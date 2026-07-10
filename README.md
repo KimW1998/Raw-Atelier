@@ -135,7 +135,7 @@ After deploy:
 2. Go to **Site settings → Forms → Form notifications** to add your email address
 3. Submissions also appear under **Forms** in the Netlify dashboard
 
-Locally, the form opens a prefilled email to `hello@rawatelier.com` instead.
+Locally, the form opens a prefilled email to `info@rawluxury.nl` instead.
 
 ### CMS on Netlify (production editing)
 

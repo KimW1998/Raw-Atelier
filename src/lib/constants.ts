@@ -3,7 +3,7 @@ export const SITE_URL = "https://raw-atelier.netlify.app";
 export const CONTACT_FORM_NAME = "contact";
 
 export const BRAND = {
-  email: "hello@rawatelier.com",
+  email: "info@rawluxury.nl",
   instagram: "https://www.instagram.com/rawatelier",
   shopUrl: "https://www.rawluxurystitches.com",
 } as const;
