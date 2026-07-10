@@ -23,9 +23,6 @@ export function InstagramSection() {
             <h2 className="mt-2 font-heading text-2xl text-brand-black md:text-3xl">
               {t("instagram.title")}
             </h2>
-            <p className="mt-2 font-body text-sm leading-relaxed text-brand-black/60">
-              {t("instagram.description")}
-            </p>
           </div>
         </FadeIn>
 
@@ -34,7 +31,7 @@ export function InstagramSection() {
             href={BRAND.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-6 flex items-center gap-4 rounded-2xl border border-brand-pink bg-white/70 p-5 transition-colors hover:border-brand-black hover:bg-white"
+            className="mb-6 mt-10 flex items-center gap-4 rounded-2xl border border-brand-pink bg-white/70 p-5 transition-colors hover:border-brand-black hover:bg-white md:mt-12"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-pink-light">
               <Instagram className="h-7 w-7 text-brand-black" />
