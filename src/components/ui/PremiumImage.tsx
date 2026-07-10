@@ -37,6 +37,14 @@ function getFallbackSrc(src: string): string {
   return UNSPLASH_FALLBACKS.embroidery;
 }
 
+function getImageSrc(src: string): string {
+  if (src.startsWith("http://") || src.startsWith("https://")) {
+    return src;
+  }
+
+  return getFallbackSrc(src);
+}
+
 export function PremiumImage({
   src,
   alt,
@@ -46,12 +54,12 @@ export function PremiumImage({
   width,
   height,
 }: ImagePlaceholderProps) {
-  const fallbackSrc = getFallbackSrc(src);
+  const imageSrc = getImageSrc(src);
 
   if (fill) {
     return (
       <img
-        src={fallbackSrc}
+        src={imageSrc}
         alt={alt}
         className={cn(
           "absolute inset-0 h-full w-full object-cover",
@@ -65,7 +73,7 @@ export function PremiumImage({
 
   return (
     <img
-      src={fallbackSrc}
+      src={imageSrc}
       alt={alt}
       width={width || 800}
       height={height || 600}

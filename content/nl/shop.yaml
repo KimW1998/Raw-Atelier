@@ -3,29 +3,58 @@ shopPage:
     eyebrow: Shop
     title: Handgemaakte stukken om te koesteren
     description: >-
-      Bekijk onze collectie prachtig geborduurde producten — elk stuk gemaakt met dezelfde zorg en aandacht als onze
-      maatwerkopdrachten.
-  featured:
-    eyebrow: Uitgelichte producten
-    title: Uit de collectie
-    description: Een selectie van onze meest geliefde stukken. Bezoek onze volledige shop voor het complete aanbod.
-  visit:
-    title: Bezoek onze online shop
+      Bekijk gepersonaliseerd borduurwerk, babycadeaus, keychains, pouches en naaitpatronen — elk stuk met zorg gemaakt.
+      Bestellen en afrekenen gebeurt in onze WooCommerce-shop bij Raw Luxury Stitches.
+  trust:
     description: >-
-      Onze volledige collectie geborduurde producten, gepersonaliseerde cadeaus en accessoires is verkrijgbaar bij Raw
-      Luxury Stitches — onze dedicated online winkel.
+      Na je bestelling neemt Kim persoonlijk contact met je op om naam, stof, kleuren en details af te stemmen voordat
+      je stuk wordt gemaakt.
+  visit:
+    title: Bezoek de volledige online shop
+    description: >-
+      Bekijk alle producten, personalisatie-opties en verzenddetails bij Raw Luxury Stitches — onze dedicated
+      WooCommerce-winkel.
     externalNote: Opent rawluxurystitches.com in een nieuw tabblad
 shop:
-  products:
-    '1':
-      name: Geborduurde Linnen Servetset
-      price: €45
-    '2':
-      name: Gepersonaliseerde Babydeken
-      price: €85
-    '3':
-      name: Gemonogrammeerde Tote Bag
-      price: €38
-    '4':
-      name: Handgeborduurde Wandkunst
-      price: €120
+  tabsLabel: Shopcategorieën
+  emptyCategory: Nog geen producten in deze categorie. Bezoek de volledige shop of neem contact op voor maatwerk.
+  productNote: Gepersonaliseerd en op bestelling gemaakt. Opent in onze online shop.
+  viewFullShop: Bekijk volledige shop
+  badges:
+    handmade: Handgemaakt
+    digital: Digitaal patroon
+    madeToOrder: Op bestelling
+  sections:
+    babyGifts:
+      eyebrow: Baby & cadeaus
+      title: Gepersonaliseerde babycadeaus
+      description: Naamslingers, stoffen ballonnen en bijzondere keepsakes voor baby's en feestmomenten.
+    keychains:
+      eyebrow: Keychains
+      title: Kleine gepersonaliseerde cadeaus
+      description: Geborduurde keychains en charmante details voor juffen, vrienden en bedankjes.
+    pouches:
+      eyebrow: Pouches & tassen
+      title: Trekkoordtassen & pouches
+      description: Zachte gepersonaliseerde pouches voor cadeaus, babyspullen en dagelijks gebruik.
+    patterns:
+      eyebrow: Naaitpatronen
+      title: Digitale naaitpatronen
+      description: Direct te downloaden PDF's met stap-voor-stap instructies — inclusief quilted e-reader case patronen.
+  madeToOrder:
+    eyebrow: Op bestelling
+    title: Op maat genaaid
+    description: >-
+      Deze stukken staan nog niet als standaardproduct in de shop, maar Kim kan ze op bestelling maken. Stuur je ideeën
+      en maten via het contactformulier.
+    cta: Vraag een maatwerkopdracht aan
+    items:
+      patches:
+        name: Geborduurde patches
+        description: Custom patches voor jassen, tassen en accessoires — ontworpen en gestikt volgens jouw wens.
+      ereaderCases:
+        name: Quilted e-reader & tablet cases
+        description: Zachte beschermhoezen op maat voor jouw device, stof en borduurvoorkeuren.
+      customPouches:
+        name: Custom pouches & accessoires
+        description: Op maat gemaakte pouches, cases en geborduurde accessoires afgestemd op jouw formaat en stijl.

@@ -78,7 +78,7 @@ public/
 | About | `/en/about`, `/nl/about` | Story, philosophy, FAQ |
 | Services | `/en/services`, `/nl/services` | All service offerings with details |
 | Portfolio | `/en/portfolio`, `/nl/portfolio` | Filterable masonry gallery with lightbox |
-| Shop | `/en/shop`, `/nl/shop` | Landing page linking to [rawluxurystitches.com](https://www.rawluxurystitches.com) |
+| Shop | `/en/shop`, `/nl/shop` | Curated catalog synced from [rawluxurystitches.com](https://www.rawluxurystitches.com) WooCommerce — checkout happens on the external store |
 | Contact | `/en/contact`, `/nl/contact` | Contact form with thank-you state |
 | CMS Admin | `/admin` | Decap CMS content editor |
 

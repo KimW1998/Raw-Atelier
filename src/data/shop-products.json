@@ -1,0 +1,83 @@
+{
+  "syncedAt": "2026-07-10T14:51:59.461Z",
+  "source": "https://www.rawluxurystitches.com",
+  "products": [
+    {
+      "id": 1138,
+      "slug": "custom-embroidered-apple-keychain",
+      "name": "Custom Embroidered Apple Keychain – Handmade",
+      "permalink": "https://www.rawluxurystitches.com/product/custom-embroidered-apple-keychain/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2026/06/17-600x600.png",
+      "priceLabel": "€ 14,95",
+      "section": "keychains",
+      "badge": "handmade",
+      "actionLabel": "Select options"
+    },
+    {
+      "id": 1113,
+      "slug": "quilted-e-reader-case-sewing-pattern-pdf",
+      "name": "Quilted E-Reader Case Sewing Pattern PDF",
+      "permalink": "https://www.rawluxurystitches.com/product/quilted-e-reader-case-sewing-pattern-pdf/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2026/06/1-2-600x600.png",
+      "priceLabel": "€ 5,39",
+      "section": "patterns",
+      "badge": "digital",
+      "actionLabel": "Add to cart"
+    },
+    {
+      "id": 1030,
+      "slug": "custom-embroidered-drawstring-bag",
+      "name": "Custom Embroidered Drawstring Bag – Handmade",
+      "permalink": "https://www.rawluxurystitches.com/product/custom-embroidered-drawstring-bag/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2026/06/14-600x600.png",
+      "priceLabel": "€ 19,99",
+      "section": "pouches",
+      "badge": "handmade",
+      "actionLabel": "Select options"
+    },
+    {
+      "id": 1005,
+      "slug": "custom-fabric-balloon-with-embroidery",
+      "name": "Custom Fabric Balloon with Embroidery – Handmade",
+      "permalink": "https://www.rawluxurystitches.com/product/custom-fabric-balloon-with-embroidery/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2026/06/8-600x600.png",
+      "priceLabel": "€ 38,99",
+      "section": "babyGifts",
+      "badge": "handmade",
+      "actionLabel": "Select options"
+    },
+    {
+      "id": 906,
+      "slug": "fabric-name-banner",
+      "name": "Custom Name Banner – Handmade Fabric Letters",
+      "permalink": "https://www.rawluxurystitches.com/product/fabric-name-banner/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2026/06/6-600x600.png",
+      "priceLabel": "€ 10,00 – € 69,00",
+      "section": "babyGifts",
+      "badge": "handmade",
+      "actionLabel": "Select options"
+    },
+    {
+      "id": 733,
+      "slug": "flow-cami-sewing-pattern-pdf-2",
+      "name": "Flow Cami Sewing Pattern PDF",
+      "permalink": "https://www.rawluxurystitches.com/product/flow-cami-sewing-pattern-pdf-2/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2025/11/3-1-600x600.png",
+      "priceLabel": "€ 5,50",
+      "section": "patterns",
+      "badge": "digital",
+      "actionLabel": "Add to cart"
+    },
+    {
+      "id": 190,
+      "slug": "flow-cami-sewing-pattern-pdf",
+      "name": "Flow Cami Sewing Pattern PDF",
+      "permalink": "https://www.rawluxurystitches.com/product/flow-cami-sewing-pattern-pdf/",
+      "image": "https://www.rawluxurystitches.com/wp-content/uploads/2025/10/2-1-600x600.png",
+      "priceLabel": "€ 6,00",
+      "section": "patterns",
+      "badge": "digital",
+      "actionLabel": "Add to cart"
+    }
+  ]
+}

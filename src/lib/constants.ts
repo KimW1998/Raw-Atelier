@@ -69,7 +69,6 @@ export const PORTFOLIO_ITEMS = [
 export const TESTIMONIAL_IDS = ["1", "2", "3"] as const;
 export const PROCESS_IDS = ["1", "2", "3", "4"] as const;
 export const FAQ_IDS = ["1", "2", "3", "4", "5"] as const;
-export const SHOP_PRODUCT_IDS = ["1", "2", "3", "4"] as const;
 
 export const CONTACT_SERVICE_IDS = [
   "live-events",
@@ -79,10 +78,3 @@ export const CONTACT_SERVICE_IDS = [
   "fashion",
   "general",
 ] as const;
-
-export const SHOP_PRODUCT_IMAGES: Record<string, string> = {
-  "1": "/images/shop/product-1.jpg",
-  "2": "/images/shop/product-2.jpg",
-  "3": "/images/shop/product-3.jpg",
-  "4": "/images/shop/product-4.jpg",
-};

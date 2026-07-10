@@ -1,31 +1,60 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Handcrafted pieces to cherish
+    title: Handmade pieces to cherish
     description: >-
-      Browse our collection of beautifully embroidered products — each one crafted with the same care and attention as
-      our bespoke commissions.
-  featured:
-    eyebrow: Featured Products
-    title: From the collection
-    description: A selection of our most loved pieces. Visit our full shop for the complete range.
+      Browse personalized embroidery, baby gifts, keychains, pouches, and sewing patterns — each made with care. Order
+      and checkout happen on our WooCommerce store at Raw Luxury Stitches.
+  trust:
+    description: >-
+      After you place an order, Kim personally contacts you to confirm names, fabrics, colours, and details before
+      your piece is made.
   visit:
-    title: Visit our online shop
+    title: Visit the full online shop
     description: >-
-      Our full collection of embroidered products, personalised gifts and accessories is available at Raw Luxury
-      Stitches — our dedicated online store.
+      See every product, personalization option, and shipping detail at Raw Luxury Stitches — our dedicated WooCommerce
+      store.
     externalNote: Opens rawluxurystitches.com in a new tab
 shop:
-  products:
-    '1':
-      name: Embroidered Linen Napkin Set
-      price: €45
-    '2':
-      name: Personalised Baby Blanket
-      price: €85
-    '3':
-      name: Monogrammed Tote Bag
-      price: €38
-    '4':
-      name: Hand-Embroidered Wall Art
-      price: €120
+  tabsLabel: Shop categories
+  emptyCategory: No products in this category yet. Visit the full shop or contact us for a custom order.
+  productNote: Personalized and made to order. Opens in our online shop.
+  viewFullShop: View full shop
+  badges:
+    handmade: Handmade
+    digital: Digital pattern
+    madeToOrder: Made to order
+  sections:
+    babyGifts:
+      eyebrow: Baby & gifts
+      title: Personalized baby gifts
+      description: Name banners, fabric balloons, and meaningful keepsakes for nurseries and celebrations.
+    keychains:
+      eyebrow: Keychains
+      title: Small personalized gifts
+      description: Embroidered keychains and charming details for teachers, friends, and little thank-yous.
+    pouches:
+      eyebrow: Pouches & bags
+      title: Drawstring bags & pouches
+      description: Soft personalized pouches for gifts, baby items, and everyday storage.
+    patterns:
+      eyebrow: Sewing patterns
+      title: Digital sewing patterns
+      description: Instant PDF downloads with step-by-step instructions — including quilted e-reader case patterns.
+  madeToOrder:
+    eyebrow: Made to order
+    title: Sewn on request
+    description: >-
+      These pieces are not listed as ready-made products yet, but Kim can make them to order. Send your ideas and
+      measurements through the contact form.
+    cta: Request a custom order
+    items:
+      patches:
+        name: Embroidered patches
+        description: Custom patches for jackets, bags, and accessories — designed and stitched to your brief.
+      ereaderCases:
+        name: Quilted e-reader & tablet cases
+        description: Soft protective cases sewn to order for your device, fabric, and embroidery preferences.
+      customPouches:
+        name: Custom pouches & accessories
+        description: Bespoke pouches, cases, and embroidered accessories tailored to your size and style.
