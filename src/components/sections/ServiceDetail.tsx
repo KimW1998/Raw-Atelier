@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { PatternBackground } from "@/components/ui/PatternBackground";
 import { Check } from "lucide-react";
 import { SERVICES_DATA } from "@/lib/constants";
 
@@ -117,6 +118,7 @@ export function ServicesHero() {
 
   return (
     <section className="relative flex min-h-[45vh] items-center overflow-hidden pt-24">
+      <PatternBackground variant="hero" />
       <Container className="relative z-10 py-12 text-center">
         <FadeIn>
           <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">

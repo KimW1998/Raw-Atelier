@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { PatternBackground } from "@/components/ui/PatternBackground";
 import {
   PORTFOLIO_ITEMS,
   PORTFOLIO_CATEGORIES,
@@ -40,15 +41,19 @@ export function PortfolioGallery() {
 
   return (
     <>
-      <section className="relative overflow-hidden pt-24">
-        <Section className="!bg-transparent">
-          <Container>
+      <section className="relative flex min-h-[40vh] items-center overflow-hidden pt-24">
+        <PatternBackground variant="hero" />
+        <Container className="relative z-10 py-12 text-center">
           <SectionHeading
             eyebrow={t("eyebrow")}
             title={t("title")}
             description={t("description")}
           />
+        </Container>
+      </section>
 
+      <Section spacing="compact">
+        <Container>
           <FadeIn>
             <div className="mb-12 flex flex-wrap justify-center gap-3">
               {PORTFOLIO_CATEGORIES.map((category) => (
@@ -119,7 +124,6 @@ export function PortfolioGallery() {
           </motion.div>
         </Container>
       </Section>
-      </section>
 
       <AnimatePresence>
         {lightboxIndex !== null && (
