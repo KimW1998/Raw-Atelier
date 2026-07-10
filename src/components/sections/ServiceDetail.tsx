@@ -3,10 +3,11 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { PremiumImage } from "@/components/ui/PremiumImage";
+import { BrandIcon } from "@/components/ui/BrandIcon";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { Check } from "lucide-react";
-import { SERVICES_DATA } from "@/lib/constants";
+import { BRAND_CARD_ICONS, SERVICES_DATA } from "@/lib/constants";
 
 type Service = (typeof SERVICES_DATA)[number];
 
@@ -50,9 +51,17 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
 
           <div className="lg:[direction:ltr]">
             <FadeIn>
-              <p className="mb-3 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
-                {tPage("serviceLabel")}
-              </p>
+              <div className="mb-4 flex items-center gap-4">
+                <BrandIcon
+                  src={service.icon}
+                  alt=""
+                  size="md"
+                  className={service.iconClassName.detail}
+                />
+                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
+                  {tPage("serviceLabel")}
+                </p>
+              </div>
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2 className="font-heading text-3xl md:text-4xl text-brand-black">
@@ -134,6 +143,19 @@ export function ServicesHero() {
           <p className="mx-auto mt-6 max-w-2xl font-body text-lg leading-relaxed text-brand-black/70">
             {t("hero.description")}
           </p>
+        </FadeIn>
+        <FadeIn delay={0.3}>
+          <div className="mx-auto mt-8 flex max-w-3xl flex-wrap items-center justify-center gap-5 md:gap-8">
+            {BRAND_CARD_ICONS.map((icon) => (
+              <BrandIcon
+                key={icon.key}
+                src={icon.src}
+                alt=""
+                size="md"
+                className="h-12 w-12 md:h-14 md:w-14"
+              />
+            ))}
+          </div>
         </FadeIn>
       </Container>
     </section>

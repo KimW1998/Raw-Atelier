@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { LocaleProvider, routing, type Locale } from "@/i18n/context";
 import { RootLayout } from "@/layouts/RootLayout";
 import HomePage from "@/pages/HomePage";
@@ -29,11 +30,14 @@ function LocaleRoutes({ locale }: { locale: Locale }) {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
-      <Route path="/en/*" element={<LocaleRoutes locale="en" />} />
-      <Route path="/nl/*" element={<LocaleRoutes locale="nl" />} />
-      <Route path="*" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
+        <Route path="/en/*" element={<LocaleRoutes locale="en" />} />
+        <Route path="/nl/*" element={<LocaleRoutes locale="nl" />} />
+        <Route path="*" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
+      </Routes>
+    </>
   );
 }

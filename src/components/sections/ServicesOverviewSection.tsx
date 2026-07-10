@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PremiumImage } from "@/components/ui/PremiumImage";
+import { BrandIcon } from "@/components/ui/BrandIcon";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { SERVICES_DATA } from "@/lib/constants";
 
@@ -41,6 +42,12 @@ export function ServicesOverviewSection() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
+                  <BrandIcon
+                    src={service.icon}
+                    alt=""
+                    size="sm"
+                    className={service.iconClassName.card}
+                  />
                   <h3 className="font-heading text-xl text-brand-black">
                     {tServices(`${service.id}.title`)}
                   </h3>
