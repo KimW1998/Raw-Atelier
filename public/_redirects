@@ -4,4 +4,5 @@
 /config.yml    /admin/config.yml   200
 /config.local.yml    /admin/config.local.yml   200
 
-# SPA fallback is configured in netlify.toml (GET only, so form POSTs work)
+# SPA fallback — serve index.html for client-side routes (reload / deep links)
+/*    /index.html   200

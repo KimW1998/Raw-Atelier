@@ -29,4 +29,12 @@ Sitemap: ${SITE_URL}/sitemap.xml
 const dist = path.join(__dirname, "../dist");
 fs.writeFileSync(path.join(dist, "sitemap.xml"), sitemap);
 fs.writeFileSync(path.join(dist, "robots.txt"), robots);
-console.log("Generated sitemap.xml and robots.txt");
+
+// Netlify serves 404.html for missing paths; mirror index.html so SPA reloads work
+const indexHtml = path.join(dist, "index.html");
+const notFoundHtml = path.join(dist, "404.html");
+if (fs.existsSync(indexHtml)) {
+  fs.copyFileSync(indexHtml, notFoundHtml);
+}
+
+console.log("Generated sitemap.xml, robots.txt, and 404.html");
