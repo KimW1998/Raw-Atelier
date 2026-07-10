@@ -298,7 +298,7 @@ export function ContactInfo() {
                 {t("info.instagram")}
               </span>
               <span className="font-body text-sm text-brand-black">
-                @rawatelier
+                @{BRAND.instagramHandle}
               </span>
             </div>
           </a>

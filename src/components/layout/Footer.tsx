@@ -80,7 +80,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-brand-pink"
                 >
-                  @rawatelier
+                  @{BRAND.instagramHandle}
                 </a>
               </li>
               <li>{t("location")}</li>

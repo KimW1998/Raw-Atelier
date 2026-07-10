@@ -4,9 +4,19 @@ export const CONTACT_FORM_NAME = "contact";
 
 export const BRAND = {
   email: "info@rawluxury.nl",
-  instagram: "https://www.instagram.com/rawatelier",
+  instagram: "https://www.instagram.com/raw_luxury_atelier/",
+  instagramHandle: "raw_luxury_atelier",
   shopUrl: "https://www.rawluxurystitches.com",
 } as const;
+
+export const INSTAGRAM_PREVIEW_IMAGES = [
+  "/images/portfolio/events-1.jpg",
+  "/images/portfolio/corporate-1.jpg",
+  "/images/portfolio/gifts-1.jpg",
+  "/images/portfolio/fashion-1.jpg",
+  "/images/portfolio/workshops-1.jpg",
+  "/images/portfolio/events-2.jpg",
+] as const;
 
 export const NAV_ROUTES = [
   { href: "/", key: "home" },

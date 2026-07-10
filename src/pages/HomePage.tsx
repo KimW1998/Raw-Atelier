@@ -5,6 +5,7 @@ import { FeaturedWorkSection } from "@/components/sections/FeaturedWorkSection";
 import { AboutPreviewSection } from "@/components/sections/AboutPreviewSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { InstagramSection } from "@/components/sections/InstagramSection";
 import { ContactCTASection } from "@/components/sections/ContactCTASection";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { useLocale, useTranslations } from "@/i18n/context";
@@ -31,6 +32,7 @@ export default function HomePage() {
       <FeaturedWorkSection />
       <AboutPreviewSection />
       <TestimonialsSection />
+      <InstagramSection />
       <ProcessSection />
       <ContactCTASection />
     </>
