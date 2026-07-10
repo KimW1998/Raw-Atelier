@@ -3,6 +3,7 @@ import shopData from "@/data/shop-products.json";
 export const SHOP_SECTION_ORDER = [
   "babyGifts",
   "keychains",
+  "patches",
   "pouches",
   "patterns",
 ] as const;
@@ -41,7 +42,6 @@ export interface ShopProduct {
 }
 
 export const MADE_TO_ORDER_IDS = [
-  "patches",
   "ereaderCases",
   "customPouches",
 ] as const;

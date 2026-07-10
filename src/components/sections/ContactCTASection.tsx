@@ -9,7 +9,7 @@ export function ContactCTASection() {
   const t = useTranslations("cta");
 
   return (
-    <Section background="dark">
+    <Section background="dark" spacing="compact">
       <PatternBackground variant="section" opacity={0.08} />
       <Container className="relative text-center">
         <FadeIn>

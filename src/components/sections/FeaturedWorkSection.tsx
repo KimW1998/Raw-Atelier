@@ -13,25 +13,25 @@ export function FeaturedWorkSection() {
   const t = useTranslations("home");
   const tPortfolio = useTranslations("portfolio");
   const tCta = useTranslations("cta");
-  const featured = PORTFOLIO_ITEMS.slice(0, 4);
+  const featured = PORTFOLIO_ITEMS.slice(0, 3);
 
   return (
-    <Section background="pink">
+    <Section background="pink" spacing="compact">
       <Container>
         <SectionHeading
           eyebrow={t("featured.eyebrow")}
           title={t("featured.title")}
           description={t("featured.description")}
+          spacing="compact"
+          size="compact"
         />
 
-        <StaggerChildren className="grid gap-6 sm:grid-cols-2">
-          {featured.map((item, i) => (
+        <StaggerChildren className="grid gap-4 sm:grid-cols-3">
+          {featured.map((item) => (
             <StaggerItem key={item.id}>
               <Link
                 href="/portfolio"
-                className={`group relative block overflow-hidden rounded-2xl ${
-                  i === 0 ? "sm:row-span-2 aspect-[3/4]" : "aspect-[4/3]"
-                }`}
+                className="group relative block aspect-[4/3] overflow-hidden rounded-2xl"
               >
                 <PremiumImage
                   src={item.image}
@@ -54,7 +54,7 @@ export function FeaturedWorkSection() {
           ))}
         </StaggerChildren>
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <Button href="/portfolio" variant="outline">
             {tCta("viewFullPortfolio")}
             <ArrowRight className="h-4 w-4" />

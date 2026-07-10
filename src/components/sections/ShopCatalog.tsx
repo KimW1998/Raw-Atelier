@@ -147,6 +147,18 @@ function TabPanelHeading({
   );
 }
 
+function getEmptyCategoryMessage(
+  tabId: ShopSectionId,
+  tShop: ReturnType<typeof useTranslations>
+) {
+  const sectionNote = tShop.raw(`sections.${tabId}.emptyNote`);
+  if (typeof sectionNote === "string" && sectionNote.length > 0) {
+    return sectionNote;
+  }
+
+  return tShop("emptyCategory");
+}
+
 export function ShopCatalog() {
   const t = useTranslations("shopPage");
   const tShop = useTranslations("shop");
@@ -156,15 +168,7 @@ export function ShopCatalog() {
 
   return (
     <>
-      <Section>
-        <Container size="narrow" className="text-center">
-          <p className="font-body text-base leading-relaxed text-brand-black/70">
-            {t("trust.description")}
-          </p>
-        </Container>
-      </Section>
-
-      <Section>
+      <Section spacing="compact">
         <Container>
           <div
             role="tablist"
@@ -240,16 +244,20 @@ export function ShopCatalog() {
                   </div>
                 ) : (
                   <p className="text-center font-body text-base text-brand-black/60">
-                    {tShop("emptyCategory")}
+                    {getEmptyCategoryMessage(activeTab, tShop)}
                   </p>
                 )}
+
+                <p className="mx-auto mt-10 max-w-xl text-center font-body text-sm leading-relaxed text-brand-black/60 md:mt-12">
+                  {t("trust.description")}
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
         </Container>
       </Section>
 
-      <Section background="pink">
+      <Section background="pink" spacing="compact">
         <Container size="narrow" className="text-center">
           <h2 className="font-heading text-3xl text-brand-black md:text-4xl">
             {t("visit.title")}

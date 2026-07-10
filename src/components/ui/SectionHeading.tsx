@@ -8,7 +8,20 @@ interface SectionHeadingProps {
   align?: "left" | "center";
   className?: string;
   dark?: boolean;
+  spacing?: "default" | "compact" | "tight";
+  size?: "default" | "compact";
 }
+
+const spacingClasses = {
+  default: "mb-12 md:mb-16",
+  compact: "mb-8 md:mb-10",
+  tight: "mb-6 md:mb-8",
+};
+
+const titleSizeClasses = {
+  default: "text-3xl md:text-4xl lg:text-5xl",
+  compact: "text-2xl md:text-3xl lg:text-4xl",
+};
 
 export function SectionHeading({
   eyebrow,
@@ -17,11 +30,13 @@ export function SectionHeading({
   align = "center",
   className,
   dark = false,
+  spacing = "default",
+  size = "default",
 }: SectionHeadingProps) {
   return (
     <FadeIn
       className={cn(
-        "mb-12 md:mb-16",
+        spacingClasses[spacing],
         align === "center" && "text-center mx-auto max-w-2xl",
         align === "left" && "text-left max-w-xl",
         className
@@ -39,7 +54,8 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "font-heading text-3xl md:text-4xl lg:text-5xl leading-tight",
+          "font-heading leading-tight",
+          titleSizeClasses[size],
           dark ? "text-white" : "text-brand-black"
         )}
       >

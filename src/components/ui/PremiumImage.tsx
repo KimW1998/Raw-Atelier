@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { getPlaceholderForSrc, PLACEHOLDER_IMAGES } from "@/lib/image-fallbacks";
 
 interface ImagePlaceholderProps {
   src: string;
@@ -11,40 +13,6 @@ interface ImagePlaceholderProps {
   sizes?: string;
 }
 
-const UNSPLASH_FALLBACKS: Record<string, string> = {
-  hero: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1600&q=80",
-  embroidery: "https://images.unsplash.com/photo-1594736797933-d0cbc0b8d0e8?w=1200&q=80",
-  thread: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=1200&q=80",
-  textile: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
-  workshop: "https://images.unsplash.com/photo-1452860606248-08befc0ff4a9?w=1200&q=80",
-  gift: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=1200&q=80",
-  fashion: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1200&q=80",
-  corporate: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&q=80",
-  studio: "https://images.unsplash.com/photo-1528744599571-75e7aa71b3ae?w=1200&q=80",
-  product: "https://images.unsplash.com/photo-1594736797933-d0cbc0b8d0e8?w=800&q=80",
-};
-
-function getFallbackSrc(src: string): string {
-  if (src.includes("hero")) return UNSPLASH_FALLBACKS.hero;
-  if (src.includes("live-events") || src.includes("events")) return UNSPLASH_FALLBACKS.embroidery;
-  if (src.includes("corporate")) return UNSPLASH_FALLBACKS.corporate;
-  if (src.includes("gifts") || src.includes("gift")) return UNSPLASH_FALLBACKS.gift;
-  if (src.includes("workshop")) return UNSPLASH_FALLBACKS.workshop;
-  if (src.includes("fashion")) return UNSPLASH_FALLBACKS.fashion;
-  if (src.includes("studio") || src.includes("about")) return UNSPLASH_FALLBACKS.studio;
-  if (src.includes("shop") || src.includes("product")) return UNSPLASH_FALLBACKS.product;
-  if (src.includes("portfolio")) return UNSPLASH_FALLBACKS.textile;
-  return UNSPLASH_FALLBACKS.embroidery;
-}
-
-function getImageSrc(src: string): string {
-  if (src.startsWith("http://") || src.startsWith("https://")) {
-    return src;
-  }
-
-  return getFallbackSrc(src);
-}
-
 export function PremiumImage({
   src,
   alt,
@@ -54,32 +22,48 @@ export function PremiumImage({
   width,
   height,
 }: ImagePlaceholderProps) {
-  const imageSrc = getImageSrc(src);
+  const [imageSrc, setImageSrc] = useState(src);
+  const [stage, setStage] = useState<"primary" | "placeholder" | "default">("primary");
+
+  const handleError = () => {
+    if (stage === "primary") {
+      setImageSrc(getPlaceholderForSrc(src));
+      setStage("placeholder");
+      return;
+    }
+
+    if (stage === "placeholder") {
+      setImageSrc(PLACEHOLDER_IMAGES.default);
+      setStage("default");
+    }
+  };
+
+  const imgProps = {
+    src: imageSrc,
+    alt,
+    onError: handleError,
+    loading: priority ? ("eager" as const) : ("lazy" as const),
+    decoding: "async" as const,
+  };
 
   if (fill) {
     return (
       <img
-        src={imageSrc}
-        alt={alt}
+        {...imgProps}
         className={cn(
           "absolute inset-0 h-full w-full object-cover",
           className
         )}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
       />
     );
   }
 
   return (
     <img
-      src={imageSrc}
-      alt={alt}
+      {...imgProps}
       width={width || 800}
       height={height || 600}
       className={cn("object-cover", className)}
-      loading={priority ? "eager" : "lazy"}
-      decoding="async"
     />
   );
 }

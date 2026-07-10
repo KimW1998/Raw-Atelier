@@ -15,6 +15,13 @@ const SECTION_BY_SLUG = {
 
 const SECTION_BY_CATEGORY = {
   "digital-sewing-patterns": "patterns",
+  "baby-gifts": "babyGifts",
+  "baby-gift": "babyGifts",
+  keychains: "keychains",
+  patches: "patches",
+  "embroidered-patches": "patches",
+  pouches: "pouches",
+  bags: "pouches",
 };
 
 function formatPrice(prices) {
@@ -40,17 +47,19 @@ function resolveSection(product) {
     return SECTION_BY_SLUG[product.slug];
   }
 
-  const categorySlug = product.categories?.[0]?.slug;
-  if (categorySlug && SECTION_BY_CATEGORY[categorySlug]) {
-    return SECTION_BY_CATEGORY[categorySlug];
+  for (const category of product.categories ?? []) {
+    const section = SECTION_BY_CATEGORY[category.slug];
+    if (section) return section;
   }
 
   return "gifts";
 }
 
 function resolveBadge(product) {
-  const categorySlug = product.categories?.[0]?.slug;
-  if (categorySlug === "digital-sewing-patterns") return "digital";
+  for (const category of product.categories ?? []) {
+    if (category.slug === "digital-sewing-patterns") return "digital";
+  }
+
   return "handmade";
 }
 

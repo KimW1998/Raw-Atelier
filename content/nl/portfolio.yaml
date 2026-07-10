@@ -1,37 +1,37 @@
 portfolioPage:
   eyebrow: Portfolio
   title: Verhalen gestikt in draad
-  description: Ontdek een gecureerde selectie borduurprojecten op het gebied van events, corporate, cadeaus, mode en workshops.
+  description: Ontdek een gecureerde selectie projecten op het gebied van events, corporate, cadeaus, naaiwerk en digitalisering.
 portfolio:
   categories:
     all: Alles
     events: Events
     corporate: Corporate
     gifts: Cadeaus
-    fashion: Mode
-    workshops: Workshops
+    fashion: Naaiwerk
+    digitizing: Digitalisering
   items:
     '1':
       title: Festival Live Borduurwerk
     '2':
-      title: Merkactivatie Station
+      title: Brand Activation Station
     '3':
-      title: Corporate Teamjassen
+      title: Corporate Teamjacks
     '4':
-      title: Luxe Merchandise
+      title: Luxury Brand Merchandise
     '5':
-      title: Bruiloft Zakdoek
+      title: Bruidshandkerchief
     '6':
-      title: Babydeken Aandenken
+      title: Babydeken Keepsake
     '7':
       title: Designer Collaboratie
     '8':
       title: Textielkunst Installatie
     '9':
-      title: Vrijgezellenfeest Workshop
+      title: Custom Logo Digitalisering
     '10':
-      title: Creatieve Borduurles
+      title: Borduurbestand Rugdesign
     '11':
       title: Muziekfestival Borduurwerk
     '12':
-      title: Jubileum Cadeaudoos
+      title: Jubileum Cadeaupakket

@@ -1,15 +1,15 @@
 portfolioPage:
   eyebrow: Portfolio
   title: Stories stitched in thread
-  description: Explore a curated selection of embroidery projects across events, corporate, gifts, fashion and workshops.
+  description: Explore a curated selection of projects across events, corporate, gifts, sewing and digitizing.
 portfolio:
   categories:
     all: All
     events: Events
     corporate: Corporate
     gifts: Gifts
-    fashion: Fashion
-    workshops: Workshops
+    fashion: Sewing
+    digitizing: Digitizing
   items:
     '1':
       title: Festival Live Embroidery
@@ -28,9 +28,9 @@ portfolio:
     '8':
       title: Textile Art Installation
     '9':
-      title: Hen Party Workshop
+      title: Custom Logo Digitizing
     '10':
-      title: Creative Embroidery Class
+      title: Jacket Back Embroidery File
     '11':
       title: Music Festival Embroidery
     '12':

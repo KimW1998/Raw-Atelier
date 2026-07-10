@@ -10,20 +10,22 @@ export function TestimonialsSection() {
   const tTestimonials = useTranslations("testimonials");
 
   return (
-    <Section background="pink">
+    <Section background="pink" spacing="compact" className="pb-10 md:pb-12">
       <Container>
         <SectionHeading
           eyebrow={t("testimonials.eyebrow")}
           title={t("testimonials.title")}
           description={t("testimonials.description")}
+          spacing="compact"
+          size="compact"
         />
 
-        <StaggerChildren className="grid gap-8 md:grid-cols-3">
+        <StaggerChildren className="grid gap-6 md:grid-cols-3">
           {TESTIMONIAL_IDS.map((id) => {
             const company = tTestimonials(`${id}.company`);
             return (
               <StaggerItem key={id}>
-                <blockquote className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-sm">
+                <blockquote className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-sm">
                   <p className="flex-1 font-body text-base leading-relaxed text-brand-black/80">
                     &ldquo;{tTestimonials(`${id}.quote`)}&rdquo;
                   </p>

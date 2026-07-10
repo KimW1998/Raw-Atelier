@@ -2,31 +2,39 @@ import { Instagram } from "lucide-react";
 import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
-import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { BRAND, INSTAGRAM_PREVIEW_IMAGES } from "@/lib/constants";
+import { useBeholdInstagram } from "@/hooks/useBeholdInstagram";
+import { BRAND } from "@/lib/constants";
 
 export function InstagramSection() {
   const t = useTranslations("home");
   const tCta = useTranslations("cta");
+  const { posts, isLoading } = useBeholdInstagram();
 
   return (
-    <Section background="pink">
+    <Section spacing="compact" className="border-t border-brand-pink/25 pt-8 md:pt-10">
       <Container className="relative">
-        <SectionHeading
-          eyebrow={t("instagram.eyebrow")}
-          title={t("instagram.title")}
-          description={t("instagram.description")}
-        />
+        <FadeIn>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
+              {t("instagram.eyebrow")}
+            </p>
+            <h2 className="mt-2 font-heading text-2xl text-brand-black md:text-3xl">
+              {t("instagram.title")}
+            </h2>
+            <p className="mt-2 font-body text-sm leading-relaxed text-brand-black/60">
+              {t("instagram.description")}
+            </p>
+          </div>
+        </FadeIn>
 
         <FadeIn>
           <a
             href={BRAND.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-10 flex items-center gap-4 rounded-2xl border border-brand-pink bg-white/70 p-5 transition-colors hover:border-brand-black hover:bg-white"
+            className="mb-6 flex items-center gap-4 rounded-2xl border border-brand-pink bg-white/70 p-5 transition-colors hover:border-brand-black hover:bg-white"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-pink-light">
               <Instagram className="h-7 w-7 text-brand-black" />
@@ -42,34 +50,45 @@ export function InstagramSection() {
           </a>
         </FadeIn>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-          {INSTAGRAM_PREVIEW_IMAGES.map((image, index) => (
-            <FadeIn key={image} delay={index * 0.05}>
-              <a
-                href={BRAND.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block aspect-square overflow-hidden rounded-xl"
-                aria-label={`${t("instagram.viewOnInstagram")} ${index + 1}`}
-              >
-                <PremiumImage
-                  src={image}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 50vw, 33vw"
-                  className="transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-brand-black/0 transition-colors duration-300 group-hover:bg-brand-black/35">
-                  <Instagram className="h-8 w-8 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
-              </a>
-            </FadeIn>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="mx-auto grid max-w-xl grid-cols-3 gap-1.5 sm:gap-2">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="aspect-square animate-pulse rounded-lg bg-brand-pink-light/60"
+              />
+            ))}
+          </div>
+        ) : posts.length > 0 ? (
+          <div className="mx-auto max-w-xl">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+              {posts.map((post, index) => (
+                <FadeIn key={post.permalink} delay={index * 0.04}>
+                  <a
+                    href={post.permalink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block aspect-square overflow-hidden rounded-lg bg-brand-pink-light/40"
+                    aria-label={t("instagram.viewOnInstagram")}
+                  >
+                    <img
+                      src={post.imageUrl}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-brand-black/0 transition-colors duration-300 group-hover:bg-brand-black/20" />
+                  </a>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
-        <FadeIn delay={0.2}>
-          <div className="mt-10 text-center">
-            <Button href={BRAND.instagram} variant="primary" size="large" external>
+        <FadeIn delay={0.15}>
+          <div className="mt-6 text-center">
+            <Button href={BRAND.instagram} variant="outline" size="default" external>
               {tCta("followInstagram")}
             </Button>
           </div>

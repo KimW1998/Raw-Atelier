@@ -6,12 +6,10 @@ contactPage:
   info:
     title: Let's create something beautiful
     description: >-
-      I'd love to hear about your project. Whether it's a live event, a corporate order, or a special gift — every
+      I'd love to hear about your project, whether it's a live event, a corporate order, or a special gift. Every
       enquiry is welcome.
     email: Email
     instagram: Instagram
-    bookingTitle: Book a consultation
-    bookingDescription: Not sure where to start? Book a free 15-minute consultation to discuss your ideas and explore what's possible.
   form:
     name: Name
     email: Email

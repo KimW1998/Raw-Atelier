@@ -1,10 +1,10 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Handgemaakte stukken om te koesteren
+    title: Machinegeborduurde stukken om te koesteren
     description: >-
-      Bekijk gepersonaliseerd borduurwerk, babycadeaus, keychains, pouches en naaitpatronen — elk stuk met zorg gemaakt.
-      Bestellen en afrekenen gebeurt in onze WooCommerce-shop bij Raw Luxury Stitches.
+      Bekijk gepersonaliseerd machineborduurwerk, babycadeaus, keychains, patches, pouches en naaitpatronen, elk stuk met zorg
+      gemaakt. Bestellen en afrekenen gebeurt bij Raw Luxury Stitches.
   trust:
     description: >-
       Na je bestelling neemt Kim persoonlijk contact met je op om naam, stof, kleuren en details af te stemmen voordat
@@ -12,8 +12,7 @@ shopPage:
   visit:
     title: Bezoek de volledige online shop
     description: >-
-      Bekijk alle producten, personalisatie-opties en verzenddetails bij Raw Luxury Stitches — onze dedicated
-      WooCommerce-winkel.
+      Bekijk alle producten, personalisatie-opties en verzenddetails bij Raw Luxury Stitches.
     externalNote: Opent rawluxurystitches.com in een nieuw tabblad
 shop:
   tabsLabel: Shopcategorieën
@@ -21,7 +20,7 @@ shop:
   productNote: Gepersonaliseerd en op bestelling gemaakt. Opent in onze online shop.
   viewFullShop: Bekijk volledige shop
   badges:
-    handmade: Handgemaakt
+    handmade: Geborduurd
     digital: Digitaal patroon
     madeToOrder: Op bestelling
   sections:
@@ -33,6 +32,11 @@ shop:
       eyebrow: Keychains
       title: Kleine gepersonaliseerde cadeaus
       description: Geborduurde keychains en charmante details voor juffen, vrienden en bedankjes.
+    patches:
+      eyebrow: Patches
+      title: Geborduurde patches
+      description: Patches voor jassen, tassen en accessoires. De eerste designs komen binnenkort online.
+      emptyNote: Eerste patch komt binnenkort online. Kom snel terug of bezoek de volledige shop bij Raw Luxury Stitches.
     pouches:
       eyebrow: Pouches & tassen
       title: Trekkoordtassen & pouches
@@ -40,7 +44,7 @@ shop:
     patterns:
       eyebrow: Naaitpatronen
       title: Digitale naaitpatronen
-      description: Direct te downloaden PDF's met stap-voor-stap instructies — inclusief quilted e-reader case patronen.
+      description: Direct te downloaden PDF's met stap-voor-stap instructies, inclusief quilted e-reader case patronen.
   madeToOrder:
     eyebrow: Op bestelling
     title: Op maat genaaid
@@ -49,9 +53,6 @@ shop:
       en maten via het contactformulier.
     cta: Vraag een maatwerkopdracht aan
     items:
-      patches:
-        name: Geborduurde patches
-        description: Custom patches voor jassen, tassen en accessoires — ontworpen en gestikt volgens jouw wens.
       ereaderCases:
         name: Quilted e-reader & tablet cases
         description: Zachte beschermhoezen op maat voor jouw device, stof en borduurvoorkeuren.

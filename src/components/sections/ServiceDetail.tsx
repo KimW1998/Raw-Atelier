@@ -28,10 +28,11 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
     <Section
       id={service.id}
       background={index % 2 === 0 ? "default" : "pink"}
+      spacing="compact"
     >
       <Container>
         <div
-          className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-20 ${
+          className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
             isReversed ? "lg:[direction:rtl]" : ""
           }`}
         >
@@ -64,7 +65,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
             </FadeIn>
 
             <FadeIn delay={0.3}>
-              <h3 className="mt-8 font-heading text-xl text-brand-black">
+              <h3 className="mt-6 font-heading text-xl text-brand-black">
                 {tPage("benefits")}
               </h3>
               <ul className="mt-4 space-y-3">
@@ -81,7 +82,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
             </FadeIn>
 
             <FadeIn delay={0.4}>
-              <h3 className="mt-8 font-heading text-xl text-brand-black">
+              <h3 className="mt-6 font-heading text-xl text-brand-black">
                 {tPage("process")}
               </h3>
               <ol className="mt-4 space-y-3">
@@ -100,7 +101,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
             </FadeIn>
 
             <FadeIn delay={0.5}>
-              <Button href="/contact" variant="primary" className="mt-8">
+              <Button href="/contact" variant="primary" className="mt-6">
                 {tCta("enquireAbout", { service: title })}
               </Button>
             </FadeIn>
@@ -115,8 +116,8 @@ export function ServicesHero() {
   const t = useTranslations("servicesPage");
 
   return (
-    <section className="relative flex min-h-[60vh] items-center overflow-hidden pt-24">
-      <Container className="relative z-10 py-16 text-center">
+    <section className="relative flex min-h-[45vh] items-center overflow-hidden pt-24">
+      <Container className="relative z-10 py-12 text-center">
         <FadeIn>
           <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
             {t("hero.eyebrow")}

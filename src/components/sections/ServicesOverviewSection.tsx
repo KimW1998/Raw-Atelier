@@ -14,15 +14,17 @@ export function ServicesOverviewSection() {
   const tCta = useTranslations("cta");
 
   return (
-    <Section id="services">
+    <Section id="services" spacing="compact">
       <Container>
         <SectionHeading
           eyebrow={t("services.eyebrow")}
           title={t("services.title")}
           description={t("services.description")}
+          spacing="compact"
+          size="compact"
         />
 
-        <StaggerChildren className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES_DATA.map((service) => (
             <StaggerItem key={service.id}>
               <Link

@@ -15,10 +15,10 @@ testimonials:
     company: ''
   '3':
     quote: >-
-      Our team building workshop was the highlight of the year. Everyone left inspired and with something beautiful they
-      made themselves.
+      The digitizing for our brand logo was flawless: clean stitches, perfect density, and ready for production right
+      away.
     author: Lisa Vermeer
-    role: HR Manager
+    role: Brand Manager
     company: Studio Nord
 process:
   '1':
@@ -29,7 +29,7 @@ process:
     description: I create a bespoke embroidery concept tailored to your needs, with samples when needed.
   '3':
     title: Craft With Care
-    description: Every stitch is placed by hand with precision, passion and an eye for detail.
+    description: Every stitch is placed on professional embroidery machines with precision, passion and an eye for detail.
   '4':
     title: Deliver & Delight
     description: Your finished piece arrives beautifully presented, ready to tell its story.
@@ -47,7 +47,7 @@ faq:
   '3':
     question: What items can be embroidered?
     answer: >-
-      Almost anything made of fabric — apparel, bags, towels, blankets, handkerchiefs, caps and more. If you're unsure,
+      Almost anything made of fabric: apparel, bags, towels, blankets, handkerchiefs, caps and more. If you're unsure,
       send me a message and we'll explore the possibilities together.
   '4':
     question: Can I see a sample before a large order?
@@ -55,7 +55,7 @@ faq:
       Absolutely. For corporate and larger projects, I always provide a sample for your approval before proceeding with
       the full order.
   '5':
-    question: Do you offer workshops for beginners?
+    question: Do you offer embroidery digitizing services?
     answer: >-
-      Yes! My workshops welcome all skill levels. No prior experience is needed — just curiosity and a love for
-      beautiful things.
+      Yes! I convert logos, artwork and illustrations into professional embroidery files. Share your design, fabric and
+      size requirements and I'll deliver a stitch-ready file with revisions when needed.

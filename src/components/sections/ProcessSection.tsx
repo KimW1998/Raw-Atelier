@@ -10,15 +10,17 @@ export function ProcessSection() {
   const tProcess = useTranslations("process");
 
   return (
-    <Section>
+    <Section spacing="compact">
       <Container>
         <SectionHeading
           eyebrow={t("process.eyebrow")}
           title={t("process.title")}
           description={t("process.description")}
+          spacing="compact"
+          size="compact"
         />
 
-        <StaggerChildren className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerChildren className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PROCESS_IDS.map((id) => (
             <StaggerItem key={id}>
               <div className="relative">

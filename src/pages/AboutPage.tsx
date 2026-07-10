@@ -34,9 +34,9 @@ export default function AboutPage() {
         tagline={tBrand("tagline")}
         keywords={tMeta("keywords")}
       />
-      <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-24">
+      <section className="relative flex min-h-[40vh] items-center overflow-hidden pt-24">
         <PatternBackground variant="hero" />
-        <Container className="relative z-10 py-16 text-center">
+        <Container className="relative z-10 py-12 text-center">
           <FadeIn>
             <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
               {tNav("about")}
@@ -55,14 +55,16 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <Section>
+      <Section spacing="compact">
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <div>
               <SectionHeading
                 eyebrow={t("story.eyebrow")}
                 title={t("story.title")}
                 align="left"
+                spacing="compact"
+                size="compact"
               />
               <FadeIn>
                 <p className="font-body text-base leading-relaxed text-brand-black/70">
@@ -89,12 +91,14 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section background="pink">
+      <Section background="pink" spacing="compact">
         <Container size="narrow">
           <SectionHeading
             eyebrow={t("philosophy.eyebrow")}
             title={t("philosophy.title")}
             description={t("philosophy.description")}
+            spacing="compact"
+            size="compact"
           />
           <FadeIn>
             <blockquote className="text-center">
@@ -106,16 +110,18 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section>
+      <Section spacing="compact">
         <Container>
           <SectionHeading
             eyebrow={t("why.eyebrow")}
             title={t("why.title")}
+            spacing="compact"
+            size="compact"
           />
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {whyItems.map((key, i) => (
               <FadeIn key={key} delay={i * 0.1}>
-                <div className="rounded-2xl bg-white p-8 shadow-sm">
+                <div className="rounded-2xl bg-white p-6 shadow-sm">
                   <h3 className="font-heading text-xl text-brand-black">
                     {t(`why.items.${key}.title`)}
                   </h3>
@@ -129,9 +135,9 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section background="pink">
+      <Section background="pink" spacing="compact">
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <FadeIn direction="right">
               <div className="relative aspect-square overflow-hidden rounded-2xl">
                 <PremiumImage
@@ -147,6 +153,8 @@ export default function AboutPage() {
                 eyebrow={t("needle.eyebrow")}
                 title={t("needle.title")}
                 align="left"
+                spacing="compact"
+                size="compact"
               />
               <FadeIn>
                 <p className="font-body text-base leading-relaxed text-brand-black/70">
@@ -163,9 +171,9 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section>
+      <Section spacing="tight">
         <Container>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {studioImages.map((src, i) => (
               <FadeIn key={src} delay={i * 0.1}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
@@ -182,12 +190,14 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section background="pink">
+      <Section background="pink" spacing="compact">
         <Container size="narrow">
           <SectionHeading
             eyebrow={t("faq.eyebrow")}
             title={t("faq.title")}
             description={t("faq.description")}
+            spacing="compact"
+            size="compact"
           />
           <FAQSection />
         </Container>

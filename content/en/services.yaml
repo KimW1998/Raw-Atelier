@@ -14,7 +14,7 @@ services:
     shortDescription: Embroidery experiences at events, festivals and brand activations.
     description: >-
       Bring your event to life with live embroidery that captivates guests and creates lasting memories. From festivals
-      to product launches, I set up an elegant embroidery station where attendees watch the craft unfold and leave with
+      to product launches, I set up an elegant embroidery station so attendees can watch the craft unfold and leave with
       a personalised piece.
     benefits:
       - Interactive guest experience that draws crowds
@@ -59,39 +59,41 @@ services:
     process:
       - Tell me about the occasion and recipient
       - Choose your item and design together
-      - I handcraft your personalised piece
+      - I embroider your personalised piece on professional machines
       - Delivered beautifully wrapped and ready to gift
-  workshops:
-    title: Workshops
-    shortDescription: Creative embroidery classes and experiences.
+  digitizing:
+    title: Digitizing Embroidery Designs
+    shortDescription: Professional embroidery file creation for logos and artwork.
     description: >-
-      Discover the joy of embroidery in intimate, creative workshops. Perfect for team building, hen parties, or simply
-      learning a beautiful craft in a warm, inspiring setting.
+      Transform your artwork, logos and illustrations into stitch-ready embroidery files. Whether you embroider yourself
+      or work with a production partner, I create precise digitizing tailored to your fabric, size and machine
+      requirements.
     benefits:
-      - Hands-on creative experience for all levels
-      - Perfect for groups and team building
-      - All materials and guidance included
-      - Take home your own embroidered creation
-      - Relaxed, inspiring studio atmosphere
+      - Logo and artwork conversion to embroidery files
+      - Optimized for different fabrics and stitch types
+      - Compatible with commercial embroidery machines
+      - Revisions to refine density, underlay and detail
+      - Fast turnaround for brands, makers and small businesses
     process:
-      - Choose your workshop theme and group size
-      - I prepare materials and a tailored programme
-      - Enjoy a guided creative embroidery session
-      - Leave with new skills and your finished piece
+      - Send your artwork and project requirements
+      - I review stitch feasibility and recommend adjustments
+      - Receive a sample sew-out or digital proof when needed
+      - Final embroidery file delivered ready to stitch
   fashion:
-    title: Fashion & Creative Projects
-    shortDescription: Collaborations and custom projects.
+    title: Sewing & Creative Projects
+    shortDescription: Production sewing, custom items and digital patterns.
     description: >-
-      Partner with Raw Atelier for fashion collaborations, artistic installations and bespoke creative textile projects.
-      Together we push the boundaries of embroidery as an art form.
+      From small-batch production runs to one-off custom pieces, Raw Atelier handles sewing projects beyond embroidery.
+      Think quilted cases, tailored accessories, sample development and made-to-measure textile work, alongside digital
+      sewing patterns available in the shop.
     benefits:
-      - Bespoke artistic embroidery for fashion
-      - Collaborative creative process
-      - Experimental techniques and materials
-      - Gallery-worthy textile art pieces
-      - Full project management from concept to finish
+      - Small-batch and production sewing
+      - Custom sewn items tailored to your brief
+      - Sample development and technical sewing support
+      - Digital sewing patterns with instant download
+      - Clear communication from first sketch to finished piece
     process:
-      - Share your creative vision and references
-      - We explore concepts and techniques together
-      - Develop samples and refine the design
-      - Deliver the finished creative textile piece
+      - Share your idea, references and quantities
+      - We discuss fabrics, construction and timeline
+      - Samples or prototypes when needed
+      - Production or delivery of your finished sewn pieces

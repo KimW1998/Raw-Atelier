@@ -3,7 +3,7 @@ servicesPage:
     eyebrow: Diensten
     title: Borduurervaringen op maat
     description: >-
-      Van boeiende live events tot erfstuk-cadeaus — ontdek hoe Raw Atelier jouw visie tot leven kan brengen door de
+      Van boeiende live events tot erfstuk-cadeaus. Ontdek hoe Raw Atelier jouw visie tot leven kan brengen door de
       kunst van borduren.
   serviceLabel: Dienst
   benefits: Voordelen
@@ -14,7 +14,7 @@ services:
     shortDescription: Borduurervaringen op events, festivals en merkactivaties.
     description: >-
       Breng je event tot leven met live borduurwerk dat gasten boeit en blijvende herinneringen creëert. Van festivals
-      tot productlanceringen — ik zet een elegant borduurstation op waar bezoekers het ambacht zien ontstaan en
+      tot productlanceringen. Ik zet een elegant borduurstation op zodat bezoekers het ambacht zien ontstaan en
       vertrekken met een gepersonaliseerd stuk.
     benefits:
       - Interactieve gastenervaring die menigten trekt
@@ -31,7 +31,7 @@ services:
     title: Corporate Borduurwerk
     shortDescription: Geborduurde bedrijfskleding en merchandise.
     description: >-
-      Versterk je merk met nauwkeurig geborduurde corporate kleding en merchandise. Van teamuniformen tot klantcadeaus —
+      Versterk je merk met nauwkeurig geborduurde corporate kleding en merchandise. Van teamuniformen tot klantcadeaus,
       elke steek weerspiegelt de kwaliteit en aandacht voor detail van je merk.
     benefits:
       - Premium geborduurde kleding en merchandise
@@ -49,7 +49,7 @@ services:
     shortDescription: Maatwerk borduurwerk voor bijzondere momenten.
     description: >-
       Vier de betekenisvolle momenten in het leven met op maat gemaakte geborduurde cadeaus. Of het nu een bruiloft,
-      geboorte, jubileum of attent gebaar is — elk stuk wordt met zorg gemaakt om een persoonlijk verhaal te vertellen.
+      geboorte, jubileum of attent gebaar is. Elk stuk wordt met zorg gemaakt om een persoonlijk verhaal te vertellen.
     benefits:
       - Unieke cadeaus met persoonlijke betekenis
       - Perfect voor bruiloften, geboortes en mijlpalen
@@ -59,39 +59,41 @@ services:
     process:
       - Vertel me over de gelegenheid en de ontvanger
       - Kies samen je item en design
-      - Ik maak je gepersonaliseerde stuk met de hand
+      - Ik borduur je gepersonaliseerde stuk op professionele machines
       - Prachtig verpakt en klaar om te geven
-  workshops:
-    title: Workshops
-    shortDescription: Creatieve borduurlessen en ervaringen.
+  digitizing:
+    title: Digitaliseren van Borduurdesigns
+    shortDescription: Professionele borduurbestanden voor logo's en artwork.
     description: >-
-      Ontdek de vreugde van borduren in intieme, creatieve workshops. Perfect voor teambuilding, vrijgezellenfeesten, of
-      gewoon het leren van een prachtig ambacht in een warme, inspirerende setting.
+      Zet je artwork, logo's en illustraties om naar borduurbestanden die klaar zijn om te stikken. Of je nu zelf
+      borduurt of met een productiepartner werkt. Ik maak nauwkeurige digitalisering op maat van je stof, formaat en
+      machine.
     benefits:
-      - Hands-on creatieve ervaring voor alle niveaus
-      - Perfect voor groepen en teambuilding
-      - Alle materialen en begeleiding inbegrepen
-      - Neem je eigen geborduurde creatie mee naar huis
-      - Ontspannen, inspirerende ateliersfeer
+      - Omzetting van logo's en artwork naar borduurbestanden
+      - Geoptimaliseerd voor verschillende stoffen en steektypes
+      - Compatibel met professionele borduurmachines
+      - Revisies om dichtheid, underlay en detail te verfijnen
+      - Snelle doorlooptijd voor merken, makers en kleine bedrijven
     process:
-      - Kies je workshopthema en groepsgrootte
-      - Ik bereid materialen en een op maat programma voor
-      - Geniet van een begeleide creatieve borduursessie
-      - Vertrek met nieuwe vaardigheden en je afgewerkte stuk
+      - Stuur je artwork en projectwensen
+      - Ik beoordeel de haalbaarheid en adviseer bijsturingen
+      - Ontvang indien nodig een proefsteek of digitaal proof
+      - Definitief borduurbestand geleverd en klaar om te stikken
   fashion:
-    title: Mode & Creatieve Projecten
-    shortDescription: Collaboraties en maatwerkprojecten.
+    title: Naaiwerk & Creatieve Projecten
+    shortDescription: Productiewerk, maatwerk en digitale naaipatronen.
     description: >-
-      Werk samen met Raw Atelier aan modecollaboraties, artistieke installaties en op maat gemaakte creatieve
-      textielprojecten. Samen verleggen we de grenzen van borduren als kunstvorm.
+      Van kleine productieseries tot unieke custom stukken: Raw Atelier verzorgt naaiwerk dat verder gaat dan borduren.
+      Denk aan quilted cases, accessoires op maat, sample-ontwikkeling en technisch naaiwerk, naast digitale
+      naaipatronen die je in de shop vindt.
     benefits:
-      - Maatwerk artistiek borduurwerk voor mode
-      - Collaboratief creatief proces
-      - Experimentele technieken en materialen
-      - Textielkunst van galeriekwaliteit
-      - Volledig projectmanagement van concept tot afwerking
+      - Kleine series en productiewerk
+      - Custom naaistukken afgestemd op jouw wens
+      - Sample-ontwikkeling en technische naai-ondersteuning
+      - Digitale naaipatronen met directe download
+      - Duidelijke communicatie van eerste schets tot afgewerkt stuk
     process:
-      - Deel je creatieve visie en referenties
-      - We verkennen samen concepten en technieken
-      - Ontwikkel monsters en verfijn het design
-      - Lever het afgewerkte creatieve textielstuk
+      - Deel je idee, referenties en gewenste aantallen
+      - We bespreken stoffen, constructie en planning
+      - Monsters of prototypes indien nodig
+      - Productie of levering van je afgewerkte naaistukken

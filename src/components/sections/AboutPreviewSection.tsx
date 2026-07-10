@@ -13,15 +13,15 @@ export function AboutPreviewSection() {
   const tCta = useTranslations("cta");
 
   return (
-    <Section>
+    <Section spacing="compact">
       <PatternBackground variant="section" opacity={0.05} />
       <Container className="relative">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <FadeIn direction="right">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
               <PremiumImage
                 src="/images/about-studio.jpg"
-                alt={`${tBrand("name")} embroidery studio`}
+                alt={`Machine embroidery at ${tBrand("name")} studio`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -35,24 +35,24 @@ export function AboutPreviewSection() {
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-brand-black">
+              <h2 className="font-heading text-2xl text-brand-black md:text-3xl">
                 {t("about.title")}
               </h2>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="mt-6 font-body text-base md:text-lg leading-relaxed text-brand-black/70">
+              <p className="mt-4 font-body text-base leading-relaxed text-brand-black/70">
                 {t("about.paragraph1")}
               </p>
             </FadeIn>
             <FadeIn delay={0.3}>
-              <p className="mt-4 font-body text-base leading-relaxed text-brand-black/70">
+              <p className="mt-3 font-body text-sm leading-relaxed text-brand-black/70">
                 {t("about.paragraph2")}
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
               <Link
                 href="/about"
-                className="mt-8 inline-flex items-center gap-2 font-body text-sm font-semibold text-brand-black transition-colors hover:text-brand-pink-accent"
+                className="mt-6 inline-flex items-center gap-2 font-body text-sm font-semibold text-brand-black transition-colors hover:text-brand-pink-accent"
               >
                 {tCta("readMyStory")}
                 <ArrowRight className="h-4 w-4" />

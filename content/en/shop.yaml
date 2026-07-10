@@ -1,10 +1,10 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Handmade pieces to cherish
+    title: Machine-embroidered pieces to cherish
     description: >-
-      Browse personalized embroidery, baby gifts, keychains, pouches, and sewing patterns — each made with care. Order
-      and checkout happen on our WooCommerce store at Raw Luxury Stitches.
+      Browse personalized machine embroidery, baby gifts, keychains, patches, pouches, and sewing patterns, each made with care.
+      Order and checkout happen at Raw Luxury Stitches.
   trust:
     description: >-
       After you place an order, Kim personally contacts you to confirm names, fabrics, colours, and details before
@@ -12,8 +12,7 @@ shopPage:
   visit:
     title: Visit the full online shop
     description: >-
-      See every product, personalization option, and shipping detail at Raw Luxury Stitches — our dedicated WooCommerce
-      store.
+      See every product, personalization option, and shipping detail at Raw Luxury Stitches.
     externalNote: Opens rawluxurystitches.com in a new tab
 shop:
   tabsLabel: Shop categories
@@ -21,7 +20,7 @@ shop:
   productNote: Personalized and made to order. Opens in our online shop.
   viewFullShop: View full shop
   badges:
-    handmade: Handmade
+    handmade: Embroidered
     digital: Digital pattern
     madeToOrder: Made to order
   sections:
@@ -33,6 +32,11 @@ shop:
       eyebrow: Keychains
       title: Small personalized gifts
       description: Embroidered keychains and charming details for teachers, friends, and little thank-yous.
+    patches:
+      eyebrow: Patches
+      title: Embroidered patches
+      description: Patches for jackets, bags and accessories. First designs coming soon.
+      emptyNote: First patch design coming soon. Check back shortly or visit the full shop at Raw Luxury Stitches.
     pouches:
       eyebrow: Pouches & bags
       title: Drawstring bags & pouches
@@ -40,7 +44,7 @@ shop:
     patterns:
       eyebrow: Sewing patterns
       title: Digital sewing patterns
-      description: Instant PDF downloads with step-by-step instructions — including quilted e-reader case patterns.
+      description: Instant PDF downloads with step-by-step instructions, including quilted e-reader case patterns.
   madeToOrder:
     eyebrow: Made to order
     title: Sewn on request
@@ -49,9 +53,6 @@ shop:
       measurements through the contact form.
     cta: Request a custom order
     items:
-      patches:
-        name: Embroidered patches
-        description: Custom patches for jackets, bags, and accessories — designed and stitched to your brief.
       ereaderCases:
         name: Quilted e-reader & tablet cases
         description: Soft protective cases sewn to order for your device, fabric, and embroidery preferences.

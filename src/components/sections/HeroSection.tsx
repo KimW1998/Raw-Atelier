@@ -51,7 +51,7 @@ export function HeroSection() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl shadow-brand-pink/20">
               <PremiumImage
                 src="/images/hero-main.jpg"
-                alt={`Handcrafted embroidery at ${tBrand("name")} studio`}
+                alt={`Machine embroidery at ${tBrand("name")} studio`}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"

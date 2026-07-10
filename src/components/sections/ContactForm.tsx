@@ -254,7 +254,6 @@ export function ContactForm() {
 
 export function ContactInfo() {
   const t = useTranslations("contactPage");
-  const tCta = useTranslations("cta");
 
   return (
     <div className="space-y-8">
@@ -301,22 +300,6 @@ export function ContactInfo() {
               </span>
             </div>
           </a>
-        </div>
-      </FadeIn>
-
-      <FadeIn delay={0.2}>
-        <div className="rounded-2xl bg-brand-black p-8 text-white">
-          <h4 className="font-heading text-xl">{t("info.bookingTitle")}</h4>
-          <p className="mt-3 font-body text-sm leading-relaxed text-white/70">
-            {t("info.bookingDescription")}
-          </p>
-          <Button
-            href="/contact"
-            variant="secondary"
-            className="mt-6"
-          >
-            {tCta("scheduleCall")}
-          </Button>
         </div>
       </FadeIn>
     </div>

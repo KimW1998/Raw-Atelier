@@ -285,8 +285,8 @@ collections:
                       label: Step
                       name: step
                       widget: string
-              - label: Workshops
-                name: workshops
+              - label: Digitizing
+                name: digitizing
                 widget: object
                 fields:
                   - label: Title
@@ -312,7 +312,7 @@ collections:
                       label: Step
                       name: step
                       widget: string
-              - label: Fashion
+              - label: Sewing
                 name: fashion
                 widget: object
                 fields:
@@ -813,8 +813,8 @@ collections:
                       label: Step
                       name: step
                       widget: string
-              - label: Workshops
-                name: workshops
+              - label: Digitizing
+                name: digitizing
                 widget: object
                 fields:
                   - label: Title
@@ -840,7 +840,7 @@ collections:
                       label: Step
                       name: step
                       widget: string
-              - label: Fashion
+              - label: Sewing
                 name: fashion
                 widget: object
                 fields:

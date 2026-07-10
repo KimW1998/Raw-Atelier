@@ -78,7 +78,7 @@ public/
 | About | `/en/about`, `/nl/about` | Story, philosophy, FAQ |
 | Services | `/en/services`, `/nl/services` | All service offerings with details |
 | Portfolio | `/en/portfolio`, `/nl/portfolio` | Filterable masonry gallery with lightbox |
-| Shop | `/en/shop`, `/nl/shop` | Curated catalog synced from [rawluxurystitches.com](https://www.rawluxurystitches.com) WooCommerce — checkout happens on the external store |
+| Shop | `/en/shop`, `/nl/shop` | Curated catalog synced from [rawluxurystitches.com](https://www.rawluxurystitches.com); checkout on Raw Luxury Stitches |
 | Contact | `/en/contact`, `/nl/contact` | Contact form with thank-you state |
 | CMS Admin | `/admin` | Decap CMS content editor |
 
@@ -152,14 +152,25 @@ Changes made in the CMS are committed to your git repo and trigger a new deploy.
 
 ## Images
 
-Placeholder images use premium Unsplash photography. Replace files in `/public/images/` with your own photography for production:
+Site photos are stored in `/public/images/`. The site currently uses Kim's embroidery photos from `~/Downloads/borduur fotos`.
 
-- `/public/images/hero-main.jpg`
-- `/public/images/about-*.jpg`
-- `/public/images/services/*.jpg`
-- `/public/images/portfolio/*.jpg`
-- `/public/images/shop/*.jpg`
-- `/public/images/logo-business-card.png` (your business card logo)
+| Site path | Source photo | Used for |
+|-----------|--------------|----------|
+| `hero-main.jpg` | Thread wall + patch | Homepage hero |
+| `about-studio.jpg` | Thread wall + patch | Home about preview |
+| `about-story.jpg` | JELTJE name banner | About story section |
+| `about-needle.jpg` | Thread wall + patch | About machine section |
+| `about-studio-1.jpg` | JELTJE banner + balloon | About gallery |
+| `about-studio-2.jpg` | Apple keychains on bag | About gallery |
+| `about-studio-3.jpg` | Birthday bandana | About gallery |
+| `services/*.jpg` | Matched by service type | Services page |
+| `portfolio/*.jpg` | Reused across categories | Portfolio, featured work, Instagram |
+
+To replace images later, add new files to `/public/images/` using the same filenames, or drop new photos into `borduur fotos` and rerun the image copy step.
+
+Shop product images sync automatically from Raw Luxury Stitches at build time. See [docs/woocommerce-shop-setup.md](docs/woocommerce-shop-setup.md) for WooCommerce category setup.
+
+Instagram posts on the homepage load via [Behold](https://behold.so) (free, no Meta developer account). See [docs/instagram-setup.md](docs/instagram-setup.md).
 
 ## SEO
 

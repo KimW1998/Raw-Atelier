@@ -6,14 +6,10 @@ contactPage:
   info:
     title: Laten we iets moois creëren
     description: >-
-      Ik hoor graag over jouw project. Of het nu een live event, een corporate bestelling of een speciaal cadeau is —
-      elke aanvraag is welkom.
+      Ik hoor graag over jouw project, of het nu een live event, een corporate bestelling of een speciaal cadeau is.
+      Elke aanvraag is welkom.
     email: E-mail
     instagram: Instagram
-    bookingTitle: Boek een consult
-    bookingDescription: >-
-      Weet je niet waar je moet beginnen? Boek een gratis consult van 15 minuten om je ideeën te bespreken en de
-      mogelijkheden te verkennen.
   form:
     name: Naam
     email: E-mail
