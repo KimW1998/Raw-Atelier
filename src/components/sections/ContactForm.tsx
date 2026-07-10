@@ -73,8 +73,7 @@ export function ContactForm() {
         body: encodeFormData(form),
       });
 
-      const contentType = response.headers.get("content-type") ?? "";
-      if (!response.ok || contentType.includes("text/html")) {
+      if (!response.ok) {
         throw new Error("Form submission failed");
       }
 
