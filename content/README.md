@@ -40,10 +40,12 @@ On your deployed site, login uses **Netlify Identity**:
 1. In Netlify: **Site settings → Identity** → Enable Identity
 2. Under Identity: **Enable Git Gateway**
 3. Go to **Identity → Invite users** and invite your email
-4. Accept the invite email and set a password
-5. Log in at `https://yoursite.com/admin` with that email and password
+4. Click the link in the invite email — you should land on `/admin` with a password setup screen
+5. Set your password, then log in at `https://yoursite.com/admin`
 
 There are no default CMS credentials — you create them via Netlify Identity invite.
+
+**If the email link opens the homepage instead of a password screen:** redeploy the latest site version (it redirects identity links to `/admin`), then request a new invite or password reset from **Identity → Invite users**.
 
 ### Option 2: Edit YAML directly
 

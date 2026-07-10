@@ -131,7 +131,8 @@ No environment variables are required for the base site. If you connect a form b
 2. Go to **Site settings → Identity** → Enable Identity
 3. Under Identity, enable **Git Gateway**
 4. Invite yourself via **Identity → Invite users**
-5. Visit `https://yoursite.com/admin` and log in to edit content
+5. Click the invite link — it should open `/admin` with a password setup screen
+6. Visit `https://yoursite.com/admin` and log in to edit content
 
 Changes made in the CMS are committed to your git repo and trigger a new deploy.
 
