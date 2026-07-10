@@ -1,24 +1,89 @@
 import { useState } from "react";
-import { CheckCircle, Instagram, Mail } from "lucide-react";
-import { useTranslations } from "@/i18n/context";
+import { AlertCircle, CheckCircle, Instagram, Mail } from "lucide-react";
+import { useLocale, useTranslations } from "@/i18n/context";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { BRAND, CONTACT_SERVICE_IDS } from "@/lib/constants";
+import { BRAND, CONTACT_FORM_NAME, CONTACT_SERVICE_IDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+function isLocalHost() {
+  return (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+  );
+}
+
+function encodeFormData(form: HTMLFormElement) {
+  const formData = new FormData(form);
+  const params = new URLSearchParams();
+
+  for (const [key, value] of formData.entries()) {
+    params.append(key, String(value));
+  }
+
+  return params.toString();
+}
+
 export function ContactForm() {
+  const locale = useLocale();
   const t = useTranslations("contactPage");
   const tContactServices = useTranslations("contactServices");
   const tCta = useTranslations("cta");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setLoading(false);
-    setSubmitted(true);
+    setError(false);
+
+    const form = e.currentTarget;
+
+    try {
+      if (isLocalHost()) {
+        const formData = new FormData(form);
+        const name = String(formData.get("name") ?? "");
+        const email = String(formData.get("email") ?? "");
+        const company = String(formData.get("company") ?? "");
+        const service = String(formData.get("service") ?? "");
+        const message = String(formData.get("message") ?? "");
+        const subject = encodeURIComponent(`Raw Atelier enquiry from ${name}`);
+        const body = encodeURIComponent(
+          [
+            `Name: ${name}`,
+            `Email: ${email}`,
+            company ? `Company: ${company}` : null,
+            service ? `Service: ${service}` : null,
+            "",
+            message,
+          ]
+            .filter(Boolean)
+            .join("\n")
+        );
+
+        window.location.href = `mailto:${BRAND.email}?subject=${subject}&body=${body}`;
+        setSubmitted(true);
+        return;
+      }
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeFormData(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -44,7 +109,41 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+    <form
+      name={CONTACT_FORM_NAME}
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      noValidate
+    >
+      <input type="hidden" name="form-name" value={CONTACT_FORM_NAME} />
+      <input type="hidden" name="locale" value={locale} />
+      <p className="hidden" aria-hidden="true">
+        <label>
+          Do not fill this out:
+          <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+
+      {error && (
+        <div
+          role="alert"
+          className="flex gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-left"
+        >
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
+          <div>
+            <p className="font-body text-sm font-semibold text-red-800">
+              {t("form.errorTitle")}
+            </p>
+            <p className="mt-1 font-body text-sm text-red-700">
+              {t("form.errorDescription")}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label

@@ -1,5 +1,7 @@
 export const SITE_URL = "https://raw-atelier.netlify.app";
 
+export const CONTACT_FORM_NAME = "contact";
+
 export const BRAND = {
   email: "hello@rawatelier.com",
   instagram: "https://www.instagram.com/rawatelier",

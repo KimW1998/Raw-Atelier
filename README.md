@@ -123,7 +123,19 @@ netlify deploy --prod
 
 ### Environment Variables
 
-No environment variables are required for the base site. If you connect a form backend (e.g. Netlify Forms, Formspree), add the relevant keys in the Netlify dashboard under **Site settings → Environment variables**.
+No environment variables are required for the base site.
+
+### Contact form (Netlify Forms)
+
+The contact form submits to **Netlify Forms** on the live site — no extra backend needed.
+
+After deploy:
+
+1. Go to **Site settings → Forms** and confirm the `contact` form appears
+2. Go to **Site settings → Forms → Form notifications** to add your email address
+3. Submissions also appear under **Forms** in the Netlify dashboard
+
+Locally, the form opens a prefilled email to `hello@rawatelier.com` instead.
 
 ### CMS on Netlify (production editing)
 

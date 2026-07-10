@@ -33,3 +33,6 @@ contactPage:
       Je bericht is ontvangen. Ik neem binnen 2 werkdagen contact met je op. In de tussentijd kun je me volgen op
       Instagram.
     followInstagram: Volg op Instagram
+    errorTitle: Er ging iets mis
+    errorDescription: >-
+      Je bericht kon niet worden verzonden. Probeer het opnieuw of mail rechtstreeks naar hello@rawatelier.com.

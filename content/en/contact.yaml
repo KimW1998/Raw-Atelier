@@ -31,3 +31,6 @@ contactPage:
       Your message has been received. I'll get back to you within 2 business days. In the meantime, feel free to follow
       along on Instagram.
     followInstagram: Follow on Instagram
+    errorTitle: Something went wrong
+    errorDescription: >-
+      Your message could not be sent. Please try again or email hello@rawatelier.com directly.
