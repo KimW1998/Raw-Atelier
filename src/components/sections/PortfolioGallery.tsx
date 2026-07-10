@@ -5,7 +5,6 @@ import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
 import {
@@ -42,9 +41,8 @@ export function PortfolioGallery() {
   return (
     <>
       <section className="relative overflow-hidden pt-24">
-        <PatternBackground variant="hero" />
         <Section className="!bg-transparent">
-          <Container className="relative">
+          <Container>
           <SectionHeading
             eyebrow={t("eyebrow")}
             title={t("title")}

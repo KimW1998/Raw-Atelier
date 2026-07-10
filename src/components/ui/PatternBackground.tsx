@@ -2,9 +2,10 @@ import { cn } from "@/lib/utils";
 import {
   PATTERN_DEFAULT_OPACITY,
   PATTERN_PALETTES,
+  PATTERN_TILE_SIZE,
   type PatternPalette,
 } from "@/lib/brand-patterns";
-import { BrandPatternArt, SeamlessPatternFill } from "./BrandPatternArt";
+import { BrandPatternArt, BrandPatternRepeat } from "./BrandPatternArt";
 
 export type PatternVariant =
   | "subtle"
@@ -48,29 +49,31 @@ export function PatternBackground({
   const colors = PATTERN_PALETTES[palette];
   const patternOpacity = opacity ?? PATTERN_DEFAULT_OPACITY[variant];
 
-  if (resolvedVariant === "divider") {
-    return (
-      <div
-        className={cn(
-          "pointer-events-none relative w-full overflow-hidden",
-          "h-28 md:h-40",
-          className
-        )}
-        aria-hidden="true"
-      >
-        <SeamlessPatternFill colors={colors} opacity={patternOpacity} />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-offwhite via-transparent to-brand-offwhite" />
-      </div>
-    );
-  }
+  if (resolvedVariant === "divider" || resolvedVariant === "seamless") {
+    const tileWidth = PATTERN_TILE_SIZE[variant];
 
-  if (resolvedVariant === "seamless") {
+    if (resolvedVariant === "divider") {
+      return (
+        <div
+          className={cn(
+            "pointer-events-none relative w-full overflow-hidden",
+            "h-28 md:h-40",
+            className
+          )}
+          aria-hidden="true"
+        >
+          <BrandPatternRepeat tileWidth={tileWidth} opacity={patternOpacity} />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-offwhite via-transparent to-brand-offwhite" />
+        </div>
+      );
+    }
+
     return (
       <div
         className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
         aria-hidden="true"
       >
-        <SeamlessPatternFill colors={colors} opacity={patternOpacity} />
+        <BrandPatternRepeat tileWidth={tileWidth} opacity={patternOpacity} />
       </div>
     );
   }

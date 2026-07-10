@@ -7,6 +7,8 @@ export interface PatternColors {
   waveAlt: string;
 }
 
+export const BRAND_PATTERN_SRC = "/images/brand/pattern-repeat.png";
+
 export const PATTERN_PALETTES: Record<PatternPalette, PatternColors> = {
   brand: {
     base: "#E7A7C7",
@@ -34,13 +36,26 @@ export const PATTERN_PALETTES: Record<PatternPalette, PatternColors> = {
   },
 };
 
+export const PATTERN_TILE_SIZE: Record<
+  "subtle" | "hero" | "seamless" | "luxury" | "divider" | "section" | "footer",
+  number
+> = {
+  subtle: 320,
+  hero: 320,
+  seamless: 480,
+  luxury: 320,
+  divider: 500,
+  section: 320,
+  footer: 320,
+};
+
 export const PATTERN_DEFAULT_OPACITY: Record<
   "subtle" | "hero" | "seamless" | "luxury" | "divider" | "section" | "footer",
   number
 > = {
   subtle: 1,
   hero: 0.58,
-  seamless: 0.1,
+  seamless: 0.18,
   luxury: 1,
   divider: 0.18,
   section: 1,

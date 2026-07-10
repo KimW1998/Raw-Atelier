@@ -1,3 +1,4 @@
+import { BRAND_PATTERN_SRC } from "@/lib/brand-patterns";
 import type { PatternColors } from "@/lib/brand-patterns";
 
 interface BrandPatternArtProps {
@@ -47,25 +48,23 @@ export function BrandPatternArt({
   );
 }
 
-function seamlessTileSvg(colors: PatternColors) {
-  return `<svg xmlns='http://www.w3.org/2000/svg' width='320' height='240'><rect width='320' height='240' fill='${colors.base}'/><path d='M0,0 C26,84 70,43 109,101 C134,139 96,187 122,240 L0,240 Z' fill='${colors.blob}' opacity='0.55'/><path d='M154,0 C179,67 160,125 186,182 C198,216 173,240 205,240 L230,240 C211,197 237,139 218,86 C198,38 224,14 211,0 Z' fill='${colors.wave}'/><path d='M218,0 C243,58 230,115 256,173 C269,211 243,240 275,240 L320,240 L320,0 Z' fill='${colors.waveAlt}' opacity='0.9'/></svg>`;
+interface BrandPatternRepeatProps {
+  tileWidth?: number;
+  opacity?: number;
 }
 
-export function SeamlessPatternFill({
-  colors,
-  opacity = 0.1,
-}: {
-  colors: PatternColors;
-  opacity?: number;
-}) {
+export function BrandPatternRepeat({
+  tileWidth = 320,
+  opacity = 0.2,
+}: BrandPatternRepeatProps) {
   return (
     <div
       className="absolute inset-0"
       style={{
         opacity,
-        backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(seamlessTileSvg(colors))}")`,
+        backgroundImage: `url(${BRAND_PATTERN_SRC})`,
         backgroundRepeat: "repeat",
-        backgroundSize: "420px 320px",
+        backgroundSize: `${tileWidth}px auto`,
       }}
       aria-hidden="true"
     />

@@ -14,7 +14,7 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-brand-black text-white">
-      <PatternBackground variant="footer" />
+      <PatternBackground variant="section" opacity={0.06} />
       <Container className="relative py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">

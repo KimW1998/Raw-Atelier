@@ -1,5 +1,4 @@
 import { useTranslations } from "@/i18n/context";
-import { PatternBackground } from "@/components/ui/PatternBackground";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -12,8 +11,7 @@ export function TestimonialsSection() {
 
   return (
     <Section background="pink">
-      <PatternBackground variant="luxury" />
-      <Container className="relative">
+      <Container>
         <SectionHeading
           eyebrow={t("testimonials.eyebrow")}
           title={t("testimonials.title")}

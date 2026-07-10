@@ -10,7 +10,7 @@ export function ContactCTASection() {
 
   return (
     <Section background="dark">
-      <PatternBackground variant="footer" />
+      <PatternBackground variant="section" opacity={0.08} />
       <Container className="relative text-center">
         <FadeIn>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-white">
