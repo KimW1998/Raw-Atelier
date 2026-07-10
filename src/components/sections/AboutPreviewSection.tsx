@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -7,10 +7,10 @@ import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
 
-export async function AboutPreviewSection() {
-  const t = await getTranslations("home");
-  const tBrand = await getTranslations("brand");
-  const tCta = await getTranslations("cta");
+export function AboutPreviewSection() {
+  const t = useTranslations("home");
+  const tBrand = useTranslations("brand");
+  const tCta = useTranslations("cta");
 
   return (
     <Section>

@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 

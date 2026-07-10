@@ -1,13 +1,13 @@
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { TESTIMONIAL_IDS } from "@/lib/constants";
 
-export async function TestimonialsSection() {
-  const t = await getTranslations("home");
-  const tTestimonials = await getTranslations("testimonials");
+export function TestimonialsSection() {
+  const t = useTranslations("home");
+  const tTestimonials = useTranslations("testimonials");
 
   return (
     <Section background="pink">

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface ImagePlaceholderProps {
@@ -46,32 +45,33 @@ export function PremiumImage({
   fill = false,
   width,
   height,
-  sizes,
 }: ImagePlaceholderProps) {
   const fallbackSrc = getFallbackSrc(src);
 
   if (fill) {
     return (
-      <Image
+      <img
         src={fallbackSrc}
         alt={alt}
-        fill
-        className={cn("object-cover", className)}
-        priority={priority}
-        sizes={sizes || "(max-width: 768px) 100vw, 50vw"}
+        className={cn(
+          "absolute inset-0 h-full w-full object-cover",
+          className
+        )}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
       />
     );
   }
 
   return (
-    <Image
+    <img
       src={fallbackSrc}
       alt={alt}
       width={width || 800}
       height={height || 600}
       className={cn("object-cover", className)}
-      priority={priority}
-      sizes={sizes}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
     />
   );
 }

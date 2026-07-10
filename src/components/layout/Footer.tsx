@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
 import { Instagram, Mail } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
@@ -6,10 +6,10 @@ import { Container } from "@/components/ui/Container";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { BRAND, NAV_ROUTES } from "@/lib/constants";
 
-export async function Footer() {
-  const t = await getTranslations("footer");
-  const tBrand = await getTranslations("brand");
-  const tNav = await getTranslations("nav");
+export function Footer() {
+  const t = useTranslations("footer");
+  const tBrand = useTranslations("brand");
+  const tNav = useTranslations("nav");
   const currentYear = new Date().getFullYear();
 
   return (

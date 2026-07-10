@@ -1,7 +1,5 @@
-"use client";
-
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/i18n/context";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { PatternBackground } from "@/components/ui/PatternBackground";

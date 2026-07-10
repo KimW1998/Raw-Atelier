@@ -1,8 +1,6 @@
-"use client";
-
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/i18n/context";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { FAQ_IDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";

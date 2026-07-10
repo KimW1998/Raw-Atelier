@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -9,10 +9,10 @@ import { PremiumImage } from "@/components/ui/PremiumImage";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { PORTFOLIO_ITEMS } from "@/lib/constants";
 
-export async function FeaturedWorkSection() {
-  const t = await getTranslations("home");
-  const tPortfolio = await getTranslations("portfolio");
-  const tCta = await getTranslations("cta");
+export function FeaturedWorkSection() {
+  const t = useTranslations("home");
+  const tPortfolio = useTranslations("portfolio");
+  const tCta = useTranslations("cta");
   const featured = PORTFOLIO_ITEMS.slice(0, 4);
 
   return (

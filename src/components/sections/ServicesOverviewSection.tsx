@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -8,10 +8,10 @@ import { PremiumImage } from "@/components/ui/PremiumImage";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { SERVICES_DATA } from "@/lib/constants";
 
-export async function ServicesOverviewSection() {
-  const t = await getTranslations("home");
-  const tServices = await getTranslations("services");
-  const tCta = await getTranslations("cta");
+export function ServicesOverviewSection() {
+  const t = useTranslations("home");
+  const tServices = useTranslations("services");
+  const tCta = useTranslations("cta");
 
   return (
     <Section id="services">

@@ -1,10 +1,6 @@
-"use client";
-
 import { useState } from "react";
 import { CheckCircle, Instagram, Mail } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
+import { useTranslations } from "@/i18n/context";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { BRAND, CONTACT_SERVICE_IDS } from "@/lib/constants";

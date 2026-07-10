@@ -1,42 +1,35 @@
-import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { SEO } from "@/components/SEO";
+import { ContactCTASection } from "@/components/sections/ContactCTASection";
+import { FadeIn, StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
-import { FadeIn, StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
-import { ContactCTASection } from "@/components/sections/ContactCTASection";
 import { BRAND, SHOP_PRODUCT_IDS, SHOP_PRODUCT_IMAGES } from "@/lib/constants";
-import { createMetadata } from "@/lib/seo";
+import { useLocale, useTranslations } from "@/i18n/context";
 import { ExternalLink, ShoppingBag } from "lucide-react";
 
-type Props = { params: Promise<{ locale: string }> };
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  const tBrand = await getTranslations({ locale, namespace: "brand" });
-
-  return createMetadata({
-    title: t("shop.title"),
-    description: t("shop.description"),
-    locale,
-    path: "/shop",
-    brandName: tBrand("name"),
-    tagline: tBrand("tagline"),
-    keywords: t("keywords"),
-  });
-}
-
-export default async function ShopPage() {
-  const t = await getTranslations("shopPage");
-  const tShop = await getTranslations("shop");
-  const tCta = await getTranslations("cta");
+export default function ShopPage() {
+  const locale = useLocale();
+  const tMeta = useTranslations("metadata");
+  const tBrand = useTranslations("brand");
+  const t = useTranslations("shopPage");
+  const tShop = useTranslations("shop");
+  const tCta = useTranslations("cta");
 
   return (
     <>
+      <SEO
+        title={tMeta("shop.title")}
+        description={tMeta("shop.description")}
+        locale={locale}
+        path="/shop"
+        brandName={tBrand("name")}
+        tagline={tBrand("tagline")}
+        keywords={tMeta("keywords")}
+      />
       <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-24">
         <PatternBackground variant="hero" opacity={0.1} />
         <Container className="relative z-10 py-16 text-center">

@@ -1,0 +1,8 @@
+# Decap CMS admin (must come before SPA fallback)
+/admin    /admin/index.html   200
+/admin/   /admin/index.html   200
+/config.yml    /admin/config.yml   200
+/config.local.yml    /admin/config.local.yml   200
+
+# SPA fallback for client-side routing
+/*    /index.html   200

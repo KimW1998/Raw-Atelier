@@ -1,7 +1,6 @@
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -15,10 +14,10 @@ interface ServiceDetailProps {
   index: number;
 }
 
-export async function ServiceDetail({ service, index }: ServiceDetailProps) {
-  const tServices = await getTranslations("services");
-  const tPage = await getTranslations("servicesPage");
-  const tCta = await getTranslations("cta");
+export function ServiceDetail({ service, index }: ServiceDetailProps) {
+  const tServices = useTranslations("services");
+  const tPage = useTranslations("servicesPage");
+  const tCta = useTranslations("cta");
   const isReversed = index % 2 !== 0;
 
   const title = tServices(`${service.id}.title`);
@@ -112,8 +111,8 @@ export async function ServiceDetail({ service, index }: ServiceDetailProps) {
   );
 }
 
-export async function ServicesHero() {
-  const t = await getTranslations("servicesPage");
+export function ServicesHero() {
+  const t = useTranslations("servicesPage");
 
   return (
     <section className="relative flex min-h-[60vh] items-center overflow-hidden pt-24">

@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { SEO } from "@/components/SEO";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ServicesOverviewSection } from "@/components/sections/ServicesOverviewSection";
 import { FeaturedWorkSection } from "@/components/sections/FeaturedWorkSection";
@@ -8,32 +7,24 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ContactCTASection } from "@/components/sections/ContactCTASection";
 import { PatternBackground } from "@/components/ui/PatternBackground";
-import { createMetadata } from "@/lib/seo";
-
-type Props = { params: Promise<{ locale: string }> };
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  const tBrand = await getTranslations({ locale, namespace: "brand" });
-
-  return {
-    ...createMetadata({
-      title: t("home.title"),
-      description: t("home.description"),
-      locale,
-      path: "/",
-      brandName: tBrand("name"),
-      tagline: tBrand("tagline"),
-      keywords: t("keywords"),
-    }),
-    icons: { icon: "/favicon.svg" },
-  };
-}
+import { useLocale, useTranslations } from "@/i18n/context";
 
 export default function HomePage() {
+  const locale = useLocale();
+  const tMeta = useTranslations("metadata");
+  const tBrand = useTranslations("brand");
+
   return (
     <>
+      <SEO
+        title={tMeta("home.title")}
+        description={tMeta("home.description")}
+        locale={locale}
+        path="/"
+        brandName={tBrand("name")}
+        tagline={tBrand("tagline")}
+        keywords={tMeta("keywords")}
+      />
       <HeroSection />
       <PatternBackground variant="divider" opacity={0.06} />
       <ServicesOverviewSection />

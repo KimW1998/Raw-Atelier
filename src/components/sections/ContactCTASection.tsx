@@ -1,12 +1,12 @@
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/animations/FadeIn";
 
-export async function ContactCTASection() {
-  const t = await getTranslations("cta");
+export function ContactCTASection() {
+  const t = useTranslations("cta");
 
   return (
     <Section background="dark">

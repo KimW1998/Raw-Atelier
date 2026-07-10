@@ -1,13 +1,13 @@
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { PROCESS_IDS } from "@/lib/constants";
 
-export async function ProcessSection() {
-  const t = await getTranslations("home");
-  const tProcess = await getTranslations("process");
+export function ProcessSection() {
+  const t = useTranslations("home");
+  const tProcess = useTranslations("process");
 
   return (
     <Section>

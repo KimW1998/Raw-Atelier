@@ -318,11 +318,11 @@ function buildConfig(backend) {
   };
 }
 
-const prodConfig = buildConfig({ name: "git-gateway", branch: "master" });
+const prodConfig = buildConfig({ name: "git-gateway", branch: "main" });
 const localConfig = buildConfig({
   name: "proxy",
   proxy_url: "http://localhost:8081/api/v1",
-  branch: "master",
+  branch: "main",
 });
 
 const adminDir = path.join(process.cwd(), "public/admin");

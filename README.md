@@ -6,19 +6,19 @@ A premium marketing website for **Raw Atelier** — a creative embroidery and te
 
 ## Tech Stack
 
-- **Next.js 15** (App Router, static generation)
+- **Vite 6** + **React 19**
 - **TypeScript**
+- **React Router** (locale routing)
 - **Tailwind CSS**
 - **Framer Motion**
 - **Lucide Icons**
-- **next-intl** (locale routing)
 - **Decap CMS** (free, git-based content management)
 
 ## Getting Started
 
 ```bash
 # Install dependencies
-npm install
+npm install --legacy-peer-deps
 
 # Start development server
 npm run dev
@@ -58,9 +58,10 @@ content/                # CMS content (YAML) — edit here or via /admin
 ├── en/
 └── nl/
 src/
-├── app/[locale]/       # Localized pages
+├── pages/              # Route pages
 ├── components/
-├── i18n/               # Locale routing config
+├── i18n/               # Locale context and routing helpers
+├── layouts/
 └── lib/
     ├── content.ts      # Loads YAML at build time
     └── constants.ts    # Structural data (images, IDs)
@@ -81,6 +82,8 @@ public/
 | Contact | `/en/contact`, `/nl/contact` | Contact form with thank-you state |
 | CMS Admin | `/admin` | Decap CMS content editor |
 
+## Brand Colors
+
 | Name | Hex |
 |------|-----|
 | Primary Pink | `#E7A7C7` |
@@ -91,7 +94,7 @@ public/
 
 ## Deployment on Netlify
 
-This project is configured for Netlify deployment with the `@netlify/plugin-nextjs` plugin.
+This project builds to a static `dist/` folder — no server-side runtime required.
 
 ### Option 1: Git-based deployment (recommended)
 
@@ -101,7 +104,7 @@ This project is configured for Netlify deployment with the `@netlify/plugin-next
 4. Connect your repository
 5. Build settings are auto-detected from `netlify.toml`:
    - **Build command:** `npm run build`
-   - **Publish directory:** `.next`
+   - **Publish directory:** `dist`
    - **Node version:** 20
 6. Click **Deploy site**
 
@@ -132,11 +135,9 @@ No environment variables are required for the base site. If you connect a form b
 
 Changes made in the CMS are committed to your git repo and trigger a new deploy.
 
-## Brand Colors
-
 ## Images
 
-Placeholder images use premium Unsplash photography via `next/image` remote patterns. Replace files in `/public/images/` with your own photography for production:
+Placeholder images use premium Unsplash photography. Replace files in `/public/images/` with your own photography for production:
 
 - `/public/images/hero-main.jpg`
 - `/public/images/about-*.jpg`
@@ -149,19 +150,20 @@ Placeholder images use premium Unsplash photography via `next/image` remote patt
 
 The site includes:
 
-- Per-page metadata and Open Graph tags
+- Per-page metadata and Open Graph tags (via `react-helmet-async`)
 - JSON-LD structured data (LocalBusiness schema)
-- `sitemap.xml` and `robots.txt`
+- `sitemap.xml` and `robots.txt` (generated at build time)
 - Semantic HTML and accessible navigation
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
+| `npm run dev` | Start Vite development server |
+| `npm run build` | Type-check, production build, and generate sitemap/robots |
+| `npm run preview` | Preview the production build locally |
+| `npm run cms` | Start Decap CMS local backend |
+| `npm run cms:config` | Regenerate CMS config files |
 
 ## License
 

@@ -1,7 +1,7 @@
 # Auto-generated — run: node scripts/generate-cms-config.mjs
 backend:
   name: git-gateway
-  branch: master
+  branch: main
 media_folder: public/images/uploads
 public_folder: /images/uploads
 collections:

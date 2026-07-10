@@ -1,37 +1,20 @@
-import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { SEO } from "@/components/SEO";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { ContactCTASection } from "@/components/sections/ContactCTASection";
+import { FadeIn } from "@/components/animations/FadeIn";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { ContactCTASection } from "@/components/sections/ContactCTASection";
-import { FadeIn } from "@/components/animations/FadeIn";
-import { createMetadata } from "@/lib/seo";
+import { useLocale, useTranslations } from "@/i18n/context";
 
-type Props = { params: Promise<{ locale: string }> };
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  const tBrand = await getTranslations({ locale, namespace: "brand" });
-
-  return createMetadata({
-    title: t("about.title"),
-    description: t("about.description"),
-    locale,
-    path: "/about",
-    brandName: tBrand("name"),
-    tagline: tBrand("tagline"),
-    keywords: t("keywords"),
-  });
-}
-
-export default async function AboutPage() {
-  const t = await getTranslations("about");
-  const tNav = await getTranslations("nav");
-  const tBrand = await getTranslations("brand");
+export default function AboutPage() {
+  const locale = useLocale();
+  const tMeta = useTranslations("metadata");
+  const tBrand = useTranslations("brand");
+  const t = useTranslations("about");
+  const tNav = useTranslations("nav");
 
   const whyItems = ["quality", "story", "connection"] as const;
   const studioImages = [
@@ -42,6 +25,15 @@ export default async function AboutPage() {
 
   return (
     <>
+      <SEO
+        title={tMeta("about.title")}
+        description={tMeta("about.description")}
+        locale={locale}
+        path="/about"
+        brandName={tBrand("name")}
+        tagline={tBrand("tagline")}
+        keywords={tMeta("keywords")}
+      />
       <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-24">
         <PatternBackground variant="hero" opacity={0.1} />
         <Container className="relative z-10 py-16 text-center">
