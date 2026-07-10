@@ -9,6 +9,7 @@ const config: Config = {
           pink: "#E7A7C7",
           "pink-light": "#F6DCE8",
           "pink-accent": "#D98AB5",
+          rose: "#a76571",
           black: "#111111",
           offwhite: "#FAF8F6",
         },
