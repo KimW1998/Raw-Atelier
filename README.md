@@ -18,7 +18,7 @@ A premium marketing website for **Raw Atelier** — a creative embroidery and te
 
 ```bash
 # Install dependencies
-npm install --legacy-peer-deps
+npm install
 
 # Start development server
 npm run dev
@@ -150,7 +150,7 @@ Placeholder images use premium Unsplash photography. Replace files in `/public/i
 
 The site includes:
 
-- Per-page metadata and Open Graph tags (via `react-helmet-async`)
+- Per-page metadata and Open Graph tags (custom SEO component)
 - JSON-LD structured data (LocalBusiness schema)
 - `sitemap.xml` and `robots.txt` (generated at build time)
 - Semantic HTML and accessible navigation
