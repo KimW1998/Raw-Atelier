@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { SERVICES_DATA } from "@/lib/constants";
@@ -15,7 +16,8 @@ export function ServicesOverviewSection() {
 
   return (
     <Section id="services">
-      <Container>
+      <PatternBackground variant="seamless" />
+      <Container className="relative">
         <SectionHeading
           eyebrow={t("services.eyebrow")}
           title={t("services.title")}

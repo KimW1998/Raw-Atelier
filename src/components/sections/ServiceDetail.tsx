@@ -2,6 +2,7 @@ import { useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
+import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { Check } from "lucide-react";
@@ -116,6 +117,7 @@ export function ServicesHero() {
 
   return (
     <section className="relative flex min-h-[60vh] items-center overflow-hidden pt-24">
+      <PatternBackground variant="hero" />
       <Container className="relative z-10 py-16 text-center">
         <FadeIn>
           <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">

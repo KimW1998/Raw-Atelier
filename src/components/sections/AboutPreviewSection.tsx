@@ -14,7 +14,7 @@ export function AboutPreviewSection() {
 
   return (
     <Section>
-      <PatternBackground variant="section" opacity={0.05} />
+      <PatternBackground variant="luxury" />
       <Container className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <FadeIn direction="right">

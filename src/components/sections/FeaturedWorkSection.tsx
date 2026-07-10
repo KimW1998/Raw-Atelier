@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
 import { PORTFOLIO_ITEMS } from "@/lib/constants";
@@ -17,7 +18,8 @@ export function FeaturedWorkSection() {
 
   return (
     <Section background="pink">
-      <Container>
+      <PatternBackground variant="seamless" />
+      <Container className="relative">
         <SectionHeading
           eyebrow={t("featured.eyebrow")}
           title={t("featured.title")}

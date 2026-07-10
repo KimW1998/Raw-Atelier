@@ -1,4 +1,5 @@
 import { useTranslations } from "@/i18n/context";
+import { PatternBackground } from "@/components/ui/PatternBackground";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,7 +12,8 @@ export function ProcessSection() {
 
   return (
     <Section>
-      <Container>
+      <PatternBackground variant="seamless" />
+      <Container className="relative">
         <SectionHeading
           eyebrow={t("process.eyebrow")}
           title={t("process.title")}

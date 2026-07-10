@@ -131,9 +131,11 @@ The contact form submits to **Netlify Forms** on the live site — no extra back
 
 After deploy:
 
-1. Go to **Site settings → Forms** and confirm the `contact` form appears
-2. Go to **Site settings → Forms → Form notifications** to add your email address
-3. Submissions also appear under **Forms** in the Netlify dashboard
+1. In Netlify go to **Forms → Form detection** and make sure detection is **enabled**
+2. Redeploy once more so Netlify scans `forms.html` and registers the `contact` form
+3. Go to **Site settings → Forms** and confirm the `contact` form appears
+4. Go to **Site settings → Forms → Form notifications** to add your email address
+5. Submissions also appear under **Forms** in the Netlify dashboard
 
 Locally, the form opens a prefilled email to `info@rawluxury.nl` instead.
 

@@ -26,7 +26,7 @@ export default function HomePage() {
         keywords={tMeta("keywords")}
       />
       <HeroSection />
-      <PatternBackground variant="divider" opacity={0.06} />
+      <PatternBackground variant="divider" />
       <ServicesOverviewSection />
       <FeaturedWorkSection />
       <AboutPreviewSection />

@@ -35,7 +35,7 @@ export default function AboutPage() {
         keywords={tMeta("keywords")}
       />
       <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-24">
-        <PatternBackground variant="hero" opacity={0.1} />
+        <PatternBackground variant="hero" />
         <Container className="relative z-10 py-16 text-center">
           <FadeIn>
             <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">

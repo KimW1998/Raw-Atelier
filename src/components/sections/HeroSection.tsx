@@ -13,7 +13,7 @@ export function HeroSection() {
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
-      <PatternBackground variant="hero" opacity={0.12} />
+      <PatternBackground variant="hero" />
       <div className="absolute inset-0 bg-gradient-to-b from-brand-offwhite/30 via-transparent to-brand-offwhite" />
 
       <Container className="relative z-10 pt-28 pb-16 md:pt-32">

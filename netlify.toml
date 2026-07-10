@@ -26,11 +26,12 @@
   to = "/admin/config.local.yml"
   status = 200
 
-# SPA fallback for client-side routing
+# SPA fallback for client-side routing (GET only — do not intercept form POSTs)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  conditions = {Method = ["GET"]}
 
 [[headers]]
   for = "/admin/config.yml"
