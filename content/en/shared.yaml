@@ -1,0 +1,61 @@
+testimonials:
+  '1':
+    quote: >-
+      Raw Atelier transformed our brand launch into an unforgettable experience. Guests were mesmerised watching the
+      embroidery come to life.
+    author: Sophie van der Berg
+    role: Marketing Director
+    company: Lumière Cosmetics
+  '2':
+    quote: >-
+      The personalised wedding gifts were absolutely stunning. Each piece felt so thoughtful and the craftsmanship is
+      exceptional.
+    author: Emma & James
+    role: Wedding Clients
+    company: ''
+  '3':
+    quote: >-
+      Our team building workshop was the highlight of the year. Everyone left inspired and with something beautiful they
+      made themselves.
+    author: Lisa Vermeer
+    role: HR Manager
+    company: Studio Nord
+process:
+  '1':
+    title: Share Your Vision
+    description: Tell me about your story, event or project. We'll explore ideas and possibilities together.
+  '2':
+    title: Design & Plan
+    description: I create a bespoke embroidery concept tailored to your needs, with samples when needed.
+  '3':
+    title: Craft With Care
+    description: Every stitch is placed by hand with precision, passion and an eye for detail.
+  '4':
+    title: Deliver & Delight
+    description: Your finished piece arrives beautifully presented, ready to tell its story.
+faq:
+  '1':
+    question: How far in advance should I book?
+    answer: >-
+      For events and large orders, I recommend booking 4–6 weeks in advance. Smaller personalised gifts can often be
+      accommodated within 2–3 weeks. Reach out and we'll find a timeline that works.
+  '2':
+    question: Do you travel for live embroidery events?
+    answer: >-
+      Yes! I travel throughout the Netherlands and internationally for events, festivals and brand activations. Travel
+      costs are discussed during the planning phase.
+  '3':
+    question: What items can be embroidered?
+    answer: >-
+      Almost anything made of fabric — apparel, bags, towels, blankets, handkerchiefs, caps and more. If you're unsure,
+      send me a message and we'll explore the possibilities together.
+  '4':
+    question: Can I see a sample before a large order?
+    answer: >-
+      Absolutely. For corporate and larger projects, I always provide a sample for your approval before proceeding with
+      the full order.
+  '5':
+    question: Do you offer workshops for beginners?
+    answer: >-
+      Yes! My workshops welcome all skill levels. No prior experience is needed — just curiosity and a love for
+      beautiful things.

@@ -1,0 +1,91 @@
+metadata:
+  home:
+    title: Raw Atelier
+    description: >-
+      Premium creative embroidery studio in the Netherlands. Custom embroidery, live events, corporate branding,
+      personalised gifts and workshops. Made to tell your story.
+  about:
+    title: About
+    description: >-
+      Discover the story behind Raw Atelier — a premium embroidery studio in the Netherlands dedicated to craftsmanship,
+      storytelling and bespoke textile experiences.
+  services:
+    title: Services
+    description: >-
+      Explore Raw Atelier's embroidery services — live events, corporate branding, personalised gifts, workshops and
+      fashion collaborations in the Netherlands.
+  portfolio:
+    title: Portfolio
+    description: >-
+      Browse Raw Atelier's embroidery portfolio — live events, corporate projects, personalised gifts, fashion
+      collaborations and workshops.
+  shop:
+    title: Shop
+    description: >-
+      Discover handcrafted embroidered products from Raw Atelier. Personalised gifts, home textiles and accessories —
+      available at our online shop.
+  contact:
+    title: Contact
+    description: >-
+      Get in touch with Raw Atelier for custom embroidery, live events, corporate orders, workshops and personalised
+      gifts. Based in the Netherlands.
+  keywords: >-
+    custom embroidery Netherlands, live embroidery events, embroidery workshops, personalized embroidery, corporate
+    embroidery, Raw Atelier
+brand:
+  name: Raw Atelier
+  tagline: Made to tell your story
+nav:
+  home: Home
+  about: About
+  services: Services
+  portfolio: Portfolio
+  shop: Shop
+  contact: Contact
+  workWithMe: Work With Me
+  openMenu: Open menu
+  closeMenu: Close menu
+  mainNavigation: Main navigation
+language:
+  label: Language
+  en: English
+  nl: Nederlands
+footer:
+  description: Made to tell your story. Premium creative embroidery studio crafting bespoke textile experiences in the Netherlands.
+  navigate: Navigate
+  getInTouch: Get in Touch
+  location: Netherlands
+  handcrafted: Handcrafted with care in the Netherlands
+  rights: All rights reserved.
+cta:
+  workWithMe: Work With Me
+  viewPortfolio: View Portfolio
+  learnMore: Learn more
+  viewFullPortfolio: View Full Portfolio
+  readMyStory: Read my story
+  getInTouch: Get in Touch
+  exploreServices: Explore Services
+  readyTitle: Ready to tell your story?
+  readyDescription: >-
+    Whether you're planning an event, looking for the perfect gift, or dreaming up a creative collaboration — I'd love
+    to hear from you.
+  shopNow: Shop Now
+  customOrder: Custom Order Enquiry
+  backToHome: Back to Home
+  enquireAbout: Enquire About {service}
+  scheduleCall: Schedule a Call
+contactServices:
+  live-events: Live Embroidery Events
+  corporate: Corporate Embroidery
+  gifts: Personalised Gifts
+  workshops: Workshops
+  fashion: Fashion & Creative Projects
+  general: General Inquiry
+schema:
+  description: >-
+    Premium creative embroidery studio specialising in live events, corporate branding, personalised gifts, workshops
+    and fashion collaborations.
+notFound:
+  eyebrow: '404'
+  title: Page not found
+  description: The page you're looking for doesn't exist or has been moved.

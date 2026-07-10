@@ -1,0 +1,97 @@
+servicesPage:
+  hero:
+    eyebrow: Diensten
+    title: Borduurervaringen op maat
+    description: >-
+      Van boeiende live events tot erfstuk-cadeaus — ontdek hoe Raw Atelier jouw visie tot leven kan brengen door de
+      kunst van borduren.
+  serviceLabel: Dienst
+  benefits: Voordelen
+  process: Proces
+services:
+  live-events:
+    title: Live Borduur Events
+    shortDescription: Borduurervaringen op events, festivals en merkactivaties.
+    description: >-
+      Breng je event tot leven met live borduurwerk dat gasten boeit en blijvende herinneringen creëert. Van festivals
+      tot productlanceringen — ik zet een elegant borduurstation op waar bezoekers het ambacht zien ontstaan en
+      vertrekken met een gepersonaliseerd stuk.
+    benefits:
+      - Interactieve gastenervaring die menigten trekt
+      - Gepersonaliseerd borduurwerk ter plekke
+      - Verhoogt merkactivaties en festivals
+      - Professionele opstelling met premium materialen
+      - Onvergetelijke giveaways voor elke gast
+    process:
+      - Deel je eventvisie en doelgroep
+      - We ontwerpen het borduurconcept en de opstelling
+      - Ik kom met volledige uitrusting en materialen
+      - Gasten genieten van live borduurwerk tijdens je event
+  corporate:
+    title: Corporate Borduurwerk
+    shortDescription: Geborduurde bedrijfskleding en merchandise.
+    description: >-
+      Versterk je merk met nauwkeurig geborduurde corporate kleding en merchandise. Van teamuniformen tot klantcadeaus —
+      elke steek weerspiegelt de kwaliteit en aandacht voor detail van je merk.
+    benefits:
+      - Premium geborduurde kleding en merchandise
+      - Consistente kwaliteit bij grote bestellingen
+      - Maatwerk logo- en designdigitalisatie
+      - Duurzame, hoogwaardige materialen
+      - Professionele presentatie voor je merk
+    process:
+      - Bespreek je merkrichtlijnen en behoeften
+      - Digitaliseer en bemonster je borduurdesign
+      - Keur het monster goed vóór productie
+      - Ontvang prachtig afgewerkte merkstukken
+  gifts:
+    title: Gepersonaliseerde Cadeaus
+    shortDescription: Maatwerk borduurwerk voor bijzondere momenten.
+    description: >-
+      Vier de betekenisvolle momenten in het leven met op maat gemaakte geborduurde cadeaus. Of het nu een bruiloft,
+      geboorte, jubileum of attent gebaar is — elk stuk wordt met zorg gemaakt om een persoonlijk verhaal te vertellen.
+    benefits:
+      - Unieke cadeaus met persoonlijke betekenis
+      - Perfect voor bruiloften, geboortes en mijlpalen
+      - Breed scala aan items om te borduren
+      - Elegante verpakking beschikbaar
+      - Ambacht van erfstuk-kwaliteit
+    process:
+      - Vertel me over de gelegenheid en de ontvanger
+      - Kies samen je item en design
+      - Ik maak je gepersonaliseerde stuk met de hand
+      - Prachtig verpakt en klaar om te geven
+  workshops:
+    title: Workshops
+    shortDescription: Creatieve borduurlessen en ervaringen.
+    description: >-
+      Ontdek de vreugde van borduren in intieme, creatieve workshops. Perfect voor teambuilding, vrijgezellenfeesten, of
+      gewoon het leren van een prachtig ambacht in een warme, inspirerende setting.
+    benefits:
+      - Hands-on creatieve ervaring voor alle niveaus
+      - Perfect voor groepen en teambuilding
+      - Alle materialen en begeleiding inbegrepen
+      - Neem je eigen geborduurde creatie mee naar huis
+      - Ontspannen, inspirerende ateliersfeer
+    process:
+      - Kies je workshopthema en groepsgrootte
+      - Ik bereid materialen en een op maat programma voor
+      - Geniet van een begeleide creatieve borduursessie
+      - Vertrek met nieuwe vaardigheden en je afgewerkte stuk
+  fashion:
+    title: Mode & Creatieve Projecten
+    shortDescription: Collaboraties en maatwerkprojecten.
+    description: >-
+      Werk samen met Raw Atelier aan modecollaboraties, artistieke installaties en op maat gemaakte creatieve
+      textielprojecten. Samen verleggen we de grenzen van borduren als kunstvorm.
+    benefits:
+      - Maatwerk artistiek borduurwerk voor mode
+      - Collaboratief creatief proces
+      - Experimentele technieken en materialen
+      - Textielkunst van galeriekwaliteit
+      - Volledig projectmanagement van concept tot afwerking
+    process:
+      - Deel je creatieve visie en referenties
+      - We verkennen samen concepten en technieken
+      - Ontwikkel monsters en verfijn het design
+      - Lever het afgewerkte creatieve textielstuk

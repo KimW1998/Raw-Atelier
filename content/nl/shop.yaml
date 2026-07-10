@@ -1,0 +1,31 @@
+shopPage:
+  hero:
+    eyebrow: Shop
+    title: Handgemaakte stukken om te koesteren
+    description: >-
+      Bekijk onze collectie prachtig geborduurde producten — elk stuk gemaakt met dezelfde zorg en aandacht als onze
+      maatwerkopdrachten.
+  featured:
+    eyebrow: Uitgelichte producten
+    title: Uit de collectie
+    description: Een selectie van onze meest geliefde stukken. Bezoek onze volledige shop voor het complete aanbod.
+  visit:
+    title: Bezoek onze online shop
+    description: >-
+      Onze volledige collectie geborduurde producten, gepersonaliseerde cadeaus en accessoires is verkrijgbaar bij Raw
+      Luxury Stitches — onze dedicated online winkel.
+    externalNote: Opent rawluxurystitches.com in een nieuw tabblad
+shop:
+  products:
+    '1':
+      name: Geborduurde Linnen Servetset
+      price: €45
+    '2':
+      name: Gepersonaliseerde Babydeken
+      price: €85
+    '3':
+      name: Gemonogrammeerde Tote Bag
+      price: €38
+    '4':
+      name: Handgeborduurde Wandkunst
+      price: €120

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Raw Atelier CMS</title>
+    <link
+      id="cms-config"
+      href="/admin/config.yml"
+      type="application/yaml"
+      rel="cms-config-url"
+    />
+    <script>
+      if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+      ) {
+        document.getElementById("cms-config").setAttribute(
+          "href",
+          "/admin/config.local.yml"
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <div id="nc-root"></div>
+    <script
+      src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"
+      onerror="document.body.innerHTML='<p style=\'font-family:sans-serif;padding:2rem\'>Failed to load Decap CMS script. Check your internet connection.</p>'"
+    ></script>
+  </body>
+</html>

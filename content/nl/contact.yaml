@@ -1,0 +1,35 @@
+contactPage:
+  hero:
+    eyebrow: Contact
+    title: Laten we een gesprek starten
+    description: Heb je een project in gedachten? Ik hoor het graag. Vul het formulier in of neem rechtstreeks contact op.
+  info:
+    title: Laten we iets moois creëren
+    description: >-
+      Ik hoor graag over jouw project. Of het nu een live event, een corporate bestelling of een speciaal cadeau is —
+      elke aanvraag is welkom.
+    email: E-mail
+    instagram: Instagram
+    bookingTitle: Boek een consult
+    bookingDescription: >-
+      Weet je niet waar je moet beginnen? Boek een gratis consult van 15 minuten om je ideeën te bespreken en de
+      mogelijkheden te verkennen.
+  form:
+    name: Naam
+    email: E-mail
+    company: Bedrijf
+    companyPlaceholder: Bedrijfsnaam (optioneel)
+    service: Gewenste dienst
+    servicePlaceholder: Selecteer een dienst
+    message: Bericht
+    messagePlaceholder: Vertel me over je project, event of idee...
+    required: '*'
+    namePlaceholder: Jouw naam
+    emailPlaceholder: jij@voorbeeld.nl
+    sending: Verzenden...
+    send: Verstuur bericht
+    thankYouTitle: Bedankt voor je bericht
+    thankYouDescription: >-
+      Je bericht is ontvangen. Ik neem binnen 2 werkdagen contact met je op. In de tussentijd kun je me volgen op
+      Instagram.
+    followInstagram: Volg op Instagram

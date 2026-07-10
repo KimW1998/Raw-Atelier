@@ -1,0 +1,1066 @@
+# Auto-generated — run: node scripts/generate-cms-config.mjs
+backend:
+  name: git-gateway
+  branch: master
+media_folder: public/images/uploads
+public_folder: /images/uploads
+collections:
+  - name: site-content
+    label: Site Content
+    files:
+      - label: 'English: Site Settings'
+        name: en-global
+        file: content/en/global.yaml
+        fields:
+          - label: Brand
+            name: brand
+            widget: object
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Tagline
+                name: tagline
+                widget: string
+          - label: Navigation
+            name: nav
+            widget: object
+            fields:
+              - label: Home
+                name: home
+                widget: string
+              - label: About
+                name: about
+                widget: string
+              - label: Services
+                name: services
+                widget: string
+              - label: Portfolio
+                name: portfolio
+                widget: string
+              - label: Shop
+                name: shop
+                widget: string
+              - label: Contact
+                name: contact
+                widget: string
+              - label: Work With Me
+                name: workWithMe
+                widget: string
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - label: Description
+                name: description
+                widget: text
+              - label: Navigate
+                name: navigate
+                widget: string
+              - label: Get in Touch
+                name: getInTouch
+                widget: string
+              - label: Location
+                name: location
+                widget: string
+              - label: Handcrafted note
+                name: handcrafted
+                widget: string
+              - label: Rights
+                name: rights
+                widget: string
+          - label: CTAs
+            name: cta
+            widget: object
+            fields:
+              - label: Work With Me
+                name: workWithMe
+                widget: string
+              - label: View Portfolio
+                name: viewPortfolio
+                widget: string
+              - label: Get in Touch
+                name: getInTouch
+                widget: string
+              - label: Ready Title
+                name: readyTitle
+                widget: string
+              - label: Ready Description
+                name: readyDescription
+                widget: text
+      - label: 'English: Home Page'
+        name: en-home
+        file: content/en/home.yaml
+        fields:
+          - label: Home
+            name: home
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Headline
+                    name: headline
+                    widget: string
+                  - label: Introduction
+                    name: intro
+                    widget: text
+              - label: Services Section
+                name: services
+                widget: object
+                fields:
+                  - label: Eyebrow
+                    name: eyebrow
+                    widget: string
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: About Preview
+                name: about
+                widget: object
+                fields:
+                  - label: Eyebrow
+                    name: eyebrow
+                    widget: string
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Paragraph 1
+                    name: paragraph1
+                    widget: text
+                  - label: Paragraph 2
+                    name: paragraph2
+                    widget: text
+      - label: 'English: About Page'
+        name: en-about
+        file: content/en/about.yaml
+        fields:
+          - label: About
+            name: about
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Story
+                name: story
+                widget: object
+                fields:
+                  - label: Eyebrow
+                    name: eyebrow
+                    widget: string
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Paragraph 1
+                    name: paragraph1
+                    widget: text
+                  - label: Paragraph 2
+                    name: paragraph2
+                    widget: text
+              - label: Philosophy
+                name: philosophy
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Quote
+                    name: quote
+                    widget: text
+      - label: 'English: Services'
+        name: en-services
+        file: content/en/services.yaml
+        fields:
+          - label: Services Page
+            name: servicesPage
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+          - label: Service Items
+            name: services
+            widget: object
+            fields:
+              - label: Live Events
+                name: live-events
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Corporate
+                name: corporate
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Gifts
+                name: gifts
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Workshops
+                name: workshops
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Fashion
+                name: fashion
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+      - label: 'English: Contact Page'
+        name: en-contact
+        file: content/en/contact.yaml
+        fields:
+          - label: Contact Page
+            name: contactPage
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Form
+                name: form
+                widget: object
+                fields:
+                  - label: Name
+                    name: name
+                    widget: string
+                  - label: Email
+                    name: email
+                    widget: string
+                  - label: Message
+                    name: message
+                    widget: string
+                  - label: Send Button
+                    name: send
+                    widget: string
+                  - label: Thank You Title
+                    name: thankYouTitle
+                    widget: string
+                  - label: Thank You Description
+                    name: thankYouDescription
+                    widget: text
+      - label: 'English: Testimonials & FAQ'
+        name: en-shared
+        file: content/en/shared.yaml
+        fields:
+          - label: Testimonials
+            name: testimonials
+            widget: object
+            fields:
+              - label: Testimonial 1
+                name: '1'
+                widget: object
+                fields:
+                  - label: Quote
+                    name: quote
+                    widget: text
+                  - label: Author
+                    name: author
+                    widget: string
+                  - label: Role
+                    name: role
+                    widget: string
+                  - label: Company
+                    name: company
+                    widget: string
+                    required: false
+              - label: Testimonial 2
+                name: '2'
+                widget: object
+                fields:
+                  - label: Quote
+                    name: quote
+                    widget: text
+                  - label: Author
+                    name: author
+                    widget: string
+                  - label: Role
+                    name: role
+                    widget: string
+                  - label: Company
+                    name: company
+                    widget: string
+                    required: false
+              - label: Testimonial 3
+                name: '3'
+                widget: object
+                fields:
+                  - label: Quote
+                    name: quote
+                    widget: text
+                  - label: Author
+                    name: author
+                    widget: string
+                  - label: Role
+                    name: role
+                    widget: string
+                  - label: Company
+                    name: company
+                    widget: string
+                    required: false
+          - label: FAQ
+            name: faq
+            widget: object
+            fields:
+              - label: Question 1
+                name: '1'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 2
+                name: '2'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 3
+                name: '3'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 4
+                name: '4'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 5
+                name: '5'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+          - label: Process Steps
+            name: process
+            widget: object
+            fields:
+              - label: Step 1
+                name: '1'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Step 2
+                name: '2'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Step 3
+                name: '3'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Step 4
+                name: '4'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+      - label: 'Dutch: Site Settings'
+        name: nl-global
+        file: content/nl/global.yaml
+        fields:
+          - label: Brand
+            name: brand
+            widget: object
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Tagline
+                name: tagline
+                widget: string
+          - label: Navigation
+            name: nav
+            widget: object
+            fields:
+              - label: Home
+                name: home
+                widget: string
+              - label: About
+                name: about
+                widget: string
+              - label: Services
+                name: services
+                widget: string
+              - label: Portfolio
+                name: portfolio
+                widget: string
+              - label: Shop
+                name: shop
+                widget: string
+              - label: Contact
+                name: contact
+                widget: string
+              - label: Work With Me
+                name: workWithMe
+                widget: string
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - label: Description
+                name: description
+                widget: text
+              - label: Navigate
+                name: navigate
+                widget: string
+              - label: Get in Touch
+                name: getInTouch
+                widget: string
+              - label: Location
+                name: location
+                widget: string
+              - label: Handcrafted note
+                name: handcrafted
+                widget: string
+              - label: Rights
+                name: rights
+                widget: string
+          - label: CTAs
+            name: cta
+            widget: object
+            fields:
+              - label: Work With Me
+                name: workWithMe
+                widget: string
+              - label: View Portfolio
+                name: viewPortfolio
+                widget: string
+              - label: Get in Touch
+                name: getInTouch
+                widget: string
+              - label: Ready Title
+                name: readyTitle
+                widget: string
+              - label: Ready Description
+                name: readyDescription
+                widget: text
+      - label: 'Dutch: Home Page'
+        name: nl-home
+        file: content/nl/home.yaml
+        fields:
+          - label: Home
+            name: home
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Headline
+                    name: headline
+                    widget: string
+                  - label: Introduction
+                    name: intro
+                    widget: text
+              - label: Services Section
+                name: services
+                widget: object
+                fields:
+                  - label: Eyebrow
+                    name: eyebrow
+                    widget: string
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: About Preview
+                name: about
+                widget: object
+                fields:
+                  - label: Eyebrow
+                    name: eyebrow
+                    widget: string
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Paragraph 1
+                    name: paragraph1
+                    widget: text
+                  - label: Paragraph 2
+                    name: paragraph2
+                    widget: text
+      - label: 'Dutch: About Page'
+        name: nl-about
+        file: content/nl/about.yaml
+        fields:
+          - label: About
+            name: about
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Story
+                name: story
+                widget: object
+                fields:
+                  - label: Eyebrow
+                    name: eyebrow
+                    widget: string
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Paragraph 1
+                    name: paragraph1
+                    widget: text
+                  - label: Paragraph 2
+                    name: paragraph2
+                    widget: text
+              - label: Philosophy
+                name: philosophy
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Quote
+                    name: quote
+                    widget: text
+      - label: 'Dutch: Services'
+        name: nl-services
+        file: content/nl/services.yaml
+        fields:
+          - label: Services Page
+            name: servicesPage
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+          - label: Service Items
+            name: services
+            widget: object
+            fields:
+              - label: Live Events
+                name: live-events
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Corporate
+                name: corporate
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Gifts
+                name: gifts
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Workshops
+                name: workshops
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+              - label: Fashion
+                name: fashion
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Short Description
+                    name: shortDescription
+                    widget: text
+                  - label: Description
+                    name: description
+                    widget: text
+                  - label: Benefits
+                    name: benefits
+                    widget: list
+                    field:
+                      label: Benefit
+                      name: benefit
+                      widget: string
+                  - label: Process Steps
+                    name: process
+                    widget: list
+                    field:
+                      label: Step
+                      name: step
+                      widget: string
+      - label: 'Dutch: Contact Page'
+        name: nl-contact
+        file: content/nl/contact.yaml
+        fields:
+          - label: Contact Page
+            name: contactPage
+            widget: object
+            fields:
+              - label: Hero
+                name: hero
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Form
+                name: form
+                widget: object
+                fields:
+                  - label: Name
+                    name: name
+                    widget: string
+                  - label: Email
+                    name: email
+                    widget: string
+                  - label: Message
+                    name: message
+                    widget: string
+                  - label: Send Button
+                    name: send
+                    widget: string
+                  - label: Thank You Title
+                    name: thankYouTitle
+                    widget: string
+                  - label: Thank You Description
+                    name: thankYouDescription
+                    widget: text
+      - label: 'Dutch: Testimonials & FAQ'
+        name: nl-shared
+        file: content/nl/shared.yaml
+        fields:
+          - label: Testimonials
+            name: testimonials
+            widget: object
+            fields:
+              - label: Testimonial 1
+                name: '1'
+                widget: object
+                fields:
+                  - label: Quote
+                    name: quote
+                    widget: text
+                  - label: Author
+                    name: author
+                    widget: string
+                  - label: Role
+                    name: role
+                    widget: string
+                  - label: Company
+                    name: company
+                    widget: string
+                    required: false
+              - label: Testimonial 2
+                name: '2'
+                widget: object
+                fields:
+                  - label: Quote
+                    name: quote
+                    widget: text
+                  - label: Author
+                    name: author
+                    widget: string
+                  - label: Role
+                    name: role
+                    widget: string
+                  - label: Company
+                    name: company
+                    widget: string
+                    required: false
+              - label: Testimonial 3
+                name: '3'
+                widget: object
+                fields:
+                  - label: Quote
+                    name: quote
+                    widget: text
+                  - label: Author
+                    name: author
+                    widget: string
+                  - label: Role
+                    name: role
+                    widget: string
+                  - label: Company
+                    name: company
+                    widget: string
+                    required: false
+          - label: FAQ
+            name: faq
+            widget: object
+            fields:
+              - label: Question 1
+                name: '1'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 2
+                name: '2'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 3
+                name: '3'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 4
+                name: '4'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+              - label: Question 5
+                name: '5'
+                widget: object
+                fields:
+                  - label: Question
+                    name: question
+                    widget: string
+                  - label: Answer
+                    name: answer
+                    widget: text
+          - label: Process Steps
+            name: process
+            widget: object
+            fields:
+              - label: Step 1
+                name: '1'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Step 2
+                name: '2'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Step 3
+                name: '3'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text
+              - label: Step 4
+                name: '4'
+                widget: object
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: text

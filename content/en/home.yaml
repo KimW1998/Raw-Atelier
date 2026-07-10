@@ -1,0 +1,34 @@
+home:
+  hero:
+    headline: Embroidery that tells your story
+    intro: >-
+      Bespoke embroidery for events, brands and cherished moments. Every stitch is placed with intention — crafted to
+      celebrate what matters most to you.
+  services:
+    eyebrow: What I Offer
+    title: Services crafted with intention
+    description: >-
+      From live event experiences to bespoke gifts, every service is designed to bring your story to life through the
+      art of embroidery.
+  featured:
+    eyebrow: Portfolio
+    title: Featured work
+    description: A glimpse into the stories I've helped bring to life through embroidery.
+  about:
+    eyebrow: About
+    title: Where craft meets storytelling
+    paragraph1: >-
+      Raw Atelier was born from a love of slow craft and the belief that every piece of embroidery should carry meaning.
+      What started as a passion for hand-stitching has grown into a studio that partners with brands, couples and
+      creatives to create textile experiences that linger long after the thread is cut.
+    paragraph2: >-
+      Based in the Netherlands, I work with clients who value authenticity, quality and the quiet luxury of something
+      made entirely by hand.
+  testimonials:
+    eyebrow: Kind Words
+    title: What clients say
+    description: Every project is a collaboration. Here's what some of the people I've worked with have to say.
+  process:
+    eyebrow: How It Works
+    title: From vision to finished piece
+    description: A thoughtful, collaborative process ensures every embroidery project exceeds expectations.

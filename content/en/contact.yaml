@@ -1,0 +1,33 @@
+contactPage:
+  hero:
+    eyebrow: Contact
+    title: Let's start a conversation
+    description: Have a project in mind? I'd love to hear about it. Fill out the form below or reach out directly.
+  info:
+    title: Let's create something beautiful
+    description: >-
+      I'd love to hear about your project. Whether it's a live event, a corporate order, or a special gift — every
+      enquiry is welcome.
+    email: Email
+    instagram: Instagram
+    bookingTitle: Book a consultation
+    bookingDescription: Not sure where to start? Book a free 15-minute consultation to discuss your ideas and explore what's possible.
+  form:
+    name: Name
+    email: Email
+    company: Company
+    companyPlaceholder: Company name (optional)
+    service: Service Interested In
+    servicePlaceholder: Select a service
+    message: Message
+    messagePlaceholder: Tell me about your project, event or idea...
+    required: '*'
+    namePlaceholder: Your name
+    emailPlaceholder: you@example.com
+    sending: Sending...
+    send: Send Message
+    thankYouTitle: Thank you for reaching out
+    thankYouDescription: >-
+      Your message has been received. I'll get back to you within 2 business days. In the meantime, feel free to follow
+      along on Instagram.
+    followInstagram: Follow on Instagram

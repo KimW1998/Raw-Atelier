@@ -1,0 +1,31 @@
+shopPage:
+  hero:
+    eyebrow: Shop
+    title: Handcrafted pieces to cherish
+    description: >-
+      Browse our collection of beautifully embroidered products — each one crafted with the same care and attention as
+      our bespoke commissions.
+  featured:
+    eyebrow: Featured Products
+    title: From the collection
+    description: A selection of our most loved pieces. Visit our full shop for the complete range.
+  visit:
+    title: Visit our online shop
+    description: >-
+      Our full collection of embroidered products, personalised gifts and accessories is available at Raw Luxury
+      Stitches — our dedicated online store.
+    externalNote: Opens rawluxurystitches.com in a new tab
+shop:
+  products:
+    '1':
+      name: Embroidered Linen Napkin Set
+      price: €45
+    '2':
+      name: Personalised Baby Blanket
+      price: €85
+    '3':
+      name: Monogrammed Tote Bag
+      price: €38
+    '4':
+      name: Hand-Embroidered Wall Art
+      price: €120

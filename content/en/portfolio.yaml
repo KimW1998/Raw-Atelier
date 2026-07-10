@@ -1,0 +1,37 @@
+portfolioPage:
+  eyebrow: Portfolio
+  title: Stories stitched in thread
+  description: Explore a curated selection of embroidery projects across events, corporate, gifts, fashion and workshops.
+portfolio:
+  categories:
+    all: All
+    events: Events
+    corporate: Corporate
+    gifts: Gifts
+    fashion: Fashion
+    workshops: Workshops
+  items:
+    '1':
+      title: Festival Live Embroidery
+    '2':
+      title: Brand Activation Station
+    '3':
+      title: Corporate Team Jackets
+    '4':
+      title: Luxury Brand Merchandise
+    '5':
+      title: Wedding Handkerchief
+    '6':
+      title: Baby Blanket Keepsake
+    '7':
+      title: Designer Collaboration
+    '8':
+      title: Textile Art Installation
+    '9':
+      title: Hen Party Workshop
+    '10':
+      title: Creative Embroidery Class
+    '11':
+      title: Music Festival Embroidery
+    '12':
+      title: Anniversary Gift Box

@@ -1,0 +1,37 @@
+portfolioPage:
+  eyebrow: Portfolio
+  title: Verhalen gestikt in draad
+  description: Ontdek een gecureerde selectie borduurprojecten op het gebied van events, corporate, cadeaus, mode en workshops.
+portfolio:
+  categories:
+    all: Alles
+    events: Events
+    corporate: Corporate
+    gifts: Cadeaus
+    fashion: Mode
+    workshops: Workshops
+  items:
+    '1':
+      title: Festival Live Borduurwerk
+    '2':
+      title: Merkactivatie Station
+    '3':
+      title: Corporate Teamjassen
+    '4':
+      title: Luxe Merchandise
+    '5':
+      title: Bruiloft Zakdoek
+    '6':
+      title: Babydeken Aandenken
+    '7':
+      title: Designer Collaboratie
+    '8':
+      title: Textielkunst Installatie
+    '9':
+      title: Vrijgezellenfeest Workshop
+    '10':
+      title: Creatieve Borduurles
+    '11':
+      title: Muziekfestival Borduurwerk
+    '12':
+      title: Jubileum Cadeaudoos

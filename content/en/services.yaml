@@ -1,0 +1,97 @@
+servicesPage:
+  hero:
+    eyebrow: Services
+    title: Bespoke embroidery experiences
+    description: >-
+      From captivating live events to heirloom gifts, discover how Raw Atelier can bring your vision to life through the
+      art of embroidery.
+  serviceLabel: Service
+  benefits: Benefits
+  process: Process
+services:
+  live-events:
+    title: Live Embroidery Events
+    shortDescription: Embroidery experiences at events, festivals and brand activations.
+    description: >-
+      Bring your event to life with live embroidery that captivates guests and creates lasting memories. From festivals
+      to product launches, I set up an elegant embroidery station where attendees watch the craft unfold and leave with
+      a personalised piece.
+    benefits:
+      - Interactive guest experience that draws crowds
+      - On-the-spot personalised embroidery
+      - Elevates brand activations and festivals
+      - Professional setup with premium materials
+      - Memorable takeaways for every guest
+    process:
+      - Share your event vision and audience
+      - We design the embroidery concept and setup
+      - I arrive with full equipment and materials
+      - Guests enjoy live embroidery throughout your event
+  corporate:
+    title: Corporate Embroidery
+    shortDescription: Branded apparel and merchandise.
+    description: >-
+      Elevate your brand with meticulously embroidered corporate apparel and merchandise. From team uniforms to client
+      gifts, every stitch reflects your brand's quality and attention to detail.
+    benefits:
+      - Premium branded apparel and merchandise
+      - Consistent quality across large orders
+      - Custom logo and design digitisation
+      - Sustainable, high-quality materials
+      - Professional presentation for your brand
+    process:
+      - Discuss your brand guidelines and needs
+      - Digitise and sample your embroidery design
+      - Approve the sample before production
+      - Receive beautifully finished branded pieces
+  gifts:
+    title: Personalised Gifts
+    shortDescription: Custom embroidery for special occasions.
+    description: >-
+      Celebrate life's meaningful moments with bespoke embroidered gifts. Whether it's a wedding, new baby, anniversary
+      or thoughtful gesture, each piece is crafted with care to tell a personal story.
+    benefits:
+      - One-of-a-kind gifts with personal meaning
+      - Perfect for weddings, births and milestones
+      - Wide range of items to embroider
+      - Elegant packaging available
+      - Heirloom-quality craftsmanship
+    process:
+      - Tell me about the occasion and recipient
+      - Choose your item and design together
+      - I handcraft your personalised piece
+      - Delivered beautifully wrapped and ready to gift
+  workshops:
+    title: Workshops
+    shortDescription: Creative embroidery classes and experiences.
+    description: >-
+      Discover the joy of embroidery in intimate, creative workshops. Perfect for team building, hen parties, or simply
+      learning a beautiful craft in a warm, inspiring setting.
+    benefits:
+      - Hands-on creative experience for all levels
+      - Perfect for groups and team building
+      - All materials and guidance included
+      - Take home your own embroidered creation
+      - Relaxed, inspiring studio atmosphere
+    process:
+      - Choose your workshop theme and group size
+      - I prepare materials and a tailored programme
+      - Enjoy a guided creative embroidery session
+      - Leave with new skills and your finished piece
+  fashion:
+    title: Fashion & Creative Projects
+    shortDescription: Collaborations and custom projects.
+    description: >-
+      Partner with Raw Atelier for fashion collaborations, artistic installations and bespoke creative textile projects.
+      Together we push the boundaries of embroidery as an art form.
+    benefits:
+      - Bespoke artistic embroidery for fashion
+      - Collaborative creative process
+      - Experimental techniques and materials
+      - Gallery-worthy textile art pieces
+      - Full project management from concept to finish
+    process:
+      - Share your creative vision and references
+      - We explore concepts and techniques together
+      - Develop samples and refine the design
+      - Deliver the finished creative textile piece

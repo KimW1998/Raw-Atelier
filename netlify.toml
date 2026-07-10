@@ -1,0 +1,31 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Serve Decap CMS admin (static files in public/admin/)
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/config.yml"
+  to = "/admin/config.yml"
+  status = 200
+
+[[headers]]
+  for = "/admin/config.yml"
+  [headers.values]
+    Content-Type = "text/yaml; charset=utf-8"
+    Access-Control-Allow-Origin = "*"

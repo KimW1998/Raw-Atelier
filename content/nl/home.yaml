@@ -1,0 +1,34 @@
+home:
+  hero:
+    headline: Borduurwerk dat jouw verhaal vertelt
+    intro: >-
+      Maatwerk borduurwerk voor events, merken en dierbare momenten. Elke steek is met intentie geplaatst — gemaakt om
+      te vieren wat voor jou het belangrijkst is.
+  services:
+    eyebrow: Wat ik aanbied
+    title: Diensten met zorg gemaakt
+    description: >-
+      Van live event-ervaringen tot op maat gemaakte cadeaus — elke dienst is ontworpen om jouw verhaal tot leven te
+      brengen door de kunst van borduren.
+  featured:
+    eyebrow: Portfolio
+    title: Uitgelicht werk
+    description: Een glimp van de verhalen die ik tot leven heb gebracht door borduurwerk.
+  about:
+    eyebrow: Over ons
+    title: Waar vakmanschap en storytelling samenkomen
+    paragraph1: >-
+      Raw Atelier is geboren uit een liefde voor slow craft en het geloof dat elk borduurwerk betekenis moet dragen. Wat
+      begon als een passie voor handsteken, is uitgegroeid tot een atelier dat samenwerkt met merken, koppels en
+      creatieven om textielervaringen te creëren die lang blijven hangen.
+    paragraph2: >-
+      Vanuit Nederland werk ik met klanten die authenticiteit, kwaliteit en de stille luxe van iets dat volledig met de
+      hand is gemaakt, waarderen.
+  testimonials:
+    eyebrow: Lieve woorden
+    title: Wat klanten zeggen
+    description: Elk project is een samenwerking. Dit is wat sommige mensen met wie ik heb gewerkt, zeggen.
+  process:
+    eyebrow: Hoe het werkt
+    title: Van visie tot afgewerkt stuk
+    description: Een doordacht, collaboratief proces zorgt ervoor dat elk borduurproject de verwachtingen overtreft.
