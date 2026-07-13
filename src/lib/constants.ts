@@ -1,4 +1,4 @@
-export const SITE_URL = "https://raw-atelier.netlify.app";
+export const SITE_URL = "https://www.rawatelier.nl";
 
 export const CONTACT_FORM_NAME = "contact";
 
@@ -79,18 +79,16 @@ export const PORTFOLIO_CATEGORIES = [
 export type PortfolioCategoryKey = (typeof PORTFOLIO_CATEGORIES)[number];
 
 export const PORTFOLIO_ITEMS = [
-  { id: "1", category: "events" as const, image: "/images/portfolio/events-1.jpg", aspect: "tall" as const },
-  { id: "2", category: "events" as const, image: "/images/portfolio/events-2.jpg", aspect: "wide" as const },
-  { id: "3", category: "corporate" as const, image: "/images/portfolio/corporate-1.jpg", aspect: "square" as const },
-  { id: "4", category: "corporate" as const, image: "/images/portfolio/corporate-2.jpg", aspect: "tall" as const },
-  { id: "5", category: "gifts" as const, image: "/images/portfolio/gifts-1.jpg", aspect: "wide" as const },
-  { id: "6", category: "gifts" as const, image: "/images/portfolio/gifts-2.jpg", aspect: "square" as const },
-  { id: "7", category: "fashion" as const, image: "/images/portfolio/fashion-1.jpg", aspect: "tall" as const },
-  { id: "8", category: "fashion" as const, image: "/images/portfolio/fashion-2.jpg", aspect: "wide" as const },
-  { id: "9", category: "digitizing" as const, image: "/images/portfolio/digitizing-1.jpg", aspect: "square" as const },
-  { id: "10", category: "digitizing" as const, image: "/images/portfolio/digitizing-2.jpg", aspect: "tall" as const },
-  { id: "11", category: "events" as const, image: "/images/portfolio/events-3.jpg", aspect: "square" as const },
-  { id: "12", category: "gifts" as const, image: "/images/portfolio/gifts-3.jpg", aspect: "wide" as const },
+  { id: "1", category: "events" as const, image: "/images/portfolio/events-live-booth.jpg", aspect: "wide" as const },
+  { id: "2", category: "gifts" as const, image: "/images/portfolio/gifts-balloon.jpg", aspect: "tall" as const },
+  { id: "3", category: "gifts" as const, image: "/images/portfolio/gifts-baby-hood.jpg", aspect: "tall" as const },
+  { id: "4", category: "gifts" as const, image: "/images/portfolio/gifts-baby-wrap.jpg", aspect: "wide" as const },
+  { id: "5", category: "gifts" as const, image: "/images/portfolio/gifts-banner-letters.jpg", aspect: "wide" as const },
+  { id: "6", category: "digitizing" as const, image: "/images/portfolio/digitizing-applique-letters.jpg", aspect: "square" as const },
+  { id: "7", category: "fashion" as const, image: "/images/portfolio/fashion-butterfly-wings.jpg", aspect: "tall" as const },
+  { id: "8", category: "fashion" as const, image: "/images/portfolio/fashion-upcycle-blazer.jpg", aspect: "wide" as const },
+  { id: "9", category: "fashion" as const, image: "/images/portfolio/fashion-upcycle-design.jpg", aspect: "square" as const },
+  { id: "10", category: "corporate" as const, image: "/images/portfolio/corporate-collar-bees.jpg", aspect: "square" as const },
 ] as const;
 
 export const TESTIMONIAL_IDS = ["1", "2", "3"] as const;

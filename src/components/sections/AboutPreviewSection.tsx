@@ -20,8 +20,8 @@ export function AboutPreviewSection() {
           <FadeIn direction="right">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
               <PremiumImage
-                src="/images/about-studio.jpg"
-                alt={`Machine embroidery at ${tBrand("name")} studio`}
+                src="/images/about/kim-portrait.jpg"
+                alt={`Kim Wauben, ${tBrand("name")}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />

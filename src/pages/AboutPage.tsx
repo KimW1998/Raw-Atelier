@@ -18,9 +18,9 @@ export default function AboutPage() {
 
   const whyItems = ["quality", "story", "connection"] as const;
   const studioImages = [
-    "/images/about-studio-1.jpg",
-    "/images/about-studio-2.jpg",
-    "/images/about-studio-3.jpg",
+    "/images/portfolio/fashion-butterfly-wings.jpg",
+    "/images/portfolio/gifts-baby-wrap.jpg",
+    "/images/portfolio/fashion-upcycle-blazer.jpg",
   ];
 
   return (
@@ -80,7 +80,7 @@ export default function AboutPage() {
             <FadeIn direction="left">
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                 <PremiumImage
-                  src="/images/about-story.jpg"
+                  src="/images/about/kim-portrait.jpg"
                   alt={t("story.title")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -139,10 +139,10 @@ export default function AboutPage() {
         <Container>
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <FadeIn direction="right">
-              <div className="relative aspect-square overflow-hidden rounded-2xl">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <PremiumImage
-                  src="/images/about-needle.jpg"
-                  alt={t("needle.title")}
+                  src="/images/about/kim-at-event.jpg"
+                  alt={t("atEvents.title")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
@@ -150,20 +150,20 @@ export default function AboutPage() {
             </FadeIn>
             <div>
               <SectionHeading
-                eyebrow={t("needle.eyebrow")}
-                title={t("needle.title")}
+                eyebrow={t("atEvents.eyebrow")}
+                title={t("atEvents.title")}
                 align="left"
                 spacing="compact"
                 size="compact"
               />
               <FadeIn>
                 <p className="font-body text-base leading-relaxed text-brand-black/70">
-                  {t("needle.paragraph1")}
+                  {t("atEvents.paragraph1")}
                 </p>
               </FadeIn>
               <FadeIn delay={0.1}>
                 <p className="mt-4 font-body text-base leading-relaxed text-brand-black/70">
-                  {t("needle.paragraph2")}
+                  {t("atEvents.paragraph2")}
                 </p>
               </FadeIn>
             </div>

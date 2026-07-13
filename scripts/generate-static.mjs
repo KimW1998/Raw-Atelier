@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SITE_URL = "https://raw-atelier.netlify.app";
+const SITE_URL = "https://www.rawatelier.nl";
 const locales = ["en", "nl"];
 const routes = ["", "/about", "/services", "/portfolio", "/shop", "/contact"];
 
