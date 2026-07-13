@@ -49,6 +49,11 @@ export function AboutPreviewSection() {
                 {t("about.paragraph2")}
               </p>
             </FadeIn>
+            <FadeIn delay={0.35}>
+              <p className="mt-3 font-body text-sm leading-relaxed text-brand-black/70">
+                {t("about.paragraph3")}
+              </p>
+            </FadeIn>
             <FadeIn delay={0.4}>
               <Link
                 href="/about"

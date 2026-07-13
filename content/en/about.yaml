@@ -1,49 +1,55 @@
 about:
   hero:
-    title: The story behind the stitches
-    description: Made to tell your story. Every piece that leaves this studio carries a piece of my heart.
+    title: Creative work with care
+    description: >-
+      I work with brands, businesses and individuals on embroidery projects that fit the moment and the people
+      involved.
   story:
     eyebrow: About me
     title: Hi, I'm Kim
     paragraph1: >-
-      I'm the maker behind Raw Atelier. My journey with embroidery began as a quiet obsession, with late nights spent on
-      designs, thread and an idea that wouldn't let go. What started as a personal creative outlet quickly became a way to
-      capture stories, emotions and moments in a medium that lasts.
+      Raw Atelier started from a love of embroidery, design and making things by hand.
     paragraph2: >-
-      Today I partner with brands, event organisers, couples and creatives who share my appreciation for craft. From my
-      studio in the Netherlands, I bring the same care to a single keepsake as I do to a full live embroidery setup.
+      What began as a creative passion grew into a studio where I work with brands, businesses and individuals on
+      unique embroidery projects. Whether it's a live event, corporate apparel, a personal gift or a creative custom
+      project: I believe the best results come when quality, attention and personal contact come together.
   philosophy:
-    eyebrow: Philosophy
-    title: Precise craft in a fast world
+    eyebrow: Approach
+    title: Careful work, personal contact
     description: >-
-      In a world of mass production, I choose the deliberate path. Every project receives the same attention, whether
-      it's a single handkerchief or a hundred corporate jackets.
+      Every project gets the same attention, whether it's a single gift or a larger corporate order. I work directly
+      with you, from the first conversation to delivery.
     quote: >-
-      Embroidery is not just about thread on fabric. It's about translating emotion into something tangible, something
-      that can be held, worn and cherished.
+      Embroidery works best for me when the design fits the person, the moment or the brand. That's when a piece
+      becomes something worth keeping.
   why:
     eyebrow: Why Raw Atelier
-    title: What sets us apart
+    title: What you can expect from me
     items:
       quality:
-        title: Machine Embroidery Quality
-        description: Every design is stitched with premium threads and materials on professional embroidery machines. No shortcuts, no compromises.
+        title: Quality embroidery
+        description: >-
+          Every design is stitched with good threads and materials on professional embroidery machines. I pay attention
+          to detail and a clean finish.
       story:
-        title: Story-Driven Design
-        description: We don't just embroider logos. We craft narratives. Your story guides every creative decision.
+        title: Creative custom work
+        description: >-
+          No one-size-fits-all solutions. I think along about design, material and application, so the end result fits
+          your project.
       connection:
-        title: Personal Connection
-        description: You work directly with me from first conversation to final delivery. No middlemen, no miscommunication.
+        title: Personal contact
+        description: >-
+          You work directly with me from the first conversation to final delivery. Clear communication, no detours.
   atEvents:
     eyebrow: Live events
     title: Embroidery in action
     paragraph1: >-
-      There's nothing quite like watching a design come to life in front of guests. I set up my embroidery station at
-      festivals, brand activations, markets and private celebrations, so people can see the craft happen in real time.
+      During a live embroidery event, I personalise items on the spot while guests watch. It draws attention, creates
+      interaction and gives guests something they'll actually want to keep.
     paragraph2: >-
-      Guests leave with a personalised piece they watched being made, and events get a memorable experience that draws
-      people in and stays with them long after the day is over.
+      I set up my embroidery station at festivals, brand activations, store openings and corporate events. Guests leave
+      with a personalised piece they watched being made.
   faq:
     eyebrow: FAQ
     title: Frequently asked questions
-    description: Everything you need to know before we start stitching your story.
+    description: Everything you want to know before we get started.

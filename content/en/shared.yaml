@@ -24,23 +24,23 @@ testimonials:
     company: RawLuxuryStitches
 process:
   '1':
-    title: Share Your Vision
-    description: Tell me about your story, event or project. We'll explore ideas and possibilities together.
+    title: Share your idea
+    description: Tell me about your project, event or gift. We'll explore the options together.
   '2':
-    title: Design & Plan
-    description: I create a bespoke embroidery concept tailored to your needs, with samples when needed.
+    title: Design & plan
+    description: I develop a custom embroidery concept, with samples when needed.
   '3':
-    title: Craft With Care
-    description: Every stitch is placed on professional embroidery machines with precision, passion and an eye for detail.
+    title: Craft with care
+    description: Each piece is embroidered on professional machines, with attention to detail and finish.
   '4':
-    title: Deliver & Delight
-    description: Your finished piece arrives beautifully presented, ready to tell its story.
+    title: Deliver
+    description: You receive the finished piece, neatly completed and ready to use or give.
 faq:
   '1':
     question: How far in advance should I book?
     answer: >-
       For events and large orders, I recommend booking 4–6 weeks in advance. Smaller personalised gifts can often be
-      accommodated within 2–3 weeks. Reach out and we'll find a timeline that works.
+      accommodated within 2–3 weeks. Get in touch and we'll find a timeline that works.
   '2':
     question: Do you travel for live embroidery events?
     answer: >-
@@ -49,8 +49,8 @@ faq:
   '3':
     question: What items can be embroidered?
     answer: >-
-      Almost anything made of fabric: apparel, bags, towels, blankets, handkerchiefs, caps and more. If you're unsure,
-      send me a message and we'll explore the possibilities together.
+      Almost anything made of fabric: apparel, bags, towels, blankets, handkerchiefs, caps and more. Not sure? Send me
+      a message and we'll look at what's possible together.
   '4':
     question: Can I see a sample before a large order?
     answer: >-

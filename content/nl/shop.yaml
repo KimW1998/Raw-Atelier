@@ -1,10 +1,10 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Machinegeborduurde stukken om te koesteren
+    title: Geborduurde producten en naaitpatronen
     description: >-
-      Bekijk gepersonaliseerd machineborduurwerk, babycadeaus, keychains, patches, pouches en naaitpatronen, elk stuk met zorg
-      gemaakt. Bestellen en afrekenen gebeurt bij Raw Luxury Stitches.
+      Bekijk gepersonaliseerd machineborduurwerk, babycadeaus, keychains, patches, pouches en naaitpatronen. Bestellen
+      en afrekenen gebeurt bij Raw Luxury Stitches.
   trust:
     description: >-
       Na je bestelling neemt Kim persoonlijk contact met je op om naam, stof, kleuren en details af te stemmen voordat
@@ -27,7 +27,7 @@ shop:
     babyGifts:
       eyebrow: Baby & cadeaus
       title: Gepersonaliseerde babycadeaus
-      description: Naamslingers, stoffen ballonnen en bijzondere keepsakes voor baby's en feestmomenten.
+      description: Naamslingers, stoffen ballonnen en bijzondere cadeaus voor baby's en feestmomenten.
     keychains:
       eyebrow: Keychains
       title: Kleine gepersonaliseerde cadeaus

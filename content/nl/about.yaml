@@ -1,52 +1,57 @@
 about:
   hero:
-    title: Het verhaal achter de steken
-    description: Gemaakt om jouw verhaal te vertellen. Elk stuk dat dit atelier verlaat, draagt een stukje van mijn hart.
+    title: Creatief met aandacht
+    description: >-
+      Ik werk met merken, bedrijven en particulieren aan borduurprojecten die passen bij het moment en de mensen
+      eromheen.
   story:
     eyebrow: Over mij
     title: Hoi, ik ben Kim
     paragraph1: >-
-      Ik ben de maker achter Raw Atelier. Mijn reis met borduren begon als een stille obsessie, met late avonden vol
-      designs, draad en een idee dat niet losliet. Wat begon als een persoonlijke creatieve uitlaatklep, werd al snel een
-      manier om verhalen, emoties en momenten vast te leggen in een medium dat blijft.
+      Raw Atelier begon vanuit een liefde voor borduurwerk, ontwerpen en creatief bezig zijn.
     paragraph2: >-
-      Vandaag werk ik samen met merken, eventorganisatoren, koppels en creatieven die die waardering voor ambacht delen.
-      Vanuit mijn atelier in Nederland steek ik dezelfde zorg in één keepsake als in een volledige live borduur-opstelling.
+      Wat begon als een creatieve passie groeide uit tot een studio waar ik samenwerk met merken, bedrijven en
+      particulieren aan unieke borduurprojecten. Of het nu gaat om een live event, bedrijfskleding, een persoonlijk
+      cadeau of een creatief maatwerkproject: ik geloof dat de mooiste resultaten ontstaan wanneer kwaliteit, aandacht
+      en persoonlijk contact samenkomen.
   philosophy:
-    eyebrow: Filosofie
-    title: Nauwkeurig vakmanschap in een snelle wereld
+    eyebrow: Aanpak
+    title: Zorgvuldig werk, persoonlijk contact
     description: >-
-      In een wereld van massaproductie kies ik het bedachtzame pad. Elk project krijgt dezelfde aandacht, of het nu een
-      enkele zakdoek is of honderd corporate jassen.
+      Elk project krijgt dezelfde aandacht, of het nu één cadeau is of een grotere bedrijfsbestelling. Ik werk
+      rechtstreeks met je mee, van het eerste gesprek tot de levering.
     quote: >-
-      Borduren gaat niet alleen over draad op stof. Het gaat over het vertalen van emotie naar iets tastbaars, iets dat
-      vastgehouden, gedragen en gekoesterd kan worden.
+      Borduren is voor mij het mooiste wanneer het ontwerp past bij de persoon, het moment of het merk. Dan wordt een
+      stuk echt iets om te bewaren.
   why:
     eyebrow: Waarom Raw Atelier
-    title: Wat ons onderscheidt
+    title: Wat je van mij kunt verwachten
     items:
       quality:
-        title: Kwaliteit machineborduurwerk
-        description: Elk design wordt gestikt met premium garens en materialen op professionele borduurmachines. Geen shortcuts, geen compromissen.
-      story:
-        title: Verhaalgedreven design
-        description: We borduren niet alleen logo's. We creëren verhalen. Jouw verhaal begeleidt elke creatieve beslissing.
-      connection:
-        title: Persoonlijke connectie
+        title: Kwaliteit borduurwerk
         description: >-
-          Je werkt rechtstreeks met mij van het eerste gesprek tot de uiteindelijke levering. Geen tussenpersonen, geen
-          miscommunicatie.
+          Elk design wordt gestikt met goede garens en materialen op professionele borduurmachines. Ik let op detail en
+          een nette afwerking.
+      story:
+        title: Creatief maatwerk
+        description: >-
+          Geen standaardoplossingen. Ik denk mee over design, materiaal en toepassing, zodat het eindresultaat past bij
+          jouw project.
+      connection:
+        title: Persoonlijk contact
+        description: >-
+          Je werkt rechtstreeks met mij van het eerste gesprek tot de uiteindelijke levering. Duidelijke communicatie,
+          zonder omwegen.
   atEvents:
     eyebrow: Live events
     title: Borduren in actie
     paragraph1: >-
-      Er is weinig dat zo bijzonder is als een design dat tot leven komt voor de ogen van je gasten. Ik zet mijn
-      borduurstation neer op festivals, merkactivaties, markten en privéfeesten, zodat mensen het ambacht in real time
-      kunnen zien gebeuren.
+      Tijdens een live borduur event personaliseer ik items ter plekke terwijl bezoekers meekijken. Het trekt
+      aandacht, zorgt voor interactie en geeft gasten iets mee dat ze écht willen bewaren.
     paragraph2: >-
-      Gasten vertrekken met een gepersonaliseerd stuk dat ze hebben zien ontstaan, en events krijgen een onvergetelijke
-      ervaring die nog lang blijft hangen.
+      Ik zet mijn borduurstation neer op festivals, merkactivaties, winkelopeningen en bedrijfsevenementen. Gasten
+      vertrekken met een gepersonaliseerd stuk dat ze hebben zien ontstaan.
   faq:
     eyebrow: FAQ
     title: Veelgestelde vragen
-    description: Alles wat je moet weten voordat we jouw verhaal gaan borduren.
+    description: Alles wat je wilt weten voordat we aan de slag gaan.

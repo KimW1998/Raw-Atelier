@@ -1,76 +1,78 @@
 servicesPage:
   hero:
     eyebrow: Services
-    title: Bespoke embroidery experiences
+    title: Embroidery tailored to you
     description: >-
-      From captivating live events to heirloom gifts, discover how Raw Atelier can bring your vision to life through the
-      art of embroidery.
+      From live events to corporate apparel and personal gifts. I help you from idea to finished embroidery, with clear
+      communication and attention to detail.
   serviceLabel: Service
   benefits: Benefits
+  perfectFor: Perfect for
   process: Process
 services:
   live-events:
     title: Live Embroidery Events
-    shortDescription: Embroidery experiences at events, festivals and brand activations.
+    shortDescription: Live embroidery at events, festivals and brand activations.
     description: >-
-      Bring your event to life with live embroidery that captivates guests and creates lasting memories. From festivals
-      to product launches, I set up an elegant embroidery station so attendees can watch the craft unfold and leave with
-      a personalised piece.
+      Turn your event into an experience people remember. During a live embroidery event, I personalise items on the
+      spot while guests watch. It draws attention, creates interaction and gives guests something they'll actually want
+      to keep.
+    benefitsHeading: perfectFor
     benefits:
-      - Interactive guest experience that draws crowds
-      - On-the-spot personalised embroidery
-      - Elevates brand activations and festivals
-      - Professional setup with premium materials
-      - Memorable takeaways for every guest
+      - Brand activations
+      - Festivals
+      - Store openings
+      - Corporate events
+      - Product launches
     process:
-      - Share your event vision and audience
-      - We design the embroidery concept and setup
-      - I arrive with full equipment and materials
-      - Guests enjoy live embroidery throughout your event
+      - Share your event plans and audience
+      - We decide on the design and setup together
+      - I arrive with equipment and materials
+      - Guests receive live personalised embroidery during your event
   corporate:
-    title: Corporate Embroidery
-    shortDescription: Branded apparel and merchandise.
+    title: Embroidery for businesses
+    shortDescription: Embroidered corporate apparel and merchandise.
     description: >-
-      Elevate your brand with meticulously embroidered corporate apparel and merchandise. From team uniforms to client
-      gifts, every stitch reflects your brand's quality and attention to detail.
+      Professional embroidery for clothing, merchandise and promotional products. From small teams to larger orders: I
+      help businesses make their brand visible with durable, high-quality embroidery solutions.
     benefits:
-      - Premium branded apparel and merchandise
-      - Consistent quality across large orders
-      - Custom logo and design digitisation
-      - Sustainable, high-quality materials
-      - Professional presentation for your brand
+      - Embroidered apparel and merchandise
+      - Consistent quality across larger orders
+      - Custom logo and design digitising
+      - Durable, high-quality materials
+      - Professional finish for your brand
     process:
-      - Discuss your brand guidelines and needs
-      - Digitise and sample your embroidery design
+      - Discuss your brand and requirements
+      - Digitise and sample the embroidery design
       - Approve the sample before production
-      - Receive beautifully finished branded pieces
+      - Receive finished branded pieces
   gifts:
-    title: Personalised Gifts
+    title: Personal gifts with meaning
     shortDescription: Custom embroidery for special occasions.
     description: >-
-      Celebrate life's meaningful moments with bespoke embroidered gifts. Whether it's a wedding, new baby, anniversary
-      or thoughtful gesture, each piece is crafted with care to tell a personal story.
+      A gift becomes special when it's made specifically for someone. From births and weddings to anniversaries and
+      other milestones: I create personalised embroidery projects that fit the moment and the person.
     benefits:
-      - One-of-a-kind gifts with personal meaning
-      - Perfect for weddings, births and milestones
+      - Unique gifts with personal meaning
+      - Suitable for weddings, births and milestones
       - Wide range of items to embroider
-      - Elegant packaging available
-      - Heirloom-quality craftsmanship
+      - Neatly wrapped and ready to give
+      - Quality you can rely on
     process:
       - Tell me about the occasion and recipient
       - Choose your item and design together
       - I embroider your personalised piece on professional machines
-      - Delivered beautifully wrapped and ready to gift
+      - Ready to give
   digitizing:
     title: Digitizing Embroidery Designs
     shortDescription: Professional embroidery file creation for logos and artwork.
     description: >-
       Transform your artwork, logos and illustrations into stitch-ready embroidery files. Whether you embroider yourself
-      or work with a production partner, I create precise digitizing tailored to your fabric, size and machine
+      or work with a production partner, I create precise digitising tailored to your fabric, size and machine
       requirements.
     benefits:
       - Logo and artwork conversion to embroidery files
-      - Optimized for different fabrics and stitch types
+      - Optimised for different fabrics and stitch types
       - Compatible with commercial embroidery machines
       - Revisions to refine density, underlay and detail
       - Fast turnaround for brands, makers and small businesses
@@ -83,9 +85,8 @@ services:
     title: Sewing & Creative Projects
     shortDescription: Production sewing, custom items and digital patterns.
     description: >-
-      From small-batch production runs to one-off custom pieces, Raw Atelier handles sewing projects beyond embroidery.
-      Think quilted cases, tailored accessories, sample development and made-to-measure textile work, alongside digital
-      sewing patterns available in the shop.
+      Beyond embroidery, I also handle sewing and creative projects. Think quilted cases, custom accessories, sample
+      development and technical sewing, alongside digital sewing patterns available in the shop.
     benefits:
       - Small-batch and production sewing
       - Custom sewn items tailored to your brief

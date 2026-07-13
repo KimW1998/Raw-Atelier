@@ -25,6 +25,12 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
   const title = tServices(`${service.id}.title`);
   const benefits = tServices.raw(`${service.id}.benefits`) as string[];
   const processSteps = tServices.raw(`${service.id}.process`) as string[];
+  const benefitsHeadingKey = tServices.raw(
+    `${service.id}.benefitsHeading`,
+  ) as string | undefined;
+  const benefitsHeading = benefitsHeadingKey
+    ? tPage(benefitsHeadingKey)
+    : tPage("benefits");
 
   return (
     <Section
@@ -76,7 +82,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
 
             <FadeIn delay={0.3}>
               <h3 className="mt-6 font-heading text-xl text-brand-black">
-                {tPage("benefits")}
+                {benefitsHeading}
               </h3>
               <ul className="mt-4 space-y-3">
                 {benefits.map((benefit) => (
@@ -112,7 +118,7 @@ export function ServiceDetail({ service, index }: ServiceDetailProps) {
 
             <FadeIn delay={0.5}>
               <Button href="/contact" variant="primary" className="mt-6">
-                {tCta("enquireAbout", { service: title })}
+                {tCta("enquireAbout")}
               </Button>
             </FadeIn>
           </div>

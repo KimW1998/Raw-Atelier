@@ -2,39 +2,39 @@ metadata:
   home:
     title: Raw Atelier
     description: >-
-      Premium creatief borduuratelier in Nederland. Maatwerk borduurwerk, live events, corporate branding,
-      gepersonaliseerde cadeaus en borduurdigitalisering. Gemaakt om jouw verhaal te vertellen.
+      Creatieve borduurstudio in Nederland. Maatwerk borduurwerk, live events, bedrijfskleding, gepersonaliseerde
+      cadeaus en borduurdigitalisering. Gemaakt met aandacht in Nederland.
   about:
     title: Over ons
     description: >-
-      Ontdek het verhaal achter Raw Atelier, een premium borduuratelier in Nederland, gewijd aan vakmanschap,
-      storytelling en op maat gemaakte textielervaringen.
+      Maak kennis met Kim en Raw Atelier: een creatieve borduurstudio in Nederland, gespecialiseerd in maatwerk,
+      creativiteit en persoonlijke samenwerking.
   services:
     title: Diensten
     description: >-
-      Ontdek de borduurdiensten van Raw Atelier: live events, corporate branding, gepersonaliseerde cadeaus,
-      borduurdigitalisering, naaiwerk en modecollaboraties in Nederland.
+      Ontdek de borduurdiensten van Raw Atelier: live events, bedrijfskleding, gepersonaliseerde cadeaus,
+      borduurdigitalisering, naaiwerk en creatieve projecten in Nederland.
   portfolio:
     title: Portfolio
     description: >-
-      Bekijk het borduurportfolio van Raw Atelier: live events, corporate projecten, gepersonaliseerde cadeaus,
-      modecollaboraties en digitaliseringswerk.
+      Bekijk het borduurportfolio van Raw Atelier: live events, bedrijfsprojecten, gepersonaliseerde cadeaus,
+      naaiwerk en digitaliseringswerk.
   shop:
     title: Shop
     description: >-
-      Ontdek machinegeborduurde producten van Raw Atelier. Gepersonaliseerde cadeaus, huistextiel en accessoires,
+      Ontdek machinegeborduurde producten van Raw Atelier. Gepersonaliseerde cadeaus, accessoires en naaitpatronen,
       verkrijgbaar in onze online shop.
   contact:
     title: Contact
     description: >-
-      Neem contact op met Raw Atelier voor maatwerk borduurwerk, live events, corporate bestellingen, borduurdigitalisering en
-      gepersonaliseerde cadeaus. Gevestigd in Nederland.
+      Neem contact op met Raw Atelier voor maatwerk borduurwerk, live events, bedrijfsbestellingen,
+      borduurdigitalisering en gepersonaliseerde cadeaus. Gevestigd in Nederland.
   keywords: >-
     maatwerk borduurwerk Nederland, live borduur events, borduur digitalisering, logo digitalisering, gepersonaliseerd borduurwerk, corporate
     borduurwerk, Raw Atelier
 brand:
   name: Raw Atelier
-  tagline: Gemaakt om jouw verhaal te vertellen
+  tagline: Creatief borduurwerk in Nederland
 nav:
   home: Home
   about: Over ons
@@ -42,7 +42,7 @@ nav:
   portfolio: Portfolio
   shop: Shop
   contact: Contact
-  workWithMe: Samenwerken
+  workWithMe: Plan een project
   openMenu: Menu openen
   closeMenu: Menu sluiten
   mainNavigation: Hoofdnavigatie
@@ -52,41 +52,39 @@ language:
   nl: Nederlands
 footer:
   description: >-
-    Gemaakt om jouw verhaal te vertellen. Premium creatief borduuratelier dat op maat gemaakte textielervaringen creëert
-    in Nederland.
+    Creatieve borduurstudio voor merken, events en persoonlijke projecten. Gemaakt met aandacht in Nederland.
   navigate: Navigatie
   getInTouch: Contact
   location: Nederland
   handcrafted: Met zorg machinegeborduurd in Nederland
   rights: Alle rechten voorbehouden.
 cta:
-  workWithMe: Samenwerken
-  viewPortfolio: Bekijk portfolio
+  workWithMe: Plan een project
+  viewPortfolio: Bekijk mijn werk
   learnMore: Meer info
   viewFullPortfolio: Volledig portfolio
-  readMyStory: Lees mijn verhaal
+  readMyStory: Meer over mij
   getInTouch: Neem contact op
   exploreServices: Ontdek diensten
-  readyTitle: Klaar om jouw verhaal te vertellen?
+  readyTitle: Klaar om samen aan een project te werken?
   readyDescription: >-
-    Of je nu een event plant, op zoek bent naar het perfecte cadeau, of droomt van een creatieve samenwerking. Ik hoor
-    graag van je.
+    Of je nu een event plant, een cadeau zoekt of een creatief idee hebt. Ik hoor graag van je en denk graag mee.
   shopNow: Naar de shop
   customOrder: Maatwerk aanvraag
   backToHome: Terug naar home
-  enquireAbout: Informeer over {service}
+  enquireAbout: Informeer naar de mogelijkheden
   followInstagram: Volg @raw_luxury_atelier
 contactServices:
   live-events: Live Borduur Events
-  corporate: Corporate Borduurwerk
-  gifts: Gepersonaliseerde Cadeaus
+  corporate: Borduurwerk voor bedrijven
+  gifts: Persoonlijke cadeaus met betekenis
   digitizing: Digitaliseren van Borduurdesigns
   fashion: Naaiwerk & Creatieve Projecten
   general: Algemene vraag
 schema:
   description: >-
-    Premium creatief borduuratelier gespecialiseerd in live events, corporate branding, gepersonaliseerde cadeaus,
-    borduurdigitalisering, naaiwerk en modecollaboraties.
+    Creatieve borduurstudio gespecialiseerd in live events, bedrijfskleding, gepersonaliseerde cadeaus,
+    borduurdigitalisering, naaiwerk en creatieve projecten.
 notFound:
   eyebrow: '404'
   title: Pagina niet gevonden

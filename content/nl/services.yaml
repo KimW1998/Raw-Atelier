@@ -1,72 +1,74 @@
 servicesPage:
   hero:
     eyebrow: Diensten
-    title: Borduurervaringen op maat
+    title: Borduurwerk op maat
     description: >-
-      Van boeiende live events tot erfstuk-cadeaus. Ontdek hoe Raw Atelier jouw visie tot leven kan brengen door de
-      kunst van borduren.
+      Van live events tot bedrijfskleding en persoonlijke cadeaus. Ik help je van idee tot afgewerkt borduurwerk, met
+      duidelijke communicatie en aandacht voor detail.
   serviceLabel: Dienst
   benefits: Voordelen
+  perfectFor: Perfect voor
   process: Proces
 services:
   live-events:
     title: Live Borduur Events
-    shortDescription: Borduurervaringen op events, festivals en merkactivaties.
+    shortDescription: Live borduurwerk op events, festivals en merkactivaties.
     description: >-
-      Breng je event tot leven met live borduurwerk dat gasten boeit en blijvende herinneringen creëert. Van festivals
-      tot productlanceringen. Ik zet een elegant borduurstation op zodat bezoekers het ambacht zien ontstaan en
-      vertrekken met een gepersonaliseerd stuk.
+      Maak van je event een ervaring die mensen onthouden. Tijdens een live borduur event personaliseer ik items ter
+      plekke terwijl bezoekers meekijken. Het trekt aandacht, zorgt voor interactie en geeft gasten iets mee dat ze
+      écht willen bewaren.
+    benefitsHeading: perfectFor
     benefits:
-      - Interactieve gastenervaring die menigten trekt
-      - Gepersonaliseerd borduurwerk ter plekke
-      - Verhoogt merkactivaties en festivals
-      - Professionele opstelling met premium materialen
-      - Onvergetelijke giveaways voor elke gast
+      - Merkactivaties
+      - Festivals
+      - Winkelopeningen
+      - Bedrijfsevenementen
+      - Productlanceringen
     process:
-      - Deel je eventvisie en doelgroep
-      - We ontwerpen het borduurconcept en de opstelling
-      - Ik kom met volledige uitrusting en materialen
-      - Gasten genieten van live borduurwerk tijdens je event
+      - Deel je eventplannen en doelgroep
+      - We bepalen samen het design en de opstelling
+      - Ik kom met uitrusting en materialen
+      - Gasten krijgen live gepersonaliseerd borduurwerk tijdens je event
   corporate:
-    title: Corporate Borduurwerk
+    title: Borduurwerk voor bedrijven
     shortDescription: Geborduurde bedrijfskleding en merchandise.
     description: >-
-      Versterk je merk met nauwkeurig geborduurde corporate kleding en merchandise. Van teamuniformen tot klantcadeaus,
-      elke steek weerspiegelt de kwaliteit en aandacht voor detail van je merk.
+      Professioneel borduurwerk voor kleding, merchandise en promotionele producten. Van kleine teams tot grotere
+      bestellingen: ik help bedrijven hun merk zichtbaar te maken met duurzame en hoogwaardige borduurwerkoplossingen.
     benefits:
-      - Premium geborduurde kleding en merchandise
-      - Consistente kwaliteit bij grote bestellingen
-      - Maatwerk logo- en designdigitalisatie
+      - Geborduurde kleding en merchandise
+      - Consistente kwaliteit bij grotere bestellingen
+      - Logo- en designdigitalisatie op maat
       - Duurzame, hoogwaardige materialen
-      - Professionele presentatie voor je merk
+      - Professionele afwerking voor je merk
     process:
-      - Bespreek je merkrichtlijnen en behoeften
-      - Digitaliseer en bemonster je borduurdesign
+      - Bespreek je merk en wensen
+      - Digitaliseer en bemonster het borduurdesign
       - Keur het monster goed vóór productie
-      - Ontvang prachtig afgewerkte merkstukken
+      - Ontvang afgewerkte merkstukken
   gifts:
-    title: Gepersonaliseerde Cadeaus
+    title: Persoonlijke cadeaus met betekenis
     shortDescription: Maatwerk borduurwerk voor bijzondere momenten.
     description: >-
-      Vier de betekenisvolle momenten in het leven met op maat gemaakte geborduurde cadeaus. Of het nu een bruiloft,
-      geboorte, jubileum of attent gebaar is. Elk stuk wordt met zorg gemaakt om een persoonlijk verhaal te vertellen.
+      Een cadeau wordt bijzonder wanneer het speciaal voor iemand gemaakt is. Van geboortes en bruiloften tot jubilea
+      en andere mijlpalen: ik maak gepersonaliseerde borduurprojecten die aansluiten bij het moment en de persoon.
     benefits:
       - Unieke cadeaus met persoonlijke betekenis
-      - Perfect voor bruiloften, geboortes en mijlpalen
+      - Geschikt voor bruiloften, geboortes en mijlpalen
       - Breed scala aan items om te borduren
-      - Elegante verpakking beschikbaar
-      - Ambacht van erfstuk-kwaliteit
+      - Netjes verpakt en klaar om te geven
+      - Kwaliteit waar je op kunt vertrouwen
     process:
       - Vertel me over de gelegenheid en de ontvanger
       - Kies samen je item en design
       - Ik borduur je gepersonaliseerde stuk op professionele machines
-      - Prachtig verpakt en klaar om te geven
+      - Klaar om te geven
   digitizing:
     title: Digitaliseren van Borduurdesigns
     shortDescription: Professionele borduurbestanden voor logo's en artwork.
     description: >-
       Zet je artwork, logo's en illustraties om naar borduurbestanden die klaar zijn om te stikken. Of je nu zelf
-      borduurt of met een productiepartner werkt. Ik maak nauwkeurige digitalisering op maat van je stof, formaat en
+      borduurt of met een productiepartner werkt: ik maak nauwkeurige digitalisering op maat van je stof, formaat en
       machine.
     benefits:
       - Omzetting van logo's en artwork naar borduurbestanden
@@ -83,9 +85,8 @@ services:
     title: Naaiwerk & Creatieve Projecten
     shortDescription: Productiewerk, maatwerk en digitale naaipatronen.
     description: >-
-      Van kleine productieseries tot unieke custom stukken: Raw Atelier verzorgt naaiwerk dat verder gaat dan borduren.
-      Denk aan quilted cases, accessoires op maat, sample-ontwikkeling en technisch naaiwerk, naast digitale
-      naaipatronen die je in de shop vindt.
+      Naast borduurwerk verzorg ik ook naaiwerk en creatieve projecten. Denk aan quilted cases, accessoires op maat,
+      sample-ontwikkeling en technisch naaiwerk, naast digitale naaipatronen die je in de shop vindt.
     benefits:
       - Kleine series en productiewerk
       - Custom naaistukken afgestemd op jouw wens

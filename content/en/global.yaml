@@ -2,27 +2,27 @@ metadata:
   home:
     title: Raw Atelier
     description: >-
-      Premium creative embroidery studio in the Netherlands. Custom embroidery, live events, corporate branding,
-      personalised gifts and embroidery digitizing. Made to tell your story.
+      Creative embroidery studio in the Netherlands. Custom embroidery, live events, corporate apparel, personalised
+      gifts and embroidery digitizing. Made with care in the Netherlands.
   about:
     title: About
     description: >-
-      Discover the story behind Raw Atelier, a premium embroidery studio in the Netherlands dedicated to craftsmanship,
-      storytelling and bespoke textile experiences.
+      Meet Kim and Raw Atelier: a creative embroidery studio in the Netherlands, specialising in custom work,
+      creativity and personal collaboration.
   services:
     title: Services
     description: >-
-      Explore Raw Atelier's embroidery services: live events, corporate branding, personalised gifts, embroidery
-      digitizing, sewing projects and fashion collaborations in the Netherlands.
+      Explore Raw Atelier's embroidery services: live events, corporate apparel, personalised gifts, embroidery
+      digitizing, sewing projects and creative collaborations in the Netherlands.
   portfolio:
     title: Portfolio
     description: >-
-      Browse Raw Atelier's embroidery portfolio: live events, corporate projects, personalised gifts, fashion
-      collaborations and digitizing work.
+      Browse Raw Atelier's embroidery portfolio: live events, corporate projects, personalised gifts, sewing work and
+      digitizing.
   shop:
     title: Shop
     description: >-
-      Discover machine-embroidered products from Raw Atelier. Personalised gifts, home textiles and accessories,
+      Discover machine-embroidered products from Raw Atelier. Personalised gifts, accessories and sewing patterns,
       available at our online shop.
   contact:
     title: Contact
@@ -34,7 +34,7 @@ metadata:
     embroidery, corporate embroidery, Raw Atelier
 brand:
   name: Raw Atelier
-  tagline: Made to tell your story
+  tagline: Creative embroidery in the Netherlands
 nav:
   home: Home
   about: About
@@ -42,7 +42,7 @@ nav:
   portfolio: Portfolio
   shop: Shop
   contact: Contact
-  workWithMe: Work With Me
+  workWithMe: Plan a project
   openMenu: Open menu
   closeMenu: Close menu
   mainNavigation: Main navigation
@@ -51,40 +51,40 @@ language:
   en: English
   nl: Nederlands
 footer:
-  description: Made to tell your story. Premium creative embroidery studio crafting bespoke textile experiences in the Netherlands.
+  description: >-
+    Creative embroidery studio for brands, events and personal projects. Made with care in the Netherlands.
   navigate: Navigate
   getInTouch: Get in Touch
   location: Netherlands
   handcrafted: Machine embroidered with care in the Netherlands
   rights: All rights reserved.
 cta:
-  workWithMe: Work With Me
-  viewPortfolio: View Portfolio
+  workWithMe: Plan a project
+  viewPortfolio: See my work
   learnMore: Learn more
-  viewFullPortfolio: View Full Portfolio
-  readMyStory: Read my story
+  viewFullPortfolio: View full portfolio
+  readMyStory: More about me
   getInTouch: Get in Touch
-  exploreServices: Explore Services
-  readyTitle: Ready to tell your story?
+  exploreServices: Explore services
+  readyTitle: Ready to work on a project together?
   readyDescription: >-
-    Whether you're planning an event, looking for the perfect gift, or dreaming up a creative collaboration. I'd love
-    to hear from you.
-  shopNow: Shop Now
-  customOrder: Custom Order Enquiry
-  backToHome: Back to Home
-  enquireAbout: Enquire About {service}
+    Whether you're planning an event, looking for a gift or have a creative idea in mind. I'd love to hear from you.
+  shopNow: Shop now
+  customOrder: Custom order enquiry
+  backToHome: Back to home
+  enquireAbout: Ask about options
   followInstagram: Follow @raw_luxury_atelier
 contactServices:
   live-events: Live Embroidery Events
-  corporate: Corporate Embroidery
-  gifts: Personalised Gifts
+  corporate: Embroidery for businesses
+  gifts: Personal gifts with meaning
   digitizing: Digitizing Embroidery Designs
   fashion: Sewing & Creative Projects
-  general: General Inquiry
+  general: General inquiry
 schema:
   description: >-
-    Premium creative embroidery studio specialising in live events, corporate branding, personalised gifts, embroidery
-    digitizing, sewing projects and fashion collaborations.
+    Creative embroidery studio specialising in live events, corporate apparel, personalised gifts, embroidery
+    digitizing, sewing projects and creative collaborations.
 notFound:
   eyebrow: '404'
   title: Page not found

@@ -1,37 +1,39 @@
 home:
   hero:
-    headline: Borduurwerk dat jouw verhaal vertelt
+    headline: Creatief borduurwerk voor merken, events en bijzondere momenten
     intro: >-
-      Maatwerk machineborduurwerk voor events, merken en dierbare momenten. Elke steek is met intentie geplaatst,
-      gemaakt om te vieren wat voor jou het belangrijkst is.
+      Van live borduur events en bedrijfskleding tot gepersonaliseerde cadeaus en maatwerkprojecten. Alles wordt met
+      aandacht ontworpen en professioneel geborduurd in Nederland.
   services:
     eyebrow: Wat ik aanbied
-    title: Diensten met zorg gemaakt
+    title: Borduurwerk op maat
     description: >-
-      Van live event-ervaringen tot op maat gemaakte cadeaus. Elke dienst is ontworpen om jouw verhaal tot leven te
-      brengen door professioneel machineborduurwerk.
+      Van live borduur events en bedrijfskleding tot gepersonaliseerde cadeaus en creatieve maatwerkprojecten. Elk
+      project is anders, maar de aanpak blijft hetzelfde: persoonlijke aandacht, duidelijke communicatie en kwaliteit
+      waar je op kunt vertrouwen.
   featured:
     eyebrow: Portfolio
     title: Uitgelicht werk
-    description: Een glimp van de verhalen die ik tot leven heb gebracht door borduurwerk.
+    description: Een selectie van recente projecten voor merken, events en particulieren.
   about:
     eyebrow: Over mij
-    title: Vakmanschap en storytelling
+    title: Creatief met een persoonlijk verhaal
     paragraph1: >-
-      Ik ben Kim, de maker achter Raw Atelier. Wat begon als een passie voor machineborduurwerk, is uitgegroeid tot een
-      atelier dat samenwerkt met merken, koppels en creatieven om textielstukken en ervaringen met echte betekenis te
-      maken.
+      Raw Atelier begon vanuit een liefde voor borduurwerk, ontwerpen en creatief bezig zijn.
     paragraph2: >-
-      Vanuit Nederland werk ik met klanten die authenticiteit, kwaliteit en de stille luxe van professioneel
-      machinegeborduurde stukken waarderen.
+      Wat begon als een creatieve passie groeide uit tot een studio waar ik samenwerk met merken, bedrijven en
+      particulieren aan unieke borduurprojecten.
+    paragraph3: >-
+      Of het nu gaat om een live event, bedrijfskleding, een persoonlijk cadeau of een creatief maatwerkproject, ik
+      geloof dat de mooiste resultaten ontstaan wanneer kwaliteit, aandacht en persoonlijk contact samenkomen.
   testimonials:
     eyebrow: Lieve woorden
     title: Wat klanten zeggen
     description: Reviews uit onze Etsy-shop, RawLuxuryStitches.
   process:
     eyebrow: Hoe het werkt
-    title: Van visie tot afgewerkt stuk
-    description: Een doordacht, collaboratief proces zorgt ervoor dat elk borduurproject de verwachtingen overtreft.
+    title: Van idee tot afgewerkt stuk
+    description: Een helder proces met persoonlijk contact, van het eerste gesprek tot het eindresultaat.
   instagram:
     eyebrow: Instagram
     title: Nieuw op Instagram

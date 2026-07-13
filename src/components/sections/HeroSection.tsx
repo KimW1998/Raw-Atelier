@@ -25,7 +25,7 @@ export function HeroSection() {
               </p>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h1 className="font-heading text-4xl leading-[1.1] text-brand-black sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="max-w-2xl font-heading text-3xl leading-[1.15] text-brand-black sm:text-4xl md:text-5xl lg:text-5xl">
                 {t("hero.headline")}
               </h1>
             </FadeIn>

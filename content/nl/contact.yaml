@@ -1,13 +1,13 @@
 contactPage:
   hero:
     eyebrow: Contact
-    title: Laten we een gesprek starten
-    description: Heb je een project in gedachten? Ik hoor het graag. Vul het formulier in of neem rechtstreeks contact op.
+    title: Laten we je project bespreken
+    description: Heb je een idee, event of cadeau in gedachten? Vul het formulier in of neem rechtstreeks contact op.
   info:
-    title: Laten we iets moois creëren
+    title: Ik hoor graag van je
     description: >-
-      Ik hoor graag over jouw project, of het nu een live event, een corporate bestelling of een speciaal cadeau is.
-      Elke aanvraag is welkom.
+      Of het nu gaat om een live event, bedrijfskleding of een persoonlijk cadeau: elke aanvraag is welkom. Ik denk
+      graag mee over wat mogelijk is.
     email: E-mail
     instagram: Instagram
   form:

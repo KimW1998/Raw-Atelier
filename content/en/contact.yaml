@@ -1,13 +1,13 @@
 contactPage:
   hero:
     eyebrow: Contact
-    title: Let's start a conversation
-    description: Have a project in mind? I'd love to hear about it. Fill out the form below or reach out directly.
+    title: Let's talk about your project
+    description: Have an idea, event or gift in mind? Fill out the form below or get in touch directly.
   info:
-    title: Let's create something beautiful
+    title: I'd love to hear from you
     description: >-
-      I'd love to hear about your project, whether it's a live event, a corporate order, or a special gift. Every
-      enquiry is welcome.
+      Whether it's a live event, corporate apparel or a personal gift: every enquiry is welcome. I'm happy to think
+      along about what's possible.
     email: Email
     instagram: Instagram
   form:
@@ -15,7 +15,7 @@ contactPage:
     email: Email
     company: Company
     companyPlaceholder: Company name (optional)
-    service: Service Interested In
+    service: Service interested in
     servicePlaceholder: Select a service
     message: Message
     messagePlaceholder: Tell me about your project, event or idea...
@@ -23,7 +23,7 @@ contactPage:
     namePlaceholder: Your name
     emailPlaceholder: you@example.com
     sending: Sending...
-    send: Send Message
+    send: Send message
     thankYouTitle: Thank you for reaching out
     thankYouDescription: >-
       Your message has been received. I'll get back to you within 2 business days. In the meantime, feel free to follow

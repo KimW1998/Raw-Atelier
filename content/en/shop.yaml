@@ -1,23 +1,23 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Machine-embroidered pieces to cherish
+    title: Embroidered products and sewing patterns
     description: >-
-      Browse personalized machine embroidery, baby gifts, keychains, patches, pouches, and sewing patterns, each made with care.
-      Order and checkout happen at Raw Luxury Stitches.
+      Browse personalised machine embroidery, baby gifts, keychains, patches, pouches and sewing patterns. Order and
+      checkout happen at Raw Luxury Stitches.
   trust:
     description: >-
-      After you place an order, Kim personally contacts you to confirm names, fabrics, colours, and details before
+      After you place an order, Kim personally contacts you to confirm names, fabrics, colours and details before
       your piece is made.
   visit:
     title: Visit the full online shop
     description: >-
-      See every product, personalization option, and shipping detail at Raw Luxury Stitches.
+      See every product, personalization option and shipping detail at Raw Luxury Stitches.
     externalNote: Opens rawluxurystitches.com in a new tab
 shop:
   tabsLabel: Shop categories
   emptyCategory: No products in this category yet. Visit the full shop or contact us for a custom order.
-  productNote: Personalized and made to order. Opens in our online shop.
+  productNote: Personalised and made to order. Opens in our online shop.
   viewFullShop: View full shop
   badges:
     handmade: Embroidered
@@ -26,12 +26,12 @@ shop:
   sections:
     babyGifts:
       eyebrow: Baby & gifts
-      title: Personalized baby gifts
-      description: Name banners, fabric balloons, and meaningful keepsakes for nurseries and celebrations.
+      title: Personalised baby gifts
+      description: Name banners, fabric balloons and special gifts for babies and celebrations.
     keychains:
       eyebrow: Keychains
-      title: Small personalized gifts
-      description: Embroidered keychains and charming details for teachers, friends, and little thank-yous.
+      title: Small personalised gifts
+      description: Embroidered keychains and charming details for teachers, friends and little thank-yous.
     patches:
       eyebrow: Patches
       title: Embroidered patches
@@ -40,7 +40,7 @@ shop:
     pouches:
       eyebrow: Pouches & bags
       title: Drawstring bags & pouches
-      description: Soft personalized pouches for gifts, baby items, and everyday storage.
+      description: Soft personalised pouches for gifts, baby items and everyday storage.
     patterns:
       eyebrow: Sewing patterns
       title: Digital sewing patterns
@@ -55,7 +55,7 @@ shop:
     items:
       ereaderCases:
         name: Quilted e-reader & tablet cases
-        description: Soft protective cases sewn to order for your device, fabric, and embroidery preferences.
+        description: Soft protective cases sewn to order for your device, fabric and embroidery preferences.
       customPouches:
         name: Custom pouches & accessories
-        description: Bespoke pouches, cases, and embroidered accessories tailored to your size and style.
+        description: Custom pouches, cases and embroidered accessories tailored to your size and style.
