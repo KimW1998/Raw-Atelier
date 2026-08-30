@@ -1,62 +1,79 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
-import { useTranslations } from "@/i18n/context";
+import { useLocale, useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { cn } from "@/lib/utils";
+import { Link } from "@/i18n/routing";
+import { useCart } from "@/lib/cart";
 import {
   MADE_TO_ORDER_IDS,
   SHOP_TAB_ORDER,
   SHOP_TAB_PARAM,
+  formatListedPrice,
   getDefaultShopTab,
-  getShopProductsBySection,
+  getProductBadge,
+  getProductDescription,
+  getProductHref,
+  getProductName,
   isShopTabId,
+  productHasOptions,
+  useShopProducts,
   type MadeToOrderId,
-  type ShopProduct,
+  type ShopCatalogProduct,
   type ShopSectionId,
   type ShopTabId,
 } from "@/lib/shop";
-import { BRAND } from "@/lib/constants";
 
-function ProductCard({ product }: { product: ShopProduct }) {
+function ProductCard({ product }: { product: ShopCatalogProduct }) {
   const t = useTranslations("shop");
+  const locale = useLocale();
+  const { addItem } = useCart();
+  const badge = getProductBadge(product);
+  const needsOptions = productHasOptions(product);
 
   return (
-    <a
-      href={product.permalink}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-pink/10"
-    >
-      <div className="relative aspect-square overflow-hidden">
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
+      <Link href={getProductHref(product.id)} className="relative aspect-square overflow-hidden">
         <PremiumImage
           src={product.image}
-          alt={product.name}
+          alt={getProductName(product, locale)}
           fill
           sizes="(max-width: 640px) 50vw, 25vw"
-          className="transition-transform duration-700 group-hover:scale-105"
         />
         <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.12em] text-brand-black">
-          {t(`badges.${product.badge}`)}
+          {t(`badges.${badge}`)}
         </span>
-      </div>
+      </Link>
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-heading text-lg text-brand-black">{product.name}</h3>
+        <Link href={getProductHref(product.id)}>
+          <h3 className="font-heading text-lg text-brand-black hover:text-brand-pink-accent">
+            {getProductName(product, locale)}
+          </h3>
+        </Link>
         <p className="mt-1 font-body text-sm font-semibold text-brand-pink-accent">
-          {product.priceLabel}
+          {formatListedPrice(product, locale)}
         </p>
-        <p className="mt-3 font-body text-sm leading-relaxed text-brand-black/60">
-          {t("productNote")}
+        <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-brand-black/60">
+          {getProductDescription(product, locale)}
         </p>
-        <span className="mt-auto inline-flex items-center gap-1 pt-4 font-body text-sm font-semibold text-brand-black transition-colors group-hover:text-brand-pink-accent">
-          {product.actionLabel}
-          <ArrowUpRight className="h-4 w-4" />
-        </span>
+        {needsOptions ? (
+          <Button href={getProductHref(product.id)} variant="primary" className="mt-4 w-full">
+            {t("cart.chooseOptions")}
+          </Button>
+        ) : (
+          <Button
+            variant="primary"
+            className="mt-4 w-full"
+            onClick={() => addItem(product.id)}
+          >
+            {t("cart.add")}
+          </Button>
+        )}
       </div>
-    </a>
+    </article>
   );
 }
 
@@ -149,7 +166,7 @@ function TabPanelHeading({
 
 function getEmptyCategoryMessage(
   tabId: ShopSectionId,
-  tShop: ReturnType<typeof useTranslations>
+  tShop: ReturnType<typeof useTranslations>,
 ) {
   const sectionNote = tShop.raw(`sections.${tabId}.emptyNote`);
   if (typeof sectionNote === "string" && sectionNote.length > 0) {
@@ -164,117 +181,104 @@ export function ShopCatalog() {
   const tShop = useTranslations("shop");
   const { activeTab, setActiveTab } = useShopTab();
   const heading = getTabHeading(activeTab, tShop);
-  const products = isProductTab(activeTab) ? getShopProductsBySection(activeTab) : [];
+  const allProducts = useShopProducts();
+  const products = isProductTab(activeTab)
+    ? allProducts.filter((product) => product.section === activeTab)
+    : [];
 
   return (
-    <>
-      <Section spacing="compact">
-        <Container>
-          <div
-            role="tablist"
-            aria-label={tShop("tabsLabel")}
-            className="mb-10 flex gap-2 overflow-x-auto pb-2 md:mb-12 md:justify-center"
-          >
-            {SHOP_TAB_ORDER.map((tabId) => {
-              const isActive = activeTab === tabId;
-              const productCount = isProductTab(tabId)
-                ? getShopProductsBySection(tabId).length
-                : MADE_TO_ORDER_IDS.length;
+    <Section spacing="compact">
+      <Container>
+        <p className="mx-auto mb-10 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-12">
+          {t("shippingNote")}
+        </p>
+        <div
+          role="tablist"
+          aria-label={tShop("tabsLabel")}
+          className="mb-10 flex gap-2 overflow-x-auto pb-2 md:mb-12 md:justify-center"
+        >
+          {SHOP_TAB_ORDER.map((tabId) => {
+            const isActive = activeTab === tabId;
+            const productCount = isProductTab(tabId)
+              ? allProducts.filter((product) => product.section === tabId).length
+              : MADE_TO_ORDER_IDS.length;
 
-              return (
-                <button
-                  key={tabId}
-                  type="button"
-                  role="tab"
-                  id={`shop-tab-${tabId}`}
-                  aria-selected={isActive}
-                  aria-controls={`shop-panel-${tabId}`}
-                  onClick={() => setActiveTab(tabId)}
+            return (
+              <button
+                key={tabId}
+                type="button"
+                role="tab"
+                id={`shop-tab-${tabId}`}
+                aria-selected={isActive}
+                aria-controls={`shop-panel-${tabId}`}
+                onClick={() => setActiveTab(tabId)}
+                className={cn(
+                  "shrink-0 rounded-full px-5 py-2.5 font-body text-sm font-semibold transition-all duration-300",
+                  isActive
+                    ? "bg-brand-black text-white shadow-md shadow-brand-black/10"
+                    : "bg-white text-brand-black/70 ring-1 ring-brand-pink-light hover:bg-brand-pink-light hover:text-brand-black",
+                )}
+              >
+                <span>{getTabLabel(tabId, tShop)}</span>
+                <span
                   className={cn(
-                    "shrink-0 rounded-full px-5 py-2.5 font-body text-sm font-semibold transition-all duration-300",
+                    "ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-xs",
                     isActive
-                      ? "bg-brand-black text-white shadow-md shadow-brand-black/10"
-                      : "bg-white text-brand-black/70 ring-1 ring-brand-pink-light hover:bg-brand-pink-light hover:text-brand-black"
+                      ? "bg-white/15 text-white"
+                      : "bg-brand-pink-light text-brand-black/60",
                   )}
                 >
-                  <span>{getTabLabel(tabId, tShop)}</span>
-                  <span
-                    className={cn(
-                      "ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-xs",
-                      isActive ? "bg-white/15 text-white" : "bg-brand-pink-light text-brand-black/60"
-                    )}
-                  >
-                    {productCount}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                  {productCount}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-          <div
-            role="tabpanel"
-            id={`shop-panel-${activeTab}`}
-            aria-labelledby={`shop-tab-${activeTab}`}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <TabPanelHeading
-                  eyebrow={heading.eyebrow}
-                  title={heading.title}
-                  description={heading.description}
-                />
+        <div
+          role="tabpanel"
+          id={`shop-panel-${activeTab}`}
+          aria-labelledby={`shop-tab-${activeTab}`}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <TabPanelHeading
+                eyebrow={heading.eyebrow}
+                title={heading.title}
+                description={heading.description}
+              />
 
-                {activeTab === "madeToOrder" ? (
-                  <div className="grid gap-8 md:grid-cols-3">
-                    {MADE_TO_ORDER_IDS.map((id) => (
-                      <MadeToOrderCard key={id} id={id} />
-                    ))}
-                  </div>
-                ) : products.length > 0 ? (
-                  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {products.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-center font-body text-base text-brand-black/60">
-                    {getEmptyCategoryMessage(activeTab, tShop)}
-                  </p>
-                )}
-
-                <p className="mx-auto mt-10 max-w-xl text-center font-body text-sm leading-relaxed text-brand-black/60 md:mt-12">
-                  {t("trust.description")}
+              {activeTab === "madeToOrder" ? (
+                <div className="grid gap-8 md:grid-cols-3">
+                  {MADE_TO_ORDER_IDS.map((id) => (
+                    <MadeToOrderCard key={id} id={id} />
+                  ))}
+                </div>
+              ) : products.length > 0 ? (
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center font-body text-base text-brand-black/60">
+                  {getEmptyCategoryMessage(activeTab, tShop)}
                 </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </Container>
-      </Section>
+              )}
 
-      <Section background="pink" spacing="compact">
-        <Container size="narrow" className="text-center">
-          <h2 className="font-heading text-3xl text-brand-black md:text-4xl">
-            {t("visit.title")}
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg font-body text-base leading-relaxed text-brand-black/70">
-            {t("visit.description")}
-          </p>
-          <div className="mt-8">
-            <Button href={`${BRAND.shopUrl}/custom-creations/`} variant="primary" size="large" external>
-              {tShop("viewFullShop")}
-            </Button>
-          </div>
-          <p className="mt-6 font-body text-xs text-brand-black/50">
-            {t("visit.externalNote")}
-          </p>
-        </Container>
-      </Section>
-    </>
+              <p className="mx-auto mt-10 max-w-xl text-center font-body text-sm leading-relaxed text-brand-black/60 md:mt-12">
+                {t("trust.description")}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </Container>
+    </Section>
   );
 }

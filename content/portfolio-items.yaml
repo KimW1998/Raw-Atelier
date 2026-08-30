@@ -1,0 +1,81 @@
+items:
+  - id: live-suit-design
+    category: events
+    aspect: wide
+    featured: true
+    image: /images/portfolio/events-live-booth.jpg
+    title:
+      nl: Live pakdesign-event
+      en: Live Suit Design Event
+  - id: balloon-gift
+    category: gifts
+    aspect: tall
+    featured: true
+    image: /images/portfolio/gifts-balloon.jpg
+    title:
+      nl: Gepersonaliseerd balloncadeau
+      en: Personalised balloon gift
+  - id: baby-hood
+    category: gifts
+    aspect: tall
+    featured: true
+    image: /images/portfolio/gifts-baby-hood.jpg
+    title:
+      nl: Geborduurde babywrap met capuchon
+      en: Embroidered baby hooded wrap
+  - id: baby-wrap
+    category: gifts
+    aspect: wide
+    featured: false
+    image: /images/portfolio/gifts-baby-wrap.jpg
+    title:
+      nl: Babywrap en sensorisch blok
+      en: Baby wrap and sensory block
+  - id: name-banner
+    category: gifts
+    aspect: wide
+    featured: false
+    image: /images/portfolio/gifts-banner-letters.jpg
+    title:
+      nl: Stoffen naamslinger
+      en: Fabric name garland
+  - id: applique-letters
+    category: digitizing
+    aspect: square
+    featured: false
+    image: /images/portfolio/digitizing-applique-letters.jpg
+    title:
+      nl: Appliqué letterdetails
+      en: Appliqué letter details
+  - id: butterfly-wings
+    category: fashion
+    aspect: tall
+    featured: false
+    image: /images/portfolio/fashion-butterfly-wings.jpg
+    title:
+      nl: Gewatteerde vlindervleugels
+      en: Quilted butterfly wings
+  - id: upcycled-blazer
+    category: fashion
+    aspect: wide
+    featured: false
+    image: /images/portfolio/fashion-upcycle-blazer.jpg
+    title:
+      nl: Upcycled blazer
+      en: Upcycled blazer
+  - id: upcycle-design
+    category: fashion
+    aspect: square
+    featured: false
+    image: /images/portfolio/fashion-upcycle-design.jpg
+    title:
+      nl: Eigen design upcycle
+      en: Own design upcycle
+  - id: collar-bees
+    category: corporate
+    aspect: square
+    featured: false
+    image: /images/portfolio/corporate-collar-bees.jpg
+    title:
+      nl: Geborduurd kraagdetail
+      en: Embroidered collar detail

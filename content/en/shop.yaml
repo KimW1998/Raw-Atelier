@@ -3,26 +3,72 @@ shopPage:
     eyebrow: Shop
     title: Embroidered products and sewing patterns
     description: >-
-      Browse personalised machine embroidery, baby gifts, keychains, patches, pouches and sewing patterns. Order and
-      checkout happen at Raw Luxury Stitches.
+      Personalised machine embroidery, baby gifts, keychains, pouches and digital sewing patterns. You pay through
+      Stripe, on their secure checkout page.
+  shippingNote: >-
+    Digital patterns: available to everyone, worldwide, emailed after payment. Other products: shipping within the
+    Netherlands only.
   trust:
     description: >-
-      After you place an order, Kim personally contacts you to confirm names, fabrics, colours and details before
-      your piece is made.
-  visit:
-    title: Visit the full online shop
-    description: >-
-      See every product, personalization option and shipping detail at Raw Luxury Stitches.
-    externalNote: Opens rawluxurystitches.com in a new tab
+      For personalised pieces, I contact you after your order to confirm names, fabrics, colours and details.
 shop:
   tabsLabel: Shop categories
-  emptyCategory: No products in this category yet. Visit the full shop or contact us for a custom order.
-  productNote: Personalised and made to order. Opens in our online shop.
-  viewFullShop: View full shop
+  emptyCategory: No products in this category yet. Get in touch for a custom order.
+  productNote: Personalised and made to order.
   badges:
     handmade: Embroidered
     digital: Digital pattern
     madeToOrder: Made to order
+  product:
+    backToShop: Back to the shop
+    related: You may also like
+    shippingDigital: Digital pattern. After payment I email the PDF, worldwide.
+    shippingPhysical: Shipping within the Netherlands.
+    personalization: After you order, I confirm the name, fabric and details with you.
+    fromPrice: from {price}
+    photos: Photos
+    photoOf: Photo {current} of {total}
+  options:
+    optional: optional
+    lettersHint: "{perLetter} per letter or symbol, minimum {min}."
+    maxLetters: Maximum {max} characters.
+    letterCount: "{count} characters · {price}"
+    lettersNeedMore: "{needed} more needed (minimum {min} characters)."
+    symbolsHint: Tap a symbol to insert it in the name, at your cursor.
+    errorRequired: Please fill in the required options.
+    errorInvalid: Please choose a valid option.
+    errorMinLetters: The name garland needs at least {min} letters or symbols.
+    errorMaxLetters: That name is too long for this product.
+  cart:
+    title: Cart
+    pageTitle: Cart
+    eyebrow: Shop
+    summary: Summary
+    subtotal: Subtotal
+    shippingNote: Shipping is calculated at checkout. Netherlands only.
+    digitalOnlyNote: Digital patterns are emailed, with no shipping charge.
+    continue: Continue shopping
+    viewFull: Cart
+    chooseOptions: Choose options
+    close: Close
+    empty: Your cart is empty.
+    add: Add to cart
+    checkout: Checkout
+    redirecting: Taking you to Stripe...
+    checkoutError: Checkout is unavailable right now. Please try again later or send me a message.
+    increase: Increase
+    decrease: Decrease
+    remove: Remove
+    clear: Empty cart
+  result:
+    successTitle: Thank you for your order
+    successDescription: >-
+      Your payment went through. Digital patterns are emailed to you. Physical products are shipped within the
+      Netherlands after I confirm the details with you.
+    cancelTitle: Order cancelled
+    cancelDescription: Nothing was charged. You can update your cart and try again.
+    backToShop: Back to the shop
+    contact: Get in touch
   sections:
     babyGifts:
       eyebrow: Baby & gifts
@@ -36,7 +82,7 @@ shop:
       eyebrow: Patches
       title: Embroidered patches
       description: Patches for jackets, bags and accessories. First designs coming soon.
-      emptyNote: First patch design coming soon. Check back shortly or visit the full shop at Raw Luxury Stitches.
+      emptyNote: First patch design coming soon. Send a message if you already have something in mind.
     pouches:
       eyebrow: Pouches & bags
       title: Drawstring bags & pouches
@@ -44,13 +90,12 @@ shop:
     patterns:
       eyebrow: Sewing patterns
       title: Digital sewing patterns
-      description: Instant PDF downloads with step-by-step instructions, including quilted e-reader case patterns.
+      description: PDF patterns for anyone, worldwide. After payment I email the file to you.
   madeToOrder:
     eyebrow: Made to order
     title: Sewn on request
     description: >-
-      These pieces are not listed as ready-made products yet, but Kim can make them to order. Send your ideas and
-      measurements through the contact form.
+      These pieces are not listed as ready-made products yet. Send your ideas and measurements through the contact form.
     cta: Request a custom order
     items:
       ereaderCases:

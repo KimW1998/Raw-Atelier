@@ -1,0 +1,301 @@
+{
+  "products": [
+    {
+      "id": "fabric-name-banner",
+      "type": "physical",
+      "section": "babyGifts",
+      "image": "/images/portfolio/gifts-banner-letters.jpg",
+      "priceCents": 1200,
+      "priceLabel": "vanaf € 12,00",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Stoffen naamslinger",
+        "en": "Fabric name garland"
+      },
+      "description": {
+        "nl": "Gepersonaliseerde stoffen letters. Elke letter of teken kost € 4,00, minimaal 3. Hart, & en maan kun je in de naam zetten. Kies een stof en vul de naam in.",
+        "en": "Personalised fabric letters. Each letter or symbol is € 4.00, minimum 3. You can add a heart, & or moon in the name. Choose a fabric and enter the name."
+      },
+      "options": [
+        {
+          "id": "name",
+          "type": "letters",
+          "required": true,
+          "label": { "nl": "Naam op de slinger", "en": "Name on the garland" },
+          "pricePerLetterCents": 400,
+          "minLetters": 3,
+          "maxLetters": 12,
+          "extraCharacters": [
+            { "id": "heart", "char": "♥", "label": { "nl": "Hart", "en": "Heart" } },
+            { "id": "ampersand", "char": "&", "label": { "nl": "&", "en": "&" } },
+            { "id": "moon", "char": "☾", "label": { "nl": "Maan", "en": "Moon" } }
+          ]
+        },
+        {
+          "id": "fabric",
+          "type": "fabric",
+          "required": true,
+          "label": { "nl": "Stof", "en": "Fabric" },
+          "choices": [
+            {
+              "id": "soft-pink",
+              "label": { "nl": "Zacht roze", "en": "Soft pink" },
+              "image": "/images/portfolio/gifts-balloon.jpg"
+            },
+            {
+              "id": "powder-blue",
+              "label": { "nl": "Poederblauw", "en": "Powder blue" },
+              "image": "/images/portfolio/gifts-baby-wrap.jpg"
+            },
+            {
+              "id": "linen",
+              "label": { "nl": "Linnen natuur", "en": "Natural linen" },
+              "image": "/images/portfolio/gifts-3.jpg"
+            },
+            {
+              "id": "floral",
+              "label": { "nl": "Bloemenprint", "en": "Floral print" },
+              "image": "/images/portfolio/gifts-1.jpg"
+            }
+          ]
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": { "nl": "Extra notitie", "en": "Extra note" }
+        }
+      ]
+    },
+    {
+      "id": "fabric-balloon",
+      "type": "physical",
+      "section": "babyGifts",
+      "image": "/images/portfolio/gifts-balloon.jpg",
+      "priceCents": 3899,
+      "priceLabel": "€ 38,99",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Stoffen ballon met borduurwerk",
+        "en": "Fabric balloon with embroidery"
+      },
+      "description": {
+        "nl": "Een stoffen ballon met geborduurde naam of tekst. Kies een stof en vul de naam in. Verzending binnen Nederland.",
+        "en": "A fabric balloon with embroidered name or text. Choose a fabric and enter the name. Shipping within the Netherlands."
+      },
+      "options": [
+        {
+          "id": "fabric",
+          "type": "fabric",
+          "required": true,
+          "label": { "nl": "Stof", "en": "Fabric" },
+          "choices": [
+            {
+              "id": "soft-pink",
+              "label": { "nl": "Zacht roze", "en": "Soft pink" },
+              "image": "/images/portfolio/gifts-balloon.jpg"
+            },
+            {
+              "id": "powder-blue",
+              "label": { "nl": "Poederblauw", "en": "Powder blue" },
+              "image": "/images/portfolio/gifts-baby-wrap.jpg"
+            },
+            {
+              "id": "linen",
+              "label": { "nl": "Linnen natuur", "en": "Natural linen" },
+              "image": "/images/portfolio/gifts-3.jpg"
+            }
+          ]
+        },
+        {
+          "id": "name",
+          "type": "name",
+          "required": true,
+          "label": { "nl": "Naam of tekst", "en": "Name or text" }
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": { "nl": "Extra notitie", "en": "Extra note" }
+        }
+      ]
+    },
+    {
+      "id": "apple-keychain",
+      "type": "physical",
+      "section": "keychains",
+      "image": "/images/portfolio/gifts-1.jpg",
+      "priceCents": 1495,
+      "priceLabel": "€ 14,95",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Geborduurde appel-keychain",
+        "en": "Embroidered apple keychain"
+      },
+      "description": {
+        "nl": "Klein geborduurd cadeau, bijvoorbeeld voor een juf of als bedankje. Kies hardwarekleur en vul een naam in. Verzending binnen Nederland.",
+        "en": "A small embroidered gift, for example for a teacher or as a thank-you. Choose hardware colour and add a name. Shipping within the Netherlands."
+      },
+      "options": [
+        {
+          "id": "name",
+          "type": "name",
+          "required": true,
+          "label": { "nl": "Naam", "en": "Name" }
+        },
+        {
+          "id": "hardware",
+          "type": "hardware",
+          "required": true,
+          "label": { "nl": "Hardware", "en": "Hardware" },
+          "choices": [
+            {
+              "id": "gold",
+              "label": { "nl": "Goud", "en": "Gold" },
+              "color": "#C5A572"
+            },
+            {
+              "id": "silver",
+              "label": { "nl": "Zilver", "en": "Silver" },
+              "color": "#C0C4C8"
+            }
+          ]
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": { "nl": "Extra notitie", "en": "Extra note" }
+        }
+      ]
+    },
+    {
+      "id": "drawstring-bag",
+      "type": "physical",
+      "section": "pouches",
+      "image": "/images/portfolio/gifts-3.jpg",
+      "priceCents": 1999,
+      "priceLabel": "€ 19,99",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Geborduurde trekkoordtas",
+        "en": "Embroidered drawstring bag"
+      },
+      "description": {
+        "nl": "Zachte trekkoordtas met borduurwerk. Kies een stof en vul de naam in. Verzending binnen Nederland.",
+        "en": "A soft drawstring bag with embroidery. Choose a fabric and enter the name. Shipping within the Netherlands."
+      },
+      "options": [
+        {
+          "id": "fabric",
+          "type": "fabric",
+          "required": true,
+          "label": { "nl": "Stof", "en": "Fabric" },
+          "choices": [
+            {
+              "id": "linen",
+              "label": { "nl": "Linnen natuur", "en": "Natural linen" },
+              "image": "/images/portfolio/gifts-3.jpg"
+            },
+            {
+              "id": "soft-pink",
+              "label": { "nl": "Zacht roze", "en": "Soft pink" },
+              "image": "/images/portfolio/gifts-balloon.jpg"
+            },
+            {
+              "id": "floral",
+              "label": { "nl": "Bloemenprint", "en": "Floral print" },
+              "image": "/images/portfolio/gifts-1.jpg"
+            }
+          ]
+        },
+        {
+          "id": "name",
+          "type": "name",
+          "required": true,
+          "label": { "nl": "Naam of tekst", "en": "Name or text" }
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": { "nl": "Extra notitie", "en": "Extra note" }
+        }
+      ]
+    },
+    {
+      "id": "quilted-ereader-pattern",
+      "type": "digital",
+      "section": "patterns",
+      "image": "/images/shop/ereader/ereader-1.jpg",
+      "images": [
+        "/images/shop/ereader/ereader-2.jpg",
+        "/images/shop/ereader/ereader-3.jpg",
+        "/images/shop/ereader/ereader-4.jpg"
+      ],
+      "priceCents": 539,
+      "priceLabel": "€ 5,39",
+      "personalization": false,
+      "digitalFile": "",
+      "name": {
+        "nl": "Quilted e-reader case naaitpatroon (PDF)",
+        "en": "Quilted e-reader case sewing pattern (PDF)"
+      },
+      "description": {
+        "nl": "Naai je eigen zachte, gewatteerde hoes voor e-reader of kleine tablet. Beginnersvriendelijk, met knoopsluiting, optionele ruche, 3 maten (Kindle & Kobo), video-uitleg en printbestanden in A4, Letter en A0. Direct na betaling per e-mail, voor eigen gebruik.",
+        "en": "Sew your own soft quilted case for an e-reader or small tablet. Beginner-friendly, with a button closure, optional ruffle, 3 sizes (Kindle & Kobo), video tutorial and A4, Letter and A0 files. Emailed after payment, for personal use."
+      }
+    },
+    {
+      "id": "flow-cami-pattern",
+      "type": "digital",
+      "section": "patterns",
+      "image": "/images/shop/flow-cami/cami-1.jpg",
+      "images": [
+        "/images/shop/flow-cami/cami-2.jpg",
+        "/images/shop/flow-cami/cami-3.jpg",
+        "/images/shop/flow-cami/cami-4.jpg"
+      ],
+      "priceCents": 550,
+      "priceLabel": "€ 5,50",
+      "personalization": false,
+      "digitalFile": "",
+      "name": {
+        "nl": "Flow Cami naaitpatroon (PDF)",
+        "en": "Flow Cami sewing pattern (PDF)"
+      },
+      "description": {
+        "nl": "Licht topje met verstelbare bandjes, voering en twee lengtes (taille en heup). Voor gevorderde beginner tot gemiddeld. Inclusief A4, Letter, A0 en projector. Direct na betaling per e-mail, voor eigen gebruik.",
+        "en": "A light cami with adjustable straps, lining and two lengths (waist and hip). Confident beginner to intermediate. Includes A4, Letter, A0 and projector files. Emailed after payment, for personal use."
+      }
+    },
+    {
+      "id": "pottery-apron-pattern",
+      "type": "digital",
+      "section": "patterns",
+      "image": "/images/shop/apron/apron-1.jpg",
+      "images": [
+        "/images/shop/apron/apron-2.jpg",
+        "/images/shop/apron/apron-3.jpg",
+        "/images/shop/apron/apron-4.jpg"
+      ],
+      "priceCents": 600,
+      "priceLabel": "€ 6,00",
+      "personalization": false,
+      "digitalFile": "",
+      "name": {
+        "nl": "Kruisrug schort naaitpatroon (PDF)",
+        "en": "Cross-back apron sewing pattern (PDF)"
+      },
+      "description": {
+        "nl": "Stevig kruisrugschort voor keramiek, atelier of werkplaats. Beginnersvriendelijk, met diepe zakken en vrije beweging. Printbestanden in A4, Letter en A0. Direct na betaling per e-mail, voor eigen gebruik.",
+        "en": "A sturdy cross-back apron for pottery, studio or workshop use. Beginner-friendly, with deep pockets and free movement. A4, Letter and A0 files. Emailed after payment, for personal use."
+      }
+    }
+  ]
+}

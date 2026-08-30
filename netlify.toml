@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+[dev]
+  command = "npm run dev"
+  targetPort = 3000
+  port = 8888
+  framework = "#custom"
+
 # Serve Decap CMS admin (must come before SPA fallback)
 [[redirects]]
   from = "/admin"

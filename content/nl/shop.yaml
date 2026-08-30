@@ -3,26 +3,72 @@ shopPage:
     eyebrow: Shop
     title: Geborduurde producten en naaitpatronen
     description: >-
-      Bekijk gepersonaliseerd machineborduurwerk, babycadeaus, keychains, patches, pouches en naaitpatronen. Bestellen
-      en afrekenen gebeurt bij Raw Luxury Stitches.
+      Gepersonaliseerd machineborduurwerk, babycadeaus, keychains, pouches en digitale naaitpatronen. Je rekent af via
+      Stripe, veilig op hun betaalpagina.
+  shippingNote: >-
+    Digitale patronen: voor iedereen, wereldwijd, per e-mail na betaling. Overige producten: verzending binnen
+    Nederland.
   trust:
     description: >-
-      Na je bestelling neemt Kim persoonlijk contact met je op om naam, stof, kleuren en details af te stemmen voordat
-      je stuk wordt gemaakt.
-  visit:
-    title: Bezoek de volledige online shop
-    description: >-
-      Bekijk alle producten, personalisatie-opties en verzenddetails bij Raw Luxury Stitches.
-    externalNote: Opent rawluxurystitches.com in een nieuw tabblad
+      Bij gepersonaliseerde stukken neem ik na de bestelling contact met je op over naam, stof, kleuren en details.
 shop:
   tabsLabel: Shopcategorieën
-  emptyCategory: Nog geen producten in deze categorie. Bezoek de volledige shop of neem contact op voor maatwerk.
-  productNote: Gepersonaliseerd en op bestelling gemaakt. Opent in onze online shop.
-  viewFullShop: Bekijk volledige shop
+  emptyCategory: Nog geen producten in deze categorie. Neem contact op voor maatwerk.
+  productNote: Gepersonaliseerd en op bestelling gemaakt.
   badges:
     handmade: Geborduurd
     digital: Digitaal patroon
     madeToOrder: Op bestelling
+  product:
+    backToShop: Terug naar de shop
+    related: Ook leuk
+    shippingDigital: Digitaal patroon. Na betaling stuur ik de PDF naar je e-mail, wereldwijd.
+    shippingPhysical: Verzending binnen Nederland.
+    personalization: Na je bestelling stem ik naam, stof en details met je af.
+    fromPrice: vanaf {price}
+    photos: Foto's
+    photoOf: Foto {current} van {total}
+  options:
+    optional: optioneel
+    lettersHint: "{perLetter} per letter of teken, minimaal {min}."
+    maxLetters: Maximaal {max} tekens.
+    letterCount: "{count} tekens · {price}"
+    lettersNeedMore: Nog {needed} nodig (minimaal {min} tekens).
+    symbolsHint: Tik op een teken om het in de naam te zetten, op de plek van je cursor.
+    errorRequired: Vul nog de verplichte opties in.
+    errorInvalid: Kies een geldige optie.
+    errorMinLetters: De naamslinger heeft minimaal {min} letters of tekens nodig.
+    errorMaxLetters: Die naam is te lang voor dit product.
+  cart:
+    title: Winkelwagen
+    pageTitle: Winkelwagen
+    eyebrow: Shop
+    summary: Overzicht
+    subtotal: Subtotaal
+    shippingNote: Verzendkosten zie je bij het afrekenen. Alleen verzending binnen Nederland.
+    digitalOnlyNote: Digitale patronen gaan per e-mail, zonder verzendkosten.
+    continue: Verder winkelen
+    viewFull: Winkelwagen
+    chooseOptions: Kies opties
+    close: Sluiten
+    empty: Je winkelwagen is nog leeg.
+    add: In winkelwagen
+    checkout: Afrekenen
+    redirecting: Je gaat naar Stripe...
+    checkoutError: Afrekenen lukt nu niet. Probeer het later opnieuw of stuur me een bericht.
+    increase: Meer
+    decrease: Minder
+    remove: Verwijderen
+    clear: Winkelwagen legen
+  result:
+    successTitle: Bedankt voor je bestelling
+    successDescription: >-
+      Je betaling is gelukt. Bij een digitaal patroon ontvang je het bestand per e-mail. Bij een fysiek product neem
+      ik contact met je op en verstuur ik het binnen Nederland.
+    cancelTitle: Bestelling afgebroken
+    cancelDescription: Er is niets afgeschreven. Je kunt je winkelwagen aanpassen en het opnieuw proberen.
+    backToShop: Terug naar de shop
+    contact: Neem contact op
   sections:
     babyGifts:
       eyebrow: Baby & cadeaus
@@ -36,7 +82,7 @@ shop:
       eyebrow: Patches
       title: Geborduurde patches
       description: Patches voor jassen, tassen en accessoires. De eerste designs komen binnenkort online.
-      emptyNote: Eerste patch komt binnenkort online. Kom snel terug of bezoek de volledige shop bij Raw Luxury Stitches.
+      emptyNote: Eerste patch komt binnenkort online. Stuur gerust een bericht als je al iets in gedachten hebt.
     pouches:
       eyebrow: Pouches & tassen
       title: Trekkoordtassen & pouches
@@ -44,13 +90,12 @@ shop:
     patterns:
       eyebrow: Naaitpatronen
       title: Digitale naaitpatronen
-      description: Direct te downloaden PDF's met stap-voor-stap instructies, inclusief quilted e-reader case patronen.
+      description: PDF-patronen voor iedereen, wereldwijd. Na betaling stuur ik het bestand naar je e-mail.
   madeToOrder:
     eyebrow: Op bestelling
     title: Op maat genaaid
     description: >-
-      Deze stukken staan nog niet als standaardproduct in de shop, maar Kim kan ze op bestelling maken. Stuur je ideeën
-      en maten via het contactformulier.
+      Deze stukken staan nog niet als standaardproduct in de shop. Stuur je ideeën en maten via het contactformulier.
     cta: Vraag een maatwerkopdracht aan
     items:
       ereaderCases:

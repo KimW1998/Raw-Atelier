@@ -22,8 +22,8 @@ metadata:
   shop:
     title: Shop
     description: >-
-      Ontdek machinegeborduurde producten van Raw Atelier. Gepersonaliseerde cadeaus, accessoires en naaitpatronen,
-      verkrijgbaar in onze online shop.
+      Ontdek machinegeborduurde producten van Raw Atelier. Gepersonaliseerde cadeaus, accessoires en naaitpatronen.
+      Fysieke bestellingen worden in Nederland bezorgd. Digitale patronen zijn wereldwijd te koop.
   contact:
     title: Contact
     description: >-
@@ -58,6 +58,12 @@ footer:
   location: Nederland
   handcrafted: Met zorg machinegeborduurd in Nederland
   rights: Alle rechten voorbehouden.
+  terms: Voorwaarden
+  shipping: Verzending en retour
+  privacy: Privacy
+  disclaimer: Disclaimer
+  cookies: Cookies
+  cookieSettings: Cookie-instellingen
 cta:
   workWithMe: Plan een project
   viewPortfolio: Bekijk mijn werk
@@ -89,3 +95,17 @@ notFound:
   eyebrow: '404'
   title: Pagina niet gevonden
   description: De pagina die je zoekt bestaat niet of is verplaatst.
+cookies:
+  title: Cookies
+  text: >-
+    Deze site gebruikt noodzakelijke cookies voor de winkelwagen en je taalvoorkeur. Analyse (Google Analytics) staat
+    uit tot je dat toestaat.
+  policy: Cookieverklaring
+  acceptAll: Alles toestaan
+  necessaryOnly: Alleen noodzakelijk
+  customize: Instellingen
+  save: Voorkeuren opslaan
+  necessary: Noodzakelijk
+  necessaryHelp: Winkelwagen, taal en cookiekeuze. Altijd aan.
+  analytics: Analyse
+  analyticsHelp: Google Analytics, alleen als je dit aanzet. Geen advertentiecookies.

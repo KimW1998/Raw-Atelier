@@ -1,0 +1,314 @@
+:root {
+  --ra-pink: #e7a7c7;
+  --ra-pink-light: #f6dce8;
+  --ra-pink-accent: #d98ab5;
+  --ra-rose: #a76571;
+  --ra-black: #111111;
+  --ra-offwhite: #faf8f6;
+  --ra-white: #ffffff;
+  --ra-heading: "Playfair Display", Georgia, serif;
+  --ra-body: Inter, system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--ra-offwhite) !important;
+  color: var(--ra-black);
+  font-family: var(--ra-body) !important;
+}
+
+#nc-root {
+  font-family: var(--ra-body) !important;
+  min-height: 100vh;
+  background: var(--ra-offwhite);
+}
+
+#nc-root * {
+  font-family: inherit;
+}
+
+#nc-root h1,
+#nc-root h2,
+#nc-root h3,
+#nc-root [class*="CollectionTopHeading"],
+#nc-root [class*="SidebarHeading"] {
+  font-family: var(--ra-heading) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em;
+}
+
+/* Login */
+[class*="LoginPage"],
+[class*="AuthenticationPage"] {
+  background:
+    linear-gradient(180deg, rgba(250, 248, 246, 0.92), rgba(246, 220, 232, 0.55)),
+    url("/images/brand/pattern-repeat.png") !important;
+  background-size: cover, 280px !important;
+  min-height: 100vh;
+}
+
+[class*="LoginPage"] img,
+[class*="AuthenticationPage"] img {
+  max-height: 72px !important;
+  width: auto !important;
+}
+
+[class*="LoginButton"] {
+  background: var(--ra-pink-accent) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--ra-white) !important;
+  font-family: var(--ra-body) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  padding: 12px 22px !important;
+  box-shadow: none !important;
+}
+
+[class*="LoginButton"]:hover {
+  background: var(--ra-rose) !important;
+}
+
+/* Header */
+[class*="AppHeader"] {
+  background: var(--ra-white) !important;
+  border-bottom: 1px solid var(--ra-pink-light) !important;
+  box-shadow: none !important;
+}
+
+[class*="AppHeaderContent"] {
+  max-width: 1280px;
+}
+
+[class*="AppHeaderLogo"] {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 12px 0 0 !important;
+}
+
+[class*="AppHeader"] img {
+  height: 32px !important;
+  width: auto !important;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+[class*="AppHeaderNavLink"],
+[class*="AppHeaderButton"] {
+  font-family: var(--ra-body) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+  text-transform: none !important;
+  color: var(--ra-black) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+[class*="AppHeaderNavLink"]:hover,
+[class*="AppHeaderButton"]:hover,
+[class*="AppHeaderNavLink"][class*="buttonActive"],
+[class*="AppHeaderButton"][class*="buttonActive"] {
+  color: var(--ra-black) !important;
+  background: var(--ra-pink-light) !important;
+  box-shadow: none !important;
+}
+
+[class*="AppHeaderQuickNewButton"],
+[class*="CollectionTopNewButton"],
+[class*="SaveButton"],
+[class*="PublishedToolbarButton"],
+[class*="PublishButton"],
+button[class*="Green"] {
+  background: var(--ra-pink-accent) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--ra-white) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+[class*="AppHeaderQuickNewButton"]:hover,
+[class*="CollectionTopNewButton"]:hover,
+[class*="SaveButton"]:hover,
+[class*="PublishedToolbarButton"]:hover,
+[class*="PublishButton"]:hover {
+  background: var(--ra-rose) !important;
+}
+
+/* Dashboard + collections */
+[class*="CollectionContainer"],
+[class*="AppMainContainer"] {
+  background: var(--ra-offwhite) !important;
+}
+
+[class*="SidebarContainer"] {
+  background: var(--ra-white) !important;
+  border-right: 1px solid var(--ra-pink-light) !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+[class*="SidebarHeading"] {
+  color: var(--ra-rose) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  font-family: var(--ra-body) !important;
+  font-weight: 600 !important;
+}
+
+[class*="SidebarNavLink"] {
+  border-radius: 12px !important;
+  color: var(--ra-black) !important;
+}
+
+[class*="SidebarNavLink"]:hover,
+[class*="SidebarNavLink"][class*="SidebarNavLinkActive"],
+[class*="SidebarNavLink"][aria-current="page"] {
+  background: var(--ra-pink-light) !important;
+  color: var(--ra-black) !important;
+}
+
+[class*="CollectionTop"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[class*="CollectionTopDescription"] {
+  color: rgba(17, 17, 17, 0.65) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  max-width: 42rem;
+}
+
+[class*="Card"],
+[class*="ListCard"],
+[class*="FileCard"],
+[class*="WorkflowCard"] {
+  background: var(--ra-white) !important;
+  border: 1px solid var(--ra-pink-light) !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+[class*="Card"]:hover,
+[class*="ListCard"]:hover,
+[class*="FileCard"]:hover {
+  border-color: var(--ra-pink) !important;
+  transform: translateY(-1px);
+}
+
+[class*="SearchInput"],
+input,
+textarea,
+select,
+[class*="textControl"],
+[class*="TextControl"],
+[class*="SelectControl"] select {
+  border-radius: 12px !important;
+  border-color: var(--ra-pink-light) !important;
+  background: var(--ra-white) !important;
+  font-family: var(--ra-body) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--ra-pink) !important;
+  box-shadow: 0 0 0 3px rgba(217, 138, 181, 0.2) !important;
+  outline: none !important;
+}
+
+[class*="FieldLabel"],
+label {
+  font-family: var(--ra-body) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ra-rose) !important;
+}
+
+[class*="ControlPaneContainer"],
+[class*="EditorContainer"] {
+  background: var(--ra-offwhite) !important;
+}
+
+[class*="ControlContainer"],
+[class*="ListControl"] {
+  background: var(--ra-white) !important;
+  border: 1px solid var(--ra-pink-light) !important;
+  border-radius: 16px !important;
+}
+
+[class*="ListItemTopBar"],
+[class*="ObjectWidgetTopBar"] {
+  background: var(--ra-pink-light) !important;
+  border-radius: 12px !important;
+  color: var(--ra-black) !important;
+}
+
+[class*="AddButton"],
+[class*="ListListItems"] button {
+  border-radius: 999px !important;
+}
+
+[class*="ToolbarContainer"],
+[class*="EditorControlBar"] {
+  background: var(--ra-white) !important;
+  border-bottom: 1px solid var(--ra-pink-light) !important;
+  box-shadow: none !important;
+}
+
+[class*="PreviewPaneContainer"] {
+  background: var(--ra-offwhite) !important;
+  border-left: 1px solid var(--ra-pink-light) !important;
+}
+
+[class*="ViewControls"] button[class*="active"],
+[class*="ViewControls"] [aria-pressed="true"] {
+  color: var(--ra-pink-accent) !important;
+}
+
+[class*="PublishedButton"],
+[class*="publishedButton"] {
+  background: var(--ra-pink-light) !important;
+  color: var(--ra-rose) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+[class*="AddButton"] {
+  background: var(--ra-white) !important;
+  color: var(--ra-rose) !important;
+  border: 1px solid var(--ra-pink) !important;
+  border-radius: 999px !important;
+}
+
+[class*="AppHeaderSiteLink"] {
+  color: var(--ra-rose) !important;
+  font-weight: 600 !important;
+}
+
+/* Replace leftover Decap blue */
+#nc-root a {
+  color: var(--ra-rose);
+}
+
+#nc-root button[style*="rgb(58, 105, 199)"],
+#nc-root [style*="background-color: rgb(58, 105, 199)"] {
+  background-color: var(--ra-pink-accent) !important;
+}
+
+.netlify-identity-menu,
+.netlify-identity-widget {
+  font-family: var(--ra-body) !important;
+}
+
+.netlify-identity-button {
+  background: var(--ra-pink-accent) !important;
+  border-radius: 999px !important;
+  color: var(--ra-white) !important;
+}

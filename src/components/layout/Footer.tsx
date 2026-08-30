@@ -4,7 +4,9 @@ import { Instagram, Mail } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Container } from "@/components/ui/Container";
 import { PatternBackground } from "@/components/ui/PatternBackground";
-import { BRAND, NAV_ROUTES } from "@/lib/constants";
+import { BRAND } from "@/lib/constants";
+import { getPublicNavRoutes } from "@/lib/shop-visibility";
+import { openCookieSettings } from "@/lib/cookie-consent";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -47,7 +49,7 @@ export function Footer() {
               {t("navigate")}
             </h3>
             <ul className="space-y-3">
-              {NAV_ROUTES.map((route) => (
+              {getPublicNavRoutes().map((route) => (
                 <li key={route.href}>
                   <Link
                     href={route.href}
@@ -92,7 +94,46 @@ export function Footer() {
           <p className="font-body text-xs text-white/50">
             &copy; {currentYear} {tBrand("name")}. {t("rights")}
           </p>
-          <p className="font-body text-xs text-white/50">{t("handcrafted")}</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/legal/terms"
+              className="font-body text-xs text-white/50 transition-colors hover:text-brand-pink"
+            >
+              {t("terms")}
+            </Link>
+            <Link
+              href="/legal/shipping"
+              className="font-body text-xs text-white/50 transition-colors hover:text-brand-pink"
+            >
+              {t("shipping")}
+            </Link>
+            <Link
+              href="/legal/privacy"
+              className="font-body text-xs text-white/50 transition-colors hover:text-brand-pink"
+            >
+              {t("privacy")}
+            </Link>
+            <Link
+              href="/legal/disclaimer"
+              className="font-body text-xs text-white/50 transition-colors hover:text-brand-pink"
+            >
+              {t("disclaimer")}
+            </Link>
+            <Link
+              href="/legal/cookies"
+              className="font-body text-xs text-white/50 transition-colors hover:text-brand-pink"
+            >
+              {t("cookies")}
+            </Link>
+            <button
+              type="button"
+              onClick={() => openCookieSettings()}
+              className="font-body text-xs text-white/50 transition-colors hover:text-brand-pink"
+            >
+              {t("cookieSettings")}
+            </button>
+            <p className="font-body text-xs text-white/50">{t("handcrafted")}</p>
+          </div>
         </div>
       </Container>
     </footer>

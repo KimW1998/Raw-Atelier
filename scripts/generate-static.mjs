@@ -4,8 +4,21 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_URL = "https://www.rawatelier.nl";
-const locales = ["en", "nl"];
-const routes = ["", "/about", "/services", "/portfolio", "/shop", "/contact"];
+const locales = ["nl", "en"];
+const shopPublic = process.env.VITE_SHOP_ENABLED === "true";
+const routes = [
+  "",
+  "/about",
+  "/services",
+  "/portfolio",
+  ...(shopPublic ? ["/shop", "/shop/success", "/shop/cancel"] : []),
+  "/contact",
+  "/legal/terms",
+  "/legal/shipping",
+  "/legal/privacy",
+  "/legal/disclaimer",
+  "/legal/cookies",
+];
 
 const urls = locales.flatMap((locale) =>
   routes.map((route) => {
@@ -22,7 +35,7 @@ ${urls.join("\n")}
 
 const robots = `User-agent: *
 Allow: /
-
+${shopPublic ? "" : "Disallow: /nl/shop\nDisallow: /en/shop\n"}
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
 

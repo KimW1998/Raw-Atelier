@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { getPlaceholderForSrc, PLACEHOLDER_IMAGES } from "@/lib/image-fallbacks";
 
@@ -24,6 +24,11 @@ export function PremiumImage({
 }: ImagePlaceholderProps) {
   const [imageSrc, setImageSrc] = useState(src);
   const [stage, setStage] = useState<"primary" | "placeholder" | "default">("primary");
+
+  useEffect(() => {
+    setImageSrc(src);
+    setStage("primary");
+  }, [src]);
 
   const handleError = () => {
     if (stage === "primary") {

@@ -1,8 +1,8 @@
 # Raw Atelier
 
-A premium marketing website for **Raw Atelier** — a creative embroidery and textile studio based in the Netherlands.
+A marketing website for **Raw Atelier** — a creative embroidery and textile studio based in the Netherlands.
 
-> *Made to tell your story*
+> Creative embroidery in the Netherlands
 
 ## Tech Stack
 
@@ -24,7 +24,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — you'll be redirected to `/en` or `/nl`.
+Open [http://localhost:3000](http://localhost:3000) — you'll be redirected to `/nl`. Switch to English with the language toggle.
 
 ### Content Management (CMS)
 
@@ -47,7 +47,7 @@ See [content/README.md](content/README.md) for full CMS documentation.
 | Locale | URL prefix | Content folder |
 |--------|------------|----------------|
 | English | `/en` | `content/en/` |
-| Dutch | `/nl` | `content/nl/` |
+| Dutch (default) | `/nl` | `content/nl/` |
 
 Use the **EN / NL** switcher in the navigation bar to change language.
 
@@ -78,7 +78,7 @@ public/
 | About | `/en/about`, `/nl/about` | Story, philosophy, FAQ |
 | Services | `/en/services`, `/nl/services` | All service offerings with details |
 | Portfolio | `/en/portfolio`, `/nl/portfolio` | Filterable masonry gallery with lightbox |
-| Shop | `/en/shop`, `/nl/shop` | Curated catalog synced from [rawluxurystitches.com](https://www.rawluxurystitches.com); checkout on Raw Luxury Stitches |
+| Shop | `/nl/shop`, `/en/shop` | Catalog and cart on this site; checkout via Stripe (physical shipping NL only, digital patterns worldwide) |
 | Contact | `/en/contact`, `/nl/contact` | Contact form with thank-you state |
 | CMS Admin | `/admin` | Decap CMS content editor |
 
@@ -123,7 +123,7 @@ netlify deploy --prod
 
 ### Environment Variables
 
-No environment variables are required for the base site.
+Shop checkout uses Stripe. See [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md). Copy `.env.example` and add keys in Netlify.
 
 ### Contact form (Netlify Forms)
 
@@ -168,7 +168,7 @@ Site photos are stored in `/public/images/`. The site currently uses Kim's embro
 
 To replace images later, add new files to `/public/images/` using the same filenames, or drop new photos into `borduur fotos` and rerun the image copy step.
 
-Shop product images sync automatically from Raw Luxury Stitches at build time. See [docs/woocommerce-shop-setup.md](docs/woocommerce-shop-setup.md) for WooCommerce category setup.
+Shop products and prices live in `src/data/shop-catalog.json` (editable in Decap). Checkout uses Stripe. See [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md).
 
 Instagram posts on the homepage load via [Behold](https://behold.so) (free, no Meta developer account). See [docs/instagram-setup.md](docs/instagram-setup.md).
 

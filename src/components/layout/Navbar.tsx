@@ -6,7 +6,9 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
-import { NAV_ROUTES } from "@/lib/constants";
+import { CartButton } from "@/components/shop/CartDrawer";
+import { getPublicNavRoutes, isShopPublic } from "@/lib/shop-visibility";
+import { useStudioPreview } from "@/lib/studio-preview";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -14,6 +16,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
+  const studio = useStudioPreview();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -27,11 +30,12 @@ export function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
+    if (studio) return;
     document.body.style.overflow = isMobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMobileOpen]);
+  }, [isMobileOpen, studio]);
 
   return (
     <>
@@ -50,7 +54,7 @@ export function Navbar() {
           <Logo />
 
           <ul className="hidden items-center gap-8 lg:flex">
-            {NAV_ROUTES.map((route) => (
+            {getPublicNavRoutes().map((route) => (
               <li key={route.href}>
                 <Link
                   href={route.href}
@@ -74,6 +78,7 @@ export function Navbar() {
           </ul>
 
           <div className="hidden items-center gap-4 lg:flex">
+            {isShopPublic() && <CartButton />}
             <LanguageSwitcher />
             <Button href="/contact" variant="primary" size="default">
               {t("workWithMe")}
@@ -81,6 +86,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-3 lg:hidden">
+            {isShopPublic() && <CartButton />}
             <LanguageSwitcher />
             <button
               type="button"
@@ -109,7 +115,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 flex flex-col bg-brand-offwhite lg:hidden"
           >
             <div className="flex flex-1 flex-col items-center justify-center gap-8">
-              {NAV_ROUTES.map((route, i) => (
+              {getPublicNavRoutes().map((route, i) => (
                 <motion.div
                   key={route.href}
                   initial={{ opacity: 0, y: 20 }}

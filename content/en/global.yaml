@@ -22,8 +22,8 @@ metadata:
   shop:
     title: Shop
     description: >-
-      Discover machine-embroidered products from Raw Atelier. Personalised gifts, accessories and sewing patterns,
-      available at our online shop.
+      Discover machine-embroidered products from Raw Atelier. Personalised gifts, accessories and sewing patterns.
+      Physical orders ship within the Netherlands. Digital patterns are available worldwide.
   contact:
     title: Contact
     description: >-
@@ -58,6 +58,12 @@ footer:
   location: Netherlands
   handcrafted: Machine embroidered with care in the Netherlands
   rights: All rights reserved.
+  terms: Terms
+  shipping: Shipping and returns
+  privacy: Privacy
+  disclaimer: Disclaimer
+  cookies: Cookies
+  cookieSettings: Cookie settings
 cta:
   workWithMe: Plan a project
   viewPortfolio: See my work
@@ -89,3 +95,16 @@ notFound:
   eyebrow: '404'
   title: Page not found
   description: The page you're looking for doesn't exist or has been moved.
+cookies:
+  title: Cookies
+  text: >-
+    This site uses necessary cookies for your cart and language. Analytics (Google Analytics) stay off until you allow them.
+  policy: Cookie policy
+  acceptAll: Allow all
+  necessaryOnly: Necessary only
+  customize: Settings
+  save: Save preferences
+  necessary: Necessary
+  necessaryHelp: Cart, language and cookie choice. Always on.
+  analytics: Analytics
+  analyticsHelp: Google Analytics, only if you turn this on. No advertising cookies.

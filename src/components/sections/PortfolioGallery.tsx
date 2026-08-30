@@ -1,31 +1,30 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useTranslations } from "@/i18n/context";
+import { useLocale, useTranslations } from "@/i18n/context";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { PatternBackground } from "@/components/ui/PatternBackground";
-import {
-  PORTFOLIO_ITEMS,
-  PORTFOLIO_CATEGORIES,
-  type PortfolioCategoryKey,
-} from "@/lib/constants";
+import { PORTFOLIO_CATEGORIES, type PortfolioCategoryKey } from "@/lib/constants";
+import { getPortfolioTitle, usePortfolioItems } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 export function PortfolioGallery() {
   const t = useTranslations("portfolioPage");
   const tPortfolio = useTranslations("portfolio");
+  const locale = useLocale();
+  const items = usePortfolioItems();
   const [activeCategory, setActiveCategory] =
     useState<PortfolioCategoryKey>("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const filtered =
     activeCategory === "all"
-      ? PORTFOLIO_ITEMS
-      : PORTFOLIO_ITEMS.filter((item) => item.category === activeCategory);
+      ? items
+      : items.filter((item) => item.category === activeCategory);
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -103,7 +102,7 @@ export function PortfolioGallery() {
                   >
                     <PremiumImage
                       src={item.image}
-                      alt={tPortfolio(`items.${item.id}.title`)}
+                      alt={getPortfolioTitle(item, locale)}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="transition-transform duration-700 group-hover:scale-105"
@@ -114,7 +113,7 @@ export function PortfolioGallery() {
                         {tPortfolio(`categories.${item.category}`)}
                       </span>
                       <h3 className="mt-1 font-heading text-lg text-white">
-                        {tPortfolio(`items.${item.id}.title`)}
+                        {getPortfolioTitle(item, locale)}
                       </h3>
                     </div>
                   </div>
@@ -179,9 +178,7 @@ export function PortfolioGallery() {
             >
               <PremiumImage
                 src={filtered[lightboxIndex].image}
-                alt={tPortfolio(
-                  `items.${filtered[lightboxIndex].id}.title`
-                )}
+                alt={getPortfolioTitle(filtered[lightboxIndex], locale)}
                 width={1200}
                 height={800}
                 className="max-h-[85vh] w-auto rounded-2xl"
@@ -193,7 +190,7 @@ export function PortfolioGallery() {
                   )}
                 </span>
                 <h3 className="mt-1 font-heading text-2xl text-white">
-                  {tPortfolio(`items.${filtered[lightboxIndex].id}.title`)}
+                  {getPortfolioTitle(filtered[lightboxIndex], locale)}
                 </h3>
               </div>
             </motion.div>

@@ -1,0 +1,160 @@
+:root {
+  --ra-pink: #e7a7c7;
+  --ra-pink-light: #f6dce8;
+  --ra-pink-accent: #d98ab5;
+  --ra-rose: #a76571;
+  --ra-black: #111111;
+  --ra-offwhite: #faf8f6;
+  --ra-heading: "Playfair Display", Georgia, serif;
+  --ra-body: Inter, system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--ra-offwhite);
+  color: var(--ra-black);
+  font-family: var(--ra-body);
+}
+
+.ra-preview {
+  min-height: 100vh;
+  background: var(--ra-offwhite);
+}
+
+.ra-preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  background: #fff;
+  border-bottom: 1px solid var(--ra-pink-light);
+}
+
+.ra-preview-bar img {
+  height: 32px;
+  width: auto;
+}
+
+.ra-preview-bar span {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ra-pink-accent);
+}
+
+.ra-preview-body {
+  padding: 28px 24px 48px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.ra-eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ra-pink-accent);
+}
+
+.ra-preview h1,
+.ra-preview h2,
+.ra-preview h3 {
+  font-family: var(--ra-heading);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ra-black);
+}
+
+.ra-preview h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.ra-preview p {
+  color: rgba(17, 17, 17, 0.7);
+  line-height: 1.65;
+}
+
+.ra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.ra-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--ra-pink-light);
+}
+
+.ra-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: var(--ra-pink-light);
+}
+
+.ra-card-body {
+  padding: 16px 18px 18px;
+}
+
+.ra-chip {
+  display: inline-flex;
+  border-radius: 999px;
+  background: var(--ra-pink-light);
+  color: var(--ra-rose);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+}
+
+.ra-card h3 {
+  margin: 8px 0 0;
+  font-size: 1.15rem;
+}
+
+.ra-price {
+  margin: 6px 0 0;
+  font-weight: 600;
+  color: var(--ra-pink-accent);
+}
+
+.ra-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: rgba(17, 17, 17, 0.55);
+}
+
+.ra-section {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ra-pink-light);
+}
+
+.ra-section:last-child {
+  border-bottom: 0;
+}
+
+.ra-section h2 {
+  font-size: 0.78rem;
+  font-family: var(--ra-body);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ra-rose);
+  margin: 0 0 10px;
+}
+
+.ra-kv {
+  margin: 0 0 8px;
+  font-size: 15px;
+}

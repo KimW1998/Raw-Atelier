@@ -1,0 +1,221 @@
+legal:
+  termsTitle: Algemene voorwaarden
+  terms: |-
+    ## Artikel 1 – Bedrijfsgegevens
+    Raw Atelier is de creatieve borduurstudio van Raw Luxury.
+
+    Raw Luxury
+    Fuutstraat 4, 2421 XS Nieuwkoop, Nederland
+    E-mail: info@rawluxury.nl
+    KvK: 83007849
+    Btw: NL003761795B22
+    Website: www.rawatelier.nl
+
+    ## Artikel 2 – Toepasselijkheid
+    Deze voorwaarden gelden voor alle aanbiedingen, bestellingen en overeenkomsten via de webshop van Raw Atelier.
+
+    ## Artikel 3 – Aanbiedingen
+    Alle producten en prijzen zijn onder voorbehoud van typefouten. Digitale producten worden geleverd zoals beschreven.
+
+    ## Artikel 4 – Betaling
+    Betalen kan via Stripe Checkout (iDEAL of kaart). Bestellingen worden verwerkt nadat de betaling is ontvangen. Raw Atelier slaat zelf geen kaartgegevens op.
+
+    ## Artikel 5 – Levering
+    Fysieke producten: levertijd ongeveer 2 tot 3 weken, afhankelijk van personalisatie.
+    Verzending van fysieke producten alleen binnen Nederland. Verzendkosten zie je bij het afrekenen (€ 6,95, tenzij anders vermeld).
+    Digitale naaitpatronen hebben geen verzending. Iedereen mag die kopen, waar ter wereld. Na betaling stuur ik de PDF naar het e-mailadres van de bestelling.
+
+    ## Artikel 6 – Digitale producten
+    Digitale producten (zoals naaitpatronen) worden na betaling per e-mail geleverd.
+    Door de aankoop af te ronden ga je uitdrukkelijk akkoord met directe levering en zie je af van het herroepingsrecht voor dat digitale product.
+
+    ## Artikel 7 – Herroepingsrecht en retour
+    Digitale producten: geen herroepingsrecht na levering.
+    Gepersonaliseerde of op bestelling gemaakte stukken: niet retourneerbaar.
+    Overige fysieke producten zonder personalisatie: binnen 14 dagen, ongebruikt en in originele staat. Retourkosten zijn voor rekening van de klant.
+
+    ## Artikel 8 – Garantie
+    Fysieke producten hebben 3 maanden garantie op productiefouten.
+
+    ## Artikel 9 – Aansprakelijkheid
+    Raw Luxury is niet aansprakelijk voor indirecte schade of oneigenlijk gebruik van producten.
+
+    ## Artikel 10 – Klachten
+    Klachten kun je sturen naar info@rawluxury.nl of via het contactformulier. Ik reageer in de regel binnen 2 werkdagen.
+
+    ## Artikel 11 – Toepasselijk recht
+    Op alle overeenkomsten is Nederlands recht van toepassing.
+
+  shippingTitle: Verzending en retour
+  shipping: |-
+    ## Levering
+    Fysieke producten verstuur ik alleen binnen Nederland. De verzendkosten zie je bij het afrekenen in Stripe.
+    Digitale naaitpatronen hebben geen verzending. Na betaling stuur ik de PDF naar het e-mailadres van de bestelling, wereldwijd.
+    Levertijd voor fysieke, gepersonaliseerde stukken is meestal 2 tot 3 weken. Ik geef je na de bestelling een realistische planning.
+
+    ## Herroepingsrecht
+    Je mag je bestelling binnen 14 dagen herroepen, behalve waar de wet een uitzondering toestaat.
+
+    ## Uitzonderingen
+    Het herroepingsrecht geldt niet voor:
+    - digitale producten na levering
+    - gepersonaliseerde of op bestelling gemaakte stukken
+
+    ## Retourvoorwaarden
+    Retour is mogelijk voor niet-gepersonaliseerde fysieke producten, binnen 14 dagen, ongebruikt en in originele staat. Retourkosten zijn voor jouw rekening.
+
+    ## Hoe retourneren
+    Stuur een e-mail naar info@rawluxury.nl met je bestelgegevens.
+
+    ## Terugbetaling
+    Terugbetaling gebeurt binnen 14 dagen na ontvangst van de retourzending.
+    Beschadigd of verkeerd geleverd? Mail me, dan zoeken we een oplossing.
+
+  privacyTitle: Privacyverklaring
+  privacy: |-
+    Raw Atelier / Raw Luxury respecteert je privacy.
+
+    ## Welke gegevens
+    - naam en adresgegevens (bij verzending)
+    - e-mailadres
+    - betaalgegevens (via Stripe, niet op onze server)
+    - bericht via het contactformulier (Netlify Forms)
+    - technische gegevens die nodig zijn om de site en winkelwagen te laten werken
+
+    ## Waarom
+    - bestellingen verwerken en verzenden
+    - klantenservice
+    - de website laten werken (winkelwagen, taal, cookievoorkeur)
+
+    ## Bewaartermijn
+    Niet langer dan nodig voor het doel waarvoor de gegevens zijn verzameld.
+
+    ## Delen
+    Alleen met partijen die nodig zijn voor de bestelling, zoals Stripe (betaling) en de vervoerder. Geen verkoop van gegevens.
+
+    ## Jouw rechten
+    Je mag je gegevens inzien, laten corrigeren, laten verwijderen of bezwaar maken. Stuur een verzoek naar info@rawluxury.nl.
+
+    ## Beveiliging
+    Ik neem passende maatregelen om je gegevens te beschermen.
+
+    ## Cookies
+    Zie de cookieverklaring voor meer informatie. Google Analytics gebruiken we alleen als je daar via de cookiebanner toestemming voor geeft.
+
+  disclaimerTitle: Disclaimer
+  disclaimer: |-
+    De inhoud van deze website is met zorg samengesteld.
+
+    ## Aansprakelijkheid
+    Raw Luxury is niet aansprakelijk voor:
+    - fouten of omissies op de website
+    - schade door gebruik van producten
+    - onjuist gebruik van naaitpatronen
+
+    ## Digitale producten
+    Digitale producten zijn alleen voor eigen gebruik. Delen, doorverkopen of verspreiden zonder toestemming is niet toegestaan.
+
+  cookiesTitle: Cookieverklaring (EU)
+  cookies: |-
+    Deze cookieverklaring is voor het laatst bijgewerkt op 30 augustus 2026 en geldt voor bezoekers in de Europese Economische Ruimte, het Verenigd Koninkrijk en Zwitserland.
+
+    ## 1. Inleiding
+    Deze website, https://www.rawatelier.nl (hierna: “de website”), gebruikt cookies en vergelijkbare technieken zoals scripts en lokale opslag in je browser (voor het gemak allemaal “cookies” genoemd). Cookies kunnen ook worden geplaatst door derden die we inschakelen, bijvoorbeeld bij betalen of bij het laden van lettertypen. Hieronder lees je welke cookies we gebruiken, waarom, en hoe je je keuze wijzigt.
+
+    Raw Atelier is de publieke naam van Raw Luxury.
+
+    ## 2. Wat zijn cookies?
+    Een cookie is een klein bestand dat met pagina’s van deze website wordt meegestuurd en door je browser wordt opgeslagen op je computer of ander apparaat. De informatie daarin kan bij een volgend bezoek naar onze servers of naar servers van derden worden teruggestuurd.
+
+    We gebruiken ook lokale opslag (localStorage). Dat werkt vergelijkbaar: gegevens blijven in je browser staan tot je ze wist of tot de bewaartermijn verloopt.
+
+    ## 3. Wat zijn scripts?
+    Een script is programmacode die de website laat werken en interactief maakt. Die code draait op onze server of op jouw apparaat.
+
+    ## 4. Wat is een web beacon?
+    Een web beacon (of pixel) is een klein, vaak onzichtbaar stukje tekst of afbeelding waarmee verkeer op een website kan worden gemeten. Daarbij kunnen gegevens over je bezoek worden opgeslagen. Zonder jouw toestemming plaatsen we geen meetpixels. Met toestemming gebruikt Google Analytics dit soort technieken. Stripe kan bij het afrekenen eigen technieken gebruiken.
+
+    ## 5. Soorten cookies
+
+    ### 5.1 Technische of functionele cookies
+    Sommige cookies zorgen dat de website werkt en dat je voorkeuren bekend blijven. Met functionele cookies hoef je niet steeds dezelfde informatie in te vullen en blijft bijvoorbeeld je winkelwagen gevuld tot je afrekent. Deze cookies mogen we plaatsen zonder toestemming, omdat de shop anders niet goed werkt.
+
+    ### 5.2 Statistieken (optioneel)
+    Statistiekcookies helpen om te zien hoe de website wordt gebruikt, bijvoorbeeld welke pagina’s worden bekeken. Deze staan standaard uit. We plaatsen ze alleen als je daarvoor kiest via de cookiebanner of via Cookie-instellingen onderaan de site. Met toestemming gebruiken we Google Analytics 4. Advertentiecookies van Google zetten we niet aan.
+
+    ## 6. Geplaatste cookies
+
+    ### Raw Atelier (eigen site)
+    Functioneel. Deze gegevens blijven op jouw apparaat en gaan niet naar derden.
+
+    - raw-atelier-cookie-consent — bewaart je cookiekeuze (noodzakelijk en eventueel analyse). Bewaartermijn: tot je de gegevens in je browser wist.
+    - raw-atelier-cart-v2 — bewaart je winkelwagen. Bewaartermijn: tot je de winkelwagen leegt of de gegevens in je browser wist.
+
+    Je taalvoorkeur (Nederlands of Engels) zit in de webadres, niet in een aparte cookie.
+
+    ### Google Fonts
+    Functioneel. We laden de lettertypen Inter en Playfair Display via Google Fonts, zodat de site er hetzelfde uitziet. Daarbij maakt je browser verbinding met servers van Google (fonts.googleapis.com en fonts.gstatic.com).
+
+    Delen van gegevens: Google kan daarbij je IP-adres en technische browsergegevens ontvangen. Zie het privacybeleid van Google.
+
+    ### Google Analytics
+    Statistieken (optioneel). Alleen als je analyse toestaat. We meten dan anonieme of gepseudonimiseerde gegevens over bezoeken, zoals pagina’s, land/taal en apparaattype. Het script van Google wordt pas geladen ná jouw toestemming. Advertenties en advertentiepersonalisatie staan uit.
+
+    Delen van gegevens: Google Ireland Limited / Google LLC. Zie https://policies.google.com/privacy en https://business.safety.google/privacy/
+
+    - _ga — tot 2 jaar — onderscheid maken tussen bezoekers
+    - _ga_* — tot 2 jaar — sessie van Google Analytics 4 bewaren
+
+    ### Stripe
+    Functioneel. We gebruiken Stripe voor betalingen (iDEAL en kaart). Bij het afrekenen ga je naar de beveiligde omgeving van Stripe. Raw Atelier slaat zelf geen kaartgegevens op.
+
+    Delen van gegevens: Stripe kan cookies plaatsen voor de betaling en fraudepreventie. Zie de privacyverklaring van Stripe: https://stripe.com/privacy
+
+    Voorbeelden van functies bij Stripe: fraudepreventie (onder andere tot 1 jaar) en sessie tijdens het afrekenen.
+
+    ### Netlify
+    Functioneel. De website wordt gehost door Netlify. Contactformulieren lopen via Netlify Forms. Netlify kan technische cookies of logs gebruiken voor beveiliging, hosting en het verwerken van formulieren.
+
+    Delen van gegevens: zie het privacybeleid van Netlify.
+
+    ### Instagram-feed (optioneel)
+    Als de homepage een Instagram-overzicht toont, worden berichten geladen via Behold. Dan maakt je browser verbinding met feeds.behold.so. Dat gebeurt alleen als die feed is ingesteld.
+
+    ## 7. Toestemming
+    Bij je eerste bezoek zie je een banner over cookies. Noodzakelijke cookies staan altijd aan. Kies je “Alles toestaan”, dan geef je ook toestemming voor optionele analyse. Kies je “Alleen noodzakelijk”, dan blijven statistieken uit. Via Instellingen kun je dat per categorie kiezen.
+
+    Je kunt cookies in je browser uitzetten, maar dan werkt de shop mogelijk niet goed (bijvoorbeeld de winkelwagen).
+
+    ### 7.1 Je keuze wijzigen
+    Onderaan elke pagina staat Cookie-instellingen. Daarmee open je de banner opnieuw en pas je je voorkeur aan. Je kunt cookies ook wissen via je browser; bij een volgend bezoek vragen we opnieuw om je keuze als de eerdere opslag weg is.
+
+    ## 8. Cookies inschakelen, uitschakelen en verwijderen
+    In je browser kun je cookies automatisch of handmatig verwijderen, of instellen dat bepaalde cookies niet mogen worden geplaatst. Je kunt ook een melding krijgen telkens als een cookie wordt geplaatst. Uitleg staat in de helpfunctie van je browser.
+
+    Let op: als je alle cookies uitzet, werkt de website mogelijk niet goed. Wis je cookies, dan worden noodzakelijke cookies na je volgende bezoek opnieuw geplaatst.
+
+    ## 9. Jouw rechten
+    Voor persoonsgegevens die via cookies of vergelijkbare technieken worden verwerkt, gelden onder meer deze rechten:
+
+    - het recht te weten waarom gegevens nodig zijn, wat ermee gebeurt en hoe lang ze worden bewaard
+    - inzage: je mag opvragen welke gegevens we van je hebben
+    - rectificatie: je mag gegevens laten aanvullen, corrigeren, wissen of afschermen
+    - intrekken van toestemming: als verwerking op toestemming berust, mag je die intrekken en wissen vragen
+    - dataportabiliteit: je mag je gegevens opvragen en overdragen aan een andere verwerkingsverantwoordelijke
+    - bezwaar: je mag bezwaar maken tegen verwerking, tenzij er gerechtvaardigde gronden zijn om door te gaan
+
+    Stuur een verzoek naar de contactgegevens hieronder. Heb je een klacht over hoe we met je gegevens omgaan, dan horen we dat graag. Je mag ook een klacht indienen bij de Autoriteit Persoonsgegevens.
+
+    Meer over privacy staat in de privacyverklaring op deze website.
+
+    ## 10. Contact
+    Vragen over deze cookieverklaring:
+
+    Raw Luxury
+    Fuutstraat 4
+    2421 XS Nieuwkoop
+    Nederland
+    Website: https://www.rawatelier.nl
+    E-mail: info@rawluxury.nl
+
+    KvK 83007849, btw NL003761795B22

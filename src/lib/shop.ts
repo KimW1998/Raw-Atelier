@@ -1,4 +1,39 @@
-import shopData from "@/data/shop-products.json";
+import catalog from "@/data/shop-catalog.json";
+import { useStudioPreview } from "@/lib/studio-preview";
+import type { Locale } from "@/i18n/context";
+import {
+  formatSelectionLines,
+  getListedPrice,
+  getProductUnitPriceCents,
+  type ProductOption,
+  type ProductSelections,
+} from "@/lib/product-options";
+
+export type {
+  LetterExtraCharacter,
+  ProductOption,
+  ProductOptionChoice,
+  ProductOptionType,
+  ProductSelections,
+  SelectionError,
+} from "@/lib/product-options";
+
+export {
+  BANNER_EXTRA_CHARACTERS,
+  billedLetterCount,
+  choiceLabel,
+  countBillableLetters,
+  extraCharactersFor,
+  formatSelectionLines,
+  getLettersOption,
+  getListedPrice,
+  getProductOptions,
+  getProductUnitPriceCents,
+  optionLabel,
+  productHasOptions,
+  sanitizeSelections,
+  validateSelections,
+} from "@/lib/product-options";
 
 export const SHOP_SECTION_ORDER = [
   "babyGifts",
@@ -10,14 +45,32 @@ export const SHOP_SECTION_ORDER = [
 
 export type ShopSectionId = (typeof SHOP_SECTION_ORDER)[number];
 
-export const SHOP_TAB_ORDER = [
-  ...SHOP_SECTION_ORDER,
-  "madeToOrder",
-] as const;
+export const SHOP_TAB_ORDER = [...SHOP_SECTION_ORDER, "madeToOrder"] as const;
 
 export type ShopTabId = (typeof SHOP_TAB_ORDER)[number];
 
 export const SHOP_TAB_PARAM = "tab";
+
+export type ShopProductType = "physical" | "digital";
+
+export interface ShopCatalogProduct {
+  id: string;
+  type: ShopProductType;
+  section: ShopSectionId;
+  image: string;
+  images?: string[];
+  priceCents: number;
+  priceLabel: string;
+  personalization: boolean;
+  digitalFile?: string;
+  name: Record<Locale, string>;
+  description: Record<Locale, string>;
+  options?: ProductOption[];
+}
+
+export const MADE_TO_ORDER_IDS = ["ereaderCases", "customPouches"] as const;
+
+export type MadeToOrderId = (typeof MADE_TO_ORDER_IDS)[number];
 
 export function isShopTabId(value: string | null | undefined): value is ShopTabId {
   return SHOP_TAB_ORDER.includes(value as ShopTabId);
@@ -27,35 +80,122 @@ export function getDefaultShopTab(): ShopTabId {
   return SHOP_TAB_ORDER[0];
 }
 
-export type ShopProductBadge = "handmade" | "digital";
-
-export interface ShopProduct {
-  id: number;
-  slug: string;
-  name: string;
-  permalink: string;
-  image: string;
-  priceLabel: string;
-  section: ShopSectionId | "gifts";
-  badge: ShopProductBadge;
-  actionLabel: string;
+export function getShopProducts(): ShopCatalogProduct[] {
+  return catalog.products as ShopCatalogProduct[];
 }
 
-export const MADE_TO_ORDER_IDS = [
-  "ereaderCases",
-  "customPouches",
-] as const;
-
-export type MadeToOrderId = (typeof MADE_TO_ORDER_IDS)[number];
-
-export function getShopProducts(): ShopProduct[] {
-  return shopData.products as ShopProduct[];
+export function getShopProduct(id: string): ShopCatalogProduct | undefined {
+  return getShopProducts().find((product) => product.id === id);
 }
 
-export function getShopProductsBySection(section: ShopSectionId): ShopProduct[] {
+export function getShopProductsBySection(section: ShopSectionId): ShopCatalogProduct[] {
   return getShopProducts().filter((product) => product.section === section);
 }
 
-export function getShopSyncDate(): string | null {
-  return shopData.syncedAt ?? null;
+export function getProductName(product: ShopCatalogProduct, locale: Locale): string {
+  return product.name[locale] || product.name.nl;
+}
+
+export function getProductDescription(
+  product: ShopCatalogProduct,
+  locale: Locale,
+): string {
+  return product.description[locale] || product.description.nl;
+}
+
+export function useShopProducts(): ShopCatalogProduct[] {
+  const studio = useStudioPreview();
+  return studio?.shopProducts ?? getShopProducts();
+}
+
+export function useShopProduct(id: string): ShopCatalogProduct | undefined {
+  return useShopProducts().find((product) => product.id === id);
+}
+
+export function useShopProductsBySection(section: ShopSectionId): ShopCatalogProduct[] {
+  return useShopProducts().filter((product) => product.section === section);
+}
+
+export function getProductBadge(product: ShopCatalogProduct): "handmade" | "digital" {
+  return product.type === "digital" ? "digital" : "handmade";
+}
+
+export function getProductImages(product: ShopCatalogProduct): string[] {
+  const extras = Array.isArray(product.images) ? product.images : [];
+  return [...new Set([product.image, ...extras].filter(Boolean))];
+}
+
+export function withProductImages(
+  product: ShopCatalogProduct,
+  images: string[],
+): ShopCatalogProduct {
+  const unique = [...new Set(images.filter(Boolean))];
+  return {
+    ...product,
+    image: unique[0] || product.image || "",
+    images: unique.slice(1),
+  };
+}
+
+export function formatEuro(cents: number, locale: Locale): string {
+  return new Intl.NumberFormat(locale === "nl" ? "nl-NL" : "en-GB", {
+    style: "currency",
+    currency: "EUR",
+  }).format(cents / 100);
+}
+
+export function formatListedPrice(product: ShopCatalogProduct, locale: Locale): string {
+  const listed = getListedPrice(product);
+  const amount = formatEuro(listed.cents, locale);
+  if (listed.from) {
+    return locale === "nl" ? `vanaf ${amount}` : `from ${amount}`;
+  }
+  return product.priceLabel || amount;
+}
+
+export function getProductHref(id: string): string {
+  return `/shop/${id}`;
+}
+
+export function getRelatedProducts(
+  product: ShopCatalogProduct,
+  limit = 3,
+): ShopCatalogProduct[] {
+  return getShopProducts()
+    .filter((item) => item.id !== product.id && item.section === product.section)
+    .slice(0, limit);
+}
+
+export function cartLineUnitCents(
+  product: ShopCatalogProduct,
+  selections: ProductSelections = {},
+): number {
+  return getProductUnitPriceCents(product, selections);
+}
+
+export function cartSubtotalCents(
+  lines: {
+    item: { quantity: number; selections?: ProductSelections };
+    product: ShopCatalogProduct;
+  }[],
+): number {
+  return lines.reduce(
+    (sum, line) =>
+      sum + cartLineUnitCents(line.product, line.item.selections) * line.item.quantity,
+    0,
+  );
+}
+
+export function cartHasPhysical(
+  lines: { product: ShopCatalogProduct }[],
+): boolean {
+  return lines.some((line) => line.product.type === "physical");
+}
+
+export function cartLineSummary(
+  product: ShopCatalogProduct,
+  selections: ProductSelections,
+  locale: Locale,
+): string[] {
+  return formatSelectionLines(product, selections, locale);
 }

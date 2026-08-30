@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "@/i18n/context";
+import { useLocale, useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -7,13 +7,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
-import { PORTFOLIO_ITEMS } from "@/lib/constants";
+import { getPortfolioTitle, useFeaturedPortfolioItems } from "@/lib/portfolio";
 
 export function FeaturedWorkSection() {
   const t = useTranslations("home");
   const tPortfolio = useTranslations("portfolio");
   const tCta = useTranslations("cta");
-  const featured = PORTFOLIO_ITEMS.slice(0, 3);
+  const locale = useLocale();
+  const featured = useFeaturedPortfolioItems(3);
 
   return (
     <Section background="pink" spacing="compact">
@@ -35,7 +36,7 @@ export function FeaturedWorkSection() {
               >
                 <PremiumImage
                   src={item.image}
-                  alt={tPortfolio(`items.${item.id}.title`)}
+                  alt={getPortfolioTitle(item, locale)}
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="transition-transform duration-700 group-hover:scale-105"
@@ -46,7 +47,7 @@ export function FeaturedWorkSection() {
                     {tPortfolio(`categories.${item.category}`)}
                   </span>
                   <h3 className="mt-1 font-heading text-xl text-white">
-                    {tPortfolio(`items.${item.id}.title`)}
+                    {getPortfolioTitle(item, locale)}
                   </h3>
                 </div>
               </Link>

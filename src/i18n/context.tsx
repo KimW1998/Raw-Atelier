@@ -9,8 +9,8 @@ import { loadContent } from "@/lib/content";
 import { translate, translateRaw } from "@/lib/utils";
 
 export const routing = {
-  locales: ["en", "nl"] as const,
-  defaultLocale: "en" as const,
+  locales: ["nl", "en"] as const,
+  defaultLocale: "nl" as const,
 };
 
 export type Locale = (typeof routing.locales)[number];
@@ -31,12 +31,17 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function LocaleProvider({
   locale,
+  messages: messagesProp,
   children,
 }: {
   locale: Locale;
+  messages?: Record<string, unknown>;
   children: ReactNode;
 }) {
-  const messages = useMemo(() => loadContent(locale), [locale]);
+  const messages = useMemo(
+    () => messagesProp ?? loadContent(locale),
+    [locale, messagesProp],
+  );
 
   return (
     <I18nContext.Provider value={{ locale, messages }}>

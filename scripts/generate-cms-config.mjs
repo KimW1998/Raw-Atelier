@@ -3,8 +3,8 @@ import path from "path";
 import yaml from "js-yaml";
 
 const LOCALES = [
+  { code: "nl", label: "Nederlands" },
   { code: "en", label: "English" },
-  { code: "nl", label: "Dutch" },
 ];
 
 function makeServiceFields(id, label) {
@@ -35,7 +35,7 @@ function makeServiceFields(id, label) {
 const CONTENT_FILES = [
   {
     name: "global",
-    label: "Site Settings",
+    label: "Site-instellingen",
     fields: [
       {
         label: "Brand",
@@ -71,6 +71,30 @@ const CONTENT_FILES = [
           { label: "Location", name: "location", widget: "string" },
           { label: "Handcrafted note", name: "handcrafted", widget: "string" },
           { label: "Rights", name: "rights", widget: "string" },
+          { label: "Terms", name: "terms", widget: "string" },
+          { label: "Shipping", name: "shipping", widget: "string" },
+          { label: "Privacy", name: "privacy", widget: "string" },
+          { label: "Disclaimer", name: "disclaimer", widget: "string" },
+          { label: "Cookies", name: "cookies", widget: "string" },
+          { label: "Cookie settings", name: "cookieSettings", widget: "string" },
+        ],
+      },
+      {
+        label: "Cookie banner",
+        name: "cookies",
+        widget: "object",
+        fields: [
+          { label: "Title", name: "title", widget: "string" },
+          { label: "Text", name: "text", widget: "text" },
+          { label: "Policy link", name: "policy", widget: "string" },
+          { label: "Accept all", name: "acceptAll", widget: "string" },
+          { label: "Necessary only", name: "necessaryOnly", widget: "string" },
+          { label: "Customize", name: "customize", widget: "string" },
+          { label: "Save", name: "save", widget: "string" },
+          { label: "Necessary", name: "necessary", widget: "string" },
+          { label: "Necessary help", name: "necessaryHelp", widget: "string" },
+          { label: "Analytics", name: "analytics", widget: "string" },
+          { label: "Analytics help", name: "analyticsHelp", widget: "string" },
         ],
       },
       {
@@ -89,7 +113,7 @@ const CONTENT_FILES = [
   },
   {
     name: "home",
-    label: "Home Page",
+    label: "Home",
     fields: [
       {
         label: "Home",
@@ -124,6 +148,7 @@ const CONTENT_FILES = [
               { label: "Title", name: "title", widget: "string" },
               { label: "Paragraph 1", name: "paragraph1", widget: "text" },
               { label: "Paragraph 2", name: "paragraph2", widget: "text" },
+              { label: "Paragraph 3", name: "paragraph3", widget: "text", required: false },
             ],
           },
         ],
@@ -132,7 +157,7 @@ const CONTENT_FILES = [
   },
   {
     name: "about",
-    label: "About Page",
+    label: "Over mij",
     fields: [
       {
         label: "About",
@@ -175,7 +200,7 @@ const CONTENT_FILES = [
   },
   {
     name: "services",
-    label: "Services",
+    label: "Diensten",
     fields: [
       {
         label: "Services Page",
@@ -208,8 +233,67 @@ const CONTENT_FILES = [
     ],
   },
   {
+    name: "portfolio",
+    label: "Portfolio-pagina",
+    fields: [
+      {
+        label: "Portfolio Page",
+        name: "portfolioPage",
+        widget: "object",
+        fields: [
+          { label: "Eyebrow", name: "eyebrow", widget: "string" },
+          { label: "Title", name: "title", widget: "string" },
+          { label: "Description", name: "description", widget: "text" },
+        ],
+      },
+      {
+        label: "Categories",
+        name: "portfolio",
+        widget: "object",
+        fields: [
+          {
+            label: "Category labels",
+            name: "categories",
+            widget: "object",
+            fields: [
+              { label: "All", name: "all", widget: "string" },
+              { label: "Events", name: "events", widget: "string" },
+              { label: "Corporate", name: "corporate", widget: "string" },
+              { label: "Gifts", name: "gifts", widget: "string" },
+              { label: "Sewing", name: "fashion", widget: "string" },
+              { label: "Digitizing", name: "digitizing", widget: "string" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "legal",
+    label: "Voorwaarden",
+    fields: [
+      {
+        label: "Legal",
+        name: "legal",
+        widget: "object",
+        fields: [
+          { label: "Terms title", name: "termsTitle", widget: "string" },
+          { label: "Terms", name: "terms", widget: "markdown" },
+          { label: "Shipping title", name: "shippingTitle", widget: "string" },
+          { label: "Shipping", name: "shipping", widget: "markdown" },
+          { label: "Privacy title", name: "privacyTitle", widget: "string" },
+          { label: "Privacy", name: "privacy", widget: "markdown" },
+          { label: "Disclaimer title", name: "disclaimerTitle", widget: "string" },
+          { label: "Disclaimer", name: "disclaimer", widget: "markdown" },
+          { label: "Cookies title", name: "cookiesTitle", widget: "string" },
+          { label: "Cookies", name: "cookies", widget: "markdown" },
+        ],
+      },
+    ],
+  },
+  {
     name: "contact",
-    label: "Contact Page",
+    label: "Contact",
     fields: [
       {
         label: "Contact Page",
@@ -244,7 +328,7 @@ const CONTENT_FILES = [
   },
   {
     name: "shared",
-    label: "Testimonials & FAQ",
+    label: "Reviews & FAQ",
     fields: [
       {
         label: "Testimonials",
@@ -294,25 +378,238 @@ const CONTENT_FILES = [
   },
 ];
 
-function buildConfig(backend) {
-  const files = LOCALES.flatMap((locale) =>
-    CONTENT_FILES.map((file) => ({
-      label: `${locale.label}: ${file.label}`,
-      name: `${locale.code}-${file.name}`,
-      file: `content/${locale.code}/${file.name}.yaml`,
-      fields: file.fields,
-    }))
-  );
+function contentFilesFor(locale) {
+  return CONTENT_FILES.map((file) => ({
+    label: file.label,
+    name: `${locale.code}-${file.name}`,
+    file: `content/${locale.code}/${file.name}.yaml`,
+    fields: file.fields,
+  }));
+}
 
+function buildConfig(backend) {
   return {
     backend,
+    locale: "nl",
+    site_url: "https://www.rawatelier.nl",
+    display_url: "https://www.rawatelier.nl",
+    logo: {
+      src: "/images/brand/raw-atelier-logo.png",
+      show_in_header: true,
+    },
     media_folder: "public/images/uploads",
     public_folder: "/images/uploads",
     collections: [
       {
-        name: "site-content",
-        label: "Site Content",
-        files,
+        name: "portfolio-items",
+        label: "Portfolio",
+        label_singular: "Portfolio-item",
+        description: "Foto's en titels voor de portfolio-pagina en de homepage.",
+        files: [
+          {
+            label: "Alle items",
+            name: "portfolio-items",
+            file: "content/portfolio-items.yaml",
+            fields: [
+              {
+                label: "Items",
+                name: "items",
+                widget: "list",
+                label_singular: "item",
+                summary: "{{fields.title.nl}}",
+                collapsed: true,
+                minimize_collapsed: true,
+                add_to_top: true,
+                fields: [
+                  { label: "Foto", name: "image", widget: "image" },
+                  {
+                    label: "Titel",
+                    name: "title",
+                    widget: "object",
+                    fields: [
+                      { label: "Nederlands", name: "nl", widget: "string" },
+                      { label: "English", name: "en", widget: "string" },
+                    ],
+                  },
+                  {
+                    label: "Categorie",
+                    name: "category",
+                    widget: "select",
+                    options: [
+                      { label: "Events", value: "events" },
+                      { label: "Zakelijk", value: "corporate" },
+                      { label: "Cadeaus", value: "gifts" },
+                      { label: "Mode", value: "fashion" },
+                      { label: "Digitizen", value: "digitizing" },
+                    ],
+                  },
+                  {
+                    label: "Vorm van de foto",
+                    name: "aspect",
+                    widget: "select",
+                    options: [
+                      { label: "Liggend", value: "wide" },
+                      { label: "Staand", value: "tall" },
+                      { label: "Vierkant", value: "square" },
+                    ],
+                  },
+                  { label: "Ook op de homepage", name: "featured", widget: "boolean", default: false },
+                  { label: "ID", name: "id", widget: "string", hint: "Korte slug, bijv. balloon-gift" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "shop-catalog",
+        label: "Shop",
+        description: "Producten in de webshop: foto, prijs, NL/EN teksten.",
+        files: [
+          {
+            label: "Alle producten",
+            name: "shop-catalog",
+            file: "src/data/shop-catalog.json",
+            format: "json",
+            fields: [
+              {
+                label: "Producten",
+                name: "products",
+                widget: "list",
+                label_singular: "product",
+                summary: "{{fields.name.nl}}",
+                collapsed: true,
+                minimize_collapsed: true,
+                add_to_top: true,
+                fields: [
+                  { label: "Hoofdfoto", name: "image", widget: "image" },
+                  {
+                    label: "Extra foto's",
+                    name: "images",
+                    widget: "list",
+                    required: false,
+                    field: { label: "Foto", widget: "image" },
+                    hint: "Extra productfoto's. De hoofdfoto staat hierboven.",
+                  },
+                  {
+                    label: "Naam",
+                    name: "name",
+                    widget: "object",
+                    fields: [
+                      { label: "Nederlands", name: "nl", widget: "string" },
+                      { label: "English", name: "en", widget: "string" },
+                    ],
+                  },
+                  {
+                    label: "Beschrijving",
+                    name: "description",
+                    widget: "object",
+                    fields: [
+                      { label: "Nederlands", name: "nl", widget: "text" },
+                      { label: "English", name: "en", widget: "text" },
+                    ],
+                  },
+                  { label: "Prijs op de site", name: "priceLabel", widget: "string", hint: "Bijv. € 35,00" },
+                  { label: "Prijs in centen", name: "priceCents", widget: "number", value_type: "int", hint: "3500 = € 35,00" },
+                  {
+                    label: "Type",
+                    name: "type",
+                    widget: "select",
+                    options: [
+                      { label: "Fysiek (verzending NL)", value: "physical" },
+                      { label: "Digitaal (PDF)", value: "digital" },
+                    ],
+                  },
+                  {
+                    label: "Tab in de shop",
+                    name: "section",
+                    widget: "select",
+                    options: [
+                      { label: "Baby cadeaus", value: "babyGifts" },
+                      { label: "Keychains", value: "keychains" },
+                      { label: "Patches", value: "patches" },
+                      { label: "Tassen", value: "pouches" },
+                      { label: "Patronen", value: "patterns" },
+                    ],
+                  },
+                  { label: "Personalisatie nodig", name: "personalization", widget: "boolean", default: false },
+                  {
+                    label: "Shop-opties",
+                    name: "options",
+                    widget: "list",
+                    required: false,
+                    collapsed: true,
+                    label_singular: "optie",
+                    hint: "Stof (fotovakjes), hardware (kleuren), naam, notitie of prijs per letter.",
+                    fields: [
+                      { label: "ID", name: "id", widget: "string" },
+                      {
+                        label: "Type",
+                        name: "type",
+                        widget: "select",
+                        options: [
+                          { label: "Stof (fotovakjes)", value: "fabric" },
+                          { label: "Hardware (kleurvakjes)", value: "hardware" },
+                          { label: "Naamveld", value: "name" },
+                          { label: "Extra notitie", value: "note" },
+                          { label: "Prijs per letter", value: "letters" },
+                        ],
+                      },
+                      { label: "Verplicht", name: "required", widget: "boolean", default: true },
+                      {
+                        label: "Label",
+                        name: "label",
+                        widget: "object",
+                        fields: [
+                          { label: "Nederlands", name: "nl", widget: "string" },
+                          { label: "English", name: "en", widget: "string" },
+                        ],
+                      },
+                      { label: "Prijs per letter in centen", name: "pricePerLetterCents", widget: "number", value_type: "int", required: false },
+                      { label: "Vanaf aantal letters", name: "minLetters", widget: "number", value_type: "int", required: false },
+                      { label: "Max aantal letters", name: "maxLetters", widget: "number", value_type: "int", required: false },
+                      {
+                        label: "Keuzes (stof of hardware)",
+                        name: "choices",
+                        widget: "list",
+                        required: false,
+                        collapsed: true,
+                        fields: [
+                          { label: "ID", name: "id", widget: "string" },
+                          {
+                            label: "Naam",
+                            name: "label",
+                            widget: "object",
+                            fields: [
+                              { label: "Nederlands", name: "nl", widget: "string" },
+                              { label: "English", name: "en", widget: "string" },
+                            ],
+                          },
+                          { label: "Foto", name: "image", widget: "image", required: false },
+                          { label: "Kleur (hex)", name: "color", widget: "string", required: false, hint: "Bijv. #C5A572" },
+                        ],
+                      },
+                    ],
+                  },
+                  { label: "Link naar PDF (optioneel)", name: "digitalFile", widget: "string", required: false },
+                  { label: "ID", name: "id", widget: "string" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "site-content-nl",
+        label: "Teksten (NL)",
+        description: "Alle Nederlandse pagina's, knoppen en menu's.",
+        files: contentFilesFor(LOCALES[0]),
+      },
+      {
+        name: "site-content-en",
+        label: "Teksten (EN)",
+        description: "English pages, buttons and menus.",
+        files: contentFilesFor(LOCALES[1]),
       },
     ],
   };

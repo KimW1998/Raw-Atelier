@@ -5,19 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/sync-shop-products.mjs && tsc -b && vite build && node scripts/generate-static.mjs",
-    "sync:shop": "node scripts/sync-shop-products.mjs",
+    "build": "node scripts/generate-cms-config.mjs && tsc -b && vite build && node scripts/generate-static.mjs",
     "preview": "vite preview",
     "cms": "decap-server",
     "cms:config": "node scripts/generate-cms-config.mjs"
   },
   "dependencies": {
+    "@netlify/functions": "4.3.0",
     "framer-motion": "^11.18.2",
     "js-yaml": "4.3.0",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.1"
+    "react-router-dom": "^7.1.1",
+    "stripe": "18.5.0"
   },
   "devDependencies": {
     "@types/js-yaml": "4.0.9",

@@ -6,17 +6,21 @@ All website text lives here as YAML files — separate from the app code.
 
 ```
 content/
+├── portfolio-items.yaml  # Portfolio photos and NL/EN titles (Decap: Portfolio)
 ├── en/          # English content
-│   ├── global.yaml    # Nav, footer, CTAs, SEO metadata
-│   ├── home.yaml      # Home page sections
-│   ├── about.yaml     # About page
-│   ├── services.yaml  # Services page + all service details
-│   ├── portfolio.yaml # Portfolio page + item titles
-│   ├── shop.yaml      # Shop page + products
-│   ├── contact.yaml   # Contact page + form labels
-│   └── shared.yaml    # Testimonials, FAQ, process steps
+│   ├── global.yaml
+│   ├── home.yaml
+│   ├── about.yaml
+│   ├── services.yaml
+│   ├── portfolio.yaml
+│   ├── shop.yaml
+│   ├── legal.yaml
+│   ├── contact.yaml
+│   └── shared.yaml
 └── nl/          # Dutch content (same structure)
 ```
+
+Shop product data (prices, photos, physical vs digital) lives in `src/data/shop-catalog.json` and is also editable in Decap under **Shop products**.
 
 ## Editing content
 
@@ -26,6 +30,8 @@ content/
 2. In a second terminal: `npm run cms`
 3. Open **http://localhost:3000/admin**
 4. Edit content in the visual editor — changes save to these YAML files
+
+Portfolio: open **Portfolio** to add photos, category and Dutch/English titles. Shop products: **Shop products** (prices in cents; checkout uses Stripe).
 
 > **Note:** On localhost the CMS uses `config.local.yml` (proxy backend). On production it uses `config.yml` (Netlify Git Gateway). CMS config is auto-generated — run `npm run cms:config` after changing field definitions in `scripts/generate-cms-config.mjs`.
 
@@ -55,5 +61,5 @@ Open any file in `content/en/` or `content/nl/` and edit the text. Rebuild or re
 
 1. Copy `content/en/` to `content/{locale}/`
 2. Translate all YAML files
-3. Add the locale to `src/i18n/routing.ts`
-4. Update `public/admin/config.yml` i18n locales
+3. Add the locale to `src/i18n/context.tsx`
+4. Run `npm run cms:config`

@@ -6,7 +6,6 @@ export const BRAND = {
   email: "info@rawluxury.nl",
   instagram: "https://www.instagram.com/raw_luxury_atelier/",
   instagramHandle: "raw_luxury_atelier",
-  shopUrl: "https://www.rawluxurystitches.com",
 } as const;
 
 export const NAV_ROUTES = [
@@ -77,19 +76,6 @@ export const PORTFOLIO_CATEGORIES = [
 ] as const;
 
 export type PortfolioCategoryKey = (typeof PORTFOLIO_CATEGORIES)[number];
-
-export const PORTFOLIO_ITEMS = [
-  { id: "1", category: "events" as const, image: "/images/portfolio/events-live-booth.jpg", aspect: "wide" as const },
-  { id: "2", category: "gifts" as const, image: "/images/portfolio/gifts-balloon.jpg", aspect: "tall" as const },
-  { id: "3", category: "gifts" as const, image: "/images/portfolio/gifts-baby-hood.jpg", aspect: "tall" as const },
-  { id: "4", category: "gifts" as const, image: "/images/portfolio/gifts-baby-wrap.jpg", aspect: "wide" as const },
-  { id: "5", category: "gifts" as const, image: "/images/portfolio/gifts-banner-letters.jpg", aspect: "wide" as const },
-  { id: "6", category: "digitizing" as const, image: "/images/portfolio/digitizing-applique-letters.jpg", aspect: "square" as const },
-  { id: "7", category: "fashion" as const, image: "/images/portfolio/fashion-butterfly-wings.jpg", aspect: "tall" as const },
-  { id: "8", category: "fashion" as const, image: "/images/portfolio/fashion-upcycle-blazer.jpg", aspect: "wide" as const },
-  { id: "9", category: "fashion" as const, image: "/images/portfolio/fashion-upcycle-design.jpg", aspect: "square" as const },
-  { id: "10", category: "corporate" as const, image: "/images/portfolio/corporate-collar-bees.jpg", aspect: "square" as const },
-] as const;
 
 export const TESTIMONIAL_IDS = ["1", "2", "3"] as const;
 export const PROCESS_IDS = ["1", "2", "3", "4"] as const;

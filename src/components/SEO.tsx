@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { SITE_URL } from "@/lib/constants";
+import { useStudioPreview } from "@/lib/studio-preview";
 
 interface SEOProps {
   title: string;
@@ -9,6 +10,7 @@ interface SEOProps {
   brandName: string;
   tagline: string;
   keywords: string;
+  image?: string;
 }
 
 const JSON_LD_ID = "raw-atelier-json-ld";
@@ -69,13 +71,17 @@ export function SEO({
   brandName,
   tagline,
   keywords,
+  image,
 }: SEOProps) {
+  const studio = useStudioPreview();
   const localePath = path === "/" ? `/${locale}` : `/${locale}${path}`;
   const url = `${SITE_URL}${localePath}`;
   const isHome = path === "/";
   const fullTitle = isHome ? `${brandName} | ${tagline}` : `${title} | ${brandName}`;
 
   useEffect(() => {
+    if (studio?.disableSeo) return;
+
     const schema = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
@@ -96,16 +102,20 @@ export function SEO({
     upsertMeta("property", "og:site_name", brandName);
     upsertMeta("property", "og:title", fullTitle);
     upsertMeta("property", "og:description", description);
+    if (image) {
+      upsertMeta("property", "og:image", image.startsWith("http") ? image : `${SITE_URL}${image}`);
+    }
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", fullTitle);
     upsertMeta("name", "twitter:description", description);
 
     upsertLink("canonical", url);
-    upsertLink("alternate", `${SITE_URL}/en${path === "/" ? "" : path}`, "en");
     upsertLink("alternate", `${SITE_URL}/nl${path === "/" ? "" : path}`, "nl");
+    upsertLink("alternate", `${SITE_URL}/en${path === "/" ? "" : path}`, "en");
+    upsertLink("alternate", `${SITE_URL}/nl${path === "/" ? "" : path}`, "x-default");
 
     upsertJsonLd(schema);
-  }, [brandName, description, fullTitle, keywords, locale, path, tagline, url]);
+  }, [brandName, description, fullTitle, image, keywords, locale, path, studio?.disableSeo, tagline, url]);
 
   return null;
 }

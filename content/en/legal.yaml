@@ -1,0 +1,221 @@
+legal:
+  termsTitle: Terms and conditions
+  terms: |-
+    ## Article 1 – Business details
+    Raw Atelier is the creative embroidery studio of Raw Luxury.
+
+    Raw Luxury
+    Fuutstraat 4, 2421 XS Nieuwkoop, The Netherlands
+    Email: info@rawluxury.nl
+    Chamber of Commerce: 83007849
+    VAT: NL003761795B22
+    Website: www.rawatelier.nl
+
+    ## Article 2 – Applicability
+    These terms apply to all offers, orders and agreements made through the Raw Atelier webshop.
+
+    ## Article 3 – Offers
+    All products and prices are subject to errors. Digital products are delivered as described.
+
+    ## Article 4 – Payment
+    Payment is made via Stripe Checkout (iDEAL or card). Orders are processed after payment has been received. Raw Atelier does not store card details.
+
+    ## Article 5 – Delivery
+    Physical products: lead time about 2 to 3 weeks, depending on personalisation.
+    Physical products ship within the Netherlands only. Shipping costs appear at checkout (€ 6.95 unless stated otherwise).
+    Digital sewing patterns have no shipping. Anyone can buy them, anywhere in the world. After payment I email the PDF to the address used at checkout.
+
+    ## Article 6 – Digital products
+    Digital products (such as sewing patterns) are emailed after payment.
+    By completing the purchase you agree to immediate delivery and waive the right of withdrawal for that digital product.
+
+    ## Article 7 – Withdrawal and returns
+    Digital products: no right of withdrawal after delivery.
+    Personalised or made-to-order pieces cannot be returned.
+    Other unused physical products without personalisation: within 14 days, unused and in original condition. Return shipping is at the customer’s expense.
+
+    ## Article 8 – Warranty
+    Physical products have a 3-month warranty on manufacturing defects.
+
+    ## Article 9 – Liability
+    Raw Luxury is not liable for indirect damage or improper use of products.
+
+    ## Article 10 – Complaints
+    Send complaints to info@rawluxury.nl or through the contact form. I aim to reply within 2 working days.
+
+    ## Article 11 – Applicable law
+    All agreements are governed by Dutch law.
+
+  shippingTitle: Shipping and returns
+  shipping: |-
+    ## Delivery
+    Physical products ship within the Netherlands only. Shipping costs appear at Stripe Checkout.
+    Digital sewing patterns have no shipping. After payment I email the PDF worldwide to the checkout address.
+    Lead time for personalised physical pieces is usually 2 to 3 weeks. I share a realistic timeline after your order.
+
+    ## Right of withdrawal
+    You may cancel your order within 14 days, except where the law allows an exception.
+
+    ## Exceptions
+    The right of withdrawal does not apply to:
+    - digital products after delivery
+    - personalised or made-to-order pieces
+
+    ## Return conditions
+    Returns are accepted for non-personalised physical products, within 14 days, unused and in original condition. Return shipping is at your expense.
+
+    ## How to return
+    Email info@rawluxury.nl with your order details.
+
+    ## Refunds
+    Refunds are issued within 14 days after receiving the returned items.
+    Damaged or incorrect delivery? Email me and we will find a solution.
+
+  privacyTitle: Privacy policy
+  privacy: |-
+    Raw Atelier / Raw Luxury respects your privacy.
+
+    ## What we collect
+    - name and address details (for shipping)
+    - email address
+    - payment details (through Stripe, not stored on our server)
+    - messages via the contact form (Netlify Forms)
+    - technical data needed for the site and cart to work
+
+    ## Why
+    - processing and shipping orders
+    - customer service
+    - running the website (cart, language, cookie preference)
+
+    ## Retention
+    No longer than needed for the purpose for which the data was collected.
+
+    ## Sharing
+    Only with parties needed for the order, such as Stripe (payments) and the carrier. We do not sell your data.
+
+    ## Your rights
+    You may access, correct, delete or object to processing. Send a request to info@rawluxury.nl.
+
+    ## Security
+    We take appropriate measures to protect your data.
+
+    ## Cookies
+    See the cookie policy for more information. We only use Google Analytics if you allow it in the cookie banner.
+
+  disclaimerTitle: Disclaimer
+  disclaimer: |-
+    The content of this website has been compiled with care.
+
+    ## Liability
+    Raw Luxury is not liable for:
+    - errors or omissions on the website
+    - damage resulting from the use of products
+    - incorrect use of sewing patterns
+
+    ## Digital products
+    Digital products are for personal use only. Sharing, reselling or distributing them without permission is not allowed.
+
+  cookiesTitle: Cookie policy (EU)
+  cookies: |-
+    This Cookie Policy was last updated on 30 August 2026 and applies to visitors in the European Economic Area, the United Kingdom and Switzerland.
+
+    ## 1. Introduction
+    This website, https://www.rawatelier.nl (hereinafter: “the website”), uses cookies and similar technologies such as scripts and local storage in your browser (for convenience all of these are called “cookies”). Cookies may also be placed by third parties we use, for example when you pay or when fonts are loaded. Below we explain which cookies we use, why, and how you can change your choice.
+
+    Raw Atelier is the public name of Raw Luxury.
+
+    ## 2. What are cookies?
+    A cookie is a small file that is sent with pages of this website and stored by your browser on your computer or another device. The information stored there may be sent back to our servers or to third-party servers on a later visit.
+
+    We also use local storage. That works in a similar way: data stays in your browser until you delete it or until it expires.
+
+    ## 3. What are scripts?
+    A script is a piece of program code used to make the website work and stay interactive. This code runs on our server or on your device.
+
+    ## 4. What is a web beacon?
+    A web beacon (or pixel tag) is a small, often invisible piece of text or image used to measure traffic on a website. Various data about you may be stored that way. We do not place tracking pixels without your consent. With consent, Google Analytics may use this kind of technology. Stripe may use its own technologies at checkout.
+
+    ## 5. Types of cookies
+
+    ### 5.1 Technical or functional cookies
+    Some cookies make sure parts of the website work and that your preferences are remembered. Functional cookies mean you do not have to enter the same information again, and items can stay in your shopping cart until you pay. We may place these cookies without your consent, because the shop would not work properly without them.
+
+    ### 5.2 Statistics (optional)
+    Statistics cookies help us see how the website is used, for example which pages are viewed. These are off by default. We only place them if you choose this in the cookie banner or via Cookie settings at the bottom of the site. With consent we use Google Analytics 4. Google advertising cookies stay off.
+
+    ## 6. Cookies placed
+
+    ### Raw Atelier (this website)
+    Functional. This data stays on your device and is not shared with third parties.
+
+    - raw-atelier-cookie-consent — stores your cookie choice (necessary and, if you allow it, analytics). Retention: until you clear it in your browser.
+    - raw-atelier-cart-v2 — stores your shopping cart. Retention: until you empty the cart or clear the data in your browser.
+
+    Your language preference (Dutch or English) is in the web address, not in a separate cookie.
+
+    ### Google Fonts
+    Functional. We load the Inter and Playfair Display fonts through Google Fonts so the site looks consistent. Your browser then connects to Google servers (fonts.googleapis.com and fonts.gstatic.com).
+
+    Sharing data: Google may receive your IP address and technical browser data. See Google’s privacy policy.
+
+    ### Google Analytics
+    Statistics (optional). Only if you allow analytics. We then measure anonymised or pseudonymised visit data, such as pages, country/language and device type. Google’s script loads only after your consent. Ads and ad personalisation stay off.
+
+    Sharing data: Google Ireland Limited / Google LLC. See https://policies.google.com/privacy and https://business.safety.google/privacy/
+
+    - _ga — up to 2 years — distinguish visitors
+    - _ga_* — up to 2 years — keep the Google Analytics 4 session
+
+    ### Stripe
+    Functional. We use Stripe for payments (iDEAL and card). At checkout you go to Stripe’s secure pages. Raw Atelier does not store card details.
+
+    Sharing data: Stripe may place cookies for payment and fraud prevention. See Stripe’s privacy policy: https://stripe.com/privacy
+
+    Typical Stripe functions include fraud prevention (up to 1 year) and a session during checkout.
+
+    ### Netlify
+    Functional. The website is hosted by Netlify. Contact forms go through Netlify Forms. Netlify may use technical cookies or logs for security, hosting and form handling.
+
+    Sharing data: see Netlify’s privacy policy.
+
+    ### Instagram feed (optional)
+    If the homepage shows an Instagram overview, posts are loaded via Behold. Your browser then connects to feeds.behold.so. That only happens if that feed is set up.
+
+    ## 7. Consent
+    When you first visit, we show a banner about cookies. Necessary cookies are always on. If you click “Allow all”, you also consent to optional analytics. If you click “Necessary only”, statistics stay off. Under Settings you can choose per category.
+
+    You can disable cookies in your browser, but the shop may then stop working properly (for example the cart).
+
+    ### 7.1 Manage your consent
+    Cookie settings at the bottom of every page opens the banner again so you can change your preference. You can also delete cookies in your browser; on a later visit we will ask again if the previous storage is gone.
+
+    ## 8. Enabling, disabling and deleting cookies
+    You can use your browser to delete cookies automatically or by hand, or to block certain cookies. You can also ask your browser to notify you each time a cookie is placed. See the help section of your browser.
+
+    Please note that the website may not work properly if all cookies are disabled. If you delete cookies, necessary cookies will be placed again after your next visit.
+
+    ## 9. Your rights with respect to personal data
+    For personal data processed through cookies or similar technologies, you have among others these rights:
+
+    - the right to know why your data is needed, what happens to it, and how long it is kept
+    - right of access: you may ask what personal data we hold
+    - right to rectification: you may have data completed, corrected, deleted or blocked
+    - if processing is based on consent, you may withdraw that consent and ask for deletion
+    - right to data portability: you may request your data and transfer it to another controller
+    - right to object: you may object to processing, unless there are legitimate grounds to continue
+
+    To exercise these rights, use the contact details below. If you have a complaint about how we handle your data, we would like to hear from you. You also have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens).
+
+    More on privacy is in the privacy policy on this website.
+
+    ## 10. Contact details
+    Questions about this Cookie Policy:
+
+    Raw Luxury
+    Fuutstraat 4
+    2421 XS Nieuwkoop
+    Netherlands
+    Website: https://www.rawatelier.nl
+    Email: info@rawluxury.nl
+
+    Chamber of Commerce 83007849, VAT NL003761795B22

@@ -1,6 +1,7 @@
 import { useLocale } from "@/i18n/context";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { routing, type Locale } from "@/i18n/routing";
+import { useStudioPreview } from "@/lib/studio-preview";
 import { cn } from "@/lib/utils";
 
 const localeLabels: Record<Locale, string> = {
@@ -12,8 +13,13 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
+  const studio = useStudioPreview();
 
   const switchLocale = (nextLocale: Locale) => {
+    if (studio) {
+      studio.setPreviewLocale(nextLocale);
+      return;
+    }
     router.replace(pathname, { locale: nextLocale });
   };
 
