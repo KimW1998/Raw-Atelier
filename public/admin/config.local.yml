@@ -285,6 +285,9 @@ collections:
               - label: Shop
                 name: shop
                 widget: string
+              - label: FAQ
+                name: faq
+                widget: string
               - label: Contact
                 name: contact
                 widget: string
@@ -330,6 +333,9 @@ collections:
                 widget: string
               - label: Cookie settings
                 name: cookieSettings
+                widget: string
+              - label: FAQ
+                name: faq
                 widget: string
           - label: Cookie banner
             name: cookies
@@ -723,6 +729,117 @@ collections:
               - label: Cookies
                 name: cookies
                 widget: markdown
+      - label: FAQ
+        name: nl-faq
+        file: content/nl/faq.yaml
+        fields:
+          - label: FAQ Page
+            name: faqPage
+            widget: object
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+              - label: Title
+                name: title
+                widget: string
+              - label: Description
+                name: description
+                widget: text
+              - label: Questions
+                name: items
+                widget: object
+                fields:
+                  - label: Question 1
+                    name: '1'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 2
+                    name: '2'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 3
+                    name: '3'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 4
+                    name: '4'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 5
+                    name: '5'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 6
+                    name: '6'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 7
+                    name: '7'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 8
+                    name: '8'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 9
+                    name: '9'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
       - label: Contact
         name: nl-contact
         file: content/nl/contact.yaml
@@ -957,6 +1074,9 @@ collections:
               - label: Shop
                 name: shop
                 widget: string
+              - label: FAQ
+                name: faq
+                widget: string
               - label: Contact
                 name: contact
                 widget: string
@@ -1002,6 +1122,9 @@ collections:
                 widget: string
               - label: Cookie settings
                 name: cookieSettings
+                widget: string
+              - label: FAQ
+                name: faq
                 widget: string
           - label: Cookie banner
             name: cookies
@@ -1395,6 +1518,117 @@ collections:
               - label: Cookies
                 name: cookies
                 widget: markdown
+      - label: FAQ
+        name: en-faq
+        file: content/en/faq.yaml
+        fields:
+          - label: FAQ Page
+            name: faqPage
+            widget: object
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+              - label: Title
+                name: title
+                widget: string
+              - label: Description
+                name: description
+                widget: text
+              - label: Questions
+                name: items
+                widget: object
+                fields:
+                  - label: Question 1
+                    name: '1'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 2
+                    name: '2'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 3
+                    name: '3'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 4
+                    name: '4'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 5
+                    name: '5'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 6
+                    name: '6'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 7
+                    name: '7'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 8
+                    name: '8'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
+                  - label: Question 9
+                    name: '9'
+                    widget: object
+                    fields:
+                      - label: Question
+                        name: question
+                        widget: string
+                      - label: Answer
+                        name: answer
+                        widget: text
       - label: Contact
         name: en-contact
         file: content/en/contact.yaml

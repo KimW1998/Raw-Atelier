@@ -56,6 +56,7 @@ const CONTENT_FILES = [
           { label: "Services", name: "services", widget: "string" },
           { label: "Portfolio", name: "portfolio", widget: "string" },
           { label: "Shop", name: "shop", widget: "string" },
+          { label: "FAQ", name: "faq", widget: "string" },
           { label: "Contact", name: "contact", widget: "string" },
           { label: "Work With Me", name: "workWithMe", widget: "string" },
         ],
@@ -77,6 +78,7 @@ const CONTENT_FILES = [
           { label: "Disclaimer", name: "disclaimer", widget: "string" },
           { label: "Cookies", name: "cookies", widget: "string" },
           { label: "Cookie settings", name: "cookieSettings", widget: "string" },
+          { label: "FAQ", name: "faq", widget: "string" },
         ],
       },
       {
@@ -287,6 +289,36 @@ const CONTENT_FILES = [
           { label: "Disclaimer", name: "disclaimer", widget: "markdown" },
           { label: "Cookies title", name: "cookiesTitle", widget: "string" },
           { label: "Cookies", name: "cookies", widget: "markdown" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "faq",
+    label: "FAQ",
+    fields: [
+      {
+        label: "FAQ Page",
+        name: "faqPage",
+        widget: "object",
+        fields: [
+          { label: "Eyebrow", name: "eyebrow", widget: "string" },
+          { label: "Title", name: "title", widget: "string" },
+          { label: "Description", name: "description", widget: "text" },
+          {
+            label: "Questions",
+            name: "items",
+            widget: "object",
+            fields: ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((id) => ({
+              label: `Question ${id}`,
+              name: id,
+              widget: "object",
+              fields: [
+                { label: "Question", name: "question", widget: "string" },
+                { label: "Answer", name: "answer", widget: "text" },
+              ],
+            })),
+          },
         ],
       },
     ],

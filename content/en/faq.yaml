@@ -1,0 +1,50 @@
+faqPage:
+  eyebrow: Help & info
+  title: Frequently asked questions
+  description: >-
+    Answers about ordering, shipping, sewing patterns and custom work. If your question is not here, send a message.
+  items:
+    '1':
+      question: Do you take custom orders?
+      answer: >-
+        Yes. I love making something unique, from upcycled pieces to embroidered gifts. Send your idea through the
+        contact form. I’ll let you know if it’s possible and what the timeline would be.
+    '2':
+      question: Can beginners use your patterns?
+      answer: >-
+        Yes. The digital sewing patterns come with clear step-by-step instructions. They work well for beginners, and
+        they’re still a calm, enjoyable project for experienced sewists.
+    '3':
+      question: Do you offer returns or exchanges?
+      answer: >-
+        Most items are handmade, personalised or digital, so I can’t offer returns. If something is wrong with your
+        order, please get in touch. I always want you to be happy with what you receive.
+    '4':
+      question: How can I stay in the loop?
+      answer: >-
+        Follow Raw Atelier on Instagram @raw_luxury_atelier for behind-the-scenes peeks, new work and creative
+        inspiration.
+    '5':
+      question: What is Raw Atelier?
+      answer: >-
+        Raw Atelier is the creative embroidery studio of Raw Luxury. I make custom embroidery, live events,
+        personalised gifts, digital sewing patterns and sewing projects, with care in the Netherlands.
+    '6':
+      question: Where do you ship?
+      answer: >-
+        Physical orders ship within the Netherlands. Digital sewing patterns can be bought from anywhere; after
+        payment I email the PDF to the checkout address.
+    '7':
+      question: How long will it take to receive my order?
+      answer: >-
+        Each handmade piece is made with care. Please allow about 10 to 15 business days before it ships, plus delivery
+        time. Digital patterns are emailed after payment.
+    '8':
+      question: How can I pay?
+      answer: >-
+        In the shop you pay through Stripe, with iDEAL or card. Raw Atelier does not store card details.
+    '9':
+      question: Do you confirm details after I order?
+      answer: >-
+        For personalised products I get in touch after your order about name, fabric, colours and extra wishes, so the
+        result is right.

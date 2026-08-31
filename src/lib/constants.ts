@@ -14,6 +14,7 @@ export const NAV_ROUTES = [
   { href: "/services", key: "services" },
   { href: "/portfolio", key: "portfolio" },
   { href: "/shop", key: "shop" },
+  { href: "/faq", key: "faq" },
   { href: "/contact", key: "contact" },
 ] as const;
 

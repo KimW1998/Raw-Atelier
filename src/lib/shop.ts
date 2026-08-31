@@ -29,6 +29,7 @@ export {
   getListedPrice,
   getProductOptions,
   getProductUnitPriceCents,
+  letterPriceCents,
   optionLabel,
   productHasOptions,
   sanitizeSelections,

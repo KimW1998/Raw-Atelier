@@ -25,6 +25,7 @@ export interface ProductOption {
   minLetters?: number;
   maxLetters?: number;
   extraCharacters?: LetterExtraCharacter[];
+  letterPricesCents?: Record<string, number>;
 }
 
 export const BANNER_EXTRA_CHARACTERS: LetterExtraCharacter[] = [
@@ -90,6 +91,22 @@ export function billedLetterCount(text: string, option: ProductOption): number {
   return countBillableLetters(text, option);
 }
 
+export function letterPriceCents(option: ProductOption, count: number): number {
+  const table = option.letterPricesCents;
+  if (table && Object.keys(table).length > 0) {
+    const min = Math.max(1, option.minLetters ?? 1);
+    const max = option.maxLetters ?? 0;
+    let n = Math.max(min, count);
+    if (max > 0) n = Math.min(n, max);
+    const exact = table[String(n)];
+    if (typeof exact === "number") return exact;
+    const perLetter = option.pricePerLetterCents ?? 0;
+    return n * perLetter;
+  }
+  const perLetter = option.pricePerLetterCents ?? 0;
+  return Math.max(count, 0) * perLetter;
+}
+
 export function getProductUnitPriceCents(
   product: OptionedProduct,
   selections: ProductSelections = {},
@@ -98,19 +115,18 @@ export function getProductUnitPriceCents(
   if (!letters) return product.priceCents;
 
   const text = selections[letters.id] ?? "";
-  const perLetter = letters.pricePerLetterCents ?? 0;
   const count = countBillableLetters(text, letters);
   if (count === 0) {
-    return Math.max(1, letters.minLetters ?? 1) * perLetter;
+    return letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1));
   }
-  return count * perLetter;
+  return letterPriceCents(letters, count);
 }
 
 export function getListedPrice(product: OptionedProduct): { cents: number; from: boolean } {
   const letters = getLettersOption(product);
   if (letters) {
     const min = Math.max(1, letters.minLetters ?? 1);
-    return { cents: min * (letters.pricePerLetterCents ?? 0), from: true };
+    return { cents: letterPriceCents(letters, min), from: true };
   }
   return { cents: product.priceCents, from: false };
 }

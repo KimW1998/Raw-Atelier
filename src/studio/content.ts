@@ -152,6 +152,7 @@ const LABELS: Record<string, string> = {
   customPouches: "Maatwerk pouches",
   name: "Naam",
   contactPage: "Contactpagina",
+  faqPage: "FAQ-pagina",
   info: "Info",
   email: "E-mail",
   form: "Formulier",

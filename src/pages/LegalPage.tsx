@@ -11,7 +11,7 @@ export type LegalKind = "terms" | "shipping" | "privacy" | "disclaimer" | "cooki
 const LEGAL_PAGES: LegalKind[] = ["terms", "shipping", "privacy", "disclaimer", "cookies"];
 
 function renderBody(text: string) {
-  const nodes: React.ReactNode[] = [];
+  const nodes: ReactNode[] = [];
   const lines = text.split("\n");
   let paragraph: string[] = [];
   let list: string[] = [];

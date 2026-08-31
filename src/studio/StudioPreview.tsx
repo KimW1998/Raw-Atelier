@@ -9,6 +9,7 @@ import ServicesPage from "@/pages/ServicesPage";
 import PortfolioPage from "@/pages/PortfolioPage";
 import ShopPage from "@/pages/ShopPage";
 import ContactPage from "@/pages/ContactPage";
+import FaqPage from "@/pages/FaqPage";
 import LegalPage from "@/pages/LegalPage";
 
 function PreviewPage({ path }: { path: string }) {
@@ -17,6 +18,7 @@ function PreviewPage({ path }: { path: string }) {
   if (path === "/portfolio") return <PortfolioPage />;
   if (path === "/shop") return <ShopPage />;
   if (path === "/contact") return <ContactPage />;
+  if (path === "/faq") return <FaqPage />;
   if (path === "/legal/terms") return <LegalPage kind="terms" />;
   if (path === "/legal/shipping") return <LegalPage kind="shipping" />;
   if (path === "/legal/privacy") return <LegalPage kind="privacy" />;

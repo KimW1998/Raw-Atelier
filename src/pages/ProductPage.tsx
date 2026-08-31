@@ -107,7 +107,7 @@ export default function ProductPage() {
         image={product.image}
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-32">
+      <section className="relative pt-24 pb-10 md:pt-28 md:pb-12">
         <Container>
           <FadeIn>
             <Link
@@ -123,7 +123,7 @@ export default function ProductPage() {
               <ProductGallery key={product.id} images={getProductImages(product)} alt={name} />
             </FadeIn>
 
-            <FadeIn delay={0.1} className="order-first md:order-last">
+            <FadeIn delay={0.1} className="pb-4">
               <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
                 {t(`badges.${badge}`)}
               </p>
@@ -133,7 +133,7 @@ export default function ProductPage() {
               <p className="mt-4 font-heading text-2xl text-brand-pink-accent">
                 {livePrice}
               </p>
-              <p className="mt-6 font-body text-base leading-relaxed text-brand-black/70 md:text-lg">
+              <p className="mt-6 whitespace-pre-line font-body text-base leading-relaxed text-brand-black/70 md:text-lg">
                 {description}
               </p>
               <p className="mt-4 font-body text-sm leading-relaxed text-brand-black/60">
@@ -189,9 +189,6 @@ export default function ProductPage() {
                   onClick={addToCart}
                 >
                   {t("cart.add")}
-                </Button>
-                <Button href="/shop/cart" variant="outline" size="large">
-                  {t("cart.viewFull")}
                 </Button>
               </div>
             </FadeIn>

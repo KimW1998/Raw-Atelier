@@ -5,14 +5,24 @@ import { FadeIn } from "@/components/animations/FadeIn";
 import { FAQ_IDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-export function FAQSection() {
+export function FAQSection({
+  items,
+}: {
+  items?: { question: string; answer: string }[];
+}) {
   const tFaq = useTranslations("faq");
+  const list =
+    items ??
+    FAQ_IDS.map((id) => ({
+      question: tFaq(`${id}.question`),
+      answer: tFaq(`${id}.answer`),
+    }));
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <div className="space-y-4">
-      {FAQ_IDS.map((id, index) => (
-        <FadeIn key={id} delay={index * 0.05}>
+      {list.map((item, index) => (
+        <FadeIn key={`${item.question}-${index}`} delay={index * 0.05}>
           <div className="overflow-hidden rounded-2xl border border-brand-pink-light bg-white">
             <button
               type="button"
@@ -21,7 +31,7 @@ export function FAQSection() {
               aria-expanded={openIndex === index}
             >
               <span className="pr-4 font-heading text-lg text-brand-black">
-                {tFaq(`${id}.question`)}
+                {item.question}
               </span>
               <ChevronDown
                 className={cn(
@@ -40,7 +50,7 @@ export function FAQSection() {
             >
               <div className="overflow-hidden">
                 <p className="px-6 pb-6 font-body text-sm leading-relaxed text-brand-black/70">
-                  {tFaq(`${id}.answer`)}
+                  {item.answer}
                 </p>
               </div>
             </div>

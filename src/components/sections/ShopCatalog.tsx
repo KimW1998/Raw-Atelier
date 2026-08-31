@@ -56,7 +56,7 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
         <p className="mt-1 font-body text-sm font-semibold text-brand-pink-accent">
           {formatListedPrice(product, locale)}
         </p>
-        <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-brand-black/60">
+        <p className="mt-3 line-clamp-4 flex-1 font-body text-sm leading-relaxed text-brand-black/60">
           {getProductDescription(product, locale)}
         </p>
         {needsOptions ? (
@@ -106,20 +106,12 @@ function getTabLabel(tabId: ShopTabId, tShop: ReturnType<typeof useTranslations>
   return tShop(`sections.${tabId}.eyebrow`);
 }
 
-function getTabHeading(tabId: ShopTabId, tShop: ReturnType<typeof useTranslations>) {
+function getTabDescription(tabId: ShopTabId, tShop: ReturnType<typeof useTranslations>) {
   if (tabId === "madeToOrder") {
-    return {
-      eyebrow: tShop("madeToOrder.eyebrow"),
-      title: tShop("madeToOrder.title"),
-      description: tShop("madeToOrder.description"),
-    };
+    return tShop("madeToOrder.description");
   }
 
-  return {
-    eyebrow: tShop(`sections.${tabId}.eyebrow`),
-    title: tShop(`sections.${tabId}.title`),
-    description: tShop(`sections.${tabId}.description`),
-  };
+  return tShop(`sections.${tabId}.description`);
 }
 
 function isProductTab(tabId: ShopTabId): tabId is ShopSectionId {
@@ -140,30 +132,6 @@ function useShopTab() {
   return { activeTab, setActiveTab };
 }
 
-function TabPanelHeading({
-  eyebrow,
-  title,
-  description,
-}: {
-  eyebrow: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
-      <p className="mb-3 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
-        {eyebrow}
-      </p>
-      <h2 className="font-heading text-3xl leading-tight text-brand-black md:text-4xl lg:text-5xl">
-        {title}
-      </h2>
-      <p className="mt-4 font-body text-base leading-relaxed text-brand-black/70 md:text-lg">
-        {description}
-      </p>
-    </div>
-  );
-}
-
 function getEmptyCategoryMessage(
   tabId: ShopSectionId,
   tShop: ReturnType<typeof useTranslations>,
@@ -180,22 +148,22 @@ export function ShopCatalog() {
   const t = useTranslations("shopPage");
   const tShop = useTranslations("shop");
   const { activeTab, setActiveTab } = useShopTab();
-  const heading = getTabHeading(activeTab, tShop);
+  const description = getTabDescription(activeTab, tShop);
   const allProducts = useShopProducts();
   const products = isProductTab(activeTab)
     ? allProducts.filter((product) => product.section === activeTab)
     : [];
 
   return (
-    <Section spacing="compact">
+    <Section spacing="tight">
       <Container>
-        <p className="mx-auto mb-10 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-12">
+        <p className="mx-auto mb-6 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-8">
           {t("shippingNote")}
         </p>
         <div
           role="tablist"
           aria-label={tShop("tabsLabel")}
-          className="mb-10 flex gap-2 overflow-x-auto pb-2 md:mb-12 md:justify-center"
+          className="mb-6 flex gap-2 overflow-x-auto pb-2 md:mb-8 md:justify-center"
         >
           {SHOP_TAB_ORDER.map((tabId) => {
             const isActive = activeTab === tabId;
@@ -248,11 +216,9 @@ export function ShopCatalog() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <TabPanelHeading
-                eyebrow={heading.eyebrow}
-                title={heading.title}
-                description={heading.description}
-              />
+              <p className="mx-auto mb-6 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-8">
+                {description}
+              </p>
 
               {activeTab === "madeToOrder" ? (
                 <div className="grid gap-8 md:grid-cols-3">

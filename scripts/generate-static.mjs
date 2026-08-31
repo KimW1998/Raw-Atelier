@@ -13,6 +13,7 @@ const routes = [
   "/portfolio",
   ...(shopPublic ? ["/shop", "/shop/success", "/shop/cancel"] : []),
   "/contact",
+  "/faq",
   "/legal/terms",
   "/legal/shipping",
   "/legal/privacy",

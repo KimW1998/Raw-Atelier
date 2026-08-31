@@ -53,7 +53,7 @@ export function Navbar() {
         >
           <Logo />
 
-          <ul className="hidden items-center gap-8 lg:flex">
+          <ul className="hidden items-center gap-5 xl:gap-8 lg:flex">
             {getPublicNavRoutes().map((route) => (
               <li key={route.href}>
                 <Link

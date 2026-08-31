@@ -4,7 +4,7 @@ import type {
   ProductOptionType,
   ShopCatalogProduct,
 } from "@/lib/shop";
-import { BANNER_EXTRA_CHARACTERS, extraCharactersFor, getLettersOption } from "@/lib/shop";
+import { BANNER_EXTRA_CHARACTERS, extraCharactersFor, getLettersOption, letterPriceCents } from "@/lib/shop";
 import { BilingualPair } from "./fields";
 import { StudioImageField } from "./media";
 
@@ -62,7 +62,7 @@ function emptyOption(type: ProductOptionType): ProductOption {
 function syncLetterPrice(product: ShopCatalogProduct): ShopCatalogProduct {
   const letters = getLettersOption(product);
   if (!letters) return product;
-  const cents = Math.max(1, letters.minLetters ?? 1) * (letters.pricePerLetterCents ?? 0);
+  const cents = letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1));
   const euros = (cents / 100).toFixed(2).replace(".", ",");
   return {
     ...product,

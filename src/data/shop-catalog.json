@@ -1,175 +1,45 @@
 {
   "products": [
     {
-      "id": "fabric-name-banner",
-      "type": "physical",
-      "section": "babyGifts",
-      "image": "/images/portfolio/gifts-banner-letters.jpg",
-      "priceCents": 1200,
-      "priceLabel": "vanaf € 12,00",
-      "personalization": true,
-      "digitalFile": "",
-      "name": {
-        "nl": "Stoffen naamslinger",
-        "en": "Fabric name garland"
-      },
-      "description": {
-        "nl": "Gepersonaliseerde stoffen letters. Elke letter of teken kost € 4,00, minimaal 3. Hart, & en maan kun je in de naam zetten. Kies een stof en vul de naam in.",
-        "en": "Personalised fabric letters. Each letter or symbol is € 4.00, minimum 3. You can add a heart, & or moon in the name. Choose a fabric and enter the name."
-      },
-      "options": [
-        {
-          "id": "name",
-          "type": "letters",
-          "required": true,
-          "label": { "nl": "Naam op de slinger", "en": "Name on the garland" },
-          "pricePerLetterCents": 400,
-          "minLetters": 3,
-          "maxLetters": 12,
-          "extraCharacters": [
-            { "id": "heart", "char": "♥", "label": { "nl": "Hart", "en": "Heart" } },
-            { "id": "ampersand", "char": "&", "label": { "nl": "&", "en": "&" } },
-            { "id": "moon", "char": "☾", "label": { "nl": "Maan", "en": "Moon" } }
-          ]
-        },
-        {
-          "id": "fabric",
-          "type": "fabric",
-          "required": true,
-          "label": { "nl": "Stof", "en": "Fabric" },
-          "choices": [
-            {
-              "id": "soft-pink",
-              "label": { "nl": "Zacht roze", "en": "Soft pink" },
-              "image": "/images/portfolio/gifts-balloon.jpg"
-            },
-            {
-              "id": "powder-blue",
-              "label": { "nl": "Poederblauw", "en": "Powder blue" },
-              "image": "/images/portfolio/gifts-baby-wrap.jpg"
-            },
-            {
-              "id": "linen",
-              "label": { "nl": "Linnen natuur", "en": "Natural linen" },
-              "image": "/images/portfolio/gifts-3.jpg"
-            },
-            {
-              "id": "floral",
-              "label": { "nl": "Bloemenprint", "en": "Floral print" },
-              "image": "/images/portfolio/gifts-1.jpg"
-            }
-          ]
-        },
-        {
-          "id": "note",
-          "type": "note",
-          "required": false,
-          "label": { "nl": "Extra notitie", "en": "Extra note" }
-        }
-      ]
-    },
-    {
-      "id": "fabric-balloon",
-      "type": "physical",
-      "section": "babyGifts",
-      "image": "/images/portfolio/gifts-balloon.jpg",
-      "priceCents": 3899,
-      "priceLabel": "€ 38,99",
-      "personalization": true,
-      "digitalFile": "",
-      "name": {
-        "nl": "Stoffen ballon met borduurwerk",
-        "en": "Fabric balloon with embroidery"
-      },
-      "description": {
-        "nl": "Een stoffen ballon met geborduurde naam of tekst. Kies een stof en vul de naam in. Verzending binnen Nederland.",
-        "en": "A fabric balloon with embroidered name or text. Choose a fabric and enter the name. Shipping within the Netherlands."
-      },
-      "options": [
-        {
-          "id": "fabric",
-          "type": "fabric",
-          "required": true,
-          "label": { "nl": "Stof", "en": "Fabric" },
-          "choices": [
-            {
-              "id": "soft-pink",
-              "label": { "nl": "Zacht roze", "en": "Soft pink" },
-              "image": "/images/portfolio/gifts-balloon.jpg"
-            },
-            {
-              "id": "powder-blue",
-              "label": { "nl": "Poederblauw", "en": "Powder blue" },
-              "image": "/images/portfolio/gifts-baby-wrap.jpg"
-            },
-            {
-              "id": "linen",
-              "label": { "nl": "Linnen natuur", "en": "Natural linen" },
-              "image": "/images/portfolio/gifts-3.jpg"
-            }
-          ]
-        },
-        {
-          "id": "name",
-          "type": "name",
-          "required": true,
-          "label": { "nl": "Naam of tekst", "en": "Name or text" }
-        },
-        {
-          "id": "note",
-          "type": "note",
-          "required": false,
-          "label": { "nl": "Extra notitie", "en": "Extra note" }
-        }
-      ]
-    },
-    {
       "id": "apple-keychain",
       "type": "physical",
       "section": "keychains",
-      "image": "/images/portfolio/gifts-1.jpg",
+      "image": "/images/shop/keychain/keychain-1.jpg",
+      "images": [
+        "/images/shop/keychain/keychain-2.jpg",
+        "/images/shop/keychain/keychain-3.jpg",
+        "/images/shop/keychain/keychain-4.jpg"
+      ],
       "priceCents": 1495,
       "priceLabel": "€ 14,95",
       "personalization": true,
       "digitalFile": "",
       "name": {
-        "nl": "Geborduurde appel-keychain",
-        "en": "Embroidered apple keychain"
+        "nl": "Geborduurde appel-keychain – handgemaakt",
+        "en": "Custom embroidered apple keychain – handmade"
       },
       "description": {
-        "nl": "Klein geborduurd cadeau, bijvoorbeeld voor een juf of als bedankje. Kies hardwarekleur en vul een naam in. Verzending binnen Nederland.",
-        "en": "A small embroidered gift, for example for a teacher or as a thank-you. Choose hardware colour and add a name. Shipping within the Netherlands."
+        "nl": "Klein, persoonlijk bedankje. Deze handgemaakte appel-keychain is ideaal om een juf of meester te bedanken.\n\nGepersonaliseerd met naam, ongeveer 8–10 cm, inclusief gouden sleutelring. Maaktijd ongeveer 5–10 werkdagen. Na je bestelling neem ik contact op over stof, draadkleur en extra wensen. Verzending binnen Nederland.",
+        "en": "A small, meaningful thank-you. This handmade apple keychain is perfect for a teacher.\n\nPersonalised with a name, about 8–10 cm, with a gold-tone keyring. Production about 5–10 business days. After ordering I contact you about fabric, thread colour and extra wishes. Shipping within the Netherlands."
       },
       "options": [
         {
           "id": "name",
           "type": "name",
           "required": true,
-          "label": { "nl": "Naam", "en": "Name" }
-        },
-        {
-          "id": "hardware",
-          "type": "hardware",
-          "required": true,
-          "label": { "nl": "Hardware", "en": "Hardware" },
-          "choices": [
-            {
-              "id": "gold",
-              "label": { "nl": "Goud", "en": "Gold" },
-              "color": "#C5A572"
-            },
-            {
-              "id": "silver",
-              "label": { "nl": "Zilver", "en": "Silver" },
-              "color": "#C0C4C8"
-            }
-          ]
+          "label": {
+            "nl": "Naam",
+            "en": "Name"
+          }
         },
         {
           "id": "note",
           "type": "note",
           "required": false,
-          "label": { "nl": "Extra notitie", "en": "Extra note" }
+          "label": {
+            "nl": "Extra wensen",
+            "en": "Extra wishes"
+          }
         }
       ]
     },
@@ -177,54 +47,185 @@
       "id": "drawstring-bag",
       "type": "physical",
       "section": "pouches",
-      "image": "/images/portfolio/gifts-3.jpg",
+      "image": "/images/shop/drawstring/drawstring-1.jpg",
+      "images": [
+        "/images/shop/drawstring/drawstring-2.jpg",
+        "/images/shop/drawstring/drawstring-3.jpg",
+        "/images/shop/drawstring/drawstring-4.jpg",
+        "/images/shop/drawstring/drawstring-5.jpg"
+      ],
       "priceCents": 1999,
       "priceLabel": "€ 19,99",
       "personalization": true,
       "digitalFile": "",
       "name": {
-        "nl": "Geborduurde trekkoordtas",
-        "en": "Embroidered drawstring bag"
+        "nl": "Geborduurde trekkoordtas – handgemaakt",
+        "en": "Custom embroidered drawstring bag – handmade"
       },
       "description": {
-        "nl": "Zachte trekkoordtas met borduurwerk. Kies een stof en vul de naam in. Verzending binnen Nederland.",
-        "en": "A soft drawstring bag with embroidery. Choose a fabric and enter the name. Shipping within the Netherlands."
+        "nl": "Handgemaakte trekkoordtas van zachte stof, met stevige koordjes en borduurwerk. Ongeveer 23 cm hoog en 17 cm breed.\n\nKies naam of tekst; stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
+        "en": "A handmade drawstring bag in soft fabric, with sturdy cords and embroidery. About 23 cm high and 17 cm wide.\n\nAdd a name or text; fabric and thread colour are confirmed after ordering. Production about 10–15 business days. Shipping within the Netherlands."
       },
       "options": [
-        {
-          "id": "fabric",
-          "type": "fabric",
-          "required": true,
-          "label": { "nl": "Stof", "en": "Fabric" },
-          "choices": [
-            {
-              "id": "linen",
-              "label": { "nl": "Linnen natuur", "en": "Natural linen" },
-              "image": "/images/portfolio/gifts-3.jpg"
-            },
-            {
-              "id": "soft-pink",
-              "label": { "nl": "Zacht roze", "en": "Soft pink" },
-              "image": "/images/portfolio/gifts-balloon.jpg"
-            },
-            {
-              "id": "floral",
-              "label": { "nl": "Bloemenprint", "en": "Floral print" },
-              "image": "/images/portfolio/gifts-1.jpg"
-            }
-          ]
-        },
         {
           "id": "name",
           "type": "name",
           "required": true,
-          "label": { "nl": "Naam of tekst", "en": "Name or text" }
+          "label": {
+            "nl": "Naam of tekst",
+            "en": "Name or text"
+          }
         },
         {
           "id": "note",
           "type": "note",
           "required": false,
-          "label": { "nl": "Extra notitie", "en": "Extra note" }
+          "label": {
+            "nl": "Extra wensen",
+            "en": "Extra wishes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fabric-balloon",
+      "type": "physical",
+      "section": "babyGifts",
+      "image": "/images/shop/balloon/balloon-1.jpg",
+      "images": [
+        "/images/shop/balloon/balloon-2.jpg",
+        "/images/shop/balloon/balloon-3.jpg",
+        "/images/shop/balloon/balloon-4.jpg",
+        "/images/shop/balloon/balloon-5.jpg",
+        "/images/shop/balloon/balloon-6.jpg"
+      ],
+      "priceCents": 3899,
+      "priceLabel": "€ 38,99",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Stoffen ballon met borduurwerk – handgemaakt",
+        "en": "Custom fabric balloon with embroidery – handmade"
+      },
+      "description": {
+        "nl": "Handgemaakte stoffen ballon met strik, lint en borduurwerk. Ongeveer 34 cm hoog en 25 cm breed. Mooi als babykamerdecoratie of kraamcadeau.\n\nNaam, leeftijd of korte tekst; stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
+        "en": "A handmade fabric balloon with a bow, ribbon and embroidery. About 34 cm high and 25 cm wide. Perfect as nursery décor or a newborn gift.\n\nName, age or short text; fabric and thread colour are confirmed after ordering. Production about 10–15 business days. Shipping within the Netherlands."
+      },
+      "options": [
+        {
+          "id": "name",
+          "type": "name",
+          "required": true,
+          "label": {
+            "nl": "Naam, leeftijd of tekst",
+            "en": "Name, age or text"
+          }
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": {
+            "nl": "Extra wensen",
+            "en": "Extra wishes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fabric-name-banner",
+      "type": "physical",
+      "section": "babyGifts",
+      "image": "/images/shop/banner/banner-1.jpg",
+      "images": [
+        "/images/shop/banner/banner-2.jpg",
+        "/images/shop/banner/banner-3.jpg",
+        "/images/shop/banner/banner-4.jpg",
+        "/images/shop/banner/banner-5.jpg",
+        "/images/shop/banner/banner-6.jpg",
+        "/images/shop/banner/banner-7.jpg",
+        "/images/shop/banner/banner-8.jpg",
+        "/images/shop/banner/banner-9.jpg",
+        "/images/shop/banner/banner-10.jpg",
+        "/images/shop/banner/banner-11.jpg",
+        "/images/shop/banner/banner-12.jpg"
+      ],
+      "priceCents": 1000,
+      "priceLabel": "vanaf € 10,00",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Stoffen naamslinger – handgemaakte letters",
+        "en": "Custom name banner – handmade fabric letters"
+      },
+      "description": {
+        "nl": "Unieke naamslinger, helemaal op jouw stijl. Elke letter is handgemaakt van stof, met geborduurde randen en vilten scallops. Letters ongeveer 10 cm hoog en 9 cm breed.\n\nDe prijs volgt het aantal letters (spaties tellen niet). Hart, & en maan kun je in de naam zetten. Stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
+        "en": "A unique name garland, made to your style. Each letter is handmade in fabric, with embroidered borders and felt scallops. Letters about 10 cm high and 9 cm wide.\n\nThe price follows the number of letters (spaces are free). You can add a heart, & or moon. Fabric and thread colour are confirmed after ordering. Production about 10–15 business days. Shipping within the Netherlands."
+      },
+      "options": [
+        {
+          "id": "name",
+          "type": "letters",
+          "required": true,
+          "label": {
+            "nl": "Naam op de slinger",
+            "en": "Name on the garland"
+          },
+          "pricePerLetterCents": 500,
+          "minLetters": 2,
+          "maxLetters": 15,
+          "letterPricesCents": {
+            "1": 1000,
+            "2": 1000,
+            "3": 1500,
+            "4": 2000,
+            "5": 2500,
+            "6": 3000,
+            "7": 3500,
+            "8": 4000,
+            "9": 4500,
+            "10": 4900,
+            "11": 5300,
+            "12": 5700,
+            "13": 6100,
+            "14": 6500,
+            "15": 6900
+          },
+          "extraCharacters": [
+            {
+              "id": "heart",
+              "char": "♥",
+              "label": {
+                "nl": "Hart",
+                "en": "Heart"
+              }
+            },
+            {
+              "id": "ampersand",
+              "char": "&",
+              "label": {
+                "nl": "&",
+                "en": "&"
+              }
+            },
+            {
+              "id": "moon",
+              "char": "☾",
+              "label": {
+                "nl": "Maan",
+                "en": "Moon"
+              }
+            }
+          ]
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": {
+            "nl": "Extra wensen",
+            "en": "Extra wishes"
+          }
         }
       ]
     },

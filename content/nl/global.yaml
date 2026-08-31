@@ -29,6 +29,10 @@ metadata:
     description: >-
       Neem contact op met Raw Atelier voor maatwerk borduurwerk, live events, bedrijfsbestellingen,
       borduurdigitalisering en gepersonaliseerde cadeaus. Gevestigd in Nederland.
+  faq:
+    title: FAQ
+    description: >-
+      Veelgestelde vragen over bestellen, verzending, naaitpatronen, retouren en maatwerk bij Raw Atelier.
   keywords: >-
     maatwerk borduurwerk Nederland, live borduur events, borduur digitalisering, logo digitalisering, gepersonaliseerd borduurwerk, corporate
     borduurwerk, Raw Atelier
@@ -41,6 +45,7 @@ nav:
   services: Diensten
   portfolio: Portfolio
   shop: Shop
+  faq: FAQ
   contact: Contact
   workWithMe: Plan een project
   openMenu: Menu openen
@@ -64,6 +69,7 @@ footer:
   disclaimer: Disclaimer
   cookies: Cookies
   cookieSettings: Cookie-instellingen
+  faq: FAQ
 cta:
   workWithMe: Plan een project
   viewPortfolio: Bekijk mijn werk

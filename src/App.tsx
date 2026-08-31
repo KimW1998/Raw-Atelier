@@ -11,6 +11,7 @@ import PortfolioPage from "@/pages/PortfolioPage";
 import ShopPage from "@/pages/ShopPage";
 import ShopResultPage from "@/pages/ShopResultPage";
 import ContactPage from "@/pages/ContactPage";
+import FaqPage from "@/pages/FaqPage";
 import LegalPage from "@/pages/LegalPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ProductPage from "@/pages/ProductPage";
@@ -43,6 +44,7 @@ function LocaleRoutes({ locale }: { locale: Locale }) {
           <Route path="shop/cancel" element={shopElement(<ShopResultPage variant="cancel" />)} />
           <Route path="shop/:productId" element={shopElement(<ProductPage />)} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="faq" element={<FaqPage />} />
           <Route path="legal/terms" element={<LegalPage kind="terms" />} />
           <Route path="legal/shipping" element={<LegalPage kind="shipping" />} />
           <Route path="legal/privacy" element={<LegalPage kind="privacy" />} />

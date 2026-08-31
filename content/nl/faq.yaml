@@ -1,0 +1,51 @@
+faqPage:
+  eyebrow: Hulp & info
+  title: Veelgestelde vragen
+  description: >-
+    Antwoorden over bestellen, verzending, naaitpatronen en maatwerk. Staat je vraag er niet bij? Stuur gerust een
+    bericht.
+  items:
+    '1':
+      question: Neem je maatwerkbestellingen aan?
+      answer: >-
+        Ja. Ik maak graag iets unieks, van upcycled kleding tot geborduurde cadeaus. Stuur je idee via het
+        contactformulier. Ik laat weten of het kan en wat de doorlooptijd is.
+    '2':
+      question: Kunnen beginners jouw patronen gebruiken?
+      answer: >-
+        Ja. De digitale naaitpatronen hebben duidelijke, stapsgewijze uitleg. Fijn voor beginners, en ook prettig
+        voor gevorderden die een rustig project zoeken.
+    '3':
+      question: Bied je retouren of omruilingen aan?
+      answer: >-
+        De meeste stukken zijn handgemaakt, gepersonaliseerd of digitaal, daarom kan ik geen retouren aanbieden. Is er
+        iets mis met je bestelling? Neem contact op. Ik wil dat je blij bent met wat je ontvangt.
+    '4':
+      question: Hoe blijf ik op de hoogte?
+      answer: >-
+        Volg Raw Atelier op Instagram @raw_luxury_atelier voor een kijkje achter de schermen, nieuwe dingen en
+        creatieve inspiratie.
+    '5':
+      question: Wat is Raw Atelier?
+      answer: >-
+        Raw Atelier is de creatieve borduurstudio van Raw Luxury. Ik maak maatwerk borduurwerk, live events,
+        gepersonaliseerde cadeaus, digitale naaitpatronen en naaiwerk, met aandacht in Nederland.
+    '6':
+      question: Waar verzend je naartoe?
+      answer: >-
+        Fysieke bestellingen verstuur ik binnen Nederland. Digitale naaitpatronen kun je overal kopen; na betaling
+        stuur ik de PDF naar het e-mailadres van je bestelling.
+    '7':
+      question: Hoe lang duurt het voordat ik mijn bestelling ontvang?
+      answer: >-
+        Elk handgemaakt stuk maak ik met zorg. Reken op ongeveer 10 tot 15 werkdagen voordat het de deur uit gaat, plus
+        verzendtijd. Digitale patronen stuur ik na betaling per e-mail.
+    '8':
+      question: Hoe kan ik betalen?
+      answer: >-
+        In de shop reken je af via Stripe, met iDEAL of kaart. Raw Atelier slaat zelf geen kaartgegevens op.
+    '9':
+      question: Stem je details na de bestelling nog af?
+      answer: >-
+        Bij gepersonaliseerde producten neem ik na je bestelling contact op over naam, stof, kleuren en extra wensen,
+        zodat het resultaat klopt.

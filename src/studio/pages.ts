@@ -5,6 +5,7 @@ export type StudioPageId =
   | "portfolio"
   | "shop"
   | "contact"
+  | "faq"
   | "global"
   | "legal";
 
@@ -60,6 +61,12 @@ export const STUDIO_PAGES: StudioPage[] = [
     label: "Contact",
     previewPath: "/contact",
     sources: [{ file: "contact" }],
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+    previewPath: "/faq",
+    sources: [{ file: "faq" }],
   },
   {
     id: "global",

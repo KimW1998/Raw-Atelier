@@ -29,6 +29,10 @@ metadata:
     description: >-
       Get in touch with Raw Atelier for custom embroidery, live events, corporate orders, embroidery digitizing and
       personalised gifts. Based in the Netherlands.
+  faq:
+    title: FAQ
+    description: >-
+      Frequently asked questions about ordering, shipping, sewing patterns, returns and custom work at Raw Atelier.
   keywords: >-
     custom embroidery Netherlands, live embroidery events, embroidery digitizing, logo digitizing, personalized
     embroidery, corporate embroidery, Raw Atelier
@@ -41,6 +45,7 @@ nav:
   services: Services
   portfolio: Portfolio
   shop: Shop
+  faq: FAQ
   contact: Contact
   workWithMe: Plan a project
   openMenu: Open menu
@@ -64,6 +69,7 @@ footer:
   disclaimer: Disclaimer
   cookies: Cookies
   cookieSettings: Cookie settings
+  faq: FAQ
 cta:
   workWithMe: Plan a project
   viewPortfolio: See my work

@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { useLocale, useTranslations } from "@/i18n/context";
+import { Link } from "@/i18n/routing";
 
 export default function AboutPage() {
   const locale = useLocale();
@@ -200,6 +201,16 @@ export default function AboutPage() {
             size="compact"
           />
           <FAQSection />
+          <FadeIn>
+            <p className="mt-8 text-center">
+              <Link
+                href="/faq"
+                className="font-body text-sm font-semibold text-brand-rose hover:text-brand-black"
+              >
+                {tNav("faq")} →
+              </Link>
+            </p>
+          </FadeIn>
         </Container>
       </Section>
 
