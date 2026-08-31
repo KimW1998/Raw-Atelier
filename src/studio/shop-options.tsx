@@ -28,6 +28,47 @@ function slugId(prefix: string): string {
   return `${prefix}-${Date.now().toString(36).slice(-4)}`;
 }
 
+function moveItem<T>(list: T[], from: number, direction: -1 | 1): T[] {
+  const to = from + direction;
+  if (to < 0 || to >= list.length) return list;
+  const next = [...list];
+  const [item] = next.splice(from, 1);
+  next.splice(to, 0, item);
+  return next;
+}
+
+function OrderButtons({
+  index,
+  total,
+  onMove,
+}: {
+  index: number;
+  total: number;
+  onMove: (direction: -1 | 1) => void;
+}) {
+  if (total < 2) return null;
+  return (
+    <div className="flex items-center gap-1">
+      <button
+        type="button"
+        disabled={index === 0}
+        onClick={() => onMove(-1)}
+        className="rounded-full px-2 py-1 font-body text-xs font-semibold text-brand-black ring-1 ring-brand-pink-light enabled:hover:bg-brand-pink-light disabled:opacity-30"
+      >
+        Omhoog
+      </button>
+      <button
+        type="button"
+        disabled={index === total - 1}
+        onClick={() => onMove(1)}
+        className="rounded-full px-2 py-1 font-body text-xs font-semibold text-brand-black ring-1 ring-brand-pink-light enabled:hover:bg-brand-pink-light disabled:opacity-30"
+      >
+        Omlaag
+      </button>
+    </div>
+  );
+}
+
 function emptyChoice(kind: "fabric" | "hardware"): ProductOptionChoice {
   return {
     id: slugId(kind === "fabric" ? "stof" : "kleur"),
@@ -123,21 +164,29 @@ export function ShopProductOptionsEditor({
       </div>
       <p className="font-body text-xs leading-relaxed text-brand-black/50">
         Stoffen worden klikbare fotovakjes. Hardware wordt kleurvakjes (goud/zilver). Prijs per
-        letter overschrijft de vaste prijs.
+        letter overschrijft de vaste prijs. Met omhoog/omlaag zet je de volgorde zoals die op de
+        productpagina verschijnt.
       </p>
       {options.map((option, index) => (
         <article key={option.id} className="space-y-3 rounded-2xl bg-white p-3">
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="font-body text-sm font-semibold text-brand-black">
               {OPTION_TYPES.find((item) => item.type === option.type)?.label || option.type}
             </p>
-            <button
-              type="button"
-              onClick={() => setOptions(options.filter((_, i) => i !== index))}
-              className="font-body text-xs text-brand-rose hover:underline"
-            >
-              Verwijder optie
-            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <OrderButtons
+                index={index}
+                total={options.length}
+                onMove={(direction) => setOptions(moveItem(options, index, direction))}
+              />
+              <button
+                type="button"
+                onClick={() => setOptions(options.filter((_, i) => i !== index))}
+                className="font-body text-xs text-brand-rose hover:underline"
+              >
+                Verwijder optie
+              </button>
+            </div>
           </div>
           <BilingualPair
             nl={option.label.nl}
@@ -235,6 +284,17 @@ export function ShopProductOptionsEditor({
             <div className="space-y-3">
               {(option.choices ?? []).map((choice, choiceIndex) => (
                 <div key={choice.id} className="space-y-2 rounded-xl bg-brand-offwhite p-3">
+                  <div className="flex justify-end">
+                    <OrderButtons
+                      index={choiceIndex}
+                      total={(option.choices ?? []).length}
+                      onMove={(direction) =>
+                        updateOption(index, {
+                          choices: moveItem(option.choices ?? [], choiceIndex, direction),
+                        })
+                      }
+                    />
+                  </div>
                   <div className="flex gap-3">
                     <StudioImageField
                       className="w-24 shrink-0"

@@ -33,6 +33,35 @@
           }
         },
         {
+          "id": "hardware",
+          "type": "hardware",
+          "required": true,
+          "label": {
+            "nl": "Hardware",
+            "en": "Hardware"
+          },
+          "choices": [
+            {
+              "id": "kleur-k8wh",
+              "label": {
+                "nl": "goud",
+                "en": "Gold"
+              },
+              "image": "",
+              "color": "#C5A572"
+            },
+            {
+              "id": "kleur-kobq",
+              "label": {
+                "nl": "Zilver",
+                "en": "Silver"
+              },
+              "image": "",
+              "color": "#c5c4c4"
+            }
+          ]
+        },
+        {
           "id": "note",
           "type": "note",
           "required": false,
