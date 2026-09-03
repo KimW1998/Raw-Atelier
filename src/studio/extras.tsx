@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import type { PortfolioItem } from "@/lib/portfolio";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
-import { SHOP_SECTION_ORDER, getProductImages, withProductImages } from "@/lib/shop";
+import { SHOP_SECTION_ORDER, getProductImages, isDigitalPatternSection, withProductImages } from "@/lib/shop";
 import { AutoGrowField, BilingualPair } from "./fields";
 import { StudioImageField, StudioImageList } from "./media";
 import { ShopProductOptionsEditor } from "./shop-options";
@@ -116,7 +116,8 @@ export function ShopProductsEditor({
       keychains: "Keychains",
       patches: "Patches",
       pouches: "Tassen",
-      patterns: "Patronen",
+      embroideryPatterns: "Borduurpatronen (PDF)",
+      sewingPatterns: "Naaitpatronen (PDF)",
     }),
     [],
   );
@@ -166,6 +167,9 @@ export function ShopProductsEditor({
               onChange={(event) =>
                 update(index, {
                   section: event.target.value as ShopCatalogProduct["section"],
+                  type: isDigitalPatternSection(event.target.value)
+                    ? "digital"
+                    : product.type,
                 })
               }
             >
@@ -237,6 +241,41 @@ export function ShopProductsEditor({
             />
             Personalisatie
           </label>
+          <div className="space-y-2 rounded-2xl bg-brand-pink-light/40 p-3">
+            <label className="flex items-center gap-2 font-body text-sm">
+              <input
+                type="checkbox"
+                checked={typeof product.stock === "number"}
+                onChange={(event) =>
+                  update(index, {
+                    stock: event.target.checked ? Math.max(1, product.stock ?? 1) : undefined,
+                  })
+                }
+              />
+              Voorraad bijhouden
+            </label>
+            {typeof product.stock === "number" ? (
+              <label className="block min-w-0">
+                <span className="mb-1.5 block font-body text-xs text-brand-black/50">
+                  Aantal op voorraad
+                </span>
+                <input
+                  type="number"
+                  min={0}
+                  className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
+                  value={product.stock}
+                  onChange={(event) =>
+                    update(index, { stock: Math.max(0, Number(event.target.value) || 0) })
+                  }
+                />
+              </label>
+            ) : null}
+            <p className="font-body text-xs leading-relaxed text-brand-black/50">
+              PDF-patronen laat je meestal onbeperkt. Bij fysieke stukken: zet het aantal, of 0 voor
+              uitverkocht. Na een betaalde bestelling gaat het aantal vanzelf omlaag. Wil je
+              bijvullen, zet hier het nieuwe aantal en push/deploy de site.
+            </p>
+          </div>
           <ShopProductOptionsEditor
             product={product}
             onChange={(next) =>

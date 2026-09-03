@@ -1,5 +1,6 @@
 import catalog from "@/data/shop-catalog.json";
 import { useStudioPreview } from "@/lib/studio-preview";
+import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import type { Locale } from "@/i18n/context";
 import {
   formatSelectionLines,
@@ -41,12 +42,24 @@ export const SHOP_SECTION_ORDER = [
   "keychains",
   "patches",
   "pouches",
-  "patterns",
+  "embroideryPatterns",
+  "sewingPatterns",
 ] as const;
 
 export type ShopSectionId = (typeof SHOP_SECTION_ORDER)[number];
 
-export const SHOP_TAB_ORDER = [...SHOP_SECTION_ORDER, "madeToOrder"] as const;
+export const DIGITAL_PATTERN_SECTIONS = ["embroideryPatterns", "sewingPatterns"] as const;
+
+export type DigitalPatternSectionId = (typeof DIGITAL_PATTERN_SECTIONS)[number];
+
+export const SHOP_TAB_ORDER = [
+  "babyGifts",
+  "keychains",
+  "patches",
+  "pouches",
+  "digitalPatterns",
+  "madeToOrder",
+] as const;
 
 export type ShopTabId = (typeof SHOP_TAB_ORDER)[number];
 
@@ -64,6 +77,8 @@ export interface ShopCatalogProduct {
   priceLabel: string;
   personalization: boolean;
   digitalFile?: string;
+  /** Remaining units. Omit or leave unset for unlimited (typical for PDFs). 0 = sold out. */
+  stock?: number;
   name: Record<Locale, string>;
   description: Record<Locale, string>;
   options?: ProductOption[];
@@ -77,6 +92,43 @@ export function isShopTabId(value: string | null | undefined): value is ShopTabI
   return SHOP_TAB_ORDER.includes(value as ShopTabId);
 }
 
+export function isDigitalPatternSection(
+  section: string | undefined,
+): section is DigitalPatternSectionId {
+  return DIGITAL_PATTERN_SECTIONS.includes(section as DigitalPatternSectionId);
+}
+
+export function availableStock(product: ShopCatalogProduct): number | null {
+  if (typeof product.stock !== "number" || !Number.isFinite(product.stock)) return null;
+  return Math.max(0, Math.floor(product.stock));
+}
+
+export function isSoldOut(product: ShopCatalogProduct): boolean {
+  return availableStock(product) === 0;
+}
+
+export function maxOrderQuantity(product: ShopCatalogProduct, alreadyInCart = 0): number {
+  const stock = availableStock(product);
+  if (stock === null) return Number.POSITIVE_INFINITY;
+  return Math.max(0, stock - alreadyInCart);
+}
+
+export function isShopSectionId(value: string | undefined): value is ShopSectionId {
+  return SHOP_SECTION_ORDER.includes(value as ShopSectionId);
+}
+
+export function productsForTab(
+  products: ShopCatalogProduct[],
+  tab: ShopTabId,
+): ShopCatalogProduct[] {
+  if (tab === "madeToOrder") return [];
+  if (tab === "digitalPatterns") {
+    return products.filter((product) => isDigitalPatternSection(product.section));
+  }
+  if (!isShopSectionId(tab)) return [];
+  return products.filter((product) => product.section === tab);
+}
+
 export function getDefaultShopTab(): ShopTabId {
   return SHOP_TAB_ORDER[0];
 }
@@ -86,7 +138,8 @@ export function getShopProducts(): ShopCatalogProduct[] {
 }
 
 export function getShopProduct(id: string): ShopCatalogProduct | undefined {
-  return getShopProducts().find((product) => product.id === id);
+  const product = getShopProducts().find((item) => item.id === id);
+  return product ? overlayLiveStock(product) : undefined;
 }
 
 export function getShopProductsBySection(section: ShopSectionId): ShopCatalogProduct[] {
@@ -106,7 +159,9 @@ export function getProductDescription(
 
 export function useShopProducts(): ShopCatalogProduct[] {
   const studio = useStudioPreview();
-  return studio?.shopProducts ?? getShopProducts();
+  const live = useLiveStockMap();
+  const products = studio?.shopProducts ?? getShopProducts();
+  return products.map((product) => overlayLiveStock(product, live));
 }
 
 export function useShopProduct(id: string): ShopCatalogProduct | undefined {
@@ -163,7 +218,13 @@ export function getRelatedProducts(
   limit = 3,
 ): ShopCatalogProduct[] {
   return getShopProducts()
-    .filter((item) => item.id !== product.id && item.section === product.section)
+    .filter((item) => {
+      if (item.id === product.id) return false;
+      if (isDigitalPatternSection(product.section)) {
+        return isDigitalPatternSection(item.section);
+      }
+      return item.section === product.section;
+    })
     .slice(0, limit);
 }
 

@@ -1,12 +1,12 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Geborduurde producten en naaitpatronen
+    title: Geborduurde producten en digitale patronen
     description: >-
-      Gepersonaliseerd machineborduurwerk, babycadeaus, keychains, pouches en digitale naaitpatronen. Je rekent af via
-      Stripe, veilig op hun betaalpagina.
+      Gepersonaliseerd machineborduurwerk, babycadeaus, keychains, pouches en digitale borduur- en naaitpatronen. Je
+      rekent af via Stripe, veilig op hun betaalpagina.
   shippingNote: >-
-    Digitale patronen: voor iedereen, wereldwijd, per e-mail na betaling. Overige producten: verzending binnen
+    Digitale patronen (PDF): voor iedereen, wereldwijd, per e-mail na betaling. Overige producten: verzending binnen
     Nederland.
   trust:
     description: >-
@@ -15,14 +15,16 @@ shop:
   tabsLabel: Shopcategorieën
   emptyCategory: Nog geen producten in deze categorie. Neem contact op voor maatwerk.
   productNote: Gepersonaliseerd en op bestelling gemaakt.
+  soldOut: Uitverkocht
+  stockLeft: Nog {count} op voorraad
   badges:
     handmade: Geborduurd
-    digital: Digitaal patroon
+    digital: Digitaal PDF-patroon
     madeToOrder: Op bestelling
   product:
     backToShop: Terug naar de shop
     related: Ook leuk
-    shippingDigital: Digitaal patroon. Na betaling stuur ik de PDF naar je e-mail, wereldwijd.
+    shippingDigital: Digitaal PDF-patroon. Geen verzending. Na betaling stuur ik het bestand naar je e-mail, wereldwijd.
     shippingPhysical: Verzending binnen Nederland.
     personalization: Na je bestelling stem ik naam, stof en details met je af.
     fromPrice: vanaf {price}
@@ -91,6 +93,25 @@ shop:
       eyebrow: Naaitpatronen
       title: Digitale naaitpatronen
       description: PDF-patronen voor iedereen, wereldwijd. Na betaling stuur ik het bestand naar je e-mail.
+  digitalPatterns:
+    eyebrow: Digitale patronen
+    title: Digitale PDF-patronen
+    description: >-
+      Borduur- en naaitpatronen als PDF. Geen verzending: na betaling stuur ik het bestand naar je e-mail, wereldwijd.
+    intro: >-
+      Dit zijn digitale bestanden, geen fysieke producten. Je naait of borduurt zelf. Na betaling via Stripe stuur ik
+      de PDF naar het e-mailadres van je bestelling.
+    pointEmail: Per e-mail na betaling
+    pointWorldwide: Wereldwijd
+    pointNoShipping: Geen verzending
+    embroideryTitle: Borduurpatronen
+    embroideryDescription: Machineborduurbestanden en patronen om zelf te borduren. Direct als PDF.
+    embroideryEmpty: >-
+      De eerste borduurpatronen komen hier. Voeg ze toe in de studio, of stuur een bericht als je al iets zoekt.
+    sewingTitle: Naaitpatronen
+    sewingDescription: PDF-naaitpatronen met stapsgewijze uitleg, voor beginners en gevorderden.
+    sewingEmpty: Nog geen naaitpatroon in deze categorie.
+    emptyNote: Nog geen digitale patronen in de shop.
   madeToOrder:
     eyebrow: Op bestelling
     title: Op maat genaaid

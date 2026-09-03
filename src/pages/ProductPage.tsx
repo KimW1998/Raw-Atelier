@@ -25,6 +25,9 @@ import {
   getProductName,
   getProductUnitPriceCents,
   getRelatedProducts,
+  isDigitalPatternSection,
+  isSoldOut,
+  maxOrderQuantity,
   productHasOptions,
   useShopProduct,
   validateSelections,
@@ -52,7 +55,7 @@ export default function ProductPage() {
   const tMeta = useTranslations("metadata");
   const tBrand = useTranslations("brand");
   const t = useTranslations("shop");
-  const { addItem } = useCart();
+  const { addItem, items } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selections, setSelections] = useState<ProductSelections>({});
   const [formError, setFormError] = useState("");
@@ -77,10 +80,18 @@ export default function ProductPage() {
   const description = getProductDescription(product, locale);
   const badge = getProductBadge(product);
   const related = getRelatedProducts(product);
-  const shopTabHref = `/shop?${SHOP_TAB_PARAM}=${product.section}`;
+  const shopTabHref = `/shop?${SHOP_TAB_PARAM}=${
+    isDigitalPatternSection(product.section) ? "digitalPatterns" : product.section
+  }`;
   const livePrice = letters
     ? formatEuro(unitCents, locale)
     : formatListedPrice(product, locale);
+  const soldOut = isSoldOut(product);
+  const alreadyInCart = items
+    .filter((item) => item.productId === product.id)
+    .reduce((sum, item) => sum + item.quantity, 0);
+  const remaining = maxOrderQuantity(product, alreadyInCart);
+  const stockCap = Number.isFinite(remaining) ? remaining : undefined;
 
   const addToCart = () => {
     const error = validateSelections(product, selections);
@@ -90,6 +101,7 @@ export default function ProductPage() {
       );
       return;
     }
+    if (isSoldOut(product)) return;
     setFormError("");
     addItem(product.id, quantity, selections);
   };
@@ -141,6 +153,19 @@ export default function ProductPage() {
                   ? t("product.shippingDigital")
                   : t("product.shippingPhysical")}
               </p>
+              {product.type === "digital" && (
+                <p className="mt-3 rounded-2xl bg-brand-pink-light/70 px-4 py-3 font-body text-sm font-semibold text-brand-black">
+                  PDF · {t("digitalPatterns.pointNoShipping")} · {t("digitalPatterns.pointEmail")}
+                </p>
+              )}
+              {soldOut && (
+                <p className="mt-3 font-body text-sm font-semibold text-brand-rose">{t("soldOut")}</p>
+              )}
+              {!soldOut && stockCap !== undefined && (
+                <p className="mt-3 font-body text-sm text-brand-black/55">
+                  {t("stockLeft", { count: String(stockCap) })}
+                </p>
+              )}
               {product.personalization && !productHasOptions(product) && (
                 <p className="mt-2 font-body text-sm leading-relaxed text-brand-black/60">
                   {t("product.personalization")}
@@ -161,34 +186,40 @@ export default function ProductPage() {
               )}
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <div className="flex items-center rounded-full bg-white p-1 shadow-sm">
-                  <button
-                    type="button"
-                    className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
-                    onClick={() => setQuantity((value) => Math.max(1, value - 1))}
-                    aria-label={t("cart.decrease")}
-                  >
-                    −
-                  </button>
-                  <span className="min-w-8 text-center font-body text-sm font-semibold">
-                    {quantity}
-                  </span>
-                  <button
-                    type="button"
-                    className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
-                    onClick={() => setQuantity((value) => value + 1)}
-                    aria-label={t("cart.increase")}
-                  >
-                    +
-                  </button>
-                </div>
+                {!soldOut && (
+                  <div className="flex items-center rounded-full bg-white p-1 shadow-sm">
+                    <button
+                      type="button"
+                      className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
+                      onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                      aria-label={t("cart.decrease")}
+                    >
+                      −
+                    </button>
+                    <span className="min-w-8 text-center font-body text-sm font-semibold">
+                      {quantity}
+                    </span>
+                    <button
+                      type="button"
+                      className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
+                      onClick={() =>
+                        setQuantity((value) =>
+                          stockCap === undefined ? value + 1 : Math.min(stockCap, value + 1),
+                        )
+                      }
+                      aria-label={t("cart.increase")}
+                    >
+                      +
+                    </button>
+                  </div>
+                )}
                 <Button
                   variant="primary"
                   size="large"
-                  disabled={lettersTooShort}
+                  disabled={soldOut || lettersTooShort || remaining < 1}
                   onClick={addToCart}
                 >
-                  {t("cart.add")}
+                  {soldOut ? t("soldOut") : t("cart.add")}
                 </Button>
               </div>
             </FadeIn>

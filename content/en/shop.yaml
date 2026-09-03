@@ -1,12 +1,12 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Embroidered products and sewing patterns
+    title: Embroidered products and digital patterns
     description: >-
-      Personalised machine embroidery, baby gifts, keychains, pouches and digital sewing patterns. You pay through
-      Stripe, on their secure checkout page.
+      Personalised machine embroidery, baby gifts, keychains, pouches and digital embroidery and sewing patterns. You
+      pay through Stripe, on their secure checkout page.
   shippingNote: >-
-    Digital patterns: available to everyone, worldwide, emailed after payment. Other products: shipping within the
+    Digital patterns (PDF): available to everyone, worldwide, emailed after payment. Other products: shipping within the
     Netherlands only.
   trust:
     description: >-
@@ -15,14 +15,16 @@ shop:
   tabsLabel: Shop categories
   emptyCategory: No products in this category yet. Get in touch for a custom order.
   productNote: Personalised and made to order.
+  soldOut: Sold out
+  stockLeft: "{count} left in stock"
   badges:
     handmade: Embroidered
-    digital: Digital pattern
+    digital: Digital PDF pattern
     madeToOrder: Made to order
   product:
     backToShop: Back to the shop
     related: You may also like
-    shippingDigital: Digital pattern. After payment I email the PDF, worldwide.
+    shippingDigital: Digital PDF pattern. No shipping. After payment I email the file, worldwide.
     shippingPhysical: Shipping within the Netherlands.
     personalization: After you order, I confirm the name, fabric and details with you.
     fromPrice: from {price}
@@ -91,6 +93,26 @@ shop:
       eyebrow: Sewing patterns
       title: Digital sewing patterns
       description: PDF patterns for anyone, worldwide. After payment I email the file to you.
+  digitalPatterns:
+    eyebrow: Digital patterns
+    title: Digital PDF patterns
+    description: >-
+      Embroidery and sewing patterns as PDFs. No shipping: after payment I email the file, worldwide.
+    intro: >-
+      These are digital files, not physical products. You sew or embroider them yourself. After payment through Stripe
+      I email the PDF to the checkout address.
+    pointEmail: Emailed after payment
+    pointWorldwide: Worldwide
+    pointNoShipping: No shipping
+    embroideryTitle: Embroidery patterns
+    embroideryDescription: Machine embroidery files and patterns to stitch yourself, delivered as a PDF.
+    embroideryEmpty: >-
+      The first embroidery patterns will appear here. Add them in the studio, or send a message if you already have
+      something in mind.
+    sewingTitle: Sewing patterns
+    sewingDescription: PDF sewing patterns with step-by-step instructions, for beginners and experienced sewists.
+    sewingEmpty: No sewing patterns in this category yet.
+    emptyNote: No digital patterns in the shop yet.
   madeToOrder:
     eyebrow: Made to order
     title: Sewn on request

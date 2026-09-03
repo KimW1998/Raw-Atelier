@@ -561,9 +561,11 @@ function buildConfig(backend) {
                       { label: "Keychains", value: "keychains" },
                       { label: "Patches", value: "patches" },
                       { label: "Tassen", value: "pouches" },
-                      { label: "Patronen", value: "patterns" },
+                      { label: "Borduurpatronen (PDF)", value: "embroideryPatterns" },
+                      { label: "Naaitpatronen (PDF)", value: "sewingPatterns" },
                     ],
                   },
+                  { label: "Voorraad", name: "stock", widget: "number", value_type: "int", required: false, hint: "Leeg = onbeperkt. 0 = uitverkocht." },
                   { label: "Personalisatie nodig", name: "personalization", widget: "boolean", default: false },
                   {
                     label: "Shop-opties",

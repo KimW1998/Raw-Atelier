@@ -261,7 +261,7 @@
     {
       "id": "quilted-ereader-pattern",
       "type": "digital",
-      "section": "patterns",
+      "section": "sewingPatterns",
       "image": "/images/shop/ereader/ereader-1.jpg",
       "images": [
         "/images/shop/ereader/ereader-2.jpg",
@@ -284,7 +284,7 @@
     {
       "id": "flow-cami-pattern",
       "type": "digital",
-      "section": "patterns",
+      "section": "sewingPatterns",
       "image": "/images/shop/flow-cami/cami-1.jpg",
       "images": [
         "/images/shop/flow-cami/cami-2.jpg",
@@ -307,7 +307,7 @@
     {
       "id": "pottery-apron-pattern",
       "type": "digital",
-      "section": "patterns",
+      "section": "sewingPatterns",
       "image": "/images/shop/apron/apron-1.jpg",
       "images": [
         "/images/shop/apron/apron-2.jpg",

@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LocaleProvider, routing, useLocale, type Locale } from "@/i18n/context";
 import { CartProvider } from "@/lib/cart";
+import { LiveStockProvider } from "@/lib/live-stock";
 import { RootLayout } from "@/layouts/RootLayout";
 import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
@@ -59,30 +60,32 @@ function LocaleRoutes({ locale }: { locale: Locale }) {
 
 export default function App() {
   return (
-    <CartProvider>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
-        <Route
-          path="/studio"
-          element={
-            <StudioErrorBoundary>
-              <StudioApp />
-            </StudioErrorBoundary>
-          }
-        />
-        <Route
-          path="/studio/:page"
-          element={
-            <StudioErrorBoundary>
-              <StudioApp />
-            </StudioErrorBoundary>
-          }
-        />
-        <Route path="/en/*" element={<LocaleRoutes locale="en" />} />
-        <Route path="/nl/*" element={<LocaleRoutes locale="nl" />} />
-        <Route path="*" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
-      </Routes>
-    </CartProvider>
+    <LiveStockProvider>
+      <CartProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
+          <Route
+            path="/studio"
+            element={
+              <StudioErrorBoundary>
+                <StudioApp />
+              </StudioErrorBoundary>
+            }
+          />
+          <Route
+            path="/studio/:page"
+            element={
+              <StudioErrorBoundary>
+                <StudioApp />
+              </StudioErrorBoundary>
+            }
+          />
+          <Route path="/en/*" element={<LocaleRoutes locale="en" />} />
+          <Route path="/nl/*" element={<LocaleRoutes locale="nl" />} />
+          <Route path="*" element={<Navigate to={`/${routing.defaultLocale}`} replace />} />
+        </Routes>
+      </CartProvider>
+    </LiveStockProvider>
   );
 }

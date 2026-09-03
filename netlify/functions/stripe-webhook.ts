@@ -1,6 +1,7 @@
 import type { Config } from "@netlify/functions";
 import Stripe from "stripe";
 import { getCatalogProduct } from "./_shared/catalog";
+import { applyPaidOrder } from "./_shared/stock";
 import { formatOrderEmail, getEnv, orderNotifyAddress, sendEmail } from "./_shared/email";
 import { formatSelectionLines, type ProductSelections } from "../../src/lib/product-options";
 
@@ -99,6 +100,18 @@ export default async (req: Request) => {
     personalization: personalization || undefined,
     locale: session.metadata?.locale || "nl",
   });
+
+  try {
+    await applyPaidOrder(
+      session.id,
+      products.map((item) => ({
+        productId: item.product.id,
+        quantity: item.quantity,
+      })),
+    );
+  } catch (error) {
+    console.error("[stripe-webhook] stock", error);
+  }
 
   await sendEmail({
     to: orderNotifyAddress(),

@@ -19,20 +19,27 @@ import {
   getProductHref,
   getProductName,
   isShopTabId,
+  isSoldOut,
+  maxOrderQuantity,
   productHasOptions,
+  productsForTab,
   useShopProducts,
   type MadeToOrderId,
   type ShopCatalogProduct,
-  type ShopSectionId,
   type ShopTabId,
 } from "@/lib/shop";
 
 function ProductCard({ product }: { product: ShopCatalogProduct }) {
   const t = useTranslations("shop");
   const locale = useLocale();
-  const { addItem } = useCart();
+  const { addItem, items } = useCart();
   const badge = getProductBadge(product);
   const needsOptions = productHasOptions(product);
+  const soldOut = isSoldOut(product);
+  const alreadyInCart = items
+    .filter((item) => item.productId === product.id)
+    .reduce((sum, item) => sum + item.quantity, 0);
+  const canAdd = !soldOut && maxOrderQuantity(product, alreadyInCart) > 0;
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
@@ -46,6 +53,16 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
         <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.12em] text-brand-black">
           {t(`badges.${badge}`)}
         </span>
+        {product.type === "digital" && (
+          <span className="absolute right-4 top-4 rounded-full bg-brand-black/85 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.12em] text-white">
+            PDF
+          </span>
+        )}
+        {soldOut && (
+          <span className="absolute inset-x-4 bottom-4 rounded-full bg-brand-black/85 px-3 py-2 text-center font-body text-xs font-semibold uppercase tracking-[0.12em] text-white">
+            {t("soldOut")}
+          </span>
+        )}
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <Link href={getProductHref(product.id)}>
@@ -59,7 +76,11 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
         <p className="mt-3 line-clamp-4 flex-1 font-body text-sm leading-relaxed text-brand-black/60">
           {getProductDescription(product, locale)}
         </p>
-        {needsOptions ? (
+        {soldOut ? (
+          <Button variant="outline" className="mt-4 w-full" disabled>
+            {t("soldOut")}
+          </Button>
+        ) : needsOptions ? (
           <Button href={getProductHref(product.id)} variant="primary" className="mt-4 w-full">
             {t("cart.chooseOptions")}
           </Button>
@@ -67,6 +88,7 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
           <Button
             variant="primary"
             className="mt-4 w-full"
+            disabled={!canAdd}
             onClick={() => addItem(product.id)}
           >
             {t("cart.add")}
@@ -102,6 +124,9 @@ function getTabLabel(tabId: ShopTabId, tShop: ReturnType<typeof useTranslations>
   if (tabId === "madeToOrder") {
     return tShop("madeToOrder.eyebrow");
   }
+  if (tabId === "digitalPatterns") {
+    return tShop("digitalPatterns.eyebrow");
+  }
 
   return tShop(`sections.${tabId}.eyebrow`);
 }
@@ -110,11 +135,14 @@ function getTabDescription(tabId: ShopTabId, tShop: ReturnType<typeof useTransla
   if (tabId === "madeToOrder") {
     return tShop("madeToOrder.description");
   }
+  if (tabId === "digitalPatterns") {
+    return tShop("digitalPatterns.description");
+  }
 
   return tShop(`sections.${tabId}.description`);
 }
 
-function isProductTab(tabId: ShopTabId): tabId is ShopSectionId {
+function isProductTab(tabId: ShopTabId): boolean {
   return tabId !== "madeToOrder";
 }
 
@@ -133,9 +161,15 @@ function useShopTab() {
 }
 
 function getEmptyCategoryMessage(
-  tabId: ShopSectionId,
+  tabId: ShopTabId,
   tShop: ReturnType<typeof useTranslations>,
 ) {
+  if (tabId === "digitalPatterns") {
+    return tShop("digitalPatterns.emptyNote");
+  }
+  if (tabId === "madeToOrder") {
+    return tShop("emptyCategory");
+  }
   const sectionNote = tShop.raw(`sections.${tabId}.emptyNote`);
   if (typeof sectionNote === "string" && sectionNote.length > 0) {
     return sectionNote;
@@ -144,22 +178,99 @@ function getEmptyCategoryMessage(
   return tShop("emptyCategory");
 }
 
+function ProductGrid({ products }: { products: ShopCatalogProduct[] }) {
+  return (
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}
+
+function DigitalPatternsPanel({
+  products,
+}: {
+  products: ShopCatalogProduct[];
+}) {
+  const tShop = useTranslations("shop");
+  const embroidery = products.filter((product) => product.section === "embroideryPatterns");
+  const sewing = products.filter((product) => product.section === "sewingPatterns");
+
+  return (
+    <div className="space-y-12">
+      <div className="mx-auto max-w-2xl rounded-3xl bg-white px-6 py-8 text-center shadow-sm ring-1 ring-brand-pink-light md:px-10">
+        <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
+          PDF
+        </p>
+        <h2 className="mt-3 font-heading text-2xl text-brand-black md:text-3xl">
+          {tShop("digitalPatterns.title")}
+        </h2>
+        <p className="mt-4 font-body text-sm leading-relaxed text-brand-black/70 md:text-base">
+          {tShop("digitalPatterns.intro")}
+        </p>
+        <ul className="mt-6 flex flex-wrap justify-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.12em] text-brand-black/60">
+          <li className="rounded-full bg-brand-pink-light px-3 py-1.5">{tShop("digitalPatterns.pointEmail")}</li>
+          <li className="rounded-full bg-brand-pink-light px-3 py-1.5">{tShop("digitalPatterns.pointWorldwide")}</li>
+          <li className="rounded-full bg-brand-pink-light px-3 py-1.5">{tShop("digitalPatterns.pointNoShipping")}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 className="font-heading text-xl text-brand-black md:text-2xl">
+          {tShop("digitalPatterns.embroideryTitle")}
+        </h3>
+        <p className="mt-2 max-w-2xl font-body text-sm leading-relaxed text-brand-black/65">
+          {tShop("digitalPatterns.embroideryDescription")}
+        </p>
+        <div className="mt-6">
+          {embroidery.length > 0 ? (
+            <ProductGrid products={embroidery} />
+          ) : (
+            <p className="rounded-2xl bg-white px-5 py-8 text-center font-body text-sm text-brand-black/60 shadow-sm">
+              {tShop("digitalPatterns.embroideryEmpty")}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="font-heading text-xl text-brand-black md:text-2xl">
+          {tShop("digitalPatterns.sewingTitle")}
+        </h3>
+        <p className="mt-2 max-w-2xl font-body text-sm leading-relaxed text-brand-black/65">
+          {tShop("digitalPatterns.sewingDescription")}
+        </p>
+        <div className="mt-6">
+          {sewing.length > 0 ? (
+            <ProductGrid products={sewing} />
+          ) : (
+            <p className="rounded-2xl bg-white px-5 py-8 text-center font-body text-sm text-brand-black/60 shadow-sm">
+              {tShop("digitalPatterns.sewingEmpty")}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ShopCatalog() {
   const t = useTranslations("shopPage");
   const tShop = useTranslations("shop");
   const { activeTab, setActiveTab } = useShopTab();
   const description = getTabDescription(activeTab, tShop);
   const allProducts = useShopProducts();
-  const products = isProductTab(activeTab)
-    ? allProducts.filter((product) => product.section === activeTab)
-    : [];
+  const products = productsForTab(allProducts, activeTab);
 
   return (
     <Section spacing="tight">
       <Container>
-        <p className="mx-auto mb-6 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-8">
-          {t("shippingNote")}
-        </p>
+        {activeTab !== "digitalPatterns" && (
+          <p className="mx-auto mb-6 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-8">
+            {t("shippingNote")}
+          </p>
+        )}
         <div
           role="tablist"
           aria-label={tShop("tabsLabel")}
@@ -168,7 +279,7 @@ export function ShopCatalog() {
           {SHOP_TAB_ORDER.map((tabId) => {
             const isActive = activeTab === tabId;
             const productCount = isProductTab(tabId)
-              ? allProducts.filter((product) => product.section === tabId).length
+              ? productsForTab(allProducts, tabId).length
               : MADE_TO_ORDER_IDS.length;
 
             return (
@@ -216,9 +327,11 @@ export function ShopCatalog() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="mx-auto mb-6 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-8">
-                {description}
-              </p>
+              {activeTab !== "digitalPatterns" && (
+                <p className="mx-auto mb-6 max-w-2xl text-center font-body text-sm leading-relaxed text-brand-black/70 md:mb-8">
+                  {description}
+                </p>
+              )}
 
               {activeTab === "madeToOrder" ? (
                 <div className="grid gap-8 md:grid-cols-3">
@@ -226,21 +339,21 @@ export function ShopCatalog() {
                     <MadeToOrderCard key={id} id={id} />
                   ))}
                 </div>
+              ) : activeTab === "digitalPatterns" ? (
+                <DigitalPatternsPanel products={products} />
               ) : products.length > 0 ? (
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
+                <ProductGrid products={products} />
               ) : (
                 <p className="text-center font-body text-base text-brand-black/60">
                   {getEmptyCategoryMessage(activeTab, tShop)}
                 </p>
               )}
 
-              <p className="mx-auto mt-10 max-w-xl text-center font-body text-sm leading-relaxed text-brand-black/60 md:mt-12">
-                {t("trust.description")}
-              </p>
+              {activeTab !== "digitalPatterns" && (
+                <p className="mx-auto mt-10 max-w-xl text-center font-body text-sm leading-relaxed text-brand-black/60 md:mt-12">
+                  {t("trust.description")}
+                </p>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

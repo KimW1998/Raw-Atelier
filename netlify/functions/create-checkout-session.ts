@@ -1,6 +1,7 @@
 import type { Config } from "@netlify/functions";
 import Stripe from "stripe";
 import { getCatalogProduct } from "./_shared/catalog";
+import { readLiveStock } from "./_shared/stock";
 import { getEnv } from "./_shared/email";
 import {
   formatSelectionLines,
@@ -77,11 +78,25 @@ export default async (req: Request) => {
     return json({ error: "Cart is empty" }, 400);
   }
 
+  let liveStock: Record<string, number> = {};
+  try {
+    liveStock = await readLiveStock();
+  } catch (error) {
+    console.error("[checkout] stock", error);
+  }
+
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   let hasPhysical = false;
   let needsLegacyPersonalization = false;
   const productIds: string[] = [];
   const orderNotes: string[] = [];
+  const requestedQtyByProduct = new Map<string, number>();
+  for (const item of requested) {
+    requestedQtyByProduct.set(
+      item.productId ?? "",
+      (requestedQtyByProduct.get(item.productId ?? "") ?? 0) + Number(item.quantity),
+    );
+  }
 
   for (const item of requested) {
     const quantity = Number(item.quantity);
@@ -108,6 +123,24 @@ export default async (req: Request) => {
     }
 
     if (product.type === "physical") hasPhysical = true;
+    const liveRemaining =
+      item.productId in liveStock
+        ? liveStock[item.productId]
+        : typeof (product as { stock?: unknown }).stock === "number"
+          ? Math.max(0, Math.floor((product as { stock: number }).stock))
+          : null;
+    const needed = requestedQtyByProduct.get(item.productId) ?? quantity;
+    if (liveRemaining !== null && needed > liveRemaining) {
+      return json(
+        {
+          error:
+            locale === "nl"
+              ? "Dit product is niet meer zo op voorraad."
+              : "This product does not have enough stock.",
+        },
+        409,
+      );
+    }
     if (product.personalization && !productHasOptions(product)) {
       needsLegacyPersonalization = true;
     }

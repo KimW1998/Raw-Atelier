@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getShopProduct, type ShopCatalogProduct } from "@/lib/shop";
+import { getShopProduct, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
 import {
   sanitizeSelections,
   type ProductSelections,
@@ -103,6 +103,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!product) return;
       const cleaned = sanitizeSelections(product, selections);
       setItems((current) => {
+        const already = current
+          .filter((item) => item.productId === productId)
+          .reduce((sum, item) => sum + item.quantity, 0);
+        const remaining = maxOrderQuantity(product, already);
+        const allowed = Number.isFinite(remaining)
+          ? Math.min(quantity, remaining)
+          : quantity;
+        if (allowed < 1) return current;
         const existing = current.find(
           (item) =>
             item.productId === productId &&
@@ -111,13 +119,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (existing) {
           return current.map((item) =>
             item.lineId === existing.lineId
-              ? { ...item, quantity: item.quantity + quantity }
+              ? { ...item, quantity: item.quantity + allowed }
               : item,
           );
         }
         return [
           ...current,
-          { lineId: createLineId(), productId, quantity, selections: cleaned },
+          { lineId: createLineId(), productId, quantity: allowed, selections: cleaned },
         ];
       });
       setIsOpen(true);
@@ -135,7 +143,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return;
     }
     setItems((current) =>
-      current.map((item) => (item.lineId === lineId ? { ...item, quantity } : item)),
+      current.map((item) => {
+        if (item.lineId !== lineId) return item;
+        const product = getShopProduct(item.productId);
+        if (!product) return { ...item, quantity };
+        const others = current
+          .filter((line) => line.productId === item.productId && line.lineId !== lineId)
+          .reduce((sum, line) => sum + line.quantity, 0);
+        const remaining = maxOrderQuantity(product, others);
+        const next = Number.isFinite(remaining) ? Math.min(quantity, remaining) : quantity;
+        if (next < 1) return item;
+        return { ...item, quantity: next };
+      }),
     );
   }, []);
 

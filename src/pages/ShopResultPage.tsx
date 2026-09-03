@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { useCart } from "@/lib/cart";
+import { reloadLiveStock } from "@/lib/live-stock";
 import { useEffect } from "react";
 import { useLocale, useTranslations } from "@/i18n/context";
 
@@ -19,7 +20,10 @@ export default function ShopResultPage({
   const { clear } = useCart();
 
   useEffect(() => {
-    if (variant === "success") clear();
+    if (variant === "success") {
+      clear();
+      void reloadLiveStock();
+    }
   }, [variant, clear]);
 
   const isSuccess = variant === "success";
