@@ -100,6 +100,16 @@ const CONTENT_FILES = [
         ],
       },
       {
+        label: "Vacation banner",
+        name: "vacation",
+        widget: "object",
+        fields: [
+          { label: "Title", name: "title", widget: "string" },
+          { label: "Until", name: "until", widget: "string", required: false },
+          { label: "Message", name: "message", widget: "text" },
+        ],
+      },
+      {
         label: "CTAs",
         name: "cta",
         widget: "object",

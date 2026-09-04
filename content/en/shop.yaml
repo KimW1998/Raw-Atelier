@@ -16,6 +16,10 @@ shop:
   emptyCategory: No products in this category yet. Get in touch for a custom order.
   productNote: Personalised and made to order.
   soldOut: Sold out
+  physicalPaused: Shipping paused
+  physicalPausedNote: >-
+    Physical products cannot be ordered right now. Digital patterns are still available. Remove physical items from
+    your cart to check out.
   stockLeft: "{count} left in stock"
   badges:
     handmade: Embroidered

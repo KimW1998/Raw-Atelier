@@ -4,6 +4,8 @@ import type { PortfolioItem } from "@/lib/portfolio";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import { deepMerge } from "@/lib/utils";
 import catalog from "@/data/shop-catalog.json";
+import vacationSettings from "@/data/vacation.json";
+import type { VacationSettings } from "@/lib/vacation";
 
 const yamlModules = import.meta.glob("../../content/*/*.yaml", {
   eager: true,
@@ -23,6 +25,7 @@ export interface StudioDraft {
   files: Record<Locale, FileBundle>;
   portfolioItems: PortfolioItem[];
   shopProducts: ShopCatalogProduct[];
+  vacation: VacationSettings;
 }
 
 export type FieldType = "text" | "multiline" | "stringList" | "group";
@@ -152,6 +155,8 @@ const LABELS: Record<string, string> = {
   emptyNote: "Lege-categorie tekst",
   stock: "Voorraad",
   soldOut: "Uitverkocht",
+  physicalPaused: "Geen verzending",
+  physicalPausedNote: "Fysiek gepauzeerd",
   cta: "Knoppen",
   ereaderCases: "E-reader hoezen",
   customPouches: "Maatwerk pouches",
@@ -219,6 +224,8 @@ const LABELS: Record<string, string> = {
   cookiesTitle: "Cookies: titel",
   disclaimer: "Disclaimer",
   cookies: "Cookies",
+  vacation: "Vakantiebericht",
+  until: "Tot wanneer (optioneel)",
 };
 
 function fileNameFromPath(path: string) {
@@ -249,6 +256,10 @@ export function loadStudioDraft(): StudioDraft {
     files,
     portfolioItems: clone(portfolioParsed?.items ?? []),
     shopProducts: clone(catalog.products as ShopCatalogProduct[]),
+    vacation: {
+      enabled: Boolean(vacationSettings.enabled),
+      pausePhysical: Boolean(vacationSettings.pausePhysical),
+    },
   };
 }
 

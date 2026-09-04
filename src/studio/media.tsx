@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { ImagePlus, LoaderCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { OrderButtons, moveItem } from "./order";
 
 export type StudioMediaFolder = "portfolio" | "shop" | "fabrics";
 
@@ -158,7 +159,9 @@ export function StudioImageList({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-2">
-        <span className="font-body text-xs text-brand-black/50">Foto's</span>
+        <span className="font-body text-xs text-brand-black/50">
+          Foto's (eerste = hoofdfoto, omhoog/omlaag = volgorde)
+        </span>
         <button
           type="button"
           disabled={busy}
@@ -198,30 +201,37 @@ export function StudioImageList({
                   onChange(images.map((item, i) => (i === index ? url : item)))
                 }
               />
-              <div className="mt-1 flex justify-between gap-1">
-                {index > 0 ? (
+              <div className="mt-1 flex flex-col gap-1">
+                <OrderButtons
+                  index={index}
+                  total={images.length}
+                  onMove={(direction) => onChange(moveItem(images, index, direction))}
+                />
+                <div className="flex items-center justify-between gap-1">
+                  {index > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = [...images];
+                        const [picked] = next.splice(index, 1);
+                        onChange([picked, ...next]);
+                      }}
+                      className="font-body text-[10px] text-brand-black/50 hover:text-brand-black"
+                    >
+                      Hoofdfoto
+                    </button>
+                  ) : (
+                    <span />
+                  )}
                   <button
                     type="button"
-                    onClick={() => {
-                      const next = [...images];
-                      const [picked] = next.splice(index, 1);
-                      onChange([picked, ...next]);
-                    }}
-                    className="font-body text-[10px] text-brand-black/50 hover:text-brand-black"
+                    onClick={() => onChange(images.filter((_, i) => i !== index))}
+                    className="ml-auto text-brand-black/40 hover:text-brand-rose"
+                    aria-label="Foto verwijderen"
                   >
-                    Hoofdfoto
+                    <X className="h-3.5 w-3.5" />
                   </button>
-                ) : (
-                  <span />
-                )}
-                <button
-                  type="button"
-                  onClick={() => onChange(images.filter((_, i) => i !== index))}
-                  className="ml-auto text-brand-black/40 hover:text-brand-rose"
-                  aria-label="Foto verwijderen"
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
+                </div>
               </div>
             </li>
           ))}

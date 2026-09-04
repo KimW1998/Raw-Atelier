@@ -17,8 +17,8 @@ metadata:
   portfolio:
     title: Portfolio
     description: >-
-      Browse Raw Atelier's embroidery portfolio: live events, corporate projects, personalised gifts, sewing work and
-      digitizing.
+      Browse Raw Atelier's embroidery portfolio: live events, corporate apparel, personalised baby gifts, keychains,
+      jewellery, sewing work and embroidery digitizing in the Netherlands.
   shop:
     title: Shop
     description: >-
@@ -36,7 +36,7 @@ metadata:
       Frequently asked questions about ordering, shipping, sewing patterns, returns and custom work at Raw Atelier.
   keywords: >-
     custom embroidery Netherlands, live embroidery events, embroidery digitizing, logo digitizing, personalized
-    embroidery, corporate embroidery, Raw Atelier
+    embroidery, corporate embroidery, name keychain, fabric name banner, Raw Atelier
 brand:
   name: Raw Atelier
   tagline: Creative embroidery in the Netherlands
@@ -102,6 +102,12 @@ notFound:
   eyebrow: '404'
   title: Page not found
   description: The page you're looking for doesn't exist or has been moved.
+vacation:
+  title: Away for a little while
+  until: ""
+  message: >-
+    You can still order, but physical products take longer to arrive. PDF patterns are emailed right after payment.
+    Physical pieces are made and shipped once I'm back.
 cookies:
   title: Cookies
   text: >-

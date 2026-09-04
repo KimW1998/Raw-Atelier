@@ -10,6 +10,7 @@ export interface StudioPreviewValue {
   setPreviewLocale: (locale: Locale) => void;
   portfolioItems?: PortfolioItem[];
   shopProducts?: ShopCatalogProduct[];
+  vacation?: { enabled: boolean; pausePhysical: boolean };
 }
 
 const StudioPreviewContext = createContext<StudioPreviewValue | null>(null);

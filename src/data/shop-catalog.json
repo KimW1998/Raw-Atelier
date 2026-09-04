@@ -125,8 +125,7 @@
         "/images/shop/balloon/balloon-2.jpg",
         "/images/shop/balloon/balloon-3.jpg",
         "/images/shop/balloon/balloon-4.jpg",
-        "/images/shop/balloon/balloon-5.jpg",
-        "/images/shop/balloon/balloon-6.jpg"
+        "/images/shop/balloon/balloon-5.jpg"
       ],
       "priceCents": 3899,
       "priceLabel": "€ 38,99",
@@ -168,6 +167,7 @@
       "image": "/images/shop/banner/banner-1.jpg",
       "images": [
         "/images/shop/banner/banner-2.jpg",
+        "/images/shop/banner/banner-13.jpg",
         "/images/shop/banner/banner-3.jpg",
         "/images/shop/banner/banner-4.jpg",
         "/images/shop/banner/banner-5.jpg",

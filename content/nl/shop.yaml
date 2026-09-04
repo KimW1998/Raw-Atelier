@@ -16,6 +16,10 @@ shop:
   emptyCategory: Nog geen producten in deze categorie. Neem contact op voor maatwerk.
   productNote: Gepersonaliseerd en op bestelling gemaakt.
   soldOut: Uitverkocht
+  physicalPaused: Tijdelijk geen verzending
+  physicalPausedNote: >-
+    Fysieke producten bestel je nu niet. Digitale patronen kun je nog wel kopen. Haal fysieke stukken uit je
+    winkelwagen om af te rekenen.
   stockLeft: Nog {count} op voorraad
   badges:
     handmade: Geborduurd

@@ -103,7 +103,9 @@ export function SEO({
     upsertMeta("property", "og:title", fullTitle);
     upsertMeta("property", "og:description", description);
     if (image) {
-      upsertMeta("property", "og:image", image.startsWith("http") ? image : `${SITE_URL}${image}`);
+      const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
+      upsertMeta("property", "og:image", imageUrl);
+      upsertMeta("name", "twitter:image", imageUrl);
     }
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", fullTitle);

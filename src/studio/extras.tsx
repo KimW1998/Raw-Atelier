@@ -1,10 +1,12 @@
 import { useMemo } from "react";
 import type { PortfolioItem } from "@/lib/portfolio";
 import type { ShopCatalogProduct } from "@/lib/shop";
+import type { VacationSettings } from "@/lib/vacation";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
 import { SHOP_SECTION_ORDER, getProductImages, isDigitalPatternSection, withProductImages } from "@/lib/shop";
 import { AutoGrowField, BilingualPair } from "./fields";
 import { StudioImageField, StudioImageList } from "./media";
+import { OrderButtons, moveItem } from "./order";
 import { ShopProductOptionsEditor } from "./shop-options";
 
 export function PortfolioItemsEditor({
@@ -78,7 +80,7 @@ export function PortfolioItemsEditor({
                 </label>
               </div>
               <p className="font-body text-xs leading-relaxed text-brand-black/45">
-                Eén foto per portfolio-item. Klik of sleep om te vervangen.
+                Eén foto per item. Omhoog/omlaag is de volgorde op de site.
               </p>
             </div>
           </div>
@@ -90,13 +92,20 @@ export function PortfolioItemsEditor({
               update(index, { title: { ...item.title, [locale]: value } })
             }
           />
-          <button
-            type="button"
-            onClick={() => onChange(items.filter((_, i) => i !== index))}
-            className="font-body text-xs text-brand-rose hover:underline"
-          >
-            Verwijder
-          </button>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <OrderButtons
+              index={index}
+              total={items.length}
+              onMove={(direction) => onChange(moveItem(items, index, direction))}
+            />
+            <button
+              type="button"
+              onClick={() => onChange(items.filter((_, i) => i !== index))}
+              className="font-body text-xs text-brand-rose hover:underline"
+            >
+              Verwijder
+            </button>
+          </div>
         </article>
       ))}
     </div>
@@ -282,15 +291,61 @@ export function ShopProductsEditor({
               onChange(products.map((item, i) => (i === index ? next : item)))
             }
           />
-          <button
-            type="button"
-            onClick={() => onChange(products.filter((_, i) => i !== index))}
-            className="font-body text-xs text-brand-rose hover:underline"
-          >
-            Verwijder
-          </button>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <OrderButtons
+              index={index}
+              total={products.length}
+              onMove={(direction) => onChange(moveItem(products, index, direction))}
+            />
+            <button
+              type="button"
+              onClick={() => onChange(products.filter((_, i) => i !== index))}
+              className="font-body text-xs text-brand-rose hover:underline"
+            >
+              Verwijder
+            </button>
+          </div>
         </article>
       ))}
+    </div>
+  );
+}
+
+export function VacationSettingsEditor({
+  settings,
+  onChange,
+}: {
+  settings: VacationSettings;
+  onChange: (settings: VacationSettings) => void;
+}) {
+  return (
+    <div className="space-y-3 rounded-2xl border border-brand-pink-light bg-white p-4">
+      <h2 className="font-heading text-lg text-brand-black">Vakantie</h2>
+      <p className="font-body text-xs leading-relaxed text-brand-black/55">
+        Laat de shop open met een banner. Digitale patronen blijven verkoopbaar. Zet fysieke
+        bestellingen alleen extra uit als je echt niets wilt maken of versturen.
+      </p>
+      <label className="flex items-center gap-2 font-body text-sm">
+        <input
+          type="checkbox"
+          checked={settings.enabled}
+          onChange={(event) => onChange({ ...settings, enabled: event.target.checked })}
+        />
+        Banner tonen
+      </label>
+      <label className="flex items-center gap-2 font-body text-sm">
+        <input
+          type="checkbox"
+          checked={settings.pausePhysical}
+          disabled={!settings.enabled}
+          onChange={(event) => onChange({ ...settings, pausePhysical: event.target.checked })}
+        />
+        Fysieke producten niet bestelbaar
+      </label>
+      <p className="font-body text-xs leading-relaxed text-brand-black/45">
+        Tekst van de banner staat hieronder (NL en EN). Na opslaan: git push / deploy om live te
+        zetten.
+      </p>
     </div>
   );
 }

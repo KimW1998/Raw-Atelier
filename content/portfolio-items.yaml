@@ -7,10 +7,34 @@ items:
     title:
       nl: Live pakdesign-event
       en: Live Suit Design Event
-  - id: balloon-gift
+  - id: conclusion-crew
+    category: corporate
+    aspect: tall
+    featured: true
+    image: /images/portfolio/corporate-conclusion-crew-tshirts.jpg
+    title:
+      nl: Bedrijfsborduurwerk op T-shirts
+      en: Corporate embroidery on T-shirts
+  - id: custom-baby-items
     category: gifts
     aspect: tall
     featured: true
+    image: /images/portfolio/gifts-custom-baby-items.jpg
+    title:
+      nl: Gepersonaliseerde babycadeaus met naam
+      en: Personalised baby gifts with name embroidery
+  - id: balloon-name-banner
+    category: gifts
+    aspect: wide
+    featured: false
+    image: /images/portfolio/gifts-balloon-name-banner.jpg
+    title:
+      nl: Stoffen naamslinger en ballon
+      en: Fabric name garland and balloon
+  - id: balloon-gift
+    category: gifts
+    aspect: tall
+    featured: false
     image: /images/portfolio/gifts-balloon.jpg
     title:
       nl: Gepersonaliseerd balloncadeau
@@ -18,7 +42,7 @@ items:
   - id: baby-hood
     category: gifts
     aspect: tall
-    featured: true
+    featured: false
     image: /images/portfolio/gifts-baby-hood.jpg
     title:
       nl: Geborduurde babywrap met capuchon
@@ -39,8 +63,96 @@ items:
     title:
       nl: Stoffen naamslinger
       en: Fabric name garland
-  - id: applique-letters
+  - id: name-banner-studio
+    category: gifts
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-name-banner-letters-studio.jpg
+    title:
+      nl: Geborduurde letters voor naamslinger
+      en: Embroidered letters for a name garland
+  - id: apple-keychain-bag
+    category: gifts
+    aspect: square
+    featured: false
+    image: /images/portfolio/gifts-apple-keychain-bag.jpg
+    title:
+      nl: Gepersonaliseerde appel-keychain
+      en: Personalised apple keychain
+  - id: dino-keychain
+    category: gifts
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-dino-keychain.jpg
+    title:
+      nl: Geborduurde dino-keychain met naam
+      en: Embroidered dinosaur keychain with name
+  - id: rainbow-heart-keychain
+    category: gifts
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-rainbow-heart-keychain.jpg
+    title:
+      nl: Regenboog hart-keychain met naam
+      en: Rainbow heart keychain with name
+  - id: rainbow-heart-display
+    category: gifts
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-rainbow-heart-keychain-display.jpg
+    title:
+      nl: Gepersonaliseerde borduur-keychains
+      en: Personalised embroidered keychains
+  - id: heart-envelope-earrings
+    category: fashion
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-heart-envelope-earrings.jpg
+    title:
+      nl: Geborduurde envelopoorbellen
+      en: Embroidered envelope earrings
+  - id: pink-lace-earrings
+    category: fashion
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-pink-earrings.jpg
+    title:
+      nl: Roze kant-oorbellen
+      en: Pink lace embroidery earrings
+  - id: seashell-earrings
+    category: fashion
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-seashell-earrings.jpg
+    title:
+      nl: Schelpoorbellen van kantborduurwerk
+      en: Seashell free-standing lace earrings
+  - id: personalized-cover
+    category: gifts
+    aspect: tall
+    featured: false
+    image: /images/portfolio/gifts-personalized-cover.jpg
+    title:
+      nl: Gepersonaliseerde geborduurde hoes
+      en: Personalised embroidered cover
+  - id: battery-tee
     category: digitizing
+    aspect: tall
+    featured: false
+    image: /images/portfolio/fashion-battery-embroidery.jpg
+    title:
+      nl: Minimalistisch T-shirtborduurwerk
+      en: Minimalist T-shirt embroidery
+  - id: digitizing-heart
+    category: digitizing
+    aspect: tall
+    featured: false
+    image: /images/portfolio/digitizing-rainbow-heart-keychain.jpg
+    title:
+      nl: Digitaliseren van een borduurontwerp
+      en: Digitizing an embroidery design
+  - id: applique-letters
+    category: gifts
     aspect: square
     featured: false
     image: /images/portfolio/digitizing-applique-letters.jpg
@@ -72,7 +184,7 @@ items:
       nl: Eigen design upcycle
       en: Own design upcycle
   - id: collar-bees
-    category: corporate
+    category: fashion
     aspect: square
     featured: false
     image: /images/portfolio/corporate-collar-bees.jpg

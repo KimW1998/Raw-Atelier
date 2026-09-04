@@ -12,6 +12,7 @@ import {
   cartSubtotalCents,
   formatEuro,
 } from "@/lib/shop";
+import { useVacation } from "@/lib/vacation";
 
 export default function CartPage() {
   const locale = useLocale();
@@ -23,6 +24,8 @@ export default function CartPage() {
   const lines = getCartProducts(items);
   const subtotal = cartSubtotalCents(lines);
   const hasPhysical = cartHasPhysical(lines);
+  const { pausePhysical } = useVacation();
+  const checkoutBlocked = pausePhysical && hasPhysical;
 
   return (
     <>
@@ -80,9 +83,11 @@ export default function CartPage() {
                     </span>
                   </div>
                   <p className="mt-4 font-body text-sm leading-relaxed text-brand-black/60">
-                    {hasPhysical
-                      ? t("cart.shippingNote")
-                      : t("cart.digitalOnlyNote")}
+                    {checkoutBlocked
+                      ? t("physicalPausedNote")
+                      : hasPhysical
+                        ? t("cart.shippingNote")
+                        : t("cart.digitalOnlyNote")}
                   </p>
                   {error && (
                     <p className="mt-4 font-body text-sm text-red-700">{error}</p>
@@ -91,7 +96,7 @@ export default function CartPage() {
                     variant="primary"
                     size="large"
                     className="mt-6 w-full"
-                    disabled={status === "loading"}
+                    disabled={status === "loading" || checkoutBlocked}
                     onClick={() => {
                       void checkout();
                     }}

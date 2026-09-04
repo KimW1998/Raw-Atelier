@@ -87,10 +87,12 @@ export function PortfolioGallery() {
                 transition={{ duration: 0.4 }}
                 className="mb-6 break-inside-avoid"
               >
+                <figure>
                 <button
                   type="button"
                   onClick={() => openLightbox(index)}
                   className="group relative w-full overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
+                  aria-label={getPortfolioTitle(item, locale)}
                 >
                   <div
                     className={cn(
@@ -107,17 +109,18 @@ export function PortfolioGallery() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-brand-black/0 transition-colors duration-500 group-hover:bg-brand-black/30" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-                      <span className="font-body text-xs font-semibold uppercase tracking-wider text-brand-pink">
-                        {tPortfolio(`categories.${item.category}`)}
-                      </span>
-                      <h3 className="mt-1 font-heading text-lg text-white">
-                        {getPortfolioTitle(item, locale)}
-                      </h3>
-                    </div>
+                    <div className="absolute inset-0 bg-brand-black/0 transition-colors duration-500 group-hover:bg-brand-black/20" />
                   </div>
                 </button>
+                <figcaption className="mt-3 px-1">
+                  <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-brand-pink-accent">
+                    {tPortfolio(`categories.${item.category}`)}
+                  </p>
+                  <h3 className="mt-1 font-heading text-lg text-brand-black">
+                    {getPortfolioTitle(item, locale)}
+                  </h3>
+                </figcaption>
+                </figure>
               </motion.div>
             ))}
           </motion.div>

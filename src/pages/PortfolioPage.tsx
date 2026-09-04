@@ -1,12 +1,14 @@
 import { SEO } from "@/components/SEO";
 import { PortfolioGallery } from "@/components/sections/PortfolioGallery";
 import { ContactCTASection } from "@/components/sections/ContactCTASection";
+import { getFeaturedPortfolioItems } from "@/lib/portfolio";
 import { useLocale, useTranslations } from "@/i18n/context";
 
 export default function PortfolioPage() {
   const locale = useLocale();
   const tMeta = useTranslations("metadata");
   const tBrand = useTranslations("brand");
+  const featuredImage = getFeaturedPortfolioItems(1)[0]?.image;
 
   return (
     <>
@@ -18,6 +20,7 @@ export default function PortfolioPage() {
         brandName={tBrand("name")}
         tagline={tBrand("tagline")}
         keywords={tMeta("keywords")}
+        image={featuredImage}
       />
       <PortfolioGallery />
       <ContactCTASection />

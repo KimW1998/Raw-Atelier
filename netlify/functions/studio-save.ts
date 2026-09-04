@@ -7,6 +7,7 @@ const ALLOWED = [
   /^content\/(nl|en)\/[a-z0-9-]+\.yaml$/,
   /^content\/portfolio-items\.yaml$/,
   /^src\/data\/shop-catalog\.json$/,
+  /^src\/data\/vacation\.json$/,
 ];
 
 function json(body: unknown, status = 200) {

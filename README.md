@@ -1,196 +1,183 @@
 # Raw Atelier
 
-A marketing website for **Raw Atelier** — a creative embroidery and textile studio based in the Netherlands.
+Marketing site and shop for **Raw Atelier** — a creative embroidery studio in the Netherlands (legal entity **Raw Luxury**, public brand Raw Atelier). Dutch is the default language; English is available throughout.
 
-> Creative embroidery in the Netherlands
+Site: [www.rawatelier.nl](https://www.rawatelier.nl)
 
-## Tech Stack
+## Tech stack
 
-- **Vite 6** + **React 19**
-- **TypeScript**
-- **React Router** (locale routing)
-- **Tailwind CSS**
-- **Framer Motion**
-- **Lucide Icons**
-- **Decap CMS** (free, git-based content management)
+- **Vite 6** + **React 19** + **TypeScript**
+- **React Router** (locale prefixes `/nl` and `/en`)
+- **Tailwind CSS**, **Framer Motion**, **Lucide**
+- **Netlify** (static host, Functions, Forms, Identity, Database)
+- **Stripe** Checkout for the shop
+- Visual **studio** at `/studio` (primary editor) and **Decap CMS** at `/admin`
 
-## Getting Started
+## Getting started
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — you'll be redirected to `/nl`. Switch to English with the language toggle.
-
-### Content Management (CMS)
-
-All text content lives in `/content/{locale}/*.yaml` — outside the app code.
+For the full site **including checkout, studio save, and stock**, use Netlify Dev:
 
 ```bash
-# Terminal 1: run the site
-npm run dev
-
-# Terminal 2: run the CMS backend (local editing)
-npm run cms
+npx netlify dev
 ```
 
-Then open **http://localhost:3000/admin** to edit content in a visual UI.
+Open [http://localhost:8888](http://localhost:8888) — you are redirected to `/nl`.
 
-See [content/README.md](content/README.md) for full CMS documentation.
+Vite only (no functions):
+
+```bash
+npm run dev
+```
+
+Opens [http://localhost:3000](http://localhost:3000). Studio **save** needs Netlify Dev (`/api/studio-save`).
+
+Copy `.env.example` to `.env` for Stripe, email, Analytics, and shop visibility. Never commit `.env`.
+
+## Editing the site
+
+### Studio (recommended)
+
+1. `npx netlify dev`
+2. Open [http://localhost:8888/studio](http://localhost:8888/studio)
+3. Edit copy (NL left, EN right), portfolio photos, shop products, and vacation mode
+4. **Opslaan** writes local files. Push/deploy to put changes live
+
+Studio pages include home, about, services, portfolio, shop, contact, FAQ, menu & footer (vacation banner), and legal.
+
+### Decap CMS
+
+```bash
+npm run dev    # terminal 1
+npm run cms    # terminal 2
+```
+
+Then [http://localhost:3000/admin](http://localhost:3000/admin). See [content/README.md](content/README.md).
+
+## Shop
+
+The shop is **always visible locally**. On production it stays hidden until `VITE_SHOP_ENABLED=true`.
+
+- Physical products: shipping **Netherlands only**
+- Digital sewing/embroidery PDFs: worldwide, emailed after payment
+- Cart and Stripe Checkout; live stock after paid orders (Netlify Database)
+- Product options (name, letters, hardware) live in `src/data/shop-catalog.json` (studio: Shop)
+
+Vacation mode (studio → **Menu & footer**): banner for longer lead times, optional pause on physical checkout. Flags: `src/data/vacation.json`. Copy: `content/*/global.yaml` under `vacation`.
+
+Stripe setup: [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md). After schema changes: `npm run db:migrate` locally; hosted DB migrates on deploy.
 
 ## Languages
 
-| Locale | URL prefix | Content folder |
-|--------|------------|----------------|
-| English | `/en` | `content/en/` |
+| Locale | URL | Content |
+|--------|-----|---------|
 | Dutch (default) | `/nl` | `content/nl/` |
+| English | `/en` | `content/en/` |
 
-Use the **EN / NL** switcher in the navigation bar to change language.
-
-## Project Structure
+## Project structure
 
 ```
-content/                # CMS content (YAML) — edit here or via /admin
-├── en/
-└── nl/
+content/                    # YAML copy (NL/EN) + portfolio-items.yaml
 src/
-├── pages/              # Route pages
+├── pages/
 ├── components/
-├── i18n/               # Locale context and routing helpers
+├── studio/                 # Visual editor
+├── i18n/
 ├── layouts/
 └── lib/
-    ├── content.ts      # Loads YAML at build time
-    └── constants.ts    # Structural data (images, IDs)
-public/
-├── admin/              # Decap CMS interface
-└── images/
+    ├── shop.ts
+    ├── vacation.ts
+    └── content.ts
+src/data/
+├── shop-catalog.json
+└── vacation.json
+netlify/functions/          # Checkout, webhook, stock, studio save
+netlify/database/migrations/
+public/images/
 ```
 
 ## Pages
 
-| Page | Route | Description |
-|------|-------|-------------|
-| Home | `/en`, `/nl` | Hero, services overview, featured work, about preview, testimonials, process, contact CTA |
-| About | `/en/about`, `/nl/about` | Story, philosophy, FAQ |
-| Services | `/en/services`, `/nl/services` | All service offerings with details |
-| Portfolio | `/en/portfolio`, `/nl/portfolio` | Filterable masonry gallery with lightbox |
-| Shop | `/nl/shop`, `/en/shop` | Catalog and cart on this site; checkout via Stripe (physical shipping NL only, digital patterns worldwide) |
-| Contact | `/en/contact`, `/nl/contact` | Contact form with thank-you state |
-| CMS Admin | `/admin` | Decap CMS content editor |
+| Page | Route | Notes |
+|------|-------|--------|
+| Home | `/nl`, `/en` | Hero, services, featured portfolio, about, Instagram, process |
+| About | `…/about` | Story and studio |
+| Services | `…/services` | Service details |
+| Portfolio | `…/portfolio` | Filterable gallery + lightbox |
+| Shop | `…/shop` | Hidden on production until `VITE_SHOP_ENABLED=true` |
+| Cart | `…/shop/cart` | |
+| FAQ | `…/faq` | |
+| Contact | `…/contact` | Netlify Forms on production |
+| Legal | `…/legal/*` | Terms, shipping, privacy, disclaimer, cookies |
+| Studio | `/studio` | Local editor |
+| CMS | `/admin` | Decap |
 
-## Brand Colors
+## Brand colours
 
 | Name | Hex |
 |------|-----|
-| Primary Pink | `#E7A7C7` |
-| Light Pink | `#F6DCE8` |
-| Accent Pink | `#D98AB5` |
+| Primary pink | `#E7A7C7` |
+| Light pink | `#F6DCE8` |
+| Accent pink | `#D98AB5` |
 | Black | `#111111` |
 | Off-white | `#FAF8F6` |
 
-## Deployment on Netlify
-
-This project builds to a static `dist/` folder — no server-side runtime required.
-
-### Option 1: Git-based deployment (recommended)
-
-1. Push this repository to GitHub, GitLab, or Bitbucket
-2. Log in to [Netlify](https://app.netlify.com)
-3. Click **Add new site** → **Import an existing project**
-4. Connect your repository
-5. Build settings are auto-detected from `netlify.toml`:
-   - **Build command:** `npm run build`
-   - **Publish directory:** `dist`
-   - **Node version:** 20
-6. Click **Deploy site**
-
-### Option 2: Netlify CLI
-
-```bash
-# Install Netlify CLI globally
-npm install -g netlify-cli
-
-# Build the project
-npm run build
-
-# Deploy (first time will prompt for site creation)
-netlify deploy --prod
-```
-
-### Environment Variables
-
-Shop checkout uses Stripe. See [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md). Copy `.env.example` and add keys in Netlify.
-
-### Contact form (Netlify Forms)
-
-The contact form submits to **Netlify Forms** on the live site — no extra backend needed.
-
-After deploy:
-
-1. In Netlify go to **Forms → Form detection** and make sure detection is **enabled**
-2. Redeploy once more so Netlify scans `forms.html` and registers the `contact` form
-3. Go to **Site settings → Forms** and confirm the `contact` form appears
-4. Go to **Site settings → Forms → Form notifications** to add your email address
-5. Submissions also appear under **Forms** in the Netlify dashboard
-
-Locally, the form opens a prefilled email to `info@rawluxury.nl` instead.
-
-### CMS on Netlify (production editing)
-
-1. Deploy the site to Netlify
-2. Go to **Site settings → Identity** → Enable Identity
-3. Under Identity, enable **Git Gateway**
-4. Invite yourself via **Identity → Invite users**
-5. Click the invite link — it should open `/admin` with a password setup screen
-6. Visit `https://yoursite.com/admin` and log in to edit content
-
-Changes made in the CMS are committed to your git repo and trigger a new deploy.
-
 ## Images
 
-Site photos are stored in `/public/images/`. The site currently uses Kim's embroidery photos from `~/Downloads/borduur fotos`.
+Photos live in `public/images/`. Portfolio items (file, category, NL/EN title, featured) are in `content/portfolio-items.yaml` and editable in the studio.
 
-| Site path | Source photo | Used for |
-|-----------|--------------|----------|
-| `hero-main.jpg` | Thread wall + patch | Homepage hero |
-| `about-studio.jpg` | Thread wall + patch | Home about preview |
-| `about-story.jpg` | JELTJE name banner | About story section |
-| `about-needle.jpg` | Thread wall + patch | About machine section |
-| `about-studio-1.jpg` | JELTJE banner + balloon | About gallery |
-| `about-studio-2.jpg` | Apple keychains on bag | About gallery |
-| `about-studio-3.jpg` | Birthday bandana | About gallery |
-| `services/*.jpg` | Matched by service type | Services page |
-| `portfolio/*.jpg` | Reused across categories | Portfolio, featured work, Instagram |
+Shop product photos: `public/images/shop/`. Service photos: `public/images/services/`.
 
-To replace images later, add new files to `/public/images/` using the same filenames, or drop new photos into `borduur fotos` and rerun the image copy step.
+Prefer web-sized JPEGs (about 1800px on the long edge). Add files under `public/images/` and point YAML/JSON at the public path (e.g. `/images/portfolio/…`).
 
-Shop products and prices live in `src/data/shop-catalog.json` (editable in Decap). Checkout uses Stripe. See [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md).
+Instagram on the homepage uses [Behold](https://behold.so). See [docs/instagram-setup.md](docs/instagram-setup.md).
 
-Instagram posts on the homepage load via [Behold](https://behold.so) (free, no Meta developer account). See [docs/instagram-setup.md](docs/instagram-setup.md).
+## Deployment (Netlify)
+
+Git push to the linked repo deploys production. `netlify.toml` sets:
+
+- **Build:** `npm run build`
+- **Publish:** `dist`
+- **Node:** 20
+
+Functions run on Netlify. Contact form: enable **Forms** detection, confirm the `contact` form, add an email notification. Locally the form opens mail to `info@rawluxury.nl`.
+
+### Environment variables (Netlify)
+
+| Variable | Purpose |
+|----------|---------|
+| `VITE_SHOP_ENABLED` | `true` to show the shop on the live site |
+| `STRIPE_SECRET_KEY` | Checkout |
+| `STRIPE_WEBHOOK_SECRET` | Paid-order emails and stock |
+| `STRIPE_SHIPPING_AMOUNT_CENTS` | Default `695` |
+| `ORDER_NOTIFY_EMAIL` / `ORDER_FROM_EMAIL` | Order mail |
+| `RESEND_API_KEY` | Sending mail |
+| `VITE_GA_MEASUREMENT_ID` | GA4 after cookie consent |
+
+Decap on production: enable **Identity** + **Git Gateway**, invite yourself, log in at `/admin`.
 
 ## SEO
 
-The site includes:
-
-- Per-page metadata and Open Graph tags (custom SEO component)
-- JSON-LD structured data (LocalBusiness schema)
-- `sitemap.xml` and `robots.txt` (generated at build time)
-- Semantic HTML and accessible navigation
+- Per-page title, description, Open Graph (and Twitter image when set)
+- JSON-LD `LocalBusiness`
+- `sitemap.xml` and `robots.txt` at build time
+- Bilingual portfolio titles used as image alt text
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start Vite development server |
-| `npm run build` | Type-check, production build, and generate sitemap/robots |
-| `npm run preview` | Preview the production build locally |
-| `npm run cms` | Start Decap CMS local backend |
-| `npm run cms:config` | Regenerate CMS config files |
+| `npm run dev` | Vite only |
+| `npx netlify dev` | Site + functions (port 8888) |
+| `npm run build` | CMS config, typecheck, Vite build, sitemap |
+| `npm run preview` | Preview `dist/` |
+| `npm run cms` | Decap local proxy |
+| `npm run cms:config` | Regenerate Decap config |
+| `npm run db:migrate` | Apply Netlify Database migrations locally |
 
 ## License
 
-Private — © Raw Atelier. All rights reserved.
+Private — © Raw Atelier / Raw Luxury. All rights reserved.

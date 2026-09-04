@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLocale, useTranslations } from "@/i18n/context";
-import { useCart, type CartItem } from "@/lib/cart";
+import { getCartProducts, useCart, type CartItem } from "@/lib/cart";
+import { cartHasPhysical } from "@/lib/shop";
+import { isPhysicalCheckoutPaused } from "@/lib/vacation";
 
 export function useCheckout() {
   const locale = useLocale();
@@ -11,6 +13,11 @@ export function useCheckout() {
 
   const checkout = async (cartItems: CartItem[] = items) => {
     if (cartItems.length === 0) return;
+    if (isPhysicalCheckoutPaused() && cartHasPhysical(getCartProducts(cartItems))) {
+      setStatus("error");
+      setError(t("physicalPausedNote"));
+      return;
+    }
     setStatus("loading");
     setError("");
     try {

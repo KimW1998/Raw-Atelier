@@ -6,11 +6,13 @@ import { PremiumImage } from "@/components/ui/PremiumImage";
 import { getCartProducts, useCart } from "@/lib/cart";
 import { useCheckout } from "@/lib/checkout";
 import {
+  cartHasPhysical,
   cartLineSummary,
   cartLineUnitCents,
   formatEuro,
   getProductName,
 } from "@/lib/shop";
+import { useVacation } from "@/lib/vacation";
 import { cn } from "@/lib/utils";
 
 export function CartButton({ className }: { className?: string }) {
@@ -43,6 +45,8 @@ export function CartDrawer() {
   const { items, isOpen, closeCart, setQuantity, removeItem, clear } = useCart();
   const { checkout, status, error } = useCheckout();
   const lines = getCartProducts(items);
+  const { pausePhysical } = useVacation();
+  const checkoutBlocked = pausePhysical && cartHasPhysical(lines);
 
   return (
     <AnimatePresence>
@@ -155,6 +159,9 @@ export function CartDrawer() {
             </div>
 
             <div className="border-t border-brand-pink-light px-5 py-5">
+              {checkoutBlocked && (
+                <p className="mb-3 font-body text-sm text-brand-rose">{t("physicalPausedNote")}</p>
+              )}
               {error && (
                 <p className="mb-3 font-body text-sm text-red-700">{error}</p>
               )}
@@ -162,7 +169,7 @@ export function CartDrawer() {
                 variant="primary"
                 size="large"
                 className="w-full"
-                disabled={lines.length === 0 || status === "loading"}
+                disabled={lines.length === 0 || status === "loading" || checkoutBlocked}
                 onClick={() => {
                   void checkout();
                 }}

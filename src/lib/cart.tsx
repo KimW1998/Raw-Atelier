@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { getShopProduct, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
+import { isPhysicalCheckoutPaused } from "@/lib/vacation";
 import {
   sanitizeSelections,
   type ProductSelections,
@@ -101,6 +102,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     (productId: string, quantity = 1, selections: ProductSelections = {}) => {
       const product = getShopProduct(productId);
       if (!product) return;
+      if (isPhysicalCheckoutPaused() && product.type === "physical") return;
       const cleaned = sanitizeSelections(product, selections);
       setItems((current) => {
         const already = current

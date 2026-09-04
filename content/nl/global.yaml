@@ -17,8 +17,8 @@ metadata:
   portfolio:
     title: Portfolio
     description: >-
-      Bekijk het borduurportfolio van Raw Atelier: live events, bedrijfsprojecten, gepersonaliseerde cadeaus,
-      naaiwerk en digitaliseringswerk.
+      Bekijk het borduurportfolio van Raw Atelier: live events, geborduurde bedrijfskleding, gepersonaliseerde
+      babycadeaus, keychains, sieraden, naaiwerk en borduurdigitalisering in Nederland.
   shop:
     title: Shop
     description: >-
@@ -36,7 +36,7 @@ metadata:
       Veelgestelde vragen over bestellen, verzending, naaitpatronen, retouren en maatwerk bij Raw Atelier.
   keywords: >-
     maatwerk borduurwerk Nederland, live borduur events, borduur digitalisering, logo digitalisering, gepersonaliseerd borduurwerk, corporate
-    borduurwerk, Raw Atelier
+    borduurwerk, keychain met naam, naamslinger, Raw Atelier
 brand:
   name: Raw Atelier
   tagline: Creatief borduurwerk in Nederland
@@ -102,6 +102,12 @@ notFound:
   eyebrow: '404'
   title: Pagina niet gevonden
   description: De pagina die je zoekt bestaat niet of is verplaatst.
+vacation:
+  title: Even op vakantie
+  until: ""
+  message: >-
+    Bestellen kan, maar fysieke producten hebben een langere levertijd. PDF-patronen stuur ik na betaling direct naar
+    je mail. Fysieke stukken maak en verstuur ik weer zodra ik terug ben.
 cookies:
   title: Cookies
   text: >-

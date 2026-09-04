@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { getCatalogProduct } from "./_shared/catalog";
 import { readLiveStock } from "./_shared/stock";
 import { getEnv } from "./_shared/email";
+import vacation from "../../src/data/vacation.json";
 import {
   formatSelectionLines,
   getProductUnitPriceCents,
@@ -123,6 +124,17 @@ export default async (req: Request) => {
     }
 
     if (product.type === "physical") hasPhysical = true;
+    if (vacation.enabled && vacation.pausePhysical && product.type === "physical") {
+      return json(
+        {
+          error:
+            locale === "nl"
+              ? "Fysieke producten zijn tijdelijk niet te bestellen."
+              : "Physical products cannot be ordered right now.",
+        },
+        403,
+      );
+    }
     const liveRemaining =
       item.productId in liveStock
         ? liveStock[item.productId]

@@ -12,6 +12,7 @@ import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "@/i18n/context";
 import { useCart } from "@/lib/cart";
+import { useVacation } from "@/lib/vacation";
 import {
   SHOP_TAB_PARAM,
   countBillableLetters,
@@ -87,6 +88,8 @@ export default function ProductPage() {
     ? formatEuro(unitCents, locale)
     : formatListedPrice(product, locale);
   const soldOut = isSoldOut(product);
+  const { pausePhysical } = useVacation();
+  const physicalPaused = pausePhysical && product.type === "physical";
   const alreadyInCart = items
     .filter((item) => item.productId === product.id)
     .reduce((sum, item) => sum + item.quantity, 0);
@@ -101,7 +104,7 @@ export default function ProductPage() {
       );
       return;
     }
-    if (isSoldOut(product)) return;
+    if (isSoldOut(product) || physicalPaused) return;
     setFormError("");
     addItem(product.id, quantity, selections);
   };
@@ -161,6 +164,11 @@ export default function ProductPage() {
               {soldOut && (
                 <p className="mt-3 font-body text-sm font-semibold text-brand-rose">{t("soldOut")}</p>
               )}
+              {physicalPaused && !soldOut && (
+                <p className="mt-3 font-body text-sm font-semibold text-brand-rose">
+                  {t("physicalPausedNote")}
+                </p>
+              )}
               {!soldOut && stockCap !== undefined && (
                 <p className="mt-3 font-body text-sm text-brand-black/55">
                   {t("stockLeft", { count: String(stockCap) })}
@@ -186,7 +194,7 @@ export default function ProductPage() {
               )}
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                {!soldOut && (
+                {!soldOut && !physicalPaused && (
                   <div className="flex items-center rounded-full bg-white p-1 shadow-sm">
                     <button
                       type="button"
@@ -216,10 +224,10 @@ export default function ProductPage() {
                 <Button
                   variant="primary"
                   size="large"
-                  disabled={soldOut || lettersTooShort || remaining < 1}
+                  disabled={soldOut || physicalPaused || lettersTooShort || remaining < 1}
                   onClick={addToCart}
                 >
-                  {soldOut ? t("soldOut") : t("cart.add")}
+                  {soldOut ? t("soldOut") : physicalPaused ? t("physicalPaused") : t("cart.add")}
                 </Button>
               </div>
             </FadeIn>

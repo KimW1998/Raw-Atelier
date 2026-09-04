@@ -14,7 +14,7 @@ export interface StudioPage {
   label: string;
   previewPath: string;
   sources: { file: string; roots?: string[] }[];
-  extra?: "portfolio" | "shop";
+  extra?: "portfolio" | "shop" | "vacation";
 }
 
 export const STUDIO_PAGES: StudioPage[] = [
@@ -73,6 +73,7 @@ export const STUDIO_PAGES: StudioPage[] = [
     label: "Menu & footer",
     previewPath: "/",
     sources: [{ file: "global" }],
+    extra: "vacation",
   },
   {
     id: "legal",

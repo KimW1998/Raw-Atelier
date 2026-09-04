@@ -16,7 +16,7 @@ import {
   type StudioDraft,
 } from "./content";
 import { BilingualField, BilingualListField, FieldGroup } from "./fields";
-import { PortfolioItemsEditor, ShopProductsEditor } from "./extras";
+import { PortfolioItemsEditor, ShopProductsEditor, VacationSettingsEditor } from "./extras";
 import { STUDIO_PAGES, studioPageById, type StudioPage } from "./pages";
 import { StudioPreview } from "./StudioPreview";
 import { StudioErrorBoundary } from "./StudioErrorBoundary";
@@ -150,6 +150,13 @@ export function StudioApp() {
       });
     }
 
+    if (JSON.stringify(draft.vacation) !== JSON.stringify(original.vacation)) {
+      files.push({
+        path: "src/data/vacation.json",
+        content: `${JSON.stringify(draft.vacation, null, 2)}\n`,
+      });
+    }
+
     try {
       const response = await fetch("/api/studio-save", {
         method: "POST",
@@ -261,6 +268,15 @@ export function StudioApp() {
                   }}
                 />
               ) : null}
+              {page.extra === "vacation" ? (
+                <VacationSettingsEditor
+                  settings={draft.vacation}
+                  onChange={(vacation) => {
+                    setDraft((current) => ({ ...current, vacation }));
+                    setStatus("idle");
+                  }}
+                />
+              ) : null}
               {renderFields(fields, nlView, enView, updatePath)}
             </div>
             <div className="min-h-0 bg-[#eee6e1]">
@@ -271,6 +287,7 @@ export function StudioApp() {
                   messages={previewMessages}
                   portfolioItems={draft.portfolioItems}
                   shopProducts={draft.shopProducts}
+                  vacation={draft.vacation}
                   onPreviewLocale={setPreviewLocale}
                 />
               </StudioErrorBoundary>

@@ -8,6 +8,7 @@ import { PremiumImage } from "@/components/ui/PremiumImage";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/routing";
 import { useCart } from "@/lib/cart";
+import { useVacation } from "@/lib/vacation";
 import {
   MADE_TO_ORDER_IDS,
   SHOP_TAB_ORDER,
@@ -36,10 +37,12 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
   const badge = getProductBadge(product);
   const needsOptions = productHasOptions(product);
   const soldOut = isSoldOut(product);
+  const { pausePhysical } = useVacation();
+  const physicalPaused = pausePhysical && product.type === "physical";
   const alreadyInCart = items
     .filter((item) => item.productId === product.id)
     .reduce((sum, item) => sum + item.quantity, 0);
-  const canAdd = !soldOut && maxOrderQuantity(product, alreadyInCart) > 0;
+  const canAdd = !soldOut && !physicalPaused && maxOrderQuantity(product, alreadyInCart) > 0;
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
@@ -63,6 +66,11 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
             {t("soldOut")}
           </span>
         )}
+        {physicalPaused && !soldOut && (
+          <span className="absolute inset-x-4 bottom-4 rounded-full bg-brand-black/85 px-3 py-2 text-center font-body text-xs font-semibold uppercase tracking-[0.12em] text-white">
+            {t("physicalPaused")}
+          </span>
+        )}
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <Link href={getProductHref(product.id)}>
@@ -79,6 +87,10 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
         {soldOut ? (
           <Button variant="outline" className="mt-4 w-full" disabled>
             {t("soldOut")}
+          </Button>
+        ) : physicalPaused ? (
+          <Button variant="outline" className="mt-4 w-full" disabled>
+            {t("physicalPaused")}
           </Button>
         ) : needsOptions ? (
           <Button href={getProductHref(product.id)} variant="primary" className="mt-4 w-full">
