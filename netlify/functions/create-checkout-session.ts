@@ -7,6 +7,7 @@ import vacation from "../../src/data/vacation.json";
 import {
   formatSelectionLines,
   getProductUnitPriceCents,
+  lineStockUnits,
   productHasOptions,
   sanitizeSelections,
   validateSelections,
@@ -93,9 +94,15 @@ export default async (req: Request) => {
   const orderNotes: string[] = [];
   const requestedQtyByProduct = new Map<string, number>();
   for (const item of requested) {
+    const quantity = Number(item.quantity);
+    if (!item.productId || !Number.isInteger(quantity) || quantity < 1) continue;
+    const product = getCatalogProduct(item.productId);
+    if (!product) continue;
+    const selections = sanitizeSelections(product, item.selections);
     requestedQtyByProduct.set(
-      item.productId ?? "",
-      (requestedQtyByProduct.get(item.productId ?? "") ?? 0) + Number(item.quantity),
+      item.productId,
+      (requestedQtyByProduct.get(item.productId) ?? 0) +
+        lineStockUnits(product, selections, quantity),
     );
   }
 
@@ -141,7 +148,8 @@ export default async (req: Request) => {
         : typeof (product as { stock?: unknown }).stock === "number"
           ? Math.max(0, Math.floor((product as { stock: number }).stock))
           : null;
-    const needed = requestedQtyByProduct.get(item.productId) ?? quantity;
+    const stockQty = lineStockUnits(product, selections, quantity);
+    const needed = requestedQtyByProduct.get(item.productId) ?? stockQty;
     if (liveRemaining !== null && needed > liveRemaining) {
       return json(
         {
@@ -156,7 +164,7 @@ export default async (req: Request) => {
     if (product.personalization && !productHasOptions(product)) {
       needsLegacyPersonalization = true;
     }
-    productIds.push(`${product.id}x${quantity}`);
+    productIds.push(`${product.id}x${stockQty}`);
 
     const origin = getEnv("URL") || SITE_URL;
     const image = product.image.startsWith("http")
@@ -171,7 +179,7 @@ export default async (req: Request) => {
       .slice(0, 390);
 
     if (selectionText) {
-      orderNotes.push(`${product.name.nl} x${quantity}: ${selectionText}`);
+      orderNotes.push(`${product.name.nl} x${stockQty}: ${selectionText}`);
     }
 
     lineItems.push({
@@ -187,6 +195,7 @@ export default async (req: Request) => {
             id: product.id,
             type: product.type,
             digitalFile: product.digitalFile || "",
+            stockQty: String(stockQty),
             selections: JSON.stringify(selections).slice(0, 490),
           },
         },

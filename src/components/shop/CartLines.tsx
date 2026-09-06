@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "@/i18n/context";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { getCartProducts, useCart } from "@/lib/cart";
 import {
+  bundleSize,
   cartLineSummary,
   cartLineUnitCents,
   formatEuro,
@@ -32,6 +33,7 @@ export function CartLines({ size = "compact" }: { size?: "compact" | "page" }) {
       {lines.map(({ item, product }) => {
         const unit = cartLineUnitCents(product, item.selections);
         const summary = cartLineSummary(product, item.selections, locale);
+        const pack = bundleSize(product, item.selections);
 
         return (
           <li
@@ -93,7 +95,7 @@ export function CartLines({ size = "compact" }: { size?: "compact" | "page" }) {
                   <Minus className="h-3.5 w-3.5" />
                 </button>
                 <span className="min-w-6 text-center font-body text-sm font-semibold">
-                  {item.quantity}
+                  {pack > 1 ? `${item.quantity} × ${pack}` : item.quantity}
                 </span>
                 <button
                   type="button"

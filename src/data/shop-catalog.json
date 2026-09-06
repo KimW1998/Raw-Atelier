@@ -69,6 +69,29 @@
             "nl": "Extra wensen",
             "en": "Extra wishes"
           }
+        },
+        {
+          "id": "bundle",
+          "type": "bundle",
+          "required": false,
+          "label": {
+            "nl": "Bundel",
+            "en": "Bundle"
+          },
+          "choices": [
+            {
+              "id": "bundel-4",
+              "label": { "nl": "4 stuks", "en": "4 pieces" },
+              "quantity": 4,
+              "priceCents": 5380
+            },
+            {
+              "id": "bundel-6",
+              "label": { "nl": "6 stuks", "en": "6 pieces" },
+              "quantity": 6,
+              "priceCents": 8075
+            }
+          ]
         }
       ]
     },

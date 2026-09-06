@@ -45,6 +45,10 @@ shop:
     errorInvalid: Please choose a valid option.
     errorMinLetters: The name garland needs at least {min} letters or symbols.
     errorMaxLetters: That name is too long for this product.
+    singlePiece: 1 piece
+    bundleEach: "{price} each"
+    bundleSave: "{amount} off"
+    packCountHint: Number of {size}-packs
   cart:
     title: Cart
     pageTitle: Cart

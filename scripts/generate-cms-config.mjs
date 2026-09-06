@@ -584,7 +584,7 @@ function buildConfig(backend) {
                     required: false,
                     collapsed: true,
                     label_singular: "optie",
-                    hint: "Stof (fotovakjes), hardware (kleuren), naam, notitie of prijs per letter.",
+                    hint: "Stof, hardware, naam, notitie, prijs per letter of bundelkorting (4/6 stuks).",
                     fields: [
                       { label: "ID", name: "id", widget: "string" },
                       {
@@ -597,6 +597,7 @@ function buildConfig(backend) {
                           { label: "Naamveld", value: "name" },
                           { label: "Extra notitie", value: "note" },
                           { label: "Prijs per letter", value: "letters" },
+                          { label: "Bundelkorting", value: "bundle" },
                         ],
                       },
                       { label: "Verplicht", name: "required", widget: "boolean", default: true },
@@ -631,6 +632,8 @@ function buildConfig(backend) {
                           },
                           { label: "Foto", name: "image", widget: "image", required: false },
                           { label: "Kleur (hex)", name: "color", widget: "string", required: false, hint: "Bijv. #C5A572" },
+                          { label: "Aantal stuks (bundel)", name: "quantity", widget: "number", value_type: "int", required: false },
+                          { label: "Totaalprijs bundel in centen", name: "priceCents", widget: "number", value_type: "int", required: false },
                         ],
                       },
                     ],

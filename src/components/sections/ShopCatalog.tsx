@@ -21,6 +21,7 @@ import {
   getProductName,
   isShopTabId,
   isSoldOut,
+  lineStockUnits,
   maxOrderQuantity,
   productHasOptions,
   productsForTab,
@@ -41,7 +42,7 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
   const physicalPaused = pausePhysical && product.type === "physical";
   const alreadyInCart = items
     .filter((item) => item.productId === product.id)
-    .reduce((sum, item) => sum + item.quantity, 0);
+    .reduce((sum, item) => sum + lineStockUnits(product, item.selections, item.quantity), 0);
   const canAdd = !soldOut && !physicalPaused && maxOrderQuantity(product, alreadyInCart) > 0;
 
   return (

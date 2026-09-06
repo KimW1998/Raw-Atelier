@@ -1,12 +1,16 @@
 export type ShopLocale = "nl" | "en";
 
-export type ProductOptionType = "fabric" | "hardware" | "name" | "note" | "letters";
+export type ProductOptionType = "fabric" | "hardware" | "name" | "note" | "letters" | "bundle";
 
 export interface ProductOptionChoice {
   id: string;
   label: Record<ShopLocale, string>;
   image?: string;
   color?: string;
+  /** Items in a bundle pack. */
+  quantity?: number;
+  /** Total pack price in cents. */
+  priceCents?: number;
 }
 
 export interface LetterExtraCharacter {
@@ -62,6 +66,41 @@ export function getLettersOption(product: OptionedProduct): ProductOption | unde
   return getProductOptions(product).find((option) => option.type === "letters");
 }
 
+export function getBundleOption(product: OptionedProduct): ProductOption | undefined {
+  return getProductOptions(product).find((option) => option.type === "bundle");
+}
+
+export function selectedBundleChoice(
+  product: OptionedProduct,
+  selections: ProductSelections = {},
+): ProductOptionChoice | undefined {
+  const option = getBundleOption(product);
+  if (!option) return undefined;
+  const value = selections[option.id]?.trim();
+  if (!value) return undefined;
+  return option.choices?.find((choice) => choice.id === value);
+}
+
+export function bundleSize(
+  product: OptionedProduct,
+  selections: ProductSelections = {},
+): number {
+  const choice = selectedBundleChoice(product, selections);
+  const size = choice?.quantity;
+  if (typeof size === "number" && Number.isFinite(size) && size >= 1) {
+    return Math.floor(size);
+  }
+  return 1;
+}
+
+export function lineStockUnits(
+  product: OptionedProduct,
+  selections: ProductSelections = {},
+  quantity = 1,
+): number {
+  return Math.max(1, Math.floor(quantity)) * bundleSize(product, selections);
+}
+
 export function productHasOptions(product: OptionedProduct): boolean {
   return getProductOptions(product).length > 0;
 }
@@ -112,23 +151,51 @@ export function getProductUnitPriceCents(
   selections: ProductSelections = {},
 ): number {
   const letters = getLettersOption(product);
-  if (!letters) return product.priceCents;
-
-  const text = selections[letters.id] ?? "";
-  const count = countBillableLetters(text, letters);
-  if (count === 0) {
-    return letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1));
+  let piece = product.priceCents;
+  if (letters) {
+    const text = selections[letters.id] ?? "";
+    const count = countBillableLetters(text, letters);
+    piece =
+      count === 0
+        ? letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1))
+        : letterPriceCents(letters, count);
   }
-  return letterPriceCents(letters, count);
+
+  const pack = selectedBundleChoice(product, selections);
+  if (!pack) return piece;
+
+  const packSize = bundleSize(product, selections);
+  const packTotal =
+    typeof pack.priceCents === "number" && pack.priceCents > 0
+      ? pack.priceCents
+      : piece * packSize;
+  return Math.max(0, packTotal + (piece - product.priceCents) * packSize);
 }
 
 export function getListedPrice(product: OptionedProduct): { cents: number; from: boolean } {
   const letters = getLettersOption(product);
-  if (letters) {
-    const min = Math.max(1, letters.minLetters ?? 1);
-    return { cents: letterPriceCents(letters, min), from: true };
+  const single = letters
+    ? letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1))
+    : product.priceCents;
+  const bundles = getBundleOption(product)?.choices ?? [];
+  if (bundles.length === 0) {
+    return { cents: single, from: Boolean(letters) };
   }
-  return { cents: product.priceCents, from: false };
+
+  let min = single;
+  for (const choice of bundles) {
+    const size =
+      typeof choice.quantity === "number" && choice.quantity >= 1
+        ? Math.floor(choice.quantity)
+        : 1;
+    const total =
+      typeof choice.priceCents === "number" && choice.priceCents > 0
+        ? choice.priceCents
+        : single * size;
+    const per = Math.round(total / Math.max(1, size));
+    if (per < min) min = per;
+  }
+  return { cents: min, from: min < single || Boolean(letters) };
 }
 
 export function optionLabel(option: ProductOption, locale: ShopLocale): string {
@@ -163,7 +230,7 @@ export function validateSelections(
   for (const option of getProductOptions(product)) {
     const value = selections[option.id]?.trim() ?? "";
 
-    if (option.type === "fabric" || option.type === "hardware") {
+    if (option.type === "fabric" || option.type === "hardware" || option.type === "bundle") {
       if (!value) {
         if (option.required) return { optionId: option.id, reason: "required" };
         continue;

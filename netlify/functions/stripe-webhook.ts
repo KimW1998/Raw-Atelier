@@ -63,10 +63,11 @@ export default async (req: Request) => {
     const id = metadata?.id;
     const catalogProduct = id ? getCatalogProduct(id) : undefined;
     if (!catalogProduct) return [];
+    const stockQty = Number(metadata?.stockQty);
     return [
       {
         product: catalogProduct,
-        quantity: item.quantity ?? 1,
+        quantity: Number.isInteger(stockQty) && stockQty > 0 ? stockQty : (item.quantity ?? 1),
         selectionsText: metadata?.selections
           ? formatSelectionsFromMetadata(metadata.selections, catalogProduct)
           : undefined,

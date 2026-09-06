@@ -22,18 +22,22 @@ export type {
 export {
   BANNER_EXTRA_CHARACTERS,
   billedLetterCount,
+  bundleSize,
   choiceLabel,
   countBillableLetters,
   extraCharactersFor,
   formatSelectionLines,
+  getBundleOption,
   getLettersOption,
   getListedPrice,
   getProductOptions,
   getProductUnitPriceCents,
   letterPriceCents,
+  lineStockUnits,
   optionLabel,
   productHasOptions,
   sanitizeSelections,
+  selectedBundleChoice,
   validateSelections,
 } from "@/lib/product-options";
 

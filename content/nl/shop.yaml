@@ -45,6 +45,10 @@ shop:
     errorInvalid: Kies een geldige optie.
     errorMinLetters: De naamslinger heeft minimaal {min} letters of tekens nodig.
     errorMaxLetters: Die naam is te lang voor dit product.
+    singlePiece: 1 stuk
+    bundleEach: "{price} per stuk"
+    bundleSave: "{amount} voordeel"
+    packCountHint: Aantal bundels van {size} stuks
   cart:
     title: Winkelwagen
     pageTitle: Winkelwagen

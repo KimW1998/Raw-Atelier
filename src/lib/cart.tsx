@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getShopProduct, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
+import { getShopProduct, lineStockUnits, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
 import { isPhysicalCheckoutPaused } from "@/lib/vacation";
 import {
   sanitizeSelections,
@@ -36,6 +36,15 @@ interface CartContextValue {
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
+
+function stockUnitsInCart(items: CartItem[], productId: string, exceptLineId?: string): number {
+  return items
+    .filter((item) => item.productId === productId && item.lineId !== exceptLineId)
+    .reduce((sum, item) => {
+      const product = getShopProduct(item.productId);
+      return sum + (product ? lineStockUnits(product, item.selections, item.quantity) : item.quantity);
+    }, 0);
+}
 
 function createLineId(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -104,13 +113,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!product) return;
       if (isPhysicalCheckoutPaused() && product.type === "physical") return;
       const cleaned = sanitizeSelections(product, selections);
+      const packSize = lineStockUnits(product, cleaned, 1);
       setItems((current) => {
-        const already = current
-          .filter((item) => item.productId === productId)
-          .reduce((sum, item) => sum + item.quantity, 0);
-        const remaining = maxOrderQuantity(product, already);
-        const allowed = Number.isFinite(remaining)
-          ? Math.min(quantity, remaining)
+        const already = stockUnitsInCart(current, productId);
+        const remainingPieces = maxOrderQuantity(product, already);
+        const remainingPacks = Number.isFinite(remainingPieces)
+          ? Math.floor(remainingPieces / packSize)
+          : Number.POSITIVE_INFINITY;
+        const allowed = Number.isFinite(remainingPacks)
+          ? Math.min(quantity, remainingPacks)
           : quantity;
         if (allowed < 1) return current;
         const existing = current.find(
@@ -149,11 +160,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (item.lineId !== lineId) return item;
         const product = getShopProduct(item.productId);
         if (!product) return { ...item, quantity };
-        const others = current
-          .filter((line) => line.productId === item.productId && line.lineId !== lineId)
-          .reduce((sum, line) => sum + line.quantity, 0);
-        const remaining = maxOrderQuantity(product, others);
-        const next = Number.isFinite(remaining) ? Math.min(quantity, remaining) : quantity;
+        const others = stockUnitsInCart(current, item.productId, lineId);
+        const packSize = lineStockUnits(product, item.selections, 1);
+        const remainingPieces = maxOrderQuantity(product, others);
+        const remainingPacks = Number.isFinite(remainingPieces)
+          ? Math.floor(remainingPieces / packSize)
+          : Number.POSITIVE_INFINITY;
+        const next = Number.isFinite(remainingPacks)
+          ? Math.min(quantity, remainingPacks)
+          : quantity;
         if (next < 1) return item;
         return { ...item, quantity: next };
       }),
@@ -165,7 +180,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const value = useMemo<CartContextValue>(
     () => ({
       items,
-      count: items.reduce((sum, item) => sum + item.quantity, 0),
+      count: items.reduce((sum, item) => {
+        const product = getShopProduct(item.productId);
+        return sum + (product ? lineStockUnits(product, item.selections, item.quantity) : item.quantity);
+      }, 0),
       addItem,
       removeItem,
       setQuantity,

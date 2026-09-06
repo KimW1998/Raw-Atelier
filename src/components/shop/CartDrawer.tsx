@@ -6,6 +6,7 @@ import { PremiumImage } from "@/components/ui/PremiumImage";
 import { getCartProducts, useCart } from "@/lib/cart";
 import { useCheckout } from "@/lib/checkout";
 import {
+  bundleSize,
   cartHasPhysical,
   cartLineSummary,
   cartLineUnitCents,
@@ -92,6 +93,7 @@ export function CartDrawer() {
                 <ul className="space-y-4">
                   {lines.map(({ item, product }) => {
                     const summary = cartLineSummary(product, item.selections, locale);
+                    const pack = bundleSize(product, item.selections);
                     return (
                       <li key={item.lineId} className="flex gap-3 rounded-2xl bg-white p-3 shadow-sm">
                         <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
@@ -131,7 +133,7 @@ export function CartDrawer() {
                               <Minus className="h-3 w-3" />
                             </button>
                             <span className="min-w-6 text-center font-body text-sm">
-                              {item.quantity}
+                              {pack > 1 ? `${item.quantity} × ${pack}` : item.quantity}
                             </span>
                             <button
                               type="button"

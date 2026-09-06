@@ -15,6 +15,7 @@ import { useCart } from "@/lib/cart";
 import { useVacation } from "@/lib/vacation";
 import {
   SHOP_TAB_PARAM,
+  bundleSize,
   countBillableLetters,
   formatEuro,
   formatListedPrice,
@@ -28,6 +29,7 @@ import {
   getRelatedProducts,
   isDigitalPatternSection,
   isSoldOut,
+  lineStockUnits,
   maxOrderQuantity,
   productHasOptions,
   useShopProduct,
@@ -84,16 +86,21 @@ export default function ProductPage() {
   const shopTabHref = `/shop?${SHOP_TAB_PARAM}=${
     isDigitalPatternSection(product.section) ? "digitalPatterns" : product.section
   }`;
-  const livePrice = letters
-    ? formatEuro(unitCents, locale)
-    : formatListedPrice(product, locale);
+  const livePrice =
+    letters || bundleSize(product, selections) > 1
+      ? formatEuro(unitCents, locale)
+      : formatListedPrice(product, locale);
   const soldOut = isSoldOut(product);
   const { pausePhysical } = useVacation();
   const physicalPaused = pausePhysical && product.type === "physical";
   const alreadyInCart = items
     .filter((item) => item.productId === product.id)
-    .reduce((sum, item) => sum + item.quantity, 0);
-  const remaining = maxOrderQuantity(product, alreadyInCart);
+    .reduce((sum, item) => sum + lineStockUnits(product, item.selections, item.quantity), 0);
+  const packSize = bundleSize(product, selections);
+  const remainingPieces = maxOrderQuantity(product, alreadyInCart);
+  const remaining = Number.isFinite(remainingPieces)
+    ? Math.floor(remainingPieces / packSize)
+    : Number.POSITIVE_INFINITY;
   const stockCap = Number.isFinite(remaining) ? remaining : undefined;
 
   const addToCart = () => {
@@ -106,7 +113,10 @@ export default function ProductPage() {
     }
     if (isSoldOut(product) || physicalPaused) return;
     setFormError("");
-    addItem(product.id, quantity, selections);
+    const packs = Number.isFinite(remaining)
+      ? Math.min(quantity, Math.max(1, remaining))
+      : quantity;
+    addItem(product.id, packs, selections);
   };
 
   return (
@@ -171,7 +181,7 @@ export default function ProductPage() {
               )}
               {!soldOut && stockCap !== undefined && (
                 <p className="mt-3 font-body text-sm text-brand-black/55">
-                  {t("stockLeft", { count: String(stockCap) })}
+                  {t("stockLeft", { count: String(remainingPieces) })}
                 </p>
               )}
               {product.personalization && !productHasOptions(product) && (
@@ -193,42 +203,51 @@ export default function ProductPage() {
                 <p className="mt-4 font-body text-sm text-red-700">{formError}</p>
               )}
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                {!soldOut && !physicalPaused && (
-                  <div className="flex items-center rounded-full bg-white p-1 shadow-sm">
-                    <button
-                      type="button"
-                      className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
-                      onClick={() => setQuantity((value) => Math.max(1, value - 1))}
-                      aria-label={t("cart.decrease")}
-                    >
-                      −
-                    </button>
-                    <span className="min-w-8 text-center font-body text-sm font-semibold">
-                      {quantity}
-                    </span>
-                    <button
-                      type="button"
-                      className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
-                      onClick={() =>
-                        setQuantity((value) =>
-                          stockCap === undefined ? value + 1 : Math.min(stockCap, value + 1),
-                        )
-                      }
-                      aria-label={t("cart.increase")}
-                    >
-                      +
-                    </button>
-                  </div>
+              <div className="mt-8">
+                <div className="flex flex-wrap items-center gap-4">
+                  {!soldOut && !physicalPaused && (
+                    <div className="flex items-center rounded-full bg-white p-1 shadow-sm">
+                      <button
+                        type="button"
+                        className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
+                        onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                        aria-label={t("cart.decrease")}
+                      >
+                        −
+                      </button>
+                      <span className="min-w-8 text-center font-body text-sm font-semibold">
+                        {Number.isFinite(remaining)
+                          ? Math.min(quantity, Math.max(1, remaining))
+                          : quantity}
+                      </span>
+                      <button
+                        type="button"
+                        className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-brand-pink-light"
+                        onClick={() =>
+                          setQuantity((value) =>
+                            stockCap === undefined ? value + 1 : Math.min(stockCap, value + 1),
+                          )
+                        }
+                        aria-label={t("cart.increase")}
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
+                  <Button
+                    variant="primary"
+                    size="large"
+                    disabled={soldOut || physicalPaused || lettersTooShort || remaining < 1}
+                    onClick={addToCart}
+                  >
+                    {soldOut ? t("soldOut") : physicalPaused ? t("physicalPaused") : t("cart.add")}
+                  </Button>
+                </div>
+                {packSize > 1 && (
+                  <p className="mt-2 font-body text-xs text-brand-black/50">
+                    {t("options.packCountHint", { size: String(packSize) })}
+                  </p>
                 )}
-                <Button
-                  variant="primary"
-                  size="large"
-                  disabled={soldOut || physicalPaused || lettersTooShort || remaining < 1}
-                  onClick={addToCart}
-                >
-                  {soldOut ? t("soldOut") : physicalPaused ? t("physicalPaused") : t("cart.add")}
-                </Button>
               </div>
             </FadeIn>
           </div>

@@ -141,6 +141,68 @@ function OptionField({
         </div>
       )}
 
+      {option.type === "bundle" && (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <button
+            type="button"
+            onClick={() => onChange("")}
+            aria-pressed={!value}
+            className={cn(
+              "rounded-2xl bg-white px-4 py-3 text-left ring-1 transition-all",
+              !value
+                ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
+                : "ring-brand-pink-light hover:ring-brand-pink",
+            )}
+          >
+            <span className="block font-body text-sm font-semibold text-brand-black">
+              {t("options.singlePiece")}
+            </span>
+            <span className="mt-1 block font-body text-sm text-brand-pink-accent">
+              {formatEuro(
+                getProductUnitPriceCents(product, { ...selections, [option.id]: "" }),
+                locale,
+              )}
+            </span>
+          </button>
+          {(option.choices ?? []).map((choice) => {
+            const size = Math.max(1, Math.floor(choice.quantity ?? 1));
+            const total =
+              typeof choice.priceCents === "number" && choice.priceCents > 0
+                ? choice.priceCents
+                : product.priceCents * size;
+            const full = product.priceCents * size;
+            const save = full - total;
+            return (
+              <button
+                key={choice.id}
+                type="button"
+                onClick={() => onChange(choice.id)}
+                aria-pressed={value === choice.id}
+                className={cn(
+                  "rounded-2xl bg-white px-4 py-3 text-left ring-1 transition-all",
+                  value === choice.id
+                    ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
+                    : "ring-brand-pink-light hover:ring-brand-pink",
+                )}
+              >
+                <span className="block font-body text-sm font-semibold text-brand-black">
+                  {choiceLabel(choice, locale)}
+                </span>
+                <span className="mt-1 block font-body text-sm text-brand-pink-accent">
+                  {formatEuro(total, locale)}
+                </span>
+                <span className="mt-1 block font-body text-xs text-brand-black/55">
+                  {t("options.bundleEach", { price: formatEuro(Math.round(total / size), locale) })}
+                  {save > 0
+                    ? ` · ${t("options.bundleSave", { amount: formatEuro(save, locale) })}`
+                    : ""}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {option.type === "name" && (
         <input
           type="text"
