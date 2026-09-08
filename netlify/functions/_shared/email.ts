@@ -1,3 +1,4 @@
+import { Resend } from "resend";
 import {
   formatSelectionLines,
   type ProductSelections,
@@ -36,25 +37,20 @@ export async function sendEmail(options: {
 
   console.log("[order-email] sending", options.subject, "→", options.to, "from", from);
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [options.to],
-      subject: options.subject,
-      text: options.text,
-    }),
+  const resend = new Resend(apiKey);
+  const { data, error } = await resend.emails.send({
+    from,
+    to: [options.to],
+    subject: options.subject,
+    text: options.text,
   });
 
-  if (!response.ok) {
-    const detail = await response.text();
-    console.error("[order-email] Resend weigerde de mail", response.status, detail);
-    throw new Error(`Email failed: ${response.status} ${detail}`);
+  if (error) {
+    console.error("[order-email] Resend weigerde de mail", error);
+    throw new Error(`Email failed: ${error.message}`);
   }
+
+  console.log("[order-email] sent", data?.id);
 }
 
 export function orderNotifyAddress(): string {
