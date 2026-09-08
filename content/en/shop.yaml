@@ -72,14 +72,31 @@ shop:
     remove: Remove
     clear: Empty cart
   result:
+    confirmationEyebrow: Order confirmed
     successTitle: Thank you for your order
+    successTitleNamed: Thank you, {name}
     successDescription: >-
-      Your payment went through. Digital patterns are emailed to you. Physical products are shipped within the
-      Netherlands after I confirm the details with you.
+      Your payment went through. Your order is below. A confirmation is also on its way to your email.
     cancelTitle: Order cancelled
     cancelDescription: Nothing was charged. You can update your cart and try again.
     backToShop: Back to the shop
     contact: Get in touch
+    orderNumber: "Order number {number}"
+    itemsHeading: Your order
+    customerHeading: Details
+    emailSent: "Confirmation sent to {email}"
+    shippingAddress: Shipping address
+    address: Address
+    shipping: Shipping
+    total: Total
+    paid: Paid with Stripe
+    quantity: "{count}×"
+    download: Download
+    loadingOrder: Loading your order…
+    missingOrder: >-
+      Your payment went through. I cannot show this order here right now. Please check your email for the confirmation.
+    digitalNext: Digital patterns are emailed to you. If a download link is listed with the product, you can open it here too.
+    physicalNext: Physical products are made to order and shipped within the Netherlands.
   sections:
     babyGifts:
       eyebrow: Baby & gifts

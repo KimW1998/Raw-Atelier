@@ -72,14 +72,32 @@ shop:
     remove: Verwijderen
     clear: Winkelwagen legen
   result:
+    confirmationEyebrow: Bestelling bevestigd
     successTitle: Bedankt voor je bestelling
+    successTitleNamed: Bedankt, {name}
     successDescription: >-
-      Je betaling is gelukt. Bij een digitaal patroon ontvang je het bestand per e-mail. Bij een fysiek product neem
-      ik contact met je op en verstuur ik het binnen Nederland.
+      Je betaling is gelukt. Hieronder zie je je bestelling. Een bevestiging gaat ook naar je e-mail.
     cancelTitle: Bestelling afgebroken
     cancelDescription: Er is niets afgeschreven. Je kunt je winkelwagen aanpassen en het opnieuw proberen.
     backToShop: Terug naar de shop
     contact: Neem contact op
+    orderNumber: "Bestelnummer {number}"
+    itemsHeading: Je bestelling
+    customerHeading: Gegevens
+    emailSent: "Bevestiging verstuurd naar {email}"
+    shippingAddress: Verzendadres
+    address: Adres
+    shipping: Verzending
+    total: Totaal
+    paid: Betaald via Stripe
+    quantity: "{count}×"
+    download: Download
+    loadingOrder: Je bestelling ophalen…
+    missingOrder: >-
+      Je betaling is gelukt. De details van deze bestelling kan ik hier nu niet tonen. Check je e-mail voor de
+      bevestiging.
+    digitalNext: Digitale patronen stuur ik naar je e-mail. Als er een downloadlink bij het product staat, kun je die ook hier openen.
+    physicalNext: Fysieke producten maak ik op bestelling en verstuur ik binnen Nederland.
   sections:
     babyGifts:
       eyebrow: Baby & cadeaus

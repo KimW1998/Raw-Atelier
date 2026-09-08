@@ -1,14 +1,24 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import type { PortfolioItem } from "@/lib/portfolio";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
 import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import { SHOP_SECTION_ORDER, getProductImages, isDigitalPatternSection, withProductImages } from "@/lib/shop";
+import { cn } from "@/lib/utils";
 import { AutoGrowField, BilingualPair } from "./fields";
 import { StudioImageField, StudioImageList } from "./media";
 import { OrderButtons, moveItem } from "./order";
 import { ShopProductOptionsEditor } from "./shop-options";
+
+const SECTION_LABELS: Record<string, string> = {
+  babyGifts: "Baby cadeaus",
+  keychains: "Keychains",
+  patches: "Patches",
+  pouches: "Tassen",
+  embroideryPatterns: "Borduurpatronen (PDF)",
+  sewingPatterns: "Naaitpatronen (PDF)",
+};
 
 export function PortfolioItemsEditor({
   items,
@@ -120,28 +130,33 @@ export function ShopProductsEditor({
   products: ShopCatalogProduct[];
   onChange: (products: ShopCatalogProduct[]) => void;
 }) {
-  const sectionLabels = useMemo(
-    () => ({
-      babyGifts: "Baby cadeaus",
-      keychains: "Keychains",
-      patches: "Patches",
-      pouches: "Tassen",
-      embroideryPatterns: "Borduurpatronen (PDF)",
-      sewingPatterns: "Naaitpatronen (PDF)",
-    }),
-    [],
-  );
+  const live = useLiveStockMap();
+  const [selectedId, setSelectedId] = useState(products[0]?.id ?? "");
+  const [sectionFilter, setSectionFilter] = useState("all");
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    if (!products.some((product) => product.id === selectedId)) {
+      setSelectedId(products[0]?.id ?? "");
+    }
+  }, [products, selectedId]);
 
   const update = (index: number, patch: Partial<ShopCatalogProduct>) => {
     onChange(products.map((product, i) => (i === index ? { ...product, ...patch } : product)));
   };
 
   const add = () => {
+    const id = `product-${Date.now()}`;
+    const section =
+      sectionFilter !== "all" &&
+      SHOP_SECTION_ORDER.includes(sectionFilter as ShopCatalogProduct["section"])
+        ? (sectionFilter as ShopCatalogProduct["section"])
+        : "babyGifts";
     onChange([
       {
-        id: `product-${Date.now()}`,
-        type: "physical",
-        section: "babyGifts",
+        id,
+        type: isDigitalPatternSection(section) ? "digital" : "physical",
+        section,
         image: "/images/portfolio/gifts-balloon.jpg",
         priceCents: 2500,
         priceLabel: "€ 25,00",
@@ -154,12 +169,30 @@ export function ShopProductsEditor({
       },
       ...products,
     ]);
+    setSelectedId(id);
+    setQuery("");
   };
+
+  const needle = query.trim().toLowerCase();
+  const visible = products.filter((product) => {
+    if (sectionFilter !== "all" && product.section !== sectionFilter) return false;
+    if (!needle) return true;
+    return (
+      product.name.nl.toLowerCase().includes(needle) ||
+      product.name.en.toLowerCase().includes(needle) ||
+      product.id.toLowerCase().includes(needle)
+    );
+  });
+  const selectedIndex = products.findIndex((product) => product.id === selectedId);
+  const selected = selectedIndex >= 0 ? products[selectedIndex] : undefined;
+  const groups = SHOP_SECTION_ORDER.filter((section) =>
+    visible.some((product) => product.section === section),
+  );
 
   return (
     <div className="space-y-4">
-      <StockOverview products={products} />
-      <div className="flex items-center justify-between">
+      <StockOverview products={products} onSelect={setSelectedId} />
+      <div className="flex items-center justify-between gap-3">
         <h2 className="font-heading text-lg text-brand-black">Producten</h2>
         <button
           type="button"
@@ -169,32 +202,110 @@ export function ShopProductsEditor({
           + Product
         </button>
       </div>
-      {products.map((product, index) => (
-        <article key={product.id} className="space-y-3 rounded-2xl border border-brand-pink-light bg-white p-4">
+      <div className="flex flex-col gap-2">
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Zoek op naam…"
+          className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-2.5 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
+        />
+        <select
+          className="rounded-xl border border-brand-pink-light bg-white px-2 py-2 font-body text-sm"
+          value={sectionFilter}
+          onChange={(event) => setSectionFilter(event.target.value)}
+        >
+          <option value="all">Alle categorieën</option>
+          {SHOP_SECTION_ORDER.map((section) => (
+            <option key={section} value={section}>
+              {SECTION_LABELS[section]}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="overflow-hidden rounded-2xl border border-brand-pink-light bg-white">
+        {visible.length === 0 ? (
+          <p className="px-4 py-6 font-body text-sm text-brand-black/55">
+            Geen producten in deze selectie.
+          </p>
+        ) : (
+          groups.map((section) => (
+            <div key={section} className="border-b border-brand-pink-light last:border-b-0">
+              <p className="bg-brand-pink-light/50 px-3 py-1.5 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-black/50">
+                {SECTION_LABELS[section]}
+              </p>
+              <ul>
+                {visible
+                  .filter((product) => product.section === section)
+                  .map((product) => {
+                    const remaining = liveRemaining(product, live);
+                    const active = product.id === selectedId;
+                    return (
+                      <li key={product.id}>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedId(product.id)}
+                          className={cn(
+                            "flex w-full items-center gap-3 px-3 py-2.5 text-left font-body text-sm",
+                            active ? "bg-brand-pink-light" : "hover:bg-brand-offwhite",
+                          )}
+                        >
+                          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl bg-brand-pink-light">
+                            {product.image ? (
+                              <img src={product.image} alt="" className="h-full w-full object-cover" />
+                            ) : null}
+                          </span>
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate font-semibold text-brand-black">
+                              {product.name.nl || product.id}
+                            </span>
+                            <span className="block truncate text-xs text-brand-black/50">
+                              {product.type === "digital" ? "Digitaal" : "Fysiek"}
+                              {remaining != null
+                                ? remaining === 0
+                                  ? " · uitverkocht"
+                                  : ` · ${remaining} stuks`
+                                : ""}
+                            </span>
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          ))
+        )}
+      </div>
+      {selected ? (
+        <article className="space-y-3 rounded-2xl border border-brand-pink-light bg-white p-4">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-brand-black/45">
+            Bewerken
+          </p>
           <div className="grid grid-cols-2 gap-2">
             <select
               className="rounded-xl border border-brand-pink-light px-2 py-2 font-body text-sm"
-              value={product.section}
+              value={selected.section}
               onChange={(event) =>
-                update(index, {
+                update(selectedIndex, {
                   section: event.target.value as ShopCatalogProduct["section"],
                   type: isDigitalPatternSection(event.target.value)
                     ? "digital"
-                    : product.type,
+                    : selected.type,
                 })
               }
             >
               {SHOP_SECTION_ORDER.map((section) => (
                 <option key={section} value={section}>
-                  {sectionLabels[section]}
+                  {SECTION_LABELS[section]}
                 </option>
               ))}
             </select>
             <select
               className="rounded-xl border border-brand-pink-light px-2 py-2 font-body text-sm"
-              value={product.type}
+              value={selected.type}
               onChange={(event) =>
-                update(index, { type: event.target.value as ShopCatalogProduct["type"] })
+                update(selectedIndex, { type: event.target.value as ShopCatalogProduct["type"] })
               }
             >
               <option value="physical">Fysiek (NL)</option>
@@ -203,26 +314,30 @@ export function ShopProductsEditor({
           </div>
           <StudioImageList
             folder="shop"
-            images={getProductImages(product)}
+            images={getProductImages(selected)}
             onChange={(images) =>
-              onChange(products.map((item, i) => (i === index ? withProductImages(item, images) : item)))
+              onChange(
+                products.map((item, i) =>
+                  i === selectedIndex ? withProductImages(item, images) : item,
+                ),
+              )
             }
           />
           <BilingualPair
-            nl={product.name.nl}
-            en={product.name.en}
+            nl={selected.name.nl}
+            en={selected.name.en}
             tone="title"
             onChange={(locale, value) =>
-              update(index, { name: { ...product.name, [locale]: value } })
+              update(selectedIndex, { name: { ...selected.name, [locale]: value } })
             }
           />
           <BilingualPair
-            nl={product.description.nl}
-            en={product.description.en}
+            nl={selected.description.nl}
+            en={selected.description.en}
             tone="body"
             onChange={(locale, value) =>
-              update(index, {
-                description: { ...product.description, [locale]: value },
+              update(selectedIndex, {
+                description: { ...selected.description, [locale]: value },
               })
             }
           />
@@ -230,8 +345,8 @@ export function ShopProductsEditor({
             <label className="block min-w-0">
               <span className="mb-1.5 block font-body text-xs text-brand-black/50">Prijs op de site</span>
               <AutoGrowField
-                value={product.priceLabel}
-                onChange={(value) => update(index, { priceLabel: value })}
+                value={selected.priceLabel}
+                onChange={(value) => update(selectedIndex, { priceLabel: value })}
               />
             </label>
             <label className="block min-w-0">
@@ -239,20 +354,22 @@ export function ShopProductsEditor({
               <input
                 type="number"
                 className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
-                value={product.priceCents}
-                onChange={(event) => update(index, { priceCents: Number(event.target.value) })}
+                value={selected.priceCents}
+                onChange={(event) => update(selectedIndex, { priceCents: Number(event.target.value) })}
               />
             </label>
           </div>
           <label className="flex items-center gap-2 font-body text-sm">
             <input
               type="checkbox"
-              checked={product.personalization}
-              onChange={(event) => update(index, { personalization: event.target.checked })}
+              checked={selected.personalization}
+              onChange={(event) =>
+                update(selectedIndex, { personalization: event.target.checked })
+              }
             />
             Personalisatie
           </label>
-          {product.type === "digital" ? (
+          {selected.type === "digital" ? (
             <label className="block min-w-0">
               <span className="mb-1.5 block font-body text-xs text-brand-black/50">
                 Downloadlink (PDF)
@@ -261,8 +378,10 @@ export function ShopProductsEditor({
                 type="url"
                 className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
                 placeholder="https://…"
-                value={product.digitalFile ?? ""}
-                onChange={(event) => update(index, { digitalFile: event.target.value.trim() })}
+                value={selected.digitalFile ?? ""}
+                onChange={(event) =>
+                  update(selectedIndex, { digitalFile: event.target.value.trim() })
+                }
               />
               <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-black/50">
                 Zet hier de link naar het patroonbestand. Na betaling krijgt de koper die link in
@@ -275,16 +394,16 @@ export function ShopProductsEditor({
             <label className="flex items-center gap-2 font-body text-sm">
               <input
                 type="checkbox"
-                checked={typeof product.stock === "number"}
+                checked={typeof selected.stock === "number"}
                 onChange={(event) =>
-                  update(index, {
-                    stock: event.target.checked ? Math.max(1, product.stock ?? 1) : undefined,
+                  update(selectedIndex, {
+                    stock: event.target.checked ? Math.max(1, selected.stock ?? 1) : undefined,
                   })
                 }
               />
               Voorraad bijhouden
             </label>
-            {typeof product.stock === "number" ? (
+            {typeof selected.stock === "number" ? (
               <label className="block min-w-0">
                 <span className="mb-1.5 block font-body text-xs text-brand-black/50">
                   Aantal op voorraad
@@ -293,12 +412,12 @@ export function ShopProductsEditor({
                   type="number"
                   min={0}
                   className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
-                  value={product.stock}
+                  value={selected.stock}
                   onChange={(event) =>
-                    update(index, { stock: Math.max(0, Number(event.target.value) || 0) })
+                    update(selectedIndex, { stock: Math.max(0, Number(event.target.value) || 0) })
                   }
                 />
-                <LiveStockHint product={product} />
+                <LiveStockHint product={selected} />
               </label>
             ) : null}
             <p className="font-body text-xs leading-relaxed text-brand-black/50">
@@ -308,27 +427,27 @@ export function ShopProductsEditor({
             </p>
           </div>
           <ShopProductOptionsEditor
-            product={product}
+            product={selected}
             onChange={(next) =>
-              onChange(products.map((item, i) => (i === index ? next : item)))
+              onChange(products.map((item, i) => (i === selectedIndex ? next : item)))
             }
           />
           <div className="flex flex-wrap items-center justify-between gap-2">
             <OrderButtons
-              index={index}
+              index={selectedIndex}
               total={products.length}
-              onMove={(direction) => onChange(moveItem(products, index, direction))}
+              onMove={(direction) => onChange(moveItem(products, selectedIndex, direction))}
             />
             <button
               type="button"
-              onClick={() => onChange(products.filter((_, i) => i !== index))}
+              onClick={() => onChange(products.filter((_, i) => i !== selectedIndex))}
               className="font-body text-xs text-brand-rose hover:underline"
             >
               Verwijder
             </button>
           </div>
         </article>
-      ))}
+      ) : null}
     </div>
   );
 }
@@ -338,7 +457,13 @@ function liveRemaining(product: ShopCatalogProduct, live: Record<string, number>
   return overlayLiveStock(product, live).stock ?? product.stock;
 }
 
-function StockOverview({ products }: { products: ShopCatalogProduct[] }) {
+function StockOverview({
+  products,
+  onSelect,
+}: {
+  products: ShopCatalogProduct[];
+  onSelect: (productId: string) => void;
+}) {
   const live = useLiveStockMap();
   const tracked = products.filter((product) => typeof product.stock === "number");
 
@@ -355,14 +480,17 @@ function StockOverview({ products }: { products: ShopCatalogProduct[] }) {
           {tracked.map((product) => {
             const remaining = liveRemaining(product, live) ?? 0;
             return (
-              <li
-                key={product.id}
-                className="flex items-baseline justify-between gap-3 font-body text-sm text-brand-black"
-              >
-                <span className="min-w-0 truncate">{product.name.nl}</span>
-                <span className={remaining === 0 ? "shrink-0 font-semibold text-brand-rose" : "shrink-0"}>
-                  {remaining === 0 ? "Uitverkocht" : `${remaining} stuks`}
-                </span>
+              <li key={product.id}>
+                <button
+                  type="button"
+                  onClick={() => onSelect(product.id)}
+                  className="flex w-full items-baseline justify-between gap-3 py-0.5 text-left font-body text-sm text-brand-black hover:text-brand-pink-accent"
+                >
+                  <span className="min-w-0 truncate">{product.name.nl}</span>
+                  <span className={remaining === 0 ? "shrink-0 font-semibold text-brand-rose" : "shrink-0"}>
+                    {remaining === 0 ? "Uitverkocht" : `${remaining} stuks`}
+                  </span>
+                </button>
               </li>
             );
           })}
