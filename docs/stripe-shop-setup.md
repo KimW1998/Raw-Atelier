@@ -73,7 +73,7 @@ Zet de `whsec_...` uit die output in `.env`.
 
 ## Digitale PDF's
 
-Zet in de catalogus bij een patroon het veld `digitalFile` op een URL naar het PDF-bestand. Na betaling krijgt de koper die link per mail. Laat je het veld leeg, dan vraagt de mail aan Kim om het bestand na te sturen.
+Zet in de studio bij een digitaal product het veld **Downloadlink (PDF)** op een URL naar het bestand (Google Drive of Dropbox, “iedereen met de link”). Na betaling krijgt de koper die link in de mail. Laat je het veld leeg, dan vraagt de mail aan Kim om het bestand na te sturen. De link staat niet op de shoppagina.
 
 ## Personalisatie
 

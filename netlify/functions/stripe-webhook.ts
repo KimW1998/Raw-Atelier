@@ -103,9 +103,10 @@ export default async (req: Request) => {
     const catalogProduct = id ? getCatalogProduct(id) : undefined;
     if (!catalogProduct) return [];
     const stockQty = Number(metadata?.stockQty);
+    const digitalFile = (catalogProduct.digitalFile || metadata?.digitalFile || "").trim();
     return [
       {
-        product: catalogProduct,
+        product: { ...catalogProduct, digitalFile },
         quantity: Number.isInteger(stockQty) && stockQty > 0 ? stockQty : (item.quantity ?? 1),
         selections: parseSelections(metadata?.selections),
       },
