@@ -289,6 +289,31 @@
       ]
     },
     {
+      "id": "apple-bag-tag-pattern",
+      "type": "digital",
+      "section": "embroideryPatterns",
+      "image": "/images/shop/apple-bag-tag/tag-1.jpg",
+      "images": [
+        "/images/shop/apple-bag-tag/tag-2.jpg",
+        "/images/shop/apple-bag-tag/tag-3.jpg",
+        "/images/shop/apple-bag-tag/tag-4.jpg",
+        "/images/shop/apple-bag-tag/tag-5.jpg",
+        "/images/shop/apple-bag-tag/tag-6.jpg"
+      ],
+      "priceCents": 725,
+      "priceLabel": "€ 7,25",
+      "personalization": false,
+      "digitalFile": "",
+      "name": {
+        "nl": "Appel tassenlabel borduurbestand (ITH)",
+        "en": "Apple bag tag embroidery design (ITH)"
+      },
+      "description": {
+        "nl": "Borduur zelf een appel-tassenlabel in de hoepel (ITH). Voor tas, lunchbox, juffenbedankje of sleutelhanger. Drie maten: 7 cm, 10 cm en 13 cm. Bestanden: DST, PES, JEF, EXP, VP3, HUS en XXX. Alleen het kader; lettertype zit er niet bij, die voeg je zelf toe. Digitaal bestand, geen fysiek product. Je hebt een borduurmachine nodig. Direct na betaling per e-mail, voor eigen gebruik. Afgewerkte stukken mag je verkopen, de bestanden zelf niet doorverkopen.",
+        "en": "Stitch your own apple bag tag in the hoop (ITH). For bags, lunchboxes, teacher gifts or keychains. Three sizes: 7 cm, 10 cm and 13 cm. Formats: DST, PES, JEF, EXP, VP3, HUS and XXX. Border only; the font is not included, so you add the name yourself. Digital file, not a physical product. An embroidery machine is required. Emailed after payment, for personal use. You may sell finished pieces, but not the files."
+      }
+    },
+    {
       "id": "quilted-ereader-pattern",
       "type": "digital",
       "section": "sewingPatterns",
@@ -301,7 +326,7 @@
       "priceCents": 539,
       "priceLabel": "€ 5,39",
       "personalization": false,
-      "digitalFile": "",
+      "digitalFile": "https://drive.google.com/drive/folders/13b6DlhRFKNK2WSzcEFpHZTjZZ1LcatnC?usp=sharing",
       "name": {
         "nl": "Quilted e-reader case naaitpatroon (PDF)",
         "en": "Quilted e-reader case sewing pattern (PDF)"
@@ -324,7 +349,7 @@
       "priceCents": 550,
       "priceLabel": "€ 5,50",
       "personalization": false,
-      "digitalFile": "",
+      "digitalFile": "https://drive.google.com/drive/folders/1N50c_O9f9fpYknLnNL2Bqvq64zSRmK7o?usp=sharing",
       "name": {
         "nl": "Flow Cami naaitpatroon (PDF)",
         "en": "Flow Cami sewing pattern (PDF)"
@@ -347,7 +372,7 @@
       "priceCents": 600,
       "priceLabel": "€ 6,00",
       "personalization": false,
-      "digitalFile": "",
+      "digitalFile": "https://drive.google.com/drive/folders/1aix471XrWkJKwt7KC1dcfqJpX0WFUDIF?usp=sharing",
       "name": {
         "nl": "Kruisrug schort naaitpatroon (PDF)",
         "en": "Cross-back apron sewing pattern (PDF)"
