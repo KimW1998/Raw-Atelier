@@ -8,7 +8,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getShopProduct, lineStockUnits, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
+import { availableStock, getShopProduct, lineStockUnits, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
+import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import { isPhysicalCheckoutPaused } from "@/lib/vacation";
 import {
   sanitizeSelections,
@@ -62,6 +63,36 @@ function selectionsKey(selections: ProductSelections): string {
   );
 }
 
+function clampCartToStock(
+  items: CartItem[],
+  live: Record<string, number>,
+): CartItem[] {
+  const used = new Map<string, number>();
+  const next: CartItem[] = [];
+  for (const item of items) {
+    const catalogProduct = getShopProduct(item.productId);
+    if (!catalogProduct) continue;
+    const product = overlayLiveStock(catalogProduct, live);
+    const stock = availableStock(product);
+    const pack = lineStockUnits(product, item.selections, 1);
+    const usedNow = used.get(item.productId) ?? 0;
+    const leftover = stock === null ? Number.POSITIVE_INFINITY : Math.max(0, stock - usedNow);
+    const maxPacks = Number.isFinite(leftover) ? Math.floor(leftover / pack) : item.quantity;
+    const qty = Math.min(item.quantity, Math.max(0, maxPacks));
+    if (qty < 1) continue;
+    next.push({ ...item, quantity: qty });
+    used.set(item.productId, usedNow + pack * qty);
+  }
+  return next;
+}
+
+function sameCart(a: CartItem[], b: CartItem[]): boolean {
+  if (a.length !== b.length) return false;
+  return a.every(
+    (item, index) => item.lineId === b[index]?.lineId && item.quantity === b[index]?.quantity,
+  );
+}
+
 function normalizeItem(raw: unknown): CartItem | null {
   if (!raw || typeof raw !== "object") return null;
   const item = raw as Partial<CartItem> & { productId?: string; quantity?: number };
@@ -99,6 +130,7 @@ function writeStoredCart(items: CartItem[]) {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const liveStock = useLiveStockMap();
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [ready, setReady] = useState(false);
@@ -112,6 +144,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems(readStoredCart());
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    if (!ready) return;
+    setItems((current) => {
+      const next = clampCartToStock(current, liveStock);
+      return sameCart(current, next) ? current : next;
+    });
+  }, [liveStock, ready]);
 
   useEffect(() => {
     if (!ready) return;

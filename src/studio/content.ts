@@ -140,6 +140,7 @@ const LABELS: Record<string, string> = {
   bundleEach: "Prijs per stuk",
   bundleSave: "Voordeel bundel",
   packCountHint: "Hint aantal bundels",
+  bundleNotEnoughStock: "Bundel te groot voor voorraad",
   pageTitle: "Paginatitel winkelwagen",
   summary: "Overzicht",
   subtotal: "Subtotaal",

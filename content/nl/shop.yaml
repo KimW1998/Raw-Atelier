@@ -49,6 +49,7 @@ shop:
     bundleEach: "{price} per stuk"
     bundleSave: "{amount} voordeel"
     packCountHint: Aantal bundels van {size} stuks
+    bundleNotEnoughStock: Niet op voorraad ({size} stuks nodig)
   cart:
     title: Winkelwagen
     pageTitle: Winkelwagen

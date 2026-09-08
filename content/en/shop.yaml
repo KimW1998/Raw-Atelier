@@ -49,6 +49,7 @@ shop:
     bundleEach: "{price} each"
     bundleSave: "{amount} off"
     packCountHint: Number of {size}-packs
+    bundleNotEnoughStock: Not enough stock ({size} needed)
   cart:
     title: Cart
     pageTitle: Cart

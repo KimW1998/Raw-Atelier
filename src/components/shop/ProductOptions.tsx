@@ -74,12 +74,14 @@ function OptionField({
   onChange,
   product,
   selections,
+  remainingPieces,
 }: {
   option: ProductOption;
   value: string;
   onChange: (value: string) => void;
   product: ShopCatalogProduct;
   selections: ProductSelections;
+  remainingPieces: number;
 }) {
   const locale = useLocale();
   const t = useTranslations("shop");
@@ -172,17 +174,26 @@ function OptionField({
                 : product.priceCents * size;
             const full = product.priceCents * size;
             const save = full - total;
+            const tooBig =
+              Number.isFinite(remainingPieces) && size > remainingPieces;
             return (
               <button
                 key={choice.id}
                 type="button"
-                onClick={() => onChange(choice.id)}
+                disabled={tooBig}
+                onClick={() => {
+                  if (tooBig) return;
+                  onChange(choice.id);
+                }}
                 aria-pressed={value === choice.id}
+                aria-disabled={tooBig}
                 className={cn(
                   "rounded-2xl bg-white px-4 py-3 text-left ring-1 transition-all",
-                  value === choice.id
-                    ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
-                    : "ring-brand-pink-light hover:ring-brand-pink",
+                  tooBig
+                    ? "cursor-not-allowed opacity-45 ring-brand-pink-light"
+                    : value === choice.id
+                      ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
+                      : "ring-brand-pink-light hover:ring-brand-pink",
                 )}
               >
                 <span className="block font-body text-sm font-semibold text-brand-black">
@@ -192,10 +203,13 @@ function OptionField({
                   {formatEuro(total, locale)}
                 </span>
                 <span className="mt-1 block font-body text-xs text-brand-black/55">
-                  {t("options.bundleEach", { price: formatEuro(Math.round(total / size), locale) })}
-                  {save > 0
-                    ? ` · ${t("options.bundleSave", { amount: formatEuro(save, locale) })}`
-                    : ""}
+                  {tooBig
+                    ? t("options.bundleNotEnoughStock", { size: String(size) })
+                    : `${t("options.bundleEach", { price: formatEuro(Math.round(total / size), locale) })}${
+                        save > 0
+                          ? ` · ${t("options.bundleSave", { amount: formatEuro(save, locale) })}`
+                          : ""
+                      }`}
                 </span>
               </button>
             );
@@ -292,10 +306,12 @@ export function ProductOptionsForm({
   product,
   selections,
   onChange,
+  remainingPieces,
 }: {
   product: ShopCatalogProduct;
   selections: ProductSelections;
   onChange: (selections: ProductSelections) => void;
+  remainingPieces?: number;
 }) {
   const options = getProductOptions(product);
   if (options.length === 0) return null;
@@ -308,6 +324,9 @@ export function ProductOptionsForm({
           option={option}
           product={product}
           selections={selections}
+          remainingPieces={
+            typeof remainingPieces === "number" ? remainingPieces : Number.POSITIVE_INFINITY
+          }
           value={selections[option.id] ?? ""}
           onChange={(value) => onChange({ ...selections, [option.id]: value })}
         />

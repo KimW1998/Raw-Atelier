@@ -15,6 +15,46 @@ function parseSelections(raw: string | undefined): ProductSelections | undefined
   }
 }
 
+type ShippingLike = {
+  name?: string | null;
+  address?: Stripe.Address | null;
+} | null;
+
+function formatAddressBlock(
+  details: ShippingLike,
+  phone?: string | null,
+): string | undefined {
+  const address = details?.address;
+  const cityLine = [address?.postal_code, address?.city].filter(Boolean).join(" ").trim();
+  const lines = [
+    details?.name,
+    address?.line1,
+    address?.line2,
+    cityLine,
+    address?.state,
+    address?.country,
+    phone,
+  ].filter((line): line is string => Boolean(line && line.trim()));
+  return lines.length > 0 ? lines.join("\n") : undefined;
+}
+
+function shippingAddressFromSession(session: Stripe.Checkout.Session): string | undefined {
+  const collected = session.collected_information?.shipping_details;
+  const legacy = (session as Stripe.Checkout.Session & { shipping_details?: ShippingLike })
+    .shipping_details;
+  return (
+    formatAddressBlock(collected) ||
+    formatAddressBlock(legacy) ||
+    formatAddressBlock(
+      {
+        name: session.customer_details?.name,
+        address: session.customer_details?.address,
+      },
+      session.customer_details?.phone,
+    )
+  );
+}
+
 export default async (req: Request) => {
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
@@ -46,7 +86,9 @@ export default async (req: Request) => {
     return new Response("ok");
   }
 
-  const session = event.data.object as Stripe.Checkout.Session;
+  const session = await stripe.checkout.sessions.retrieve(
+    (event.data.object as Stripe.Checkout.Session).id,
+  );
   const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
     expand: ["data.price.product"],
   });
@@ -70,18 +112,11 @@ export default async (req: Request) => {
     ];
   });
 
-  const address = session.shipping_details?.address;
-  const addressText = address
-    ? [
-        session.shipping_details?.name,
-        address.line1,
-        address.line2,
-        `${address.postal_code || ""} ${address.city || ""}`.trim(),
-        address.country,
-      ]
-        .filter(Boolean)
-        .join("\n")
-    : undefined;
+  const addressText = shippingAddressFromSession(session);
+  const shippingName =
+    session.collected_information?.shipping_details?.name ||
+    (session as Stripe.Checkout.Session & { shipping_details?: { name?: string | null } })
+      .shipping_details?.name;
 
   const personalization = session.custom_fields?.find(
     (field) => field.key === "personalization",
@@ -90,7 +125,7 @@ export default async (req: Request) => {
   const emails = formatOrderEmail({
     sessionId: session.id,
     email: session.customer_details?.email || session.customer_email || "",
-    name: session.customer_details?.name || session.shipping_details?.name || undefined,
+    name: session.customer_details?.name || shippingName || undefined,
     address: addressText,
     products,
     personalization: personalization || undefined,

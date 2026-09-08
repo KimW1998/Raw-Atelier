@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -17,6 +17,7 @@ import {
   SHOP_TAB_PARAM,
   bundleSize,
   countBillableLetters,
+  getBundleOption,
   formatEuro,
   formatListedPrice,
   getLettersOption,
@@ -103,6 +104,14 @@ export default function ProductPage() {
     : Number.POSITIVE_INFINITY;
   const stockCap = Number.isFinite(remaining) ? remaining : undefined;
 
+  useEffect(() => {
+    if (!Number.isFinite(remainingPieces) || packSize <= remainingPieces) return;
+    const option = getBundleOption(product);
+    if (!option || !selections[option.id]) return;
+    setSelections((current) => ({ ...current, [option.id]: "" }));
+    setQuantity(1);
+  }, [packSize, product, remainingPieces, selections]);
+
   const addToCart = () => {
     const error = validateSelections(product, selections);
     if (error) {
@@ -112,10 +121,10 @@ export default function ProductPage() {
       return;
     }
     if (isSoldOut(product) || physicalPaused) return;
+    if (Number.isFinite(remaining) && remaining < 1) return;
     setFormError("");
-    const packs = Number.isFinite(remaining)
-      ? Math.min(quantity, Math.max(1, remaining))
-      : quantity;
+    const packs = Number.isFinite(remaining) ? Math.min(quantity, remaining) : quantity;
+    if (packs < 1) return;
     addItem(product.id, packs, selections);
   };
 
@@ -193,8 +202,10 @@ export default function ProductPage() {
               <ProductOptionsForm
                 product={product}
                 selections={selections}
+                remainingPieces={remainingPieces}
                 onChange={(next) => {
                   setSelections(next);
+                  setQuantity(1);
                   setFormError("");
                 }}
               />
@@ -217,7 +228,7 @@ export default function ProductPage() {
                       </button>
                       <span className="min-w-8 text-center font-body text-sm font-semibold">
                         {Number.isFinite(remaining)
-                          ? Math.min(quantity, Math.max(1, remaining))
+                          ? Math.min(quantity, Math.max(0, remaining))
                           : quantity}
                       </span>
                       <button
