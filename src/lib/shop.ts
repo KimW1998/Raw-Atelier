@@ -61,11 +61,23 @@ export const SHOP_TAB_ORDER = [
   "keychains",
   "patches",
   "pouches",
-  "digitalPatterns",
+  "embroideryPatterns",
+  "sewingPatterns",
   "madeToOrder",
 ] as const;
 
 export type ShopTabId = (typeof SHOP_TAB_ORDER)[number];
+
+export const SHOP_PRIMARY_TABS = [
+  "babyGifts",
+  "keychains",
+  "patches",
+  "pouches",
+  "digitalPatterns",
+  "madeToOrder",
+] as const;
+
+export type ShopPrimaryTabId = (typeof SHOP_PRIMARY_TABS)[number];
 
 export const SHOP_TAB_PARAM = "tab";
 
@@ -83,6 +95,10 @@ export interface ShopCatalogProduct {
   digitalFile?: string;
   /** Remaining units. Omit or leave unset for unlimited (typical for PDFs). 0 = sold out. */
   stock?: number;
+  /** Product-only sale percent. If set, this overrides the site-wide sale. */
+  salePercent?: number;
+  /** Skip the site-wide sale for this product. */
+  saleSkip?: boolean;
   name: Record<Locale, string>;
   description: Record<Locale, string>;
   options?: ProductOption[];
@@ -94,6 +110,37 @@ export type MadeToOrderId = (typeof MADE_TO_ORDER_IDS)[number];
 
 export function isShopTabId(value: string | null | undefined): value is ShopTabId {
   return SHOP_TAB_ORDER.includes(value as ShopTabId);
+}
+
+export function resolveShopTab(value: string | null | undefined): ShopTabId | null {
+  if (!value) return null;
+  if (value === "digitalPatterns") return "embroideryPatterns";
+  if (isShopTabId(value)) return value;
+  return null;
+}
+
+export function getShopTabHref(tab: ShopTabId | "digitalPatterns"): string {
+  const resolved = resolveShopTab(tab === "digitalPatterns" ? "embroideryPatterns" : tab);
+  if (!resolved) return "/shop";
+  return `/shop?${SHOP_TAB_PARAM}=${resolved}`;
+}
+
+export function getPrimaryTabCoverImages(
+  tab: ShopPrimaryTabId,
+  products: ShopCatalogProduct[],
+): string[] {
+  if (tab === "digitalPatterns") {
+    const embroidery = products.find((product) => product.section === "embroideryPatterns");
+    const sewing = products.find((product) => product.section === "sewingPatterns");
+    return [embroidery?.image, sewing?.image].filter((src): src is string => Boolean(src));
+  }
+  if (tab === "madeToOrder") {
+    return ["/images/services/fashion.jpg"];
+  }
+  return productsForTab(products, tab)
+    .slice(0, 3)
+    .map((product) => product.image)
+    .filter(Boolean);
 }
 
 export function isDigitalPatternSection(
@@ -126,9 +173,6 @@ export function productsForTab(
   tab: ShopTabId,
 ): ShopCatalogProduct[] {
   if (tab === "madeToOrder") return [];
-  if (tab === "digitalPatterns") {
-    return products.filter((product) => isDigitalPatternSection(product.section));
-  }
   if (!isShopSectionId(tab)) return [];
   return products.filter((product) => product.section === tab);
 }
@@ -210,7 +254,7 @@ export function formatListedPrice(product: ShopCatalogProduct, locale: Locale): 
   if (listed.from) {
     return locale === "nl" ? `vanaf ${amount}` : `from ${amount}`;
   }
-  return product.priceLabel || amount;
+  return listed.salePercent > 0 ? amount : product.priceLabel || amount;
 }
 
 export function getProductHref(id: string): string {
@@ -237,6 +281,13 @@ export function cartLineUnitCents(
   selections: ProductSelections = {},
 ): number {
   return getProductUnitPriceCents(product, selections);
+}
+
+export function cartLineOriginalCents(
+  product: ShopCatalogProduct,
+  selections: ProductSelections = {},
+): number {
+  return getProductUnitPriceCents(product, selections, false);
 }
 
 export function cartSubtotalCents(

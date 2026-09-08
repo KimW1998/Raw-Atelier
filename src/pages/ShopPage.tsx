@@ -1,16 +1,12 @@
 import { SEO } from "@/components/SEO";
 import { ContactCTASection } from "@/components/sections/ContactCTASection";
 import { ShopCatalog } from "@/components/sections/ShopCatalog";
-import { FadeIn } from "@/components/animations/FadeIn";
-import { Container } from "@/components/ui/Container";
-import { PatternBackground } from "@/components/ui/PatternBackground";
 import { useLocale, useTranslations } from "@/i18n/context";
 
 export default function ShopPage() {
   const locale = useLocale();
   const tMeta = useTranslations("metadata");
   const tBrand = useTranslations("brand");
-  const t = useTranslations("shopPage");
 
   return (
     <>
@@ -23,27 +19,6 @@ export default function ShopPage() {
         tagline={tBrand("tagline")}
         keywords={tMeta("keywords")}
       />
-      <section className="relative overflow-hidden pt-24">
-        <PatternBackground variant="hero" />
-        <Container className="relative z-10 pb-6 pt-10 text-center md:pb-8 md:pt-12">
-          <FadeIn>
-            <p className="mb-3 font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
-              {t("hero.eyebrow")}
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <h1 className="font-heading text-3xl text-brand-black md:text-4xl lg:text-5xl">
-              {t("hero.title")}
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <p className="mx-auto mt-4 max-w-2xl font-body text-base leading-relaxed text-brand-black/70 md:text-lg">
-              {t("hero.description")}
-            </p>
-          </FadeIn>
-        </Container>
-      </section>
-
       <ShopCatalog />
       <ContactCTASection />
     </>

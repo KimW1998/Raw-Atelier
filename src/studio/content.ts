@@ -4,7 +4,9 @@ import type { PortfolioItem } from "@/lib/portfolio";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import { deepMerge } from "@/lib/utils";
 import catalog from "@/data/shop-catalog.json";
+import saleSettings from "@/data/sale.json";
 import vacationSettings from "@/data/vacation.json";
+import type { SaleSettings } from "@/lib/sale";
 import type { VacationSettings } from "@/lib/vacation";
 
 const yamlModules = import.meta.glob("../../content/*/*.yaml", {
@@ -26,6 +28,7 @@ export interface StudioDraft {
   portfolioItems: PortfolioItem[];
   shopProducts: ShopCatalogProduct[];
   vacation: VacationSettings;
+  sale: SaleSettings;
 }
 
 export type FieldType = "text" | "multiline" | "stringList" | "group";
@@ -89,10 +92,22 @@ const LABELS: Record<string, string> = {
   all: "Alles",
   events: "Events",
   shopPage: "Shop-pagina",
+  browse: "Collectie-label",
+  browseTitle: "Overzicht: titel",
+  browseDescription: "Overzicht: tekst",
+  spotlight: "Uitgelicht",
+  more: "Meer in de shop",
+  pointDigital: "PDF wereldwijd",
+  pointPhysical: "Verzending NL",
+  pointCustom: "Op bestelling",
+  comingSoon: "Binnenkort",
+  countOne: "1 product",
+  madeToOrderCount: "Aantal op aanvraag",
   shippingNote: "Verzendinfo",
   trust: "Vertrouwen",
   shop: "Shop",
   tabsLabel: "Tabbladen",
+  overview: "Overzicht",
   emptyCategory: "Lege categorie",
   productNote: "Productnotitie",
   badges: "Labels",
@@ -173,6 +188,11 @@ const LABELS: Record<string, string> = {
   embroideryPatterns: "Borduurpatronen",
   sewingPatterns: "Naaitpatronen",
   digitalPatterns: "Digitale patronen",
+  embroideryTitle: "Borduurpatronen-titel",
+  embroideryTab: "Borduren-tab",
+  chooseKind: "PDF-keuze",
+  sewingTitle: "Naaitpatronen-titel",
+  sewingTab: "Naaien-tab",
   patterns: "Patronen",
   emptyNote: "Lege-categorie tekst",
   stock: "Voorraad",
@@ -247,6 +267,8 @@ const LABELS: Record<string, string> = {
   cookies: "Cookies",
   vacation: "Vakantiebericht",
   until: "Tot wanneer (optioneel)",
+  sale: "Sale-banner",
+  shopBanner: "Tekst in de shop",
 };
 
 function fileNameFromPath(path: string) {
@@ -280,6 +302,14 @@ export function loadStudioDraft(): StudioDraft {
     vacation: {
       enabled: Boolean(vacationSettings.enabled),
       pausePhysical: Boolean(vacationSettings.pausePhysical),
+    },
+    sale: {
+      enabled: Boolean(saleSettings.enabled),
+      percentOff: Number(saleSettings.percentOff) || 0,
+      endsOn: typeof saleSettings.endsOn === "string" ? saleSettings.endsOn : "",
+      showSiteBanner: saleSettings.showSiteBanner !== false,
+      showShopBanner: saleSettings.showShopBanner !== false,
+      showBadges: saleSettings.showBadges !== false,
     },
   };
 }

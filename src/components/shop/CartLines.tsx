@@ -2,15 +2,18 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "@/i18n/context";
 import { PremiumImage } from "@/components/ui/PremiumImage";
+import { SalePrice } from "@/components/shop/SalePrice";
 import { getCartProducts, useCart } from "@/lib/cart";
 import {
   bundleSize,
+  cartLineOriginalCents,
   cartLineSummary,
   cartLineUnitCents,
   formatEuro,
   getProductHref,
   getProductName,
 } from "@/lib/shop";
+import { salePercentForProduct } from "@/lib/sale";
 import { cn } from "@/lib/utils";
 
 export function CartLines({ size = "compact" }: { size?: "compact" | "page" }) {
@@ -32,6 +35,7 @@ export function CartLines({ size = "compact" }: { size?: "compact" | "page" }) {
     <ul className={cn("space-y-4", isPage && "space-y-5")}>
       {lines.map(({ item, product }) => {
         const unit = cartLineUnitCents(product, item.selections);
+        const original = cartLineOriginalCents(product, item.selections);
         const summary = cartLineSummary(product, item.selections, locale);
         const pack = bundleSize(product, item.selections);
 
@@ -68,9 +72,11 @@ export function CartLines({ size = "compact" }: { size?: "compact" | "page" }) {
                   {getProductName(product, locale)}
                 </p>
               </Link>
-              <p className="font-body text-sm font-semibold text-brand-pink-accent">
-                {formatEuro(unit, locale)}
-              </p>
+              <SalePrice
+                cents={unit}
+                originalCents={original}
+                salePercent={salePercentForProduct(product)}
+              />
               {summary.length > 0 && (
                 <ul className="mt-1 space-y-0.5">
                   {summary.map((line) => (

@@ -3,16 +3,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocale, useTranslations } from "@/i18n/context";
 import { Button } from "@/components/ui/Button";
 import { PremiumImage } from "@/components/ui/PremiumImage";
+import { SalePrice } from "@/components/shop/SalePrice";
 import { getCartProducts, useCart } from "@/lib/cart";
 import { useCheckout } from "@/lib/checkout";
 import {
   bundleSize,
   cartHasPhysical,
+  cartLineOriginalCents,
   cartLineSummary,
   cartLineUnitCents,
-  formatEuro,
   getProductName,
 } from "@/lib/shop";
+import { salePercentForProduct } from "@/lib/sale";
 import { useVacation } from "@/lib/vacation";
 import { cn } from "@/lib/utils";
 
@@ -108,9 +110,11 @@ export function CartDrawer() {
                           <p className="font-heading text-base text-brand-black">
                             {getProductName(product, locale)}
                           </p>
-                          <p className="font-body text-sm text-brand-pink-accent">
-                            {formatEuro(cartLineUnitCents(product, item.selections), locale)}
-                          </p>
+                          <SalePrice
+                            cents={cartLineUnitCents(product, item.selections)}
+                            originalCents={cartLineOriginalCents(product, item.selections)}
+                            salePercent={salePercentForProduct(product)}
+                          />
                           {summary.length > 0 && (
                             <ul className="mt-1 space-y-0.5">
                               {summary.map((line) => (

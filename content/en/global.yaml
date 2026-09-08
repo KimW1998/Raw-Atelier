@@ -81,7 +81,7 @@ cta:
   exploreServices: Explore services
   readyTitle: Ready to work on a project together?
   readyDescription: >-
-    Whether you're planning an event, looking for a gift or have a creative idea in mind. I'd love to hear from you.
+    Whether you're looking for a gift, a pattern or something made to order, I'd love to hear from you.
   shopNow: Shop now
   customOrder: Custom order enquiry
   backToHome: Back to home
@@ -108,6 +108,11 @@ vacation:
   message: >-
     You can still order, but physical products take longer to arrive. PDF patterns are emailed right after payment.
     Physical pieces are made and shipped once I'm back.
+sale:
+  title: Sale
+  until: Until {date}
+  message: Discount across (almost) the whole shop. Cart prices already include the sale.
+  shopBanner: Extra discount in the shop. Prices below are the sale prices.
 cookies:
   title: Cookies
   text: >-

@@ -1,3 +1,5 @@
+import { applySaleCents, salePercentForProduct } from "./sale-pricing";
+
 export type ShopLocale = "nl" | "en";
 
 export type ProductOptionType = "fabric" | "hardware" | "name" | "note" | "letters" | "bundle";
@@ -49,6 +51,8 @@ export type ProductSelections = Record<string, string>;
 export interface OptionedProduct {
   priceCents: number;
   options?: ProductOption[];
+  salePercent?: number;
+  saleSkip?: boolean;
 }
 
 export type SelectionErrorReason = "required" | "invalid" | "minLetters" | "maxLetters";
@@ -149,6 +153,7 @@ export function letterPriceCents(option: ProductOption, count: number): number {
 export function getProductUnitPriceCents(
   product: OptionedProduct,
   selections: ProductSelections = {},
+  applySale = true,
 ): number {
   const letters = getLettersOption(product);
   let piece = product.priceCents;
@@ -162,40 +167,55 @@ export function getProductUnitPriceCents(
   }
 
   const pack = selectedBundleChoice(product, selections);
-  if (!pack) return piece;
-
-  const packSize = bundleSize(product, selections);
-  const packTotal =
-    typeof pack.priceCents === "number" && pack.priceCents > 0
-      ? pack.priceCents
-      : piece * packSize;
-  return Math.max(0, packTotal + (piece - product.priceCents) * packSize);
+  const unsold = pack
+    ? Math.max(
+        0,
+        (typeof pack.priceCents === "number" && pack.priceCents > 0
+          ? pack.priceCents
+          : piece * bundleSize(product, selections)) +
+          (piece - product.priceCents) * bundleSize(product, selections),
+      )
+    : piece;
+  return applySale ? applySaleCents(unsold, salePercentForProduct(product)) : unsold;
 }
 
-export function getListedPrice(product: OptionedProduct): { cents: number; from: boolean } {
+export function getListedPrice(product: OptionedProduct): {
+  cents: number;
+  originalCents: number;
+  from: boolean;
+  salePercent: number;
+} {
   const letters = getLettersOption(product);
   const single = letters
     ? letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1))
     : product.priceCents;
   const bundles = getBundleOption(product)?.choices ?? [];
-  if (bundles.length === 0) {
-    return { cents: single, from: Boolean(letters) };
+  let original = single;
+  let from = Boolean(letters);
+  if (bundles.length > 0) {
+    let min = single;
+    for (const choice of bundles) {
+      const size =
+        typeof choice.quantity === "number" && choice.quantity >= 1
+          ? Math.floor(choice.quantity)
+          : 1;
+      const total =
+        typeof choice.priceCents === "number" && choice.priceCents > 0
+          ? choice.priceCents
+          : single * size;
+      const per = Math.round(total / Math.max(1, size));
+      if (per < min) min = per;
+    }
+    original = min;
+    from = min < single || Boolean(letters);
   }
-
-  let min = single;
-  for (const choice of bundles) {
-    const size =
-      typeof choice.quantity === "number" && choice.quantity >= 1
-        ? Math.floor(choice.quantity)
-        : 1;
-    const total =
-      typeof choice.priceCents === "number" && choice.priceCents > 0
-        ? choice.priceCents
-        : single * size;
-    const per = Math.round(total / Math.max(1, size));
-    if (per < min) min = per;
-  }
-  return { cents: min, from: min < single || Boolean(letters) };
+  const salePercent = salePercentForProduct(product);
+  return {
+    originalCents: original,
+    cents: applySaleCents(original, salePercent),
+    from,
+    salePercent,
+  };
 }
 
 export function optionLabel(option: ProductOption, locale: ShopLocale): string {

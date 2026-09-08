@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { ProductGallery } from "@/components/shop/ProductGallery";
 import { ProductOptionsForm } from "@/components/shop/ProductOptions";
+import { ListedSalePrice, SaleBadge, SalePrice } from "@/components/shop/SalePrice";
 import { ContactCTASection } from "@/components/sections/ContactCTASection";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -12,14 +13,13 @@ import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "@/i18n/context";
 import { useCart } from "@/lib/cart";
+import { salePercentForProduct } from "@/lib/sale";
 import { useVacation } from "@/lib/vacation";
 import {
   SHOP_TAB_PARAM,
   bundleSize,
   countBillableLetters,
   getBundleOption,
-  formatEuro,
-  formatListedPrice,
   getLettersOption,
   getProductBadge,
   getProductDescription,
@@ -28,7 +28,6 @@ import {
   getProductName,
   getProductUnitPriceCents,
   getRelatedProducts,
-  isDigitalPatternSection,
   isSoldOut,
   lineStockUnits,
   maxOrderQuantity,
@@ -68,6 +67,10 @@ export default function ProductPage() {
     () => (product ? getProductUnitPriceCents(product, selections) : 0),
     [product, selections],
   );
+  const originalUnitCents = useMemo(
+    () => (product ? getProductUnitPriceCents(product, selections, false) : 0),
+    [product, selections],
+  );
   const letters = product ? getLettersOption(product) : undefined;
   const letterCount = letters
     ? countBillableLetters(selections[letters.id] ?? "", letters)
@@ -84,13 +87,8 @@ export default function ProductPage() {
   const description = getProductDescription(product, locale);
   const badge = getProductBadge(product);
   const related = getRelatedProducts(product);
-  const shopTabHref = `/shop?${SHOP_TAB_PARAM}=${
-    isDigitalPatternSection(product.section) ? "digitalPatterns" : product.section
-  }`;
-  const livePrice =
-    letters || bundleSize(product, selections) > 1
-      ? formatEuro(unitCents, locale)
-      : formatListedPrice(product, locale);
+  const shopTabHref = `/shop?${SHOP_TAB_PARAM}=${product.section}`;
+  const liveConfigured = Boolean(letters) || bundleSize(product, selections) > 1;
   const soldOut = isSoldOut(product);
   const { pausePhysical } = useVacation();
   const physicalPaused = pausePhysical && product.type === "physical";
@@ -164,9 +162,19 @@ export default function ProductPage() {
               <h1 className="mt-3 font-heading text-4xl leading-tight text-brand-black md:text-5xl">
                 {name}
               </h1>
-              <p className="mt-4 font-heading text-2xl text-brand-pink-accent">
-                {livePrice}
-              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <SaleBadge product={product} />
+                {liveConfigured ? (
+                  <SalePrice
+                    cents={unitCents}
+                    originalCents={originalUnitCents}
+                    salePercent={salePercentForProduct(product)}
+                    size="page"
+                  />
+                ) : (
+                  <ListedSalePrice product={product} size="page" />
+                )}
+              </div>
               <p className="mt-6 whitespace-pre-line font-body text-base leading-relaxed text-brand-black/70 md:text-lg">
                 {description}
               </p>
@@ -290,9 +298,7 @@ export default function ProductPage() {
                     <h3 className="font-heading text-lg text-brand-black group-hover:text-brand-pink-accent">
                       {getProductName(item, locale)}
                     </h3>
-                    <p className="mt-1 font-body text-sm font-semibold text-brand-pink-accent">
-                      {formatListedPrice(item, locale)}
-                    </p>
+                    <ListedSalePrice product={item} className="mt-1" />
                   </div>
                 </Link>
               ))}

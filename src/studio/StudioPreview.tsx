@@ -2,6 +2,7 @@ import { LocaleProvider, type Locale } from "@/i18n/context";
 import { RootLayout } from "@/layouts/RootLayout";
 import { StudioPreviewProvider } from "@/lib/studio-preview";
 import type { PortfolioItem } from "@/lib/portfolio";
+import type { SaleSettings } from "@/lib/sale";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
 import HomePage from "@/pages/HomePage";
@@ -35,6 +36,7 @@ export function StudioPreview({
   portfolioItems,
   shopProducts,
   vacation,
+  sale,
   onPreviewLocale,
 }: {
   locale: Locale;
@@ -43,6 +45,7 @@ export function StudioPreview({
   portfolioItems: PortfolioItem[];
   shopProducts: ShopCatalogProduct[];
   vacation: VacationSettings;
+  sale: SaleSettings;
   onPreviewLocale: (locale: Locale) => void;
 }) {
   return (
@@ -57,6 +60,7 @@ export function StudioPreview({
             portfolioItems,
             shopProducts,
             vacation,
+            sale,
           }}
         >
           <RootLayout>

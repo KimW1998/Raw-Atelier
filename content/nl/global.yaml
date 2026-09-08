@@ -81,7 +81,7 @@ cta:
   exploreServices: Ontdek diensten
   readyTitle: Klaar om samen aan een project te werken?
   readyDescription: >-
-    Of je nu een event plant, een cadeau zoekt of een creatief idee hebt. Ik hoor graag van je en denk graag mee.
+    Of je een cadeau zoekt, een patroon wilt of iets op maat wilt laten maken, ik hoor graag van je en denk graag mee.
   shopNow: Naar de shop
   customOrder: Maatwerk aanvraag
   backToHome: Terug naar home
@@ -108,6 +108,11 @@ vacation:
   message: >-
     Bestellen kan, maar fysieke producten hebben een langere levertijd. PDF-patronen stuur ik na betaling direct naar
     je mail. Fysieke stukken maak en verstuur ik weer zodra ik terug ben.
+sale:
+  title: Sale
+  until: Tot {date}
+  message: Korting op (bijna) de hele shop. Prijzen in de winkelwagen zijn al verrekend.
+  shopBanner: Extra korting op de shop. Prijzen hieronder zijn de sale-prijzen.
 cookies:
   title: Cookies
   text: >-

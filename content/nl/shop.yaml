@@ -1,21 +1,39 @@
 shopPage:
   hero:
     eyebrow: Shop
-    title: Geborduurde producten en digitale patronen
-    description: >-
-      Gepersonaliseerd machineborduurwerk, babycadeaus, keychains, pouches en digitale borduur- en naaitpatronen. Je
-      rekent af via Stripe, veilig op hun betaalpagina.
+    title: Cadeaus uit de studio
+    description: Gepersonaliseerd borduurwerk, PDF-patronen en naaiwerk op bestelling.
   shippingNote: >-
     Digitale patronen (PDF): voor iedereen, wereldwijd, per e-mail na betaling. Overige producten: verzending binnen
     Nederland.
   trust:
     description: >-
       Bij gepersonaliseerde stukken neem ik na de bestelling contact met je op over naam, stof, kleuren en details.
+  home:
+    browse: Collectie
+    browseTitle: Wat kun je bij Raw Atelier kopen
+    browseDescription: >-
+      Gepersonaliseerde cadeaus, kleine geborduurde items, digitale patronen en stukken op bestelling. Kies een
+      categorie om verder te kijken.
+    cta: Bekijk
+    spotlight: Uitgelicht
+    more: Meer in de shop
+    pointDigital: PDF wereldwijd
+    pointPhysical: Verzending NL
+    pointCustom: Op bestelling
+    comingSoon: Binnenkort
+    count: "{count} producten"
+    countOne: 1 product
+    madeToOrderCount: "{count} op aanvraag"
 shop:
   tabsLabel: Shopcategorieën
+  overview: Overzicht
   emptyCategory: Nog geen producten in deze categorie. Neem contact op voor maatwerk.
   productNote: Gepersonaliseerd en op bestelling gemaakt.
   soldOut: Uitverkocht
+  sale:
+    badge: "−{percent}%"
+    from: vanaf
   physicalPaused: Tijdelijk geen verzending
   physicalPausedNote: >-
     Fysieke producten bestel je nu niet. Digitale patronen kun je nog wel kopen. Haal fysieke stukken uit je
@@ -126,16 +144,19 @@ shop:
     description: >-
       Borduur- en naaitpatronen als PDF. Geen verzending: na betaling stuur ik het bestand naar je e-mail, wereldwijd.
     intro: >-
-      Dit zijn digitale bestanden, geen fysieke producten. Je naait of borduurt zelf. Na betaling via Stripe stuur ik
-      de PDF naar het e-mailadres van je bestelling.
+      Dit zijn digitale bestanden, geen fysieke producten. Je naait of borduurt zelf. Na betaling stuur ik de PDF naar
+      het e-mailadres van je bestelling.
     pointEmail: Per e-mail na betaling
     pointWorldwide: Wereldwijd
     pointNoShipping: Geen verzending
     embroideryTitle: Borduurpatronen
+    embroideryTab: Borduurpatronen
+    chooseKind: Kies een PDF
     embroideryDescription: Machineborduurbestanden en patronen om zelf te borduren. Direct als PDF.
     embroideryEmpty: >-
       De eerste borduurpatronen komen hier. Voeg ze toe in de studio, of stuur een bericht als je al iets zoekt.
     sewingTitle: Naaitpatronen
+    sewingTab: Naaitpatronen
     sewingDescription: PDF-naaitpatronen met stapsgewijze uitleg, voor beginners en gevorderden.
     sewingEmpty: Nog geen naaitpatroon in deze categorie.
     emptyNote: Nog geen digitale patronen in de shop.

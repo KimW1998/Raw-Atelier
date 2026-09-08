@@ -16,7 +16,7 @@ import {
   type StudioDraft,
 } from "./content";
 import { BilingualField, BilingualListField, FieldGroup } from "./fields";
-import { PortfolioItemsEditor, ShopProductsEditor, VacationSettingsEditor } from "./extras";
+import { PortfolioItemsEditor, SaleSettingsEditor, ShopProductsEditor, VacationSettingsEditor } from "./extras";
 import { STUDIO_PAGES, studioPageById, type StudioPage } from "./pages";
 import { StudioPreview } from "./StudioPreview";
 import { StudioErrorBoundary } from "./StudioErrorBoundary";
@@ -157,6 +157,13 @@ export function StudioApp() {
       });
     }
 
+    if (JSON.stringify(draft.sale) !== JSON.stringify(original.sale)) {
+      files.push({
+        path: "src/data/sale.json",
+        content: `${JSON.stringify(draft.sale, null, 2)}\n`,
+      });
+    }
+
     try {
       const response = await fetch("/api/studio-save", {
         method: "POST",
@@ -260,13 +267,22 @@ export function StudioApp() {
                 />
               ) : null}
               {page.extra === "shop" ? (
-                <ShopProductsEditor
-                  products={draft.shopProducts}
-                  onChange={(shopProducts) => {
-                    setDraft((current) => ({ ...current, shopProducts }));
-                    setStatus("idle");
-                  }}
-                />
+                <>
+                  <SaleSettingsEditor
+                    settings={draft.sale}
+                    onChange={(sale) => {
+                      setDraft((current) => ({ ...current, sale }));
+                      setStatus("idle");
+                    }}
+                  />
+                  <ShopProductsEditor
+                    products={draft.shopProducts}
+                    onChange={(shopProducts) => {
+                      setDraft((current) => ({ ...current, shopProducts }));
+                      setStatus("idle");
+                    }}
+                  />
+                </>
               ) : null}
               {page.extra === "vacation" ? (
                 <VacationSettingsEditor
@@ -288,6 +304,7 @@ export function StudioApp() {
                   portfolioItems={draft.portfolioItems}
                   shopProducts={draft.shopProducts}
                   vacation={draft.vacation}
+                  sale={draft.sale}
                   onPreviewLocale={setPreviewLocale}
                 />
               </StudioErrorBoundary>

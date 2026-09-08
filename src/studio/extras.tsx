@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { PortfolioItem } from "@/lib/portfolio";
+import { clampSalePercent, type SaleSettings } from "@/lib/sale";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
@@ -359,6 +360,42 @@ export function ShopProductsEditor({
               />
             </label>
           </div>
+          <div className="grid grid-cols-2 gap-3">
+            <label className="block min-w-0">
+              <span className="mb-1.5 block font-body text-xs text-brand-black/50">
+                Sale % (alleen dit product)
+              </span>
+              <input
+                type="number"
+                min={0}
+                max={90}
+                className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
+                value={selected.salePercent ?? 0}
+                onChange={(event) => {
+                  const percent = clampSalePercent(Number(event.target.value));
+                  update(selectedIndex, {
+                    salePercent: percent > 0 ? percent : undefined,
+                    saleSkip: percent > 0 ? undefined : selected.saleSkip,
+                  });
+                }}
+              />
+            </label>
+            <label className="flex items-end gap-2 pb-3 font-body text-sm">
+              <input
+                type="checkbox"
+                checked={Boolean(selected.saleSkip) && !(selected.salePercent && selected.salePercent > 0)}
+                disabled={Boolean(selected.salePercent && selected.salePercent > 0)}
+                onChange={(event) =>
+                  update(selectedIndex, { saleSkip: event.target.checked || undefined })
+                }
+              />
+              <span>Niet meedoen met site-sale</span>
+            </label>
+          </div>
+          <p className="font-body text-xs leading-relaxed text-brand-black/50">
+            Eigen sale-% wint van de site-sale. 0 = meedoen met de site-sale (tenzij je
+            hiernaast uitzet).
+          </p>
           <label className="flex items-center gap-2 font-body text-sm">
             <input
               type="checkbox"
@@ -509,6 +546,82 @@ function LiveStockHint({ product }: { product: ShopCatalogProduct }) {
       In de shop nu: {remaining} stuks. Het veld hierboven is je ingestelde aantal. Als je dat
       wijzigt en opslaat, wordt de shop-voorraad daarnaar gezet.
     </p>
+  );
+}
+
+export function SaleSettingsEditor({
+  settings,
+  onChange,
+}: {
+  settings: SaleSettings;
+  onChange: (settings: SaleSettings) => void;
+}) {
+  return (
+    <div className="space-y-3 rounded-2xl border border-brand-pink-light bg-white p-4">
+      <h2 className="font-heading text-lg text-brand-black">Sale</h2>
+      <p className="font-body text-xs leading-relaxed text-brand-black/55">
+        Zet een korting op de hele shop, of alleen op losse producten (veld bij het product).
+        De Stripe-prijs volgt dezelfde korting. Bannertekst staat bij Menu & footer.
+      </p>
+      <label className="flex items-center gap-2 font-body text-sm">
+        <input
+          type="checkbox"
+          checked={settings.enabled}
+          onChange={(event) => onChange({ ...settings, enabled: event.target.checked })}
+        />
+        Site-sale aan
+      </label>
+      <div className="grid grid-cols-2 gap-3">
+        <label className="block min-w-0">
+          <span className="mb-1.5 block font-body text-xs text-brand-black/50">Korting %</span>
+          <input
+            type="number"
+            min={0}
+            max={90}
+            className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
+            value={settings.percentOff}
+            onChange={(event) =>
+              onChange({ ...settings, percentOff: clampSalePercent(Number(event.target.value)) })
+            }
+          />
+        </label>
+        <label className="block min-w-0">
+          <span className="mb-1.5 block font-body text-xs text-brand-black/50">
+            Tot en met (optioneel)
+          </span>
+          <input
+            type="date"
+            className="w-full rounded-2xl border border-brand-pink-light bg-white px-3.5 py-3 font-body text-sm text-brand-black outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20"
+            value={settings.endsOn}
+            onChange={(event) => onChange({ ...settings, endsOn: event.target.value })}
+          />
+        </label>
+      </div>
+      <label className="flex items-center gap-2 font-body text-sm">
+        <input
+          type="checkbox"
+          checked={settings.showSiteBanner}
+          onChange={(event) => onChange({ ...settings, showSiteBanner: event.target.checked })}
+        />
+        Roze balk bovenaan de hele site
+      </label>
+      <label className="flex items-center gap-2 font-body text-sm">
+        <input
+          type="checkbox"
+          checked={settings.showShopBanner}
+          onChange={(event) => onChange({ ...settings, showShopBanner: event.target.checked })}
+        />
+        Extra strook op de shoppagina
+      </label>
+      <label className="flex items-center gap-2 font-body text-sm">
+        <input
+          type="checkbox"
+          checked={settings.showBadges}
+          onChange={(event) => onChange({ ...settings, showBadges: event.target.checked })}
+        />
+        −% badge op producten
+      </label>
+    </div>
   );
 }
 
