@@ -1,7 +1,14 @@
-import { getDatabase } from "@netlify/database";
+import { getStore } from "@netlify/blobs";
 import { getCatalogProducts } from "./catalog";
 
 export type StockMap = Record<string, number>;
+
+type StockEntry = {
+  remaining: number;
+  catalogStock: number;
+};
+
+type StockState = Record<string, StockEntry>;
 
 function catalogStockOf(product: { stock?: unknown }): number | null {
   return typeof product.stock === "number" && Number.isFinite(product.stock)
@@ -9,51 +16,41 @@ function catalogStockOf(product: { stock?: unknown }): number | null {
     : null;
 }
 
+function stockStore() {
+  return getStore({ name: "shop-stock", consistency: "strong" });
+}
+
+async function readState(): Promise<StockState> {
+  const store = stockStore();
+  const stored = (await store.get("remaining", { type: "json" })) as StockState | null;
+  return stored && typeof stored === "object" ? stored : {};
+}
+
+async function writeState(state: StockState): Promise<void> {
+  await stockStore().setJSON("remaining", state);
+}
+
 export async function readLiveStock(): Promise<StockMap> {
-  const db = getDatabase();
+  const state = await readState();
   const map: StockMap = {};
+  let changed = false;
 
   for (const product of getCatalogProducts()) {
     const catalogStock = catalogStockOf(product);
     if (catalogStock === null) continue;
 
-    const existing = await db.sql`
-      SELECT remaining, catalog_stock
-      FROM product_stock
-      WHERE product_id = ${product.id}
-      LIMIT 1
-    `;
-    const row = (Array.isArray(existing) ? existing[0] : undefined) as
-      | { remaining?: number; catalog_stock?: number }
-      | undefined;
-
-    if (!row) {
-      await db.sql`
-        INSERT INTO product_stock (product_id, remaining, catalog_stock)
-        VALUES (${product.id}, ${catalogStock}, ${catalogStock})
-        ON CONFLICT (product_id) DO NOTHING
-      `;
+    const row = state[product.id];
+    if (!row || row.catalogStock !== catalogStock) {
+      state[product.id] = { remaining: catalogStock, catalogStock };
       map[product.id] = catalogStock;
+      changed = true;
       continue;
     }
 
-    const storedCatalog = Number(row.catalog_stock);
-    const storedRemaining = Number(row.remaining);
-    if (storedCatalog !== catalogStock) {
-      await db.sql`
-        UPDATE product_stock
-        SET remaining = ${catalogStock},
-            catalog_stock = ${catalogStock},
-            updated_at = NOW()
-        WHERE product_id = ${product.id}
-      `;
-      map[product.id] = catalogStock;
-      continue;
-    }
-
-    map[product.id] = Math.max(0, storedRemaining);
+    map[product.id] = Math.max(0, Math.floor(row.remaining));
   }
 
+  if (changed) await writeState(state);
   return map;
 }
 
@@ -66,38 +63,28 @@ export async function applyPaidOrder(
   sessionId: string,
   lines: { productId: string; quantity: number }[],
 ): Promise<void> {
-  const db = getDatabase();
-  const client = await db.pool.connect();
-  try {
-    await client.query("BEGIN");
-    const claimed = await client.query(
-      `INSERT INTO processed_checkouts (session_id)
-       VALUES ($1)
-       ON CONFLICT (session_id) DO NOTHING
-       RETURNING session_id`,
-      [sessionId],
-    );
-    if (!claimed.rowCount) {
-      await client.query("COMMIT");
-      return;
-    }
+  const store = stockStore();
+  const processedKey = `processed/${sessionId}`;
+  const already = await store.get(processedKey);
+  if (already) return;
 
-    for (const line of lines) {
-      if (line.quantity < 1) continue;
-      await client.query(
-        `UPDATE product_stock
-         SET remaining = GREATEST(0, remaining - $2),
-             updated_at = NOW()
-         WHERE product_id = $1`,
-        [line.productId, line.quantity],
-      );
-    }
+  await store.set(processedKey, "1");
 
-    await client.query("COMMIT");
-  } catch (error) {
-    await client.query("ROLLBACK");
-    throw error;
-  } finally {
-    client.release();
+  const state = await readState();
+  for (const product of getCatalogProducts()) {
+    const catalogStock = catalogStockOf(product);
+    if (catalogStock === null) continue;
+    if (!state[product.id] || state[product.id].catalogStock !== catalogStock) {
+      state[product.id] = { remaining: catalogStock, catalogStock };
+    }
   }
+
+  for (const line of lines) {
+    if (line.quantity < 1) continue;
+    const row = state[line.productId];
+    if (!row) continue;
+    row.remaining = Math.max(0, Math.floor(row.remaining) - line.quantity);
+  }
+
+  await writeState(state);
 }

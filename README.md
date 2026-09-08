@@ -9,7 +9,7 @@ Site: [www.rawatelier.nl](https://www.rawatelier.nl)
 - **Vite 6** + **React 19** + **TypeScript**
 - **React Router** (locale prefixes `/nl` and `/en`)
 - **Tailwind CSS**, **Framer Motion**, **Lucide**
-- **Netlify** (static host, Functions, Forms, Identity, Database)
+- **Netlify** (static host, Functions, Forms, Identity)
 - **Stripe** Checkout for the shop
 - Visual **studio** at `/studio` (primary editor) and **Decap CMS** at `/admin`
 
@@ -63,12 +63,12 @@ The shop is **always visible locally**. On production it stays hidden until `VIT
 
 - Physical products: shipping **Netherlands only**
 - Digital sewing/embroidery PDFs: worldwide, emailed after payment
-- Cart and Stripe Checkout; live stock after paid orders (Netlify Database)
+- Cart and Stripe Checkout; live stock after paid orders (stored with Netlify Blobs)
 - Product options (name, letters, hardware) live in `src/data/shop-catalog.json` (studio: Shop)
 
 Vacation mode (studio → **Menu & footer**): banner for longer lead times, optional pause on physical checkout. Flags: `src/data/vacation.json`. Copy: `content/*/global.yaml` under `vacation`.
 
-Stripe setup: [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md). After schema changes: `npm run db:migrate` locally; hosted DB migrates on deploy.
+Stripe setup: [docs/stripe-shop-setup.md](docs/stripe-shop-setup.md).
 
 ## Languages
 
@@ -95,7 +95,6 @@ src/data/
 ├── shop-catalog.json
 └── vacation.json
 netlify/functions/          # Checkout, webhook, stock, studio save
-netlify/database/migrations/
 public/images/
 ```
 
@@ -176,7 +175,6 @@ Decap on production: enable **Identity** + **Git Gateway**, invite yourself, log
 | `npm run preview` | Preview `dist/` |
 | `npm run cms` | Decap local proxy |
 | `npm run cms:config` | Regenerate Decap config |
-| `npm run db:migrate` | Apply Netlify Database migrations locally |
 
 ## License
 
