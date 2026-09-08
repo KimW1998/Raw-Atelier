@@ -113,14 +113,18 @@ export default async (req: Request) => {
   const summary = products
     .map((item) => `${item.quantity}× ${item.product.name.nl}`)
     .join(", ");
-  await sendEmail({
-    to: orderNotifyAddress(),
-    subject: summary ? `Nieuwe bestelling — ${summary}` : `Nieuwe bestelling ${session.id}`,
-    text: emails.owner,
-  });
-
-  if (emails.customer?.to) {
-    await sendEmail(emails.customer);
+  try {
+    await sendEmail({
+      to: orderNotifyAddress(),
+      subject: summary ? `Nieuwe bestelling — ${summary}` : `Nieuwe bestelling ${session.id}`,
+      text: emails.owner,
+    });
+    if (emails.customer?.to) {
+      await sendEmail(emails.customer);
+    }
+  } catch (error) {
+    console.error("[stripe-webhook] email", error);
+    return new Response("Email failed", { status: 500 });
   }
 
   return new Response("ok");

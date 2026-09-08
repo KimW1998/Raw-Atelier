@@ -6,11 +6,14 @@ import {
 import type { CatalogProduct } from "./catalog";
 
 export function getEnv(name: string): string | undefined {
+  let fromNetlify: string | undefined;
   try {
-    return Netlify.env.get(name) ?? process.env[name];
+    fromNetlify = Netlify.env.get(name);
   } catch {
-    return process.env[name];
+    fromNetlify = undefined;
   }
+  const value = (process.env[name] || fromNetlify || "").trim();
+  return value || undefined;
 }
 
 export async function sendEmail(options: {
@@ -22,9 +25,16 @@ export async function sendEmail(options: {
   const from = getEnv("ORDER_FROM_EMAIL") || "Raw Atelier <info@rawluxury.nl>";
 
   if (!apiKey) {
-    console.log("[order-email]", options.subject, options.to, options.text);
+    console.error(
+      "[order-email] RESEND_API_KEY ontbreekt in de function. Mail niet verstuurd:",
+      options.subject,
+      "→",
+      options.to,
+    );
     return;
   }
+
+  console.log("[order-email] sending", options.subject, "→", options.to, "from", from);
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -42,6 +52,7 @@ export async function sendEmail(options: {
 
   if (!response.ok) {
     const detail = await response.text();
+    console.error("[order-email] Resend weigerde de mail", response.status, detail);
     throw new Error(`Email failed: ${response.status} ${detail}`);
   }
 }
