@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Check } from "lucide-react";
+import { Check, Mail, Package } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { OrderReceiptCard } from "@/components/shop/OrderReceiptCard";
@@ -132,10 +132,51 @@ export default function ShopResultPage({
             {orderStatus === "ready" && order && (
               <>
                 <OrderReceiptCard order={order} />
-                <div className="mt-8 space-y-3 font-body text-sm leading-relaxed text-brand-black/65">
-                  {order.hasDigital && <p>{t("result.digitalNext")}</p>}
-                  {order.hasPhysical && <p>{t("result.physicalNext")}</p>}
-                </div>
+                {(order.hasDigital || order.hasPhysical) && (
+                  <div className="mt-8 rounded-3xl bg-white p-6 shadow-sm md:p-8">
+                    <h2 className="font-heading text-2xl text-brand-black">
+                      {t("result.nextHeading")}
+                    </h2>
+                    <div
+                      className={
+                        order.hasDigital && order.hasPhysical
+                          ? "mt-6 grid gap-6 md:grid-cols-2"
+                          : "mt-6"
+                      }
+                    >
+                      {order.hasDigital && (
+                        <div className="flex gap-4">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-pink-light text-brand-pink-accent">
+                            <Mail className="h-5 w-5" aria-hidden />
+                          </div>
+                          <div>
+                            <p className="font-heading text-lg text-brand-black">
+                              {t("result.digitalNextTitle")}
+                            </p>
+                            <p className="mt-1 font-body text-sm leading-relaxed text-brand-black/65">
+                              {t("result.digitalNext")}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      {order.hasPhysical && (
+                        <div className="flex gap-4">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-pink-light text-brand-pink-accent">
+                            <Package className="h-5 w-5" aria-hidden />
+                          </div>
+                          <div>
+                            <p className="font-heading text-lg text-brand-black">
+                              {t("result.physicalNextTitle")}
+                            </p>
+                            <p className="mt-1 font-body text-sm leading-relaxed text-brand-black/65">
+                              {t("result.physicalNext")}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </>
             )}
             {orderStatus === "missing" && (
