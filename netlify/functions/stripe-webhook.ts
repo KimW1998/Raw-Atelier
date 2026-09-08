@@ -116,17 +116,20 @@ export default async (req: Request) => {
     customer: Boolean(emails.customer?.to),
   });
 
-  const summary = products
-    .map((item) => `${item.quantity}× ${item.product.name.nl}`)
-    .join(", ");
   try {
     await sendEmail({
       to: orderNotifyAddress(),
-      subject: summary ? `Nieuwe bestelling — ${summary}` : `Nieuwe bestelling ${session.id}`,
-      text: emails.owner,
+      subject: emails.owner.subject,
+      text: emails.owner.text,
+      html: emails.owner.html,
     });
     if (emails.customer?.to) {
-      await sendEmail(emails.customer);
+      await sendEmail({
+        to: emails.customer.to,
+        subject: emails.customer.subject,
+        text: emails.customer.text,
+        html: emails.customer.html,
+      });
     }
   } catch (error) {
     console.error("[stripe-webhook] email", error);
