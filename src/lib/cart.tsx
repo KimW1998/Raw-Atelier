@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -92,19 +93,29 @@ function readStoredCart(): CartItem[] {
   }
 }
 
+function writeStoredCart(items: CartItem[]) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [ready, setReady] = useState(false);
+  const skipHydrateRef = useRef(false);
 
   useEffect(() => {
+    if (skipHydrateRef.current) {
+      setReady(true);
+      return;
+    }
     setItems(readStoredCart());
     setReady(true);
   }, []);
 
   useEffect(() => {
     if (!ready) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    writeStoredCart(items);
   }, [items, ready]);
 
   const addItem = useCallback(
@@ -175,7 +186,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
-  const clear = useCallback(() => setItems([]), []);
+  const clear = useCallback(() => {
+    skipHydrateRef.current = true;
+    setItems([]);
+    setIsOpen(false);
+    writeStoredCart([]);
+  }, []);
 
   const value = useMemo<CartContextValue>(
     () => ({

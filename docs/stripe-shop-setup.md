@@ -30,7 +30,26 @@ In **Site settings → Environment variables**:
 | `RESEND_API_KEY`               | optioneel, voor ordermails           |             |
 
 
-Zonder `RESEND_API_KEY` worden mails in de function-logs geschreven, niet verstuurd. Voor echte mails: [Resend](https://resend.com) account, domein verifiëren, key plakken.
+Zonder `RESEND_API_KEY` worden mails in de function-logs geschreven, niet verstuurd.
+
+## Ordermails (Resend)
+
+Na een betaalde checkout stuurt de webhook jou een mail met wat je moet verzenden (aantal, opties, adres). De koper krijgt van Raw Atelier een bedankmail (NL of EN, afhankelijk van de shoptaal). Digitale PDF's staan daarin met downloadlink.
+
+1. Maak een account op [resend.com](https://resend.com).
+2. Voeg je verzenddomein toe (voor `info@rawluxury.nl`: **rawluxury.nl**) en rond DNS-verificatie af.
+3. Maak een API key.
+4. Zet in Netlify (**Site settings → Environment variables**) én in lokale `.env`:
+
+| Variable | Voorbeeld |
+|----------|-----------|
+| `RESEND_API_KEY` | `re_...` |
+| `ORDER_NOTIFY_EMAIL` | `info@rawluxury.nl` (jouw inbox) |
+| `ORDER_FROM_EMAIL` | `Raw Atelier <info@rawluxury.nl>` |
+
+`ORDER_FROM_EMAIL` moet een adres zijn op het geverifieerde domein. Na wijzigen van Netlify-vars: opnieuw deployen. Lokaal: `npx netlify dev` herstarten.
+
+Testen: Stripe testbetaling + `stripe listen` (webhook). Je moet een mail krijgen met **TE VERZENDEN** en het adres. In Resend → **Emails** zie je of het is aangekomen.
 
 ## Lokaal testen
 

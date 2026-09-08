@@ -81,19 +81,26 @@
           "choices": [
             {
               "id": "bundel-4",
-              "label": { "nl": "4 stuks", "en": "4 pieces" },
+              "label": {
+                "nl": "4 stuks",
+                "en": "4 pieces"
+              },
               "quantity": 4,
               "priceCents": 5380
             },
             {
               "id": "bundel-6",
-              "label": { "nl": "6 stuks", "en": "6 pieces" },
+              "label": {
+                "nl": "6 stuks",
+                "en": "6 pieces"
+              },
               "quantity": 6,
               "priceCents": 8075
             }
           ]
         }
-      ]
+      ],
+      "stock": 10
     },
     {
       "id": "drawstring-bag",

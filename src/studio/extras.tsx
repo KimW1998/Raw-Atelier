@@ -3,6 +3,7 @@ import type { PortfolioItem } from "@/lib/portfolio";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
+import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import { SHOP_SECTION_ORDER, getProductImages, isDigitalPatternSection, withProductImages } from "@/lib/shop";
 import { AutoGrowField, BilingualPair } from "./fields";
 import { StudioImageField, StudioImageList } from "./media";
@@ -157,6 +158,7 @@ export function ShopProductsEditor({
 
   return (
     <div className="space-y-4">
+      <StockOverview products={products} />
       <div className="flex items-center justify-between">
         <h2 className="font-heading text-lg text-brand-black">Producten</h2>
         <button
@@ -277,6 +279,7 @@ export function ShopProductsEditor({
                     update(index, { stock: Math.max(0, Number(event.target.value) || 0) })
                   }
                 />
+                <LiveStockHint product={product} />
               </label>
             ) : null}
             <p className="font-body text-xs leading-relaxed text-brand-black/50">
@@ -308,6 +311,57 @@ export function ShopProductsEditor({
         </article>
       ))}
     </div>
+  );
+}
+
+function liveRemaining(product: ShopCatalogProduct, live: Record<string, number>): number | null {
+  if (typeof product.stock !== "number") return null;
+  return overlayLiveStock(product, live).stock ?? product.stock;
+}
+
+function StockOverview({ products }: { products: ShopCatalogProduct[] }) {
+  const live = useLiveStockMap();
+  const tracked = products.filter((product) => typeof product.stock === "number");
+
+  return (
+    <div className="space-y-2 rounded-2xl border border-brand-pink-light bg-white p-4">
+      <h2 className="font-heading text-lg text-brand-black">Voorraad nu</h2>
+      {tracked.length === 0 ? (
+        <p className="font-body text-xs leading-relaxed text-brand-black/55">
+          Je houdt nog geen aantallen bij. Zet bij een fysiek product <strong>Voorraad bijhouden</strong>{" "}
+          en vul het aantal stuks in. PDF-patronen laat je meestal onbeperkt.
+        </p>
+      ) : (
+        <ul className="space-y-1.5">
+          {tracked.map((product) => {
+            const remaining = liveRemaining(product, live) ?? 0;
+            return (
+              <li
+                key={product.id}
+                className="flex items-baseline justify-between gap-3 font-body text-sm text-brand-black"
+              >
+                <span className="min-w-0 truncate">{product.name.nl}</span>
+                <span className={remaining === 0 ? "shrink-0 font-semibold text-brand-rose" : "shrink-0"}>
+                  {remaining === 0 ? "Uitverkocht" : `${remaining} stuks`}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function LiveStockHint({ product }: { product: ShopCatalogProduct }) {
+  const live = useLiveStockMap();
+  const remaining = liveRemaining(product, live);
+  if (remaining == null || remaining === product.stock) return null;
+  return (
+    <p className="mt-1.5 font-body text-xs text-brand-black/55">
+      In de shop nu: {remaining} stuks. Het veld hierboven is je ingestelde aantal. Als je dat
+      wijzigt en opslaat, wordt de shop-voorraad daarnaar gezet.
+    </p>
   );
 }
 

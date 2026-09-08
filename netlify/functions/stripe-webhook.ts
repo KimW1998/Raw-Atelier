@@ -3,18 +3,15 @@ import Stripe from "stripe";
 import { getCatalogProduct } from "./_shared/catalog";
 import { applyPaidOrder } from "./_shared/stock";
 import { formatOrderEmail, getEnv, orderNotifyAddress, sendEmail } from "./_shared/email";
-import { formatSelectionLines, type ProductSelections } from "../../src/lib/product-options";
+import { type ProductSelections } from "../../src/lib/product-options";
 
-function formatSelectionsFromMetadata(
-  raw: string,
-  product: NonNullable<ReturnType<typeof getCatalogProduct>>,
-): string | undefined {
+function parseSelections(raw: string | undefined): ProductSelections | undefined {
+  if (!raw) return undefined;
   try {
     const parsed = JSON.parse(raw) as ProductSelections;
-    const lines = formatSelectionLines(product, parsed, "nl");
-    return lines.length > 0 ? lines.join(" · ") : undefined;
+    return parsed && typeof parsed === "object" ? parsed : undefined;
   } catch {
-    return raw || undefined;
+    return undefined;
   }
 }
 
@@ -68,9 +65,7 @@ export default async (req: Request) => {
       {
         product: catalogProduct,
         quantity: Number.isInteger(stockQty) && stockQty > 0 ? stockQty : (item.quantity ?? 1),
-        selectionsText: metadata?.selections
-          ? formatSelectionsFromMetadata(metadata.selections, catalogProduct)
-          : undefined,
+        selections: parseSelections(metadata?.selections),
       },
     ];
   });
@@ -100,6 +95,7 @@ export default async (req: Request) => {
     products,
     personalization: personalization || undefined,
     locale: session.metadata?.locale || "nl",
+    amountCents: typeof session.amount_total === "number" ? session.amount_total : undefined,
   });
 
   try {
@@ -114,9 +110,12 @@ export default async (req: Request) => {
     console.error("[stripe-webhook] stock", error);
   }
 
+  const summary = products
+    .map((item) => `${item.quantity}× ${item.product.name.nl}`)
+    .join(", ");
   await sendEmail({
     to: orderNotifyAddress(),
-    subject: `Nieuwe bestelling ${session.id}`,
+    subject: summary ? `Nieuwe bestelling — ${summary}` : `Nieuwe bestelling ${session.id}`,
     text: emails.owner,
   });
 

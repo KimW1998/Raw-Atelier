@@ -20,10 +20,9 @@ export default function ShopResultPage({
   const { clear } = useCart();
 
   useEffect(() => {
-    if (variant === "success") {
-      clear();
-      void reloadLiveStock();
-    }
+    if (variant !== "success") return;
+    clear();
+    void reloadLiveStock();
   }, [variant, clear]);
 
   const isSuccess = variant === "success";
