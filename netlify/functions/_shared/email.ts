@@ -13,7 +13,7 @@ export function getEnv(name: string): string | undefined {
   } catch {
     fromNetlify = undefined;
   }
-  const value = (process.env[name] || fromNetlify || "").trim();
+  const value = (fromNetlify || process.env[name] || "").trim();
   return value || undefined;
 }
 
@@ -27,12 +27,12 @@ export async function sendEmail(options: {
 
   if (!apiKey) {
     console.error(
-      "[order-email] RESEND_API_KEY ontbreekt in de function. Mail niet verstuurd:",
+      "[order-email] RESEND_API_KEY ontbreekt in de function. Geen call naar Resend.",
       options.subject,
       "→",
       options.to,
     );
-    return;
+    throw new Error("RESEND_API_KEY ontbreekt in de Netlify function (niet alleen in Builds).");
   }
 
   console.log("[order-email] sending", options.subject, "→", options.to, "from", from);

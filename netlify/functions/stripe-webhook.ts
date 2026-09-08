@@ -110,6 +110,12 @@ export default async (req: Request) => {
     console.error("[stripe-webhook] stock", error);
   }
 
+  console.log("[stripe-webhook] paid session", session.id, {
+    hasResendKey: Boolean(getEnv("RESEND_API_KEY")),
+    notify: orderNotifyAddress(),
+    customer: Boolean(emails.customer?.to),
+  });
+
   const summary = products
     .map((item) => `${item.quantity}× ${item.product.name.nl}`)
     .join(", ");

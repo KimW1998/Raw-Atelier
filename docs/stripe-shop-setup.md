@@ -49,7 +49,7 @@ Na een betaalde checkout stuurt de webhook jou een mail met wat je moet verzende
 
 `ORDER_FROM_EMAIL` moet een adres zijn op het **geverifieerde** domein in Resend. Zonder geverifieerd domein weigert Resend de mail (vaak 403) en zie je niets in je inbox. Tot DNS klaar is mag je tijdelijk `Raw Atelier <beth.t@example.com>` gebruiken: die mag alleen naar het e-mailadres van je Resend-account.
 
-Zet `RESEND_API_KEY` in Netlify op **All scopes** (niet alleen Builds). Na wijzigen: opnieuw deployen.
+Zet `RESEND_API_KEY`, `ORDER_FROM_EMAIL` en `ORDER_NOTIFY_EMAIL` op **dezelfde scopes als je Stripe-keys** (Functions + Runtime / All scopes). Als ze alleen onder **Builds** staan, werkt checkout wel en voorraad ook, maar er gaat **geen call naar Resend**. Na wijzigen: opnieuw deployen.
 
 Als er geen mail aankomt: Netlify → **Functions** → `stripe-webhook` → logs. Daar staat of de key ontbreekt of Resend de mail weigert.
 
