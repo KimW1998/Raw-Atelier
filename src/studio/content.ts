@@ -219,7 +219,6 @@ const LABELS: Record<string, string> = {
   handcrafted: "Handgemaakt-regel",
   rights: "Rechten",
   terms: "Voorwaarden",
-  shipping: "Verzending",
   privacy: "Privacy",
   viewPortfolio: "Bekijk werk",
   learnMore: "Meer info",
