@@ -162,6 +162,7 @@ const LABELS: Record<string, string> = {
   photoOf: "Foto-nummer",
   options: "Shop-opties",
   optional: "Optioneel",
+  included: "Inbegrepen",
   lettersHint: "Hint letters",
   maxLetters: "Max letters",
   letterCount: "Lettertelling",

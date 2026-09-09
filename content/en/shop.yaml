@@ -54,6 +54,7 @@ shop:
     photoOf: Photo {current} of {total}
   options:
     optional: optional
+    included: included
     lettersHint: "{perLetter} per letter or symbol, minimum {min}."
     maxLetters: Maximum {max} characters.
     letterCount: "{count} characters · {price}"
@@ -133,8 +134,8 @@ shop:
       emptyNote: First patch design coming soon. Send a message if you already have something in mind.
     pouches:
       eyebrow: Pouches & bags
-      title: Drawstring bags & pouches
-      description: Soft personalised pouches for gifts, baby items and everyday storage.
+      title: Toiletry bags & pouches
+      description: Quilted toiletry bags, drawstring bags and soft pouches for makeup, gifts and travel.
     patterns:
       eyebrow: Sewing patterns
       title: Digital sewing patterns

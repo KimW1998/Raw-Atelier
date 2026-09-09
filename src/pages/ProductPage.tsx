@@ -26,12 +26,15 @@ import {
   getProductHref,
   getProductImages,
   getProductName,
+  getProductOptions,
   getProductUnitPriceCents,
   getRelatedProducts,
+  getSizeOption,
   isSoldOut,
   lineStockUnits,
   maxOrderQuantity,
   productHasOptions,
+  sanitizeSelections,
   useShopProduct,
   validateSelections,
   type ProductSelections,
@@ -63,6 +66,23 @@ export default function ProductPage() {
   const [selections, setSelections] = useState<ProductSelections>({});
   const [formError, setFormError] = useState("");
 
+  useEffect(() => {
+    if (!product) return;
+    const next: ProductSelections = {};
+    for (const option of getProductOptions(product)) {
+      if (!option.required || !option.choices?.length) continue;
+      if (option.type === "size" || option.type === "addon") {
+        next[option.id] = option.choices[0].id;
+      }
+      if (option.type === "fabric" && option.choices.length === 1) {
+        next[option.id] = option.choices[0].id;
+      }
+    }
+    setSelections(next);
+    setQuantity(1);
+    setFormError("");
+  }, [product?.id]);
+
   const unitCents = useMemo(
     () => (product ? getProductUnitPriceCents(product, selections) : 0),
     [product, selections],
@@ -88,7 +108,8 @@ export default function ProductPage() {
   const badge = getProductBadge(product);
   const related = getRelatedProducts(product);
   const shopTabHref = `/shop?${SHOP_TAB_PARAM}=${product.section}`;
-  const liveConfigured = Boolean(letters) || bundleSize(product, selections) > 1;
+  const liveConfigured =
+    Boolean(letters) || bundleSize(product, selections) > 1 || Boolean(getSizeOption(product));
   const soldOut = isSoldOut(product);
   const { pausePhysical } = useVacation();
   const physicalPaused = pausePhysical && product.type === "physical";
@@ -159,7 +180,7 @@ export default function ProductPage() {
               <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-brand-pink-accent">
                 {t(`badges.${badge}`)}
               </p>
-              <h1 className="mt-3 font-heading text-4xl leading-tight text-brand-black md:text-5xl">
+              <h1 className="mt-3 font-heading text-3xl leading-tight text-brand-black md:text-5xl">
                 {name}
               </h1>
               <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -212,7 +233,7 @@ export default function ProductPage() {
                 selections={selections}
                 remainingPieces={remainingPieces}
                 onChange={(next) => {
-                  setSelections(next);
+                  setSelections(sanitizeSelections(product, next));
                   setQuantity(1);
                   setFormError("");
                 }}
@@ -222,8 +243,8 @@ export default function ProductPage() {
                 <p className="mt-4 font-body text-sm text-red-700">{formError}</p>
               )}
 
-              <div className="mt-8">
-                <div className="flex flex-wrap items-center gap-4">
+              <div className="sticky bottom-3 z-20 mt-8 rounded-2xl bg-white/95 p-3 shadow-lg ring-1 ring-brand-pink-light/80 backdrop-blur md:static md:mt-8 md:bg-transparent md:p-0 md:shadow-none md:ring-0">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                   {!soldOut && !physicalPaused && (
                     <div className="flex items-center rounded-full bg-white p-1 shadow-sm">
                       <button
@@ -256,6 +277,7 @@ export default function ProductPage() {
                   <Button
                     variant="primary"
                     size="large"
+                    className="flex-1 md:flex-none"
                     disabled={soldOut || physicalPaused || lettersTooShort || remaining < 1}
                     onClick={addToCart}
                   >

@@ -12,6 +12,8 @@ import { OrderButtons, moveItem } from "./order";
 const OPTION_TYPES: { type: ProductOptionType; label: string }[] = [
   { type: "fabric", label: "Stof (fotovakjes)" },
   { type: "hardware", label: "Hardware (kleurvakjes)" },
+  { type: "size", label: "Maat (prijs per maat)" },
+  { type: "addon", label: "Extra (plusprijs)" },
   { type: "name", label: "Naamveld" },
   { type: "note", label: "Extra notitie" },
   { type: "letters", label: "Prijs per letter" },
@@ -21,6 +23,8 @@ const OPTION_TYPES: { type: ProductOptionType; label: string }[] = [
 const DEFAULT_LABELS: Record<ProductOptionType, { nl: string; en: string }> = {
   fabric: { nl: "Stof", en: "Fabric" },
   hardware: { nl: "Hardware", en: "Hardware" },
+  size: { nl: "Maat", en: "Size" },
+  addon: { nl: "Extra", en: "Add-on" },
   name: { nl: "Naam", en: "Name" },
   note: { nl: "Extra notitie", en: "Extra note" },
   letters: { nl: "Naam op het product", en: "Name on the product" },
@@ -40,6 +44,21 @@ function emptyChoice(kind: "fabric" | "hardware"): ProductOptionChoice {
     },
     image: "",
     color: kind === "hardware" ? "#C5A572" : "",
+  };
+}
+
+function emptySizeChoice(
+  label: string,
+  detail: string,
+  priceCents: number,
+): ProductOptionChoice {
+  return {
+    id: slugId("maat"),
+    label: {
+      nl: detail ? `${label} · ${detail}` : label,
+      en: detail ? `${label} · ${detail}` : label,
+    },
+    priceCents,
   };
 }
 
@@ -68,6 +87,19 @@ function emptyOption(type: ProductOptionType, product: ShopCatalogProduct): Prod
   if (type === "fabric" || type === "hardware") {
     option.choices = [emptyChoice(type)];
   }
+  if (type === "size") {
+    option.choices = [
+      emptySizeChoice("S", "12 × 8 × 9 cm", 1000),
+      emptySizeChoice("M", "16 × 9 × 10 cm", 1200),
+      emptySizeChoice("L", "18 × 10 × 13 cm", 1400),
+    ];
+  }
+  if (type === "addon") {
+    option.choices = [
+      emptySizeChoice("Zonder", "", 0),
+      emptySizeChoice("Naam borduren", "+ € 5", 500),
+    ];
+  }
   if (type === "letters") {
     option.pricePerLetterCents = 400;
     option.minLetters = 3;
@@ -93,6 +125,22 @@ function syncLetterPrice(product: ShopCatalogProduct): ShopCatalogProduct {
   };
 }
 
+function syncOptionPrices(product: ShopCatalogProduct): ShopCatalogProduct {
+  const withLetters = syncLetterPrice(product);
+  const sizes = withLetters.options?.find((option) => option.type === "size")?.choices ?? [];
+  const prices = sizes
+    .map((choice) => choice.priceCents)
+    .filter((cents): cents is number => typeof cents === "number" && cents > 0);
+  if (prices.length === 0) return withLetters;
+  const min = Math.min(...prices);
+  const euros = (min / 100).toFixed(2).replace(".", ",");
+  return {
+    ...withLetters,
+    priceCents: min,
+    priceLabel: `vanaf € ${euros}`,
+  };
+}
+
 export function ShopProductOptionsEditor({
   product,
   onChange,
@@ -104,7 +152,7 @@ export function ShopProductOptionsEditor({
 
   const setOptions = (nextOptions: ProductOption[]) => {
     onChange(
-      syncLetterPrice({
+      syncOptionPrices({
         ...product,
         options: nextOptions,
         personalization: nextOptions.length > 0 ? true : product.personalization,
@@ -131,7 +179,7 @@ export function ShopProductOptionsEditor({
         </p>
         <div className="flex flex-wrap gap-1">
           {OPTION_TYPES.map(({ type, label }) => {
-            const once = type === "bundle" || type === "letters";
+            const once = type === "bundle" || type === "letters" || type === "size";
             const exists = once && options.some((option) => option.type === type);
             return (
               <button
@@ -148,9 +196,9 @@ export function ShopProductOptionsEditor({
         </div>
       </div>
       <p className="font-body text-xs leading-relaxed text-brand-black/50">
-        Stoffen worden klikbare fotovakjes. Hardware wordt kleurvakjes (goud/zilver). Prijs per
-        letter overschrijft de vaste prijs. Bundelkorting: 4 of 6 stuks voor een lagere totaalprijs. Met omhoog/omlaag
-        zet je de volgorde zoals die op de productpagina verschijnt.
+        Stoffen worden klikbare fotovakjes. Hardware wordt kleurvakjes (goud/zilver). Maat zet een prijs per formaat.
+        Prijs per letter overschrijft de vaste prijs. Bundelkorting: 4 of 6 stuks voor een lagere totaalprijs. Met
+        omhoog/omlaag zet je de volgorde zoals die op de productpagina verschijnt.
       </p>
       {options.map((option, index) => (
         <article key={option.id} className="space-y-3 rounded-2xl bg-white p-3">
@@ -369,6 +417,95 @@ export function ShopProductOptionsEditor({
                 className="rounded-full bg-brand-pink-light px-3 py-1.5 font-body text-xs font-semibold text-brand-black"
               >
                 {option.type === "fabric" ? "+ Stof" : "+ Kleur"}
+              </button>
+            </div>
+          )}
+
+          {(option.type === "size" || option.type === "addon") && (
+            <div className="space-y-3">
+              <p className="font-body text-xs leading-relaxed text-brand-black/50">
+                {option.type === "addon"
+                  ? "De plusprijs komt bovenop de maatprijs. 0 = geen extra kosten."
+                  : "Elke maat heeft een eigen prijs. De shop toont “vanaf” de kleinste prijs."}
+              </p>
+              {(option.choices ?? []).map((choice, choiceIndex) => (
+                <div key={choice.id} className="space-y-2 rounded-xl bg-brand-offwhite p-3">
+                  <div className="flex justify-end">
+                    <OrderButtons
+                      index={choiceIndex}
+                      total={(option.choices ?? []).length}
+                      onMove={(direction) =>
+                        updateOption(index, {
+                          choices: moveItem(option.choices ?? [], choiceIndex, direction),
+                        })
+                      }
+                    />
+                  </div>
+                  <BilingualPair
+                    nl={choice.label.nl}
+                    en={choice.label.en}
+                    tone="short"
+                    onChange={(locale, value) =>
+                      updateOption(index, {
+                        choices: (option.choices ?? []).map((item, i) =>
+                          i === choiceIndex
+                            ? { ...item, label: { ...item.label, [locale]: value } }
+                            : item,
+                        ),
+                      })
+                    }
+                  />
+                  <label className="block min-w-0">
+                    <span className="mb-1 block font-body text-xs text-brand-black/50">Prijs (€)</span>
+                    <input
+                      type="number"
+                      min={0}
+                      step={0.01}
+                      className="w-full rounded-2xl border border-brand-pink-light bg-white px-3 py-2 font-body text-sm outline-none focus:border-brand-pink"
+                      value={((choice.priceCents ?? 0) / 100).toString()}
+                      onChange={(event) =>
+                        updateOption(index, {
+                          choices: (option.choices ?? []).map((item, i) =>
+                            i === choiceIndex
+                              ? {
+                                  ...item,
+                                  priceCents: Math.max(
+                                    0,
+                                    Math.round(Number(event.target.value) * 100),
+                                  ),
+                                }
+                              : item,
+                          ),
+                        })
+                      }
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateOption(index, {
+                        choices: (option.choices ?? []).filter((_, i) => i !== choiceIndex),
+                      })
+                    }
+                    className="font-body text-xs text-brand-rose hover:underline"
+                  >
+                    Verwijder keuze
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() =>
+                  updateOption(index, {
+                    choices: [
+                      ...(option.choices ?? []),
+                      emptySizeChoice(option.type === "addon" ? "Extra" : "XL", "", product.priceCents),
+                    ],
+                  })
+                }
+                className="rounded-full bg-brand-pink-light px-3 py-1.5 font-body text-xs font-semibold text-brand-black"
+              >
+                {option.type === "addon" ? "+ Extra" : "+ Maat"}
               </button>
             </div>
           )}

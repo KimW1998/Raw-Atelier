@@ -65,16 +65,16 @@ function OverlayTile({
           <div className="absolute inset-0 bg-brand-pink-light" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black/70 via-brand-black/15 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+        <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5 md:p-6">
           <h3
             className={cn(
               "font-heading text-white",
-              size === "standard" ? "text-xl" : "text-xl md:text-2xl",
+              size === "standard" ? "text-base sm:text-xl" : "text-lg sm:text-xl md:text-2xl",
             )}
           >
             {titleFor(tabId, tShop)}
           </h3>
-          <span className="mt-2 inline-flex items-center gap-1 font-body text-sm font-semibold text-white">
+          <span className="mt-1 hidden items-center gap-1 font-body text-sm font-semibold text-white sm:mt-2 sm:inline-flex">
             {t("home.cta")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
@@ -120,7 +120,7 @@ export function ShopIntro() {
         </FadeIn>
       </div>
       <FadeIn delay={0.12} direction="left">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-sm">
+        <div className="relative aspect-[5/4] overflow-hidden rounded-2xl shadow-sm sm:aspect-[4/3]">
           <PremiumImage
             src={HERO_IMAGE}
             alt={t("hero.title")}
@@ -151,7 +151,7 @@ export function ShopOverview({
       {banner ? <div className="mb-8">{banner}</div> : null}
 
       <div id="shop-categories">
-        <h2 className="mb-5 font-heading text-3xl text-brand-black md:text-4xl">
+        <h2 className="mb-4 font-heading text-2xl text-brand-black md:mb-5 md:text-4xl">
           {t("home.spotlight")}
         </h2>
         <div className="grid gap-5 md:grid-cols-2">
@@ -166,10 +166,10 @@ export function ShopOverview({
           ))}
         </div>
 
-        <h2 className="mb-5 mt-12 font-heading text-3xl text-brand-black md:text-4xl">
+        <h2 className="mb-4 mt-10 font-heading text-2xl text-brand-black md:mb-5 md:mt-12 md:text-4xl">
           {t("home.more")}
         </h2>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {SECONDARY.map((tabId) => (
             <OverlayTile
               key={tabId}

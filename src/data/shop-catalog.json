@@ -103,6 +103,130 @@
       "stock": 10
     },
     {
+      "id": "quilted-toiletry-bag",
+      "type": "physical",
+      "section": "pouches",
+      "image": "/images/uploads/shop/boxy-pouch-flower-3-sizes-1788954883564.jpg",
+      "images": [],
+      "priceCents": 1000,
+      "priceLabel": "vanaf € 10,00",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Gewatteerde toilettas – handgemaakt",
+        "en": "Quilted toiletry bag – handmade"
+      },
+      "description": {
+        "nl": "Zachte, gewatteerde tas met rits. De boxy vorm blijft mooi openstaan: handig voor make-up, toiletspullen of onderweg.\n\nKies een maat en stof. Optioneel: naam borduren voor € 5 extra. Andere print in gedachten? Zet het bij extra wensen. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
+        "en": "A soft quilted bag with a zip. The boxy shape stays open, handy for makeup, toiletries or travel.\n\nChoose a size and fabric. Optional: embroider a name for €5 extra. Another print in mind? Add it under extra wishes. Production about 10–15 business days. Shipping within the Netherlands."
+      },
+      "options": [
+        {
+          "id": "size",
+          "type": "size",
+          "required": true,
+          "label": {
+            "nl": "Maat",
+            "en": "Size"
+          },
+          "choices": [
+            {
+              "id": "size-s",
+              "label": {
+                "nl": "S · 12 × 8 × 9 cm",
+                "en": "S · 12 × 8 × 9 cm"
+              },
+              "priceCents": 1000
+            },
+            {
+              "id": "size-m",
+              "label": {
+                "nl": "M · 16 × 9 × 10 cm",
+                "en": "M · 16 × 9 × 10 cm"
+              },
+              "priceCents": 1200
+            },
+            {
+              "id": "size-l",
+              "label": {
+                "nl": "L · 18 × 10 × 13 cm",
+                "en": "L · 18 × 10 × 13 cm"
+              },
+              "priceCents": 1400
+            }
+          ]
+        },
+        {
+          "id": "fabric",
+          "type": "fabric",
+          "required": true,
+          "label": {
+            "nl": "Stof",
+            "en": "Fabric"
+          },
+          "choices": [
+            {
+              "id": "stof-bloemen",
+              "label": {
+                "nl": "Bloemenprint",
+                "en": "Floral print"
+              },
+              "image": "/images/uploads/shop/boxy-pouch-flower-3-sizes-1788954883564.jpg"
+            }
+          ]
+        },
+        {
+          "id": "embroidery",
+          "type": "addon",
+          "required": true,
+          "label": {
+            "nl": "Borduurwerk",
+            "en": "Embroidery"
+          },
+          "choices": [
+            {
+              "id": "embroidery-none",
+              "label": {
+                "nl": "Zonder",
+                "en": "Without"
+              },
+              "priceCents": 0
+            },
+            {
+              "id": "embroidery-yes",
+              "label": {
+                "nl": "Naam borduren",
+                "en": "Embroider a name"
+              },
+              "priceCents": 500
+            }
+          ]
+        },
+        {
+          "id": "embroideryName",
+          "type": "name",
+          "required": true,
+          "revealWhen": {
+            "optionId": "embroidery",
+            "choiceId": "embroidery-yes"
+          },
+          "label": {
+            "nl": "Naam om te borduren",
+            "en": "Name to embroider"
+          }
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": {
+            "nl": "Extra wensen",
+            "en": "Extra wishes"
+          }
+        }
+      ]
+    },
+    {
       "id": "drawstring-bag",
       "type": "physical",
       "section": "pouches",

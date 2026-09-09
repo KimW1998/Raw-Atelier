@@ -59,7 +59,7 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
           fill
           sizes="(max-width: 640px) 50vw, 25vw"
         />
-        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.12em] text-brand-black">
+        <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 font-body text-[10px] font-semibold uppercase tracking-[0.12em] text-brand-black sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-xs">
           {t(`badges.${badge}`)}
         </span>
         {product.type === "digital" && (
@@ -78,9 +78,9 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
           </span>
         )}
       </Link>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-3 sm:p-5">
         <Link href={getProductHref(product.id)}>
-          <h3 className="font-heading text-lg text-brand-black hover:text-brand-pink-accent">
+          <h3 className="line-clamp-2 font-heading text-base leading-snug text-brand-black hover:text-brand-pink-accent sm:text-lg">
             {getProductName(product, locale)}
           </h3>
         </Link>
@@ -88,31 +88,33 @@ function ProductCard({ product }: { product: ShopCatalogProduct }) {
           <ListedSalePrice product={product} />
           <SaleBadge product={product} />
         </div>
-        <p className="mt-3 line-clamp-4 flex-1 font-body text-sm leading-relaxed text-brand-black/60">
+        <p className="mt-2 hidden flex-1 font-body text-sm leading-relaxed text-brand-black/60 sm:mt-3 sm:line-clamp-3 sm:block">
           {getProductDescription(product, locale)}
         </p>
+        <div className="mt-auto pt-3">
         {soldOut ? (
-          <Button variant="outline" className="mt-4 w-full" disabled>
+          <Button variant="outline" className="w-full" disabled>
             {t("soldOut")}
           </Button>
         ) : physicalPaused ? (
-          <Button variant="outline" className="mt-4 w-full" disabled>
+          <Button variant="outline" className="w-full" disabled>
             {t("physicalPaused")}
           </Button>
         ) : needsOptions ? (
-          <Button href={getProductHref(product.id)} variant="primary" className="mt-4 w-full">
+          <Button href={getProductHref(product.id)} variant="primary" className="w-full">
             {t("cart.chooseOptions")}
           </Button>
         ) : (
           <Button
             variant="primary"
-            className="mt-4 w-full"
+            className="w-full"
             disabled={!canAdd}
             onClick={() => addItem(product.id)}
           >
             {t("cart.add")}
           </Button>
         )}
+        </div>
       </div>
     </article>
   );
@@ -229,13 +231,13 @@ function ShopPrimaryNav({
     <div
       role="tablist"
       aria-label={tShop("tabsLabel")}
-      className="flex flex-wrap justify-center gap-2"
+      className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
     >
       <button
         type="button"
         onClick={onHome}
         className={cn(
-          "shrink-0 rounded-full px-4 py-2 font-body text-sm font-semibold transition-all duration-300 sm:px-5 sm:py-2.5",
+          "shrink-0 rounded-full px-3.5 py-2 font-body text-xs font-semibold transition-all duration-300 sm:px-5 sm:py-2.5 sm:text-sm",
           overviewActive
             ? "bg-brand-black text-white shadow-md shadow-brand-black/10"
             : "bg-white text-brand-black/70 ring-1 ring-brand-pink-light hover:bg-brand-pink-light hover:text-brand-black",
@@ -256,7 +258,7 @@ function ShopPrimaryNav({
             aria-selected={isActive}
             onClick={() => onSelect(primaryToShopTab(tabId, activeTab ?? "embroideryPatterns"))}
             className={cn(
-              "shrink-0 rounded-full px-4 py-2 font-body text-sm font-semibold transition-all duration-300 sm:px-5 sm:py-2.5",
+              "shrink-0 rounded-full px-3.5 py-2 font-body text-xs font-semibold transition-all duration-300 sm:px-5 sm:py-2.5 sm:text-sm",
               isActive
                 ? "bg-brand-black text-white shadow-md shadow-brand-black/10"
                 : "bg-white text-brand-black/70 ring-1 ring-brand-pink-light hover:bg-brand-pink-light hover:text-brand-black",
@@ -335,7 +337,7 @@ function DigitalPatternIntro({ tabId }: { tabId: "embroideryPatterns" | "sewingP
 
 function ProductGrid({ products }: { products: ShopCatalogProduct[] }) {
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

@@ -9,6 +9,7 @@ import {
   formatEuro,
   getProductOptions,
   getProductUnitPriceCents,
+  optionIsRevealed,
   optionLabel,
   type ProductOption,
   type ProductOptionChoice,
@@ -130,7 +131,7 @@ function OptionField({
       </legend>
 
       {(option.type === "fabric" || option.type === "hardware") && (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3">
           {(option.choices ?? []).map((choice) => (
             <ChoiceBox
               key={choice.id}
@@ -140,6 +141,65 @@ function OptionField({
               onSelect={() => onChange(choice.id)}
             />
           ))}
+        </div>
+      )}
+
+      {option.type === "size" && (
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          {(option.choices ?? []).map((choice) => {
+            const price = typeof choice.priceCents === "number" ? choice.priceCents : product.priceCents;
+            return (
+              <button
+                key={choice.id}
+                type="button"
+                onClick={() => onChange(choice.id)}
+                aria-pressed={value === choice.id}
+                className={cn(
+                  "rounded-2xl bg-white px-2.5 py-2.5 text-left ring-1 transition-all sm:px-4 sm:py-3",
+                  value === choice.id
+                    ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
+                    : "ring-brand-pink-light hover:ring-brand-pink",
+                )}
+              >
+                <span className="block font-body text-xs font-semibold leading-snug text-brand-black sm:text-sm">
+                  {choiceLabel(choice, locale)}
+                </span>
+                <span className="mt-1 block font-body text-xs text-brand-pink-accent sm:text-sm">
+                  {formatEuro(price, locale)}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {option.type === "addon" && (
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          {(option.choices ?? []).map((choice) => {
+            const extra =
+              typeof choice.priceCents === "number" && choice.priceCents > 0 ? choice.priceCents : 0;
+            return (
+              <button
+                key={choice.id}
+                type="button"
+                onClick={() => onChange(choice.id)}
+                aria-pressed={value === choice.id}
+                className={cn(
+                  "rounded-2xl bg-white px-3 py-3 text-left ring-1 transition-all",
+                  value === choice.id
+                    ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
+                    : "ring-brand-pink-light hover:ring-brand-pink",
+                )}
+              >
+                <span className="block font-body text-sm font-semibold text-brand-black">
+                  {choiceLabel(choice, locale)}
+                </span>
+                <span className="mt-1 block font-body text-xs text-brand-black/55 sm:text-sm">
+                  {extra > 0 ? `+ ${formatEuro(extra, locale)}` : t("options.included")}
+                </span>
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -318,7 +378,7 @@ export function ProductOptionsForm({
 
   return (
     <div className="mt-8 space-y-7">
-      {options.map((option) => (
+      {options.filter((option) => optionIsRevealed(option, selections)).map((option) => (
         <OptionField
           key={option.id}
           option={option}

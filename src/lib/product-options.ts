@@ -2,7 +2,15 @@ import { applySaleCents, salePercentForProduct } from "./sale-pricing";
 
 export type ShopLocale = "nl" | "en";
 
-export type ProductOptionType = "fabric" | "hardware" | "name" | "note" | "letters" | "bundle";
+export type ProductOptionType =
+  | "fabric"
+  | "hardware"
+  | "size"
+  | "addon"
+  | "name"
+  | "note"
+  | "letters"
+  | "bundle";
 
 export interface ProductOptionChoice {
   id: string;
@@ -32,6 +40,8 @@ export interface ProductOption {
   maxLetters?: number;
   extraCharacters?: LetterExtraCharacter[];
   letterPricesCents?: Record<string, number>;
+  /** Show this field only when another option has this choice selected. */
+  revealWhen?: { optionId: string; choiceId: string };
 }
 
 export const BANNER_EXTRA_CHARACTERS: LetterExtraCharacter[] = [
@@ -72,6 +82,53 @@ export function getLettersOption(product: OptionedProduct): ProductOption | unde
 
 export function getBundleOption(product: OptionedProduct): ProductOption | undefined {
   return getProductOptions(product).find((option) => option.type === "bundle");
+}
+
+export function getSizeOption(product: OptionedProduct): ProductOption | undefined {
+  return getProductOptions(product).find((option) => option.type === "size");
+}
+
+export function selectedSizeChoice(
+  product: OptionedProduct,
+  selections: ProductSelections = {},
+): ProductOptionChoice | undefined {
+  const option = getSizeOption(product);
+  if (!option) return undefined;
+  const value = selections[option.id]?.trim();
+  if (!value) return undefined;
+  return option.choices?.find((choice) => choice.id === value);
+}
+
+export function sizePriceCents(choice: ProductOptionChoice | undefined, fallback: number): number {
+  if (typeof choice?.priceCents === "number" && Number.isFinite(choice.priceCents) && choice.priceCents > 0) {
+    return Math.round(choice.priceCents);
+  }
+  return fallback;
+}
+
+export function optionIsRevealed(
+  option: ProductOption,
+  selections: ProductSelections = {},
+): boolean {
+  const rule = option.revealWhen;
+  if (!rule?.optionId || !rule.choiceId) return true;
+  return selections[rule.optionId] === rule.choiceId;
+}
+
+export function addonExtraCents(
+  product: OptionedProduct,
+  selections: ProductSelections = {},
+): number {
+  let extra = 0;
+  for (const option of getProductOptions(product)) {
+    if (option.type !== "addon") continue;
+    const value = selections[option.id]?.trim();
+    const choice = option.choices?.find((item) => item.id === value);
+    if (typeof choice?.priceCents === "number" && Number.isFinite(choice.priceCents) && choice.priceCents > 0) {
+      extra += Math.round(choice.priceCents);
+    }
+  }
+  return extra;
 }
 
 export function selectedBundleChoice(
@@ -156,7 +213,7 @@ export function getProductUnitPriceCents(
   applySale = true,
 ): number {
   const letters = getLettersOption(product);
-  let piece = product.priceCents;
+  let piece = sizePriceCents(selectedSizeChoice(product, selections), product.priceCents);
   if (letters) {
     const text = selections[letters.id] ?? "";
     const count = countBillableLetters(text, letters);
@@ -167,6 +224,7 @@ export function getProductUnitPriceCents(
   }
 
   const pack = selectedBundleChoice(product, selections);
+  const extras = addonExtraCents(product, selections) * bundleSize(product, selections);
   const unsold = pack
     ? Math.max(
         0,
@@ -174,8 +232,8 @@ export function getProductUnitPriceCents(
           ? pack.priceCents
           : piece * bundleSize(product, selections)) +
           (piece - product.priceCents) * bundleSize(product, selections),
-      )
-    : piece;
+      ) + extras
+    : piece + extras;
   return applySale ? applySaleCents(unsold, salePercentForProduct(product)) : unsold;
 }
 
@@ -186,12 +244,18 @@ export function getListedPrice(product: OptionedProduct): {
   salePercent: number;
 } {
   const letters = getLettersOption(product);
+  const sizes = getSizeOption(product)?.choices ?? [];
+  const sizePrices = sizes
+    .map((choice) => sizePriceCents(choice, 0))
+    .filter((cents) => cents > 0);
   const single = letters
     ? letterPriceCents(letters, Math.max(1, letters.minLetters ?? 1))
-    : product.priceCents;
+    : sizePrices.length > 0
+      ? Math.min(...sizePrices)
+      : product.priceCents;
   const bundles = getBundleOption(product)?.choices ?? [];
   let original = single;
-  let from = Boolean(letters);
+  let from = Boolean(letters) || sizePrices.length > 1;
   if (bundles.length > 0) {
     let min = single;
     for (const choice of bundles) {
@@ -232,6 +296,7 @@ export function formatSelectionLines(
   locale: ShopLocale,
 ): string[] {
   return getProductOptions(product).flatMap((option) => {
+    if (!optionIsRevealed(option, selections)) return [];
     const value = selections[option.id]?.trim();
     if (!value) return [];
     const label = optionLabel(option, locale);
@@ -248,9 +313,16 @@ export function validateSelections(
   selections: ProductSelections,
 ): SelectionError | null {
   for (const option of getProductOptions(product)) {
+    if (!optionIsRevealed(option, selections)) continue;
     const value = selections[option.id]?.trim() ?? "";
 
-    if (option.type === "fabric" || option.type === "hardware" || option.type === "bundle") {
+    if (
+      option.type === "fabric" ||
+      option.type === "hardware" ||
+      option.type === "size" ||
+      option.type === "addon" ||
+      option.type === "bundle"
+    ) {
       if (!value) {
         if (option.required) return { optionId: option.id, reason: "required" };
         continue;
@@ -290,6 +362,7 @@ export function sanitizeSelections(
   if (!selections || typeof selections !== "object") return next;
 
   for (const option of getProductOptions(product)) {
+    if (!optionIsRevealed(option, selections)) continue;
     const value = selections[option.id];
     if (typeof value === "string" && value.trim()) {
       next[option.id] = value.trim();

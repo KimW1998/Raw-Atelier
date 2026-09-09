@@ -54,6 +54,7 @@ shop:
     photoOf: Foto {current} van {total}
   options:
     optional: optioneel
+    included: inbegrepen
     lettersHint: "{perLetter} per letter of teken, minimaal {min}."
     maxLetters: Maximaal {max} tekens.
     letterCount: "{count} tekens · {price}"
@@ -134,8 +135,8 @@ shop:
       emptyNote: Eerste patch komt binnenkort online. Stuur gerust een bericht als je al iets in gedachten hebt.
     pouches:
       eyebrow: Pouches & tassen
-      title: Trekkoordtassen & pouches
-      description: Zachte gepersonaliseerde pouches voor cadeaus, babyspullen en dagelijks gebruik.
+      title: Toilettasjes & tassen
+      description: Gewatteerde toilettasjes, trekkoordtassen en zachte tasjes voor make-up, cadeaus en onderweg.
     patterns:
       eyebrow: Naaitpatronen
       title: Digitale naaitpatronen

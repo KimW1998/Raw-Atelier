@@ -584,7 +584,7 @@ function buildConfig(backend) {
                     required: false,
                     collapsed: true,
                     label_singular: "optie",
-                    hint: "Stof, hardware, naam, notitie, prijs per letter of bundelkorting (4/6 stuks).",
+                    hint: "Stof, hardware, maat, naam, notitie, prijs per letter of bundelkorting (4/6 stuks).",
                     fields: [
                       { label: "ID", name: "id", widget: "string" },
                       {
@@ -594,6 +594,8 @@ function buildConfig(backend) {
                         options: [
                           { label: "Stof (fotovakjes)", value: "fabric" },
                           { label: "Hardware (kleurvakjes)", value: "hardware" },
+                          { label: "Maat (prijs per maat)", value: "size" },
+                          { label: "Extra (plusprijs)", value: "addon" },
                           { label: "Naamveld", value: "name" },
                           { label: "Extra notitie", value: "note" },
                           { label: "Prijs per letter", value: "letters" },
