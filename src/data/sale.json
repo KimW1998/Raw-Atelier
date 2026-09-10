@@ -1,6 +1,6 @@
 {
-  "enabled": true,
-  "percentOff": 90,
+  "enabled": false,
+  "percentOff": 20,
   "endsOn": "",
   "showSiteBanner": false,
   "showShopBanner": false,
