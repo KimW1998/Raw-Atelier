@@ -10,6 +10,7 @@ import {
   lineStockUnits,
   productHasOptions,
   sanitizeSelections,
+  stockCapsForSelection,
   validateSelections,
   type ProductSelections,
 } from "../../src/lib/product-options";
@@ -92,18 +93,34 @@ export default async (req: Request) => {
   let needsLegacyPersonalization = false;
   const productIds: string[] = [];
   const orderNotes: string[] = [];
-  const requestedQtyByProduct = new Map<string, number>();
+  const neededByKey = new Map<string, number>();
+  const catalogByKey = new Map<string, number>();
   for (const item of requested) {
     const quantity = Number(item.quantity);
     if (!item.productId || !Number.isInteger(quantity) || quantity < 1) continue;
     const product = getCatalogProduct(item.productId);
     if (!product) continue;
     const selections = sanitizeSelections(product, item.selections);
-    requestedQtyByProduct.set(
-      item.productId,
-      (requestedQtyByProduct.get(item.productId) ?? 0) +
-        lineStockUnits(product, selections, quantity),
-    );
+    const stockQty = lineStockUnits(product, selections, quantity);
+    for (const cap of stockCapsForSelection(product, selections)) {
+      neededByKey.set(cap.key, (neededByKey.get(cap.key) ?? 0) + stockQty);
+      catalogByKey.set(cap.key, cap.remaining);
+    }
+  }
+
+  for (const [key, needed] of neededByKey) {
+    const remaining = key in liveStock ? liveStock[key] : catalogByKey.get(key);
+    if (typeof remaining === "number" && needed > remaining) {
+      return json(
+        {
+          error:
+            locale === "nl"
+              ? "Dit product is niet meer zo op voorraad."
+              : "This product does not have enough stock.",
+        },
+        409,
+      );
+    }
   }
 
   for (const item of requested) {
@@ -142,25 +159,7 @@ export default async (req: Request) => {
         403,
       );
     }
-    const liveRemaining =
-      item.productId in liveStock
-        ? liveStock[item.productId]
-        : typeof (product as { stock?: unknown }).stock === "number"
-          ? Math.max(0, Math.floor((product as { stock: number }).stock))
-          : null;
     const stockQty = lineStockUnits(product, selections, quantity);
-    const needed = requestedQtyByProduct.get(item.productId) ?? stockQty;
-    if (liveRemaining !== null && needed > liveRemaining) {
-      return json(
-        {
-          error:
-            locale === "nl"
-              ? "Dit product is niet meer zo op voorraad."
-              : "This product does not have enough stock.",
-        },
-        409,
-      );
-    }
     if (product.personalization && !productHasOptions(product)) {
       needsLegacyPersonalization = true;
     }

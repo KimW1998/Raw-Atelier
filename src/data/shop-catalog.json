@@ -12,15 +12,15 @@
       ],
       "priceCents": 1495,
       "priceLabel": "€ 14,95",
-      "personalization": true,
+      "personalization": false,
       "digitalFile": "",
       "name": {
         "nl": "Geborduurde appel-keychain – handgemaakt",
         "en": "Custom embroidered apple keychain – handmade"
       },
       "description": {
-        "nl": "Klein, persoonlijk bedankje. Deze handgemaakte appel-keychain is ideaal om een juf of meester te bedanken.\n\nGepersonaliseerd met naam, ongeveer 8–10 cm, inclusief gouden sleutelring. Maaktijd ongeveer 5–10 werkdagen. Na je bestelling neem ik contact op over stof, draadkleur en extra wensen. Verzending binnen Nederland.",
-        "en": "A small, meaningful thank-you. This handmade apple keychain is perfect for a teacher.\n\nPersonalised with a name, about 8–10 cm, with a gold-tone keyring. Production about 5–10 business days. After ordering I contact you about fabric, thread colour and extra wishes. Shipping within the Netherlands."
+        "nl": "Klein, persoonlijk bedankje. Deze handgemaakte appel-keychain is ideaal om een juf of meester te bedanken.\n\nGepersonaliseerd met naam, ongeveer 8–10 cm, inclusief gouden sleutelring. Maaktijd ongeveer 5–10 werkdagen. Na je bestelling neem ik contact op over stof, draadkleur en extra wensen. ",
+        "en": "A small, meaningful thank-you. This handmade apple keychain is perfect for a teacher.\n\nPersonalised with a name, about 8–10 cm, with a gold-tone keyring. Production about 5–10 business days. After ordering I contact you about fabric, thread colour and extra wishes. "
       },
       "options": [
         {
@@ -107,7 +107,11 @@
       "type": "physical",
       "section": "pouches",
       "image": "/images/uploads/shop/boxy-pouch-flower-3-sizes-1788954883564.jpg",
-      "images": [],
+      "images": [
+        "/images/uploads/shop/3-sizes-boxy-pouches-citrus-1789047279146.jpg",
+        "/images/uploads/shop/boxy-pouch-3-sizes-sailor-1789047279221.jpg",
+        "/images/uploads/shop/boxy-pouches-3-sizes-leafes-1789047279431.jpg"
+      ],
       "priceCents": 1000,
       "priceLabel": "vanaf € 10,00",
       "personalization": true,
@@ -117,8 +121,8 @@
         "en": "Quilted toiletry bag – handmade"
       },
       "description": {
-        "nl": "Zachte, gewatteerde tas met rits. De boxy vorm blijft mooi openstaan: handig voor make-up, toiletspullen of onderweg.\n\nKies een maat en stof. Optioneel: naam borduren voor € 5 extra. Andere print in gedachten? Zet het bij extra wensen. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
-        "en": "A soft quilted bag with a zip. The boxy shape stays open, handy for makeup, toiletries or travel.\n\nChoose a size and fabric. Optional: embroider a name for €5 extra. Another print in mind? Add it under extra wishes. Production about 10–15 business days. Shipping within the Netherlands."
+        "nl": "Een zacht, gewatteerd tasje met rits, in een boxy vorm die open blijft staan. Handig op het aanrecht, in je tas of onderweg: make-up, verzorging of kleine spulletjes hebben zo hun eigen plekje.\n\nElk tasje naai ik met de hand in mijn atelier. Kies een maat en stof, en optioneel borduur ik een naam op het tasje (+ € 5). Wil je een andere print? Zet het bij extra wensen, dan kijk ik wat er kan.\n\nMaaktijd ongeveer 10–15 werkdagen.",
+        "en": "A soft quilted bag with a zip, in a boxy shape that stays open. Handy on the counter, in your bag or on the go: makeup, toiletries or small bits all have their own place.\n\nEach bag is sewn by hand in my studio. Choose a size and fabric, and I can embroider a name on it (+ €5). Another print in mind? Add it under extra wishes and I’ll see what’s possible.\n\nProduction about 10–15 business days."
       },
       "options": [
         {
@@ -227,6 +231,149 @@
       ]
     },
     {
+      "id": "quilted-ereader-case",
+      "type": "physical",
+      "section": "pouches",
+      "image": "/images/shop/ereader/ereader-2.jpg",
+      "images": [
+        "/images/shop/ereader/ereader-3.jpg"
+      ],
+      "priceCents": 3495,
+      "priceLabel": "€ 34,95",
+      "personalization": true,
+      "digitalFile": "",
+      "name": {
+        "nl": "Gewatteerde e-reader hoes – handgemaakt",
+        "en": "Quilted e-reader case – handmade"
+      },
+      "description": {
+        "nl": "Een zachte, gewatteerde hoes voor je Kindle of Kobo, met knoopsluiting en een speelse ruche. De vulling beschermt je e-reader in je tas, zonder dat het een standaard plastic cover wordt.\n\nIk naai elke hoes op bestelling, in dezelfde stijl als mijn Lumi-patroon. Kies een maat die bij jouw e-reader past en een stof. Optioneel borduur ik een naam (+ € 5). Ander model of een eigen print in gedachten? Zet het bij extra wensen.\n\nMaaktijd ongeveer 10–15 werkdagen.",
+        "en": "A soft quilted case for your Kindle or Kobo, with a button closure and a playful ruffle. The padding protects your e-reader in your bag, without looking like a standard plastic cover.\n\nEach case is sewn to order, in the same style as my Lumi pattern. Choose a size that fits your e-reader and a fabric. Optional: embroider a name (+ €5). Another model or print in mind? Add it under extra wishes.\n\nProduction about 10–15 business days."
+      },
+      "options": [
+        {
+          "id": "size",
+          "type": "size",
+          "required": true,
+          "label": {
+            "nl": "Maat",
+            "en": "Size"
+          },
+          "choices": [
+            {
+              "id": "size-kindle",
+              "label": {
+                "nl": "Kindle Paperwhite / Basic",
+                "en": "Kindle Paperwhite / Basic"
+              },
+              "priceCents": 3495
+            },
+            {
+              "id": "size-clara",
+              "label": {
+                "nl": "Kobo Clara",
+                "en": "Kobo Clara"
+              },
+              "priceCents": 3495
+            },
+            {
+              "id": "size-libra",
+              "label": {
+                "nl": "Kobo Libra / kleine tablet",
+                "en": "Kobo Libra / small tablet"
+              },
+              "priceCents": 3495
+            }
+          ]
+        },
+        {
+          "id": "fabric",
+          "type": "fabric",
+          "required": true,
+          "label": {
+            "nl": "Stof",
+            "en": "Fabric"
+          },
+          "choices": [
+            {
+              "id": "stof-roze-panter",
+              "label": {
+                "nl": "Roze panterprint",
+                "en": "Pink leopard print"
+              },
+              "image": "/images/shop/ereader/ereader-2.jpg"
+            },
+            {
+              "id": "stof-groene-panter",
+              "label": {
+                "nl": "Groene panterprint",
+                "en": "Green leopard print"
+              },
+              "image": "/images/shop/ereader/ereader-3.jpg"
+            }
+          ]
+        },
+        {
+          "id": "embroidery",
+          "type": "addon",
+          "required": true,
+          "label": {
+            "nl": "Borduurwerk",
+            "en": "Embroidery"
+          },
+          "choices": [
+            {
+              "id": "embroidery-none",
+              "label": {
+                "nl": "Zonder",
+                "en": "Without"
+              },
+              "priceCents": 0
+            },
+            {
+              "id": "embroidery-yes",
+              "label": {
+                "nl": "Naam borduren",
+                "en": "Embroider a name"
+              },
+              "priceCents": 500
+            }
+          ]
+        },
+        {
+          "id": "embroideryName",
+          "type": "name",
+          "required": true,
+          "revealWhen": {
+            "optionId": "embroidery",
+            "choiceId": "embroidery-yes"
+          },
+          "label": {
+            "nl": "Naam om te borduren",
+            "en": "Name to embroider"
+          }
+        },
+        {
+          "id": "device",
+          "type": "note",
+          "required": true,
+          "label": {
+            "nl": "Merk en model e-reader",
+            "en": "E-reader brand and model"
+          }
+        },
+        {
+          "id": "note",
+          "type": "note",
+          "required": false,
+          "label": {
+            "nl": "Extra wensen",
+            "en": "Extra wishes"
+          }
+        }
+      ]
+    },
+    {
       "id": "drawstring-bag",
       "type": "physical",
       "section": "pouches",
@@ -246,8 +393,8 @@
         "en": "Custom embroidered drawstring bag – handmade"
       },
       "description": {
-        "nl": "Handgemaakte trekkoordtas van zachte stof, met stevige koordjes en borduurwerk. Ongeveer 23 cm hoog en 17 cm breed.\n\nKies naam of tekst; stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
-        "en": "A handmade drawstring bag in soft fabric, with sturdy cords and embroidery. About 23 cm high and 17 cm wide.\n\nAdd a name or text; fabric and thread colour are confirmed after ordering. Production about 10–15 business days. Shipping within the Netherlands."
+        "nl": "Handgemaakte trekkoordtas van zachte stof, met stevige koordjes en borduurwerk. Ongeveer 23 cm hoog en 17 cm breed.\n\nKies naam of tekst; stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. ",
+        "en": "A handmade drawstring bag in soft fabric, with sturdy cords and embroidery. About 23 cm high and 17 cm wide.\n\nAdd a name or text; fabric and thread colour are confirmed after ordering. Production about 10–15 business days. "
       },
       "options": [
         {
@@ -290,8 +437,8 @@
         "en": "Custom fabric balloon with embroidery – handmade"
       },
       "description": {
-        "nl": "Handgemaakte stoffen ballon met strik, lint en borduurwerk. Ongeveer 34 cm hoog en 25 cm breed. Mooi als babykamerdecoratie of kraamcadeau.\n\nNaam, leeftijd of korte tekst; stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
-        "en": "A handmade fabric balloon with a bow, ribbon and embroidery. About 34 cm high and 25 cm wide. Perfect as nursery décor or a newborn gift.\n\nName, age or short text; fabric and thread colour are confirmed after ordering. Production about 10–15 business days. Shipping within the Netherlands."
+        "nl": "Handgemaakte stoffen ballon met strik, lint en borduurwerk. Ongeveer 34 cm hoog en 25 cm breed. Mooi als babykamerdecoratie of kraamcadeau.\n\nNaam, leeftijd of korte tekst; stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. ",
+        "en": "A handmade fabric balloon with a bow, ribbon and embroidery. About 34 cm high and 25 cm wide. Perfect as nursery décor or a newborn gift.\n\nName, age or short text; fabric and thread colour are confirmed after ordering. Production about 10–15 business days. "
       },
       "options": [
         {
@@ -342,8 +489,8 @@
         "en": "Custom name banner – handmade fabric letters"
       },
       "description": {
-        "nl": "Unieke naamslinger, helemaal op jouw stijl. Elke letter is handgemaakt van stof, met geborduurde randen en vilten scallops. Letters ongeveer 10 cm hoog en 9 cm breed.\n\nDe prijs volgt het aantal letters (spaties tellen niet). Hart, & en maan kun je in de naam zetten. Stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. Verzending binnen Nederland.",
-        "en": "A unique name garland, made to your style. Each letter is handmade in fabric, with embroidered borders and felt scallops. Letters about 10 cm high and 9 cm wide.\n\nThe price follows the number of letters (spaces are free). You can add a heart, & or moon. Fabric and thread colour are confirmed after ordering. Production about 10–15 business days. Shipping within the Netherlands."
+        "nl": "Unieke naamslinger, helemaal op jouw stijl. Elke letter is handgemaakt van stof, met geborduurde randen en vilten scallops. Letters ongeveer 10 cm hoog en 9 cm breed.\n\nDe prijs volgt het aantal letters (spaties tellen niet). Hart, & en maan kun je in de naam zetten. Stof en draadkleur stemmen we na de bestelling af. Maaktijd ongeveer 10–15 werkdagen. ",
+        "en": "A unique name garland, made to your style. Each letter is handmade in fabric, with embroidered borders and felt scallops. Letters about 10 cm high and 9 cm wide.\n\nThe price follows the number of letters (spaces are free). You can add a heart, & or moon. Fabric and thread colour are confirmed after ordering. Production about 10–15 business days."
       },
       "options": [
         {

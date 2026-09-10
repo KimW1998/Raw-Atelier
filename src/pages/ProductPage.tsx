@@ -30,9 +30,9 @@ import {
   getProductUnitPriceCents,
   getRelatedProducts,
   getSizeOption,
+  firstAvailableFabricId,
   isSoldOut,
-  lineStockUnits,
-  maxOrderQuantity,
+  remainingStockForSelection,
   productHasOptions,
   sanitizeSelections,
   useShopProduct,
@@ -54,8 +54,13 @@ function selectionErrorMessage(
   return t("options.errorRequired");
 }
 
-export default function ProductPage() {
-  const { productId = "" } = useParams();
+export default function ProductPage({
+  previewProductId,
+}: {
+  previewProductId?: string;
+} = {}) {
+  const { productId: routeId = "" } = useParams();
+  const productId = previewProductId || routeId;
   const product = useShopProduct(productId);
   const locale = useLocale();
   const tMeta = useTranslations("metadata");
@@ -74,8 +79,9 @@ export default function ProductPage() {
       if (option.type === "size" || option.type === "addon") {
         next[option.id] = option.choices[0].id;
       }
-      if (option.type === "fabric" && option.choices.length === 1) {
-        next[option.id] = option.choices[0].id;
+      if (option.type === "fabric") {
+        const first = firstAvailableFabricId(option);
+        if (first) next[option.id] = first;
       }
     }
     setSelections(next);
@@ -113,11 +119,9 @@ export default function ProductPage() {
   const soldOut = isSoldOut(product);
   const { pausePhysical } = useVacation();
   const physicalPaused = pausePhysical && product.type === "physical";
-  const alreadyInCart = items
-    .filter((item) => item.productId === product.id)
-    .reduce((sum, item) => sum + lineStockUnits(product, item.selections, item.quantity), 0);
+  const alreadyInCart = items.filter((item) => item.productId === product.id);
   const packSize = bundleSize(product, selections);
-  const remainingPieces = maxOrderQuantity(product, alreadyInCart);
+  const remainingPieces = remainingStockForSelection(product, selections, alreadyInCart);
   const remaining = Number.isFinite(remainingPieces)
     ? Math.floor(remainingPieces / packSize)
     : Number.POSITIVE_INFINITY;

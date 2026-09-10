@@ -8,7 +8,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { availableStock, getShopProduct, lineStockUnits, maxOrderQuantity, type ShopCatalogProduct } from "@/lib/shop";
+import {
+  getShopProduct,
+  lineStockUnits,
+  remainingStockForSelection,
+  stockCapsForSelection,
+  type ShopCatalogProduct,
+} from "@/lib/shop";
 import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import { isPhysicalCheckoutPaused } from "@/lib/vacation";
 import {
@@ -39,15 +45,6 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-function stockUnitsInCart(items: CartItem[], productId: string, exceptLineId?: string): number {
-  return items
-    .filter((item) => item.productId === productId && item.lineId !== exceptLineId)
-    .reduce((sum, item) => {
-      const product = getShopProduct(item.productId);
-      return sum + (product ? lineStockUnits(product, item.selections, item.quantity) : item.quantity);
-    }, 0);
-}
-
 function createLineId(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
     return crypto.randomUUID();
@@ -73,15 +70,22 @@ function clampCartToStock(
     const catalogProduct = getShopProduct(item.productId);
     if (!catalogProduct) continue;
     const product = overlayLiveStock(catalogProduct, live);
-    const stock = availableStock(product);
     const pack = lineStockUnits(product, item.selections, 1);
-    const usedNow = used.get(item.productId) ?? 0;
-    const leftover = stock === null ? Number.POSITIVE_INFINITY : Math.max(0, stock - usedNow);
-    const maxPacks = Number.isFinite(leftover) ? Math.floor(leftover / pack) : item.quantity;
-    const qty = Math.min(item.quantity, Math.max(0, maxPacks));
-    if (qty < 1) continue;
-    next.push({ ...item, quantity: qty });
-    used.set(item.productId, usedNow + pack * qty);
+    const caps = stockCapsForSelection(product, item.selections);
+    let maxPacks = item.quantity;
+    if (caps.length === 0) {
+      next.push(item);
+      continue;
+    }
+    for (const cap of caps) {
+      const leftover = Math.max(0, cap.remaining - (used.get(cap.key) ?? 0));
+      maxPacks = Math.min(maxPacks, Math.floor(leftover / pack));
+    }
+    if (maxPacks < 1) continue;
+    next.push({ ...item, quantity: maxPacks });
+    for (const cap of caps) {
+      used.set(cap.key, (used.get(cap.key) ?? 0) + pack * maxPacks);
+    }
   }
   return next;
 }
@@ -166,10 +170,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const cleaned = sanitizeSelections(product, selections);
       const packSize = lineStockUnits(product, cleaned, 1);
       setItems((current) => {
-        const already = stockUnitsInCart(current, productId);
-        const remainingPieces = maxOrderQuantity(product, already);
-        const remainingPacks = Number.isFinite(remainingPieces)
-          ? Math.floor(remainingPieces / packSize)
+        const leftover = remainingStockForSelection(product, cleaned, current);
+        const remainingPacks = Number.isFinite(leftover)
+          ? Math.floor(leftover / packSize)
           : Number.POSITIVE_INFINITY;
         const allowed = Number.isFinite(remainingPacks)
           ? Math.min(quantity, remainingPacks)
@@ -211,11 +214,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (item.lineId !== lineId) return item;
         const product = getShopProduct(item.productId);
         if (!product) return { ...item, quantity };
-        const others = stockUnitsInCart(current, item.productId, lineId);
         const packSize = lineStockUnits(product, item.selections, 1);
-        const remainingPieces = maxOrderQuantity(product, others);
-        const remainingPacks = Number.isFinite(remainingPieces)
-          ? Math.floor(remainingPieces / packSize)
+        const leftover = remainingStockForSelection(product, item.selections, current, lineId);
+        const remainingPacks = Number.isFinite(leftover)
+          ? Math.floor(leftover / packSize)
           : Number.POSITIVE_INFINITY;
         const next = Number.isFinite(remainingPacks)
           ? Math.min(quantity, remainingPacks)

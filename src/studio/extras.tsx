@@ -5,7 +5,7 @@ import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
 import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
-import { SHOP_SECTION_ORDER, getProductImages, isDigitalPatternSection, withProductImages } from "@/lib/shop";
+import { SHOP_SECTION_ORDER, getProductImages, getProductOptions, isDigitalPatternSection, withProductImages } from "@/lib/shop";
 import { cn } from "@/lib/utils";
 import { AutoGrowField, BilingualPair } from "./fields";
 import { StudioImageField, StudioImageList } from "./media";
@@ -127,9 +127,11 @@ export function PortfolioItemsEditor({
 export function ShopProductsEditor({
   products,
   onChange,
+  onSelectProduct,
 }: {
   products: ShopCatalogProduct[];
   onChange: (products: ShopCatalogProduct[]) => void;
+  onSelectProduct?: (id: string) => void;
 }) {
   const live = useLiveStockMap();
   const [selectedId, setSelectedId] = useState(products[0]?.id ?? "");
@@ -158,7 +160,7 @@ export function ShopProductsEditor({
         id,
         type: isDigitalPatternSection(section) ? "digital" : "physical",
         section,
-        image: "/images/portfolio/gifts-balloon.jpg",
+        image: "",
         priceCents: 2500,
         priceLabel: "€ 25,00",
         personalization: true,
@@ -172,6 +174,7 @@ export function ShopProductsEditor({
     ]);
     setSelectedId(id);
     setQuery("");
+    onSelectProduct?.(id);
   };
 
   const needle = query.trim().toLowerCase();
@@ -192,7 +195,13 @@ export function ShopProductsEditor({
 
   return (
     <div className="space-y-4">
-      <StockOverview products={products} onSelect={setSelectedId} />
+      <StockOverview
+        products={products}
+        onSelect={(id) => {
+          setSelectedId(id);
+          onSelectProduct?.(id);
+        }}
+      />
       <div className="flex items-center justify-between gap-3">
         <h2 className="font-heading text-lg text-brand-black">Producten</h2>
         <button
@@ -245,7 +254,10 @@ export function ShopProductsEditor({
                       <li key={product.id}>
                         <button
                           type="button"
-                          onClick={() => setSelectedId(product.id)}
+                          onClick={() => {
+                            setSelectedId(product.id);
+                            onSelectProduct?.(product.id);
+                          }}
                           className={cn(
                             "flex w-full items-center gap-3 px-3 py-2.5 text-left font-body text-sm",
                             active ? "bg-brand-pink-light" : "hover:bg-brand-offwhite",
@@ -458,9 +470,9 @@ export function ShopProductsEditor({
               </label>
             ) : null}
             <p className="font-body text-xs leading-relaxed text-brand-black/50">
-              PDF-patronen laat je meestal onbeperkt. Bij fysieke stukken: zet het aantal, of 0 voor
-              uitverkocht. Na een betaalde bestelling gaat het aantal vanzelf omlaag. Wil je
-              bijvullen, zet hier het nieuwe aantal en push/deploy de site.
+              PDF-patronen laat je meestal onbeperkt. Bij fysieke stukken: zet het totaal, of houd
+              voorraad per stof bij bij de stofkeuzes hieronder. Na een betaalde bestelling gaat het
+              aantal vanzelf omlaag. Wil je bijvullen, zet hier het nieuwe aantal en push/deploy de site.
             </p>
           </div>
           <ShopProductOptionsEditor
@@ -490,8 +502,16 @@ export function ShopProductsEditor({
 }
 
 function liveRemaining(product: ShopCatalogProduct, live: Record<string, number>): number | null {
-  if (typeof product.stock !== "number") return null;
-  return overlayLiveStock(product, live).stock ?? product.stock;
+  const overlaid = overlayLiveStock(product, live);
+  const fabrics = getProductOptions(overlaid).flatMap((option) =>
+    option.type === "fabric" ? (option.choices ?? []) : [],
+  );
+  const tracked = fabrics.filter((choice) => typeof choice.stock === "number");
+  if (tracked.length > 0) {
+    return tracked.reduce((sum, choice) => sum + (choice.stock ?? 0), 0);
+  }
+  if (typeof overlaid.stock === "number") return overlaid.stock;
+  return null;
 }
 
 function StockOverview({
@@ -502,7 +522,7 @@ function StockOverview({
   onSelect: (productId: string) => void;
 }) {
   const live = useLiveStockMap();
-  const tracked = products.filter((product) => typeof product.stock === "number");
+  const tracked = products.filter((product) => liveRemaining(product, live) != null);
 
   return (
     <div className="space-y-2 rounded-2xl border border-brand-pink-light bg-white p-4">
@@ -510,11 +530,43 @@ function StockOverview({
       {tracked.length === 0 ? (
         <p className="font-body text-xs leading-relaxed text-brand-black/55">
           Je houdt nog geen aantallen bij. Zet bij een fysiek product <strong>Voorraad bijhouden</strong>{" "}
-          en vul het aantal stuks in. PDF-patronen laat je meestal onbeperkt.
+          of bij een stof <strong>Voorraad bijhouden</strong> en vul het aantal stuks in. PDF-patronen
+          laat je meestal onbeperkt.
         </p>
       ) : (
         <ul className="space-y-1.5">
           {tracked.map((product) => {
+            const overlaid = overlayLiveStock(product, live);
+            const fabrics = getProductOptions(overlaid).flatMap((option) =>
+              option.type === "fabric"
+                ? (option.choices ?? []).filter((choice) => typeof choice.stock === "number")
+                : [],
+            );
+            if (fabrics.length > 0) {
+              return fabrics.map((choice) => {
+                const remaining = choice.stock ?? 0;
+                return (
+                  <li key={`${product.id}-${choice.id}`}>
+                    <button
+                      type="button"
+                      onClick={() => onSelect(product.id)}
+                      className="flex w-full items-baseline justify-between gap-3 py-0.5 text-left font-body text-sm text-brand-black hover:text-brand-pink-accent"
+                    >
+                      <span className="min-w-0 truncate">
+                        {product.name.nl} · {choice.label.nl}
+                      </span>
+                      <span
+                        className={
+                          remaining === 0 ? "shrink-0 font-semibold text-brand-rose" : "shrink-0"
+                        }
+                      >
+                        {remaining === 0 ? "Uitverkocht" : `${remaining} stuks`}
+                      </span>
+                    </button>
+                  </li>
+                );
+              });
+            }
             const remaining = liveRemaining(product, live) ?? 0;
             return (
               <li key={product.id}>

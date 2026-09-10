@@ -10,15 +10,21 @@ import AboutPage from "@/pages/AboutPage";
 import ServicesPage from "@/pages/ServicesPage";
 import PortfolioPage from "@/pages/PortfolioPage";
 import ShopPage from "@/pages/ShopPage";
+import ProductPage from "@/pages/ProductPage";
 import ContactPage from "@/pages/ContactPage";
 import FaqPage from "@/pages/FaqPage";
 import LegalPage from "@/pages/LegalPage";
 
 function PreviewPage({ path }: { path: string }) {
+  const shopProduct = path.match(/^\/shop\/([^/?#]+)/);
+  const productId = shopProduct?.[1] ?? "";
+  if (productId && !["cart", "success", "cancel"].includes(productId)) {
+    return <ProductPage previewProductId={decodeURIComponent(productId)} />;
+  }
   if (path === "/about") return <AboutPage />;
   if (path === "/services") return <ServicesPage />;
   if (path === "/portfolio") return <PortfolioPage />;
-  if (path === "/shop") return <ShopPage />;
+  if (path === "/shop" || path.startsWith("/shop?")) return <ShopPage />;
   if (path === "/contact") return <ContactPage />;
   if (path === "/faq") return <FaqPage />;
   if (path === "/legal/terms") return <LegalPage kind="terms" />;
@@ -38,6 +44,7 @@ export function StudioPreview({
   vacation,
   sale,
   onPreviewLocale,
+  onPreviewPath,
 }: {
   locale: Locale;
   path: string;
@@ -47,6 +54,7 @@ export function StudioPreview({
   vacation: VacationSettings;
   sale: SaleSettings;
   onPreviewLocale: (locale: Locale) => void;
+  onPreviewPath: (path: string) => void;
 }) {
   return (
     <div className="h-full overflow-auto bg-brand-offwhite" style={{ transform: "translateZ(0)" }}>
@@ -56,6 +64,7 @@ export function StudioPreview({
             disableSeo: true,
             previewLocale: locale,
             previewPath: path,
+            setPreviewPath: onPreviewPath,
             setPreviewLocale: onPreviewLocale,
             portfolioItems,
             shopProducts,

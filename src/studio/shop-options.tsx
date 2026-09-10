@@ -374,8 +374,56 @@ export function ShopProductOptionsEditor({
                         </div>
                       </div>
                     ) : (
-                      <div className="min-w-0 flex-1 font-body text-xs text-brand-black/45">
-                        Klik of sleep een stofoto in het vakje.
+                      <div className="min-w-0 flex-1 space-y-2">
+                        <p className="font-body text-xs text-brand-black/45">
+                          Klik of sleep een stofoto in het vakje.
+                        </p>
+                        <label className="flex items-center gap-2 font-body text-sm">
+                          <input
+                            type="checkbox"
+                            checked={typeof choice.stock === "number"}
+                            onChange={(event) =>
+                              updateOption(index, {
+                                choices: (option.choices ?? []).map((item, i) =>
+                                  i === choiceIndex
+                                    ? {
+                                        ...item,
+                                        stock: event.target.checked
+                                          ? Math.max(1, item.stock ?? 1)
+                                          : undefined,
+                                      }
+                                    : item,
+                                ),
+                              })
+                            }
+                          />
+                          Voorraad bijhouden
+                        </label>
+                        {typeof choice.stock === "number" ? (
+                          <label className="block min-w-0">
+                            <span className="mb-1 block font-body text-xs text-brand-black/50">
+                              Aantal van deze stof
+                            </span>
+                            <input
+                              type="number"
+                              min={0}
+                              className="w-full rounded-2xl border border-brand-pink-light bg-white px-3 py-2 font-body text-sm outline-none focus:border-brand-pink"
+                              value={choice.stock}
+                              onChange={(event) =>
+                                updateOption(index, {
+                                  choices: (option.choices ?? []).map((item, i) =>
+                                    i === choiceIndex
+                                      ? {
+                                          ...item,
+                                          stock: Math.max(0, Number(event.target.value) || 0),
+                                        }
+                                      : item,
+                                  ),
+                                })
+                              }
+                            />
+                          </label>
+                        ) : null}
                       </div>
                     )}
                   </div>

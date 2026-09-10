@@ -165,14 +165,27 @@ shop:
     emptyNote: No digital patterns in the shop yet.
   madeToOrder:
     eyebrow: Made to order
-    title: Sewn on request
+    title: Made on request
     description: >-
-      These pieces are not listed as ready-made products yet. Send your ideas and measurements through the contact form.
+      Not everything is listed as a ready-made product. For digital embroidery files, sewing, gifts and custom
+      accessories, send your idea through the contact form. We’ll confirm design, fabric and timing together.
     cta: Request a custom order
     items:
-      ereaderCases:
-        name: Quilted e-reader & tablet cases
-        description: Soft protective cases sewn to order for your device, fabric and embroidery preferences.
+      embroideryDesigns:
+        name: Digital embroidery designs
+        description: >-
+          Convert logos, artwork and illustrations into stitch-ready embroidery files. For brands, makers and
+          small runs.
+      sewingProduction:
+        name: Production & sewing
+        description: >-
+          Quilted cases, samples, small batches and technical sewing. From first sketch to finished piece, made to
+          order in the studio.
       customPouches:
         name: Custom pouches & accessories
         description: Custom pouches, cases and embroidered accessories tailored to your size and style.
+      personalGifts:
+        name: Personalised gifts
+        description: >-
+          Embroidery and sewing for births, weddings or an extra-personal gift. We’ll choose the piece, name and
+          details together.

@@ -79,8 +79,13 @@ export function StudioApp() {
   const [draft, setDraft] = useState<StudioDraft>(() => loadStudioDraft());
   const [baseline] = useState(() => JSON.stringify(loadStudioDraft()));
   const [previewLocale, setPreviewLocale] = useState<Locale>("nl");
+  const [previewPath, setPreviewPath] = useState(page.previewPath);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setPreviewPath(page.previewPath);
+  }, [page.id, page.previewPath]);
 
   useEffect(() => {
     document.title = "Raw Atelier studio";
@@ -281,6 +286,7 @@ export function StudioApp() {
                       setDraft((current) => ({ ...current, shopProducts }));
                       setStatus("idle");
                     }}
+                    onSelectProduct={(id) => setPreviewPath(`/shop/${id}`)}
                   />
                 </>
               ) : null}
@@ -299,13 +305,14 @@ export function StudioApp() {
               <StudioErrorBoundary>
                 <StudioPreview
                   locale={previewLocale}
-                  path={page.previewPath}
+                  path={previewPath}
                   messages={previewMessages}
                   portfolioItems={draft.portfolioItems}
                   shopProducts={draft.shopProducts}
                   vacation={draft.vacation}
                   sale={draft.sale}
                   onPreviewLocale={setPreviewLocale}
+                  onPreviewPath={setPreviewPath}
                 />
               </StudioErrorBoundary>
             </div>

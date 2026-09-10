@@ -165,14 +165,27 @@ shop:
     emptyNote: Nog geen digitale patronen in de shop.
   madeToOrder:
     eyebrow: Op bestelling
-    title: Op maat genaaid
+    title: Op aanvraag
     description: >-
-      Deze stukken staan nog niet als standaardproduct in de shop. Stuur je ideeën en maten via het contactformulier.
+      Niet alles staat als vast product in de shop. Voor digitale borduurdesigns, naaiwerk, cadeaus en accessoires
+      op maat stuur je je idee via het contactformulier. We stemmen samen design, stof en planning af.
     cta: Vraag een maatwerkopdracht aan
     items:
-      ereaderCases:
-        name: Quilted e-reader & tablet cases
-        description: Zachte beschermhoezen op maat voor jouw device, stof en borduurvoorkeuren.
+      embroideryDesigns:
+        name: Digitale borduurdesigns
+        description: >-
+          Logo’s, artwork en illustraties omzetten naar borduurbestanden, klaar voor jouw machine. Geschikt voor
+          merken, makers en kleine oplages.
+      sewingProduction:
+        name: Productie & naaiwerk
+        description: >-
+          Quilted cases, samples, kleine series en technisch naaiwerk. Van eerste schets tot afgewerkt stuk, op
+          bestelling in het atelier.
       customPouches:
         name: Custom pouches & accessoires
         description: Op maat gemaakte pouches, cases en geborduurde accessoires afgestemd op jouw formaat en stijl.
+      personalGifts:
+        name: Gepersonaliseerde cadeaus
+        description: >-
+          Borduurwerk en naaiwerk voor geboorte, bruiloft of een extra persoonlijk cadeau. Samen kiezen we item,
+          naam en details.

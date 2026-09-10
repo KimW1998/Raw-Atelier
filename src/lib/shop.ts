@@ -3,9 +3,14 @@ import { useStudioPreview } from "@/lib/studio-preview";
 import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import type { Locale } from "@/i18n/context";
 import {
+  availableStockFor,
+  catalogStockNumber,
+  fabricOptionWithStock,
   formatSelectionLines,
   getListedPrice,
+  getProductOptions,
   getProductUnitPriceCents,
+  lineStockUnits,
   type ProductOption,
   type ProductSelections,
 } from "@/lib/product-options";
@@ -23,11 +28,17 @@ export {
   BANNER_EXTRA_CHARACTERS,
   billedLetterCount,
   bundleSize,
+  catalogStockNumber,
+  catalogStockTracks,
+  choiceIsSoldOut,
   choiceLabel,
   countBillableLetters,
   extraCharactersFor,
+  fabricOptionWithStock,
+  firstAvailableFabricId,
   formatSelectionLines,
   getBundleOption,
+  getFabricOptions,
   getLettersOption,
   getListedPrice,
   getProductOptions,
@@ -37,10 +48,13 @@ export {
   lineStockUnits,
   optionIsRevealed,
   optionLabel,
+  productHasFabricStock,
   productHasOptions,
   sanitizeSelections,
   selectedBundleChoice,
+  stockCapsForSelection,
   validateSelections,
+  variantStockKey,
 } from "@/lib/product-options";
 
 export const SHOP_SECTION_ORDER = [
@@ -106,7 +120,12 @@ export interface ShopCatalogProduct {
   options?: ProductOption[];
 }
 
-export const MADE_TO_ORDER_IDS = ["ereaderCases", "customPouches"] as const;
+export const MADE_TO_ORDER_IDS = [
+  "embroideryDesigns",
+  "sewingProduction",
+  "customPouches",
+  "personalGifts",
+] as const;
 
 export type MadeToOrderId = (typeof MADE_TO_ORDER_IDS)[number];
 
@@ -137,7 +156,11 @@ export function getPrimaryTabCoverImages(
     return [embroidery?.image, sewing?.image].filter((src): src is string => Boolean(src));
   }
   if (tab === "madeToOrder") {
-    return ["/images/services/fashion.jpg"];
+    return [
+      "/images/services/digitizing.jpg",
+      "/images/services/fashion.jpg",
+      "/images/services/gifts.jpg",
+    ];
   }
   return productsForTab(products, tab)
     .slice(0, 3)
@@ -157,11 +180,65 @@ export function availableStock(product: ShopCatalogProduct): number | null {
 }
 
 export function isSoldOut(product: ShopCatalogProduct): boolean {
+  const fabrics = getProductOptions(product).flatMap((option) =>
+    option.type === "fabric" ? (option.choices ?? []) : [],
+  );
+  const trackedFabrics = fabrics.filter((choice) => catalogStockNumber(choice.stock) !== null);
+  if (trackedFabrics.length > 0) {
+    const hasOpenFabric = fabrics.some((choice) => catalogStockNumber(choice.stock) === null);
+    if (hasOpenFabric) return availableStock(product) === 0;
+    if (trackedFabrics.every((choice) => catalogStockNumber(choice.stock) === 0)) return true;
+  }
   return availableStock(product) === 0;
 }
 
-export function maxOrderQuantity(product: ShopCatalogProduct, alreadyInCart = 0): number {
-  const stock = availableStock(product);
+export function remainingStockForSelection(
+  product: ShopCatalogProduct,
+  selections: ProductSelections,
+  cartItems: { productId: string; selections: ProductSelections; quantity: number; lineId?: string }[],
+  exceptLineId?: string,
+): number {
+  let leftover = Number.POSITIVE_INFINITY;
+  const productStock = availableStock(product);
+  if (productStock !== null) {
+    const used = cartItems
+      .filter((item) => item.productId === product.id && item.lineId !== exceptLineId)
+      .reduce(
+        (sum, item) => sum + lineStockUnits(product, item.selections, item.quantity),
+        0,
+      );
+    leftover = Math.min(leftover, Math.max(0, productStock - used));
+  }
+  const fabric = fabricOptionWithStock(product, selections);
+  if (fabric) {
+    const used = cartItems
+      .filter(
+        (item) =>
+          item.productId === product.id &&
+          item.lineId !== exceptLineId &&
+          item.selections[fabric.option.id] === fabric.choice.id,
+      )
+      .reduce(
+        (sum, item) => sum + lineStockUnits(product, item.selections, item.quantity),
+        0,
+      );
+    leftover = Math.min(
+      leftover,
+      Math.max(0, (catalogStockNumber(fabric.choice.stock) ?? 0) - used),
+    );
+  }
+  return leftover;
+}
+
+export function maxOrderQuantity(
+  product: ShopCatalogProduct,
+  alreadyInCart = 0,
+  selections: ProductSelections = {},
+): number {
+  const stock = availableStockFor(
+    { ...product, id: product.id },
+    selections,
+  );
   if (stock === null) return Number.POSITIVE_INFINITY;
   return Math.max(0, stock - alreadyInCart);
 }
@@ -238,7 +315,7 @@ export function withProductImages(
   const unique = [...new Set(images.filter(Boolean))];
   return {
     ...product,
-    image: unique[0] || product.image || "",
+    image: unique[0] || "",
     images: unique.slice(1),
   };
 }

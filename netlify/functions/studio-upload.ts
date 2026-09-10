@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import type { Config } from "@netlify/functions";
 import { getEnv } from "./_shared/email";
 
@@ -28,6 +29,20 @@ function extensionFor(file: File): string | null {
   if (TYPES[file.type]) return TYPES[file.type];
   const match = file.name.toLowerCase().match(/\.(jpe?g|png|webp|gif)$/);
   return match ? match[1].replace("jpeg", "jpg") : null;
+}
+
+function repoRoot(): string {
+  const candidates = [
+    process.cwd(),
+    path.resolve(process.cwd(), "../.."),
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../.."),
+  ];
+  for (const dir of candidates) {
+    if (existsSync(path.join(dir, "package.json")) && existsSync(path.join(dir, "public"))) {
+      return dir;
+    }
+  }
+  return process.cwd();
 }
 
 function slugBase(name: string): string {
@@ -85,9 +100,9 @@ export default async (req: Request) => {
 
   const filename = `${slugBase(file.name)}-${Date.now()}.${ext}`;
   const relDir = path.join("public", "images", "uploads", folderRaw);
-  const relPath = path.join(relDir, filename);
-  const absDir = path.join(process.cwd(), relDir);
-  const absPath = path.join(process.cwd(), relPath);
+  const root = repoRoot();
+  const absDir = path.join(root, relDir);
+  const absPath = path.join(absDir, filename);
 
   if (!existsSync(absDir)) mkdirSync(absDir, { recursive: true });
   writeFileSync(absPath, Buffer.from(await file.arrayBuffer()));

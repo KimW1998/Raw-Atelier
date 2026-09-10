@@ -454,7 +454,7 @@ export function ShopCatalog() {
                   )}
 
                   {activeTab === "madeToOrder" ? (
-                    <div className="grid gap-8 md:grid-cols-3">
+                    <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2">
                       {MADE_TO_ORDER_IDS.map((id) => (
                         <MadeToOrderCard key={id} id={id} />
                       ))}

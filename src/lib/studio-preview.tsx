@@ -8,6 +8,7 @@ export interface StudioPreviewValue {
   disableSeo: boolean;
   previewLocale: Locale;
   previewPath: string;
+  setPreviewPath: (path: string) => void;
   setPreviewLocale: (locale: Locale) => void;
   portfolioItems?: PortfolioItem[];
   shopProducts?: ShopCatalogProduct[];

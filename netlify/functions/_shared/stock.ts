@@ -1,4 +1,9 @@
 import { getStore } from "@netlify/blobs";
+import {
+  catalogStockTracks,
+  stockCapsForSelection,
+  type ProductSelections,
+} from "../../../src/lib/product-options";
 import { getCatalogProducts } from "./catalog";
 
 export type StockMap = Record<string, number>;
@@ -9,12 +14,6 @@ type StockEntry = {
 };
 
 type StockState = Record<string, StockEntry>;
-
-function catalogStockOf(product: { stock?: unknown }): number | null {
-  return typeof product.stock === "number" && Number.isFinite(product.stock)
-    ? Math.max(0, Math.floor(product.stock))
-    : null;
-}
 
 function stockStore() {
   return getStore({ name: "shop-stock", consistency: "strong" });
@@ -30,28 +29,39 @@ async function writeState(state: StockState): Promise<void> {
   await stockStore().setJSON("remaining", state);
 }
 
-export async function readLiveStock(): Promise<StockMap> {
-  const state = await readState();
+function allTracks() {
+  return getCatalogProducts().flatMap((product) =>
+    catalogStockTracks({
+      id: product.id,
+      priceCents: product.priceCents,
+      stock: product.stock,
+      options: product.options,
+    }),
+  );
+}
+
+function syncCatalog(state: StockState): { state: StockState; map: StockMap; changed: boolean } {
   const map: StockMap = {};
   let changed = false;
 
-  for (const product of getCatalogProducts()) {
-    const catalogStock = catalogStockOf(product);
-    if (catalogStock === null) continue;
-
-    const row = state[product.id];
-    if (!row || row.catalogStock !== catalogStock) {
-      state[product.id] = { remaining: catalogStock, catalogStock };
-      map[product.id] = catalogStock;
+  for (const track of allTracks()) {
+    const row = state[track.key];
+    if (!row || row.catalogStock !== track.catalogStock) {
+      state[track.key] = { remaining: track.catalogStock, catalogStock: track.catalogStock };
+      map[track.key] = track.catalogStock;
       changed = true;
       continue;
     }
-
-    map[product.id] = Math.max(0, Math.floor(row.remaining));
+    map[track.key] = Math.max(0, Math.floor(row.remaining));
   }
 
-  if (changed) await writeState(state);
-  return map;
+  return { state, map, changed };
+}
+
+export async function readLiveStock(): Promise<StockMap> {
+  const synced = syncCatalog(await readState());
+  if (synced.changed) await writeState(synced.state);
+  return synced.map;
 }
 
 export async function remainingFor(productId: string): Promise<number | null> {
@@ -61,7 +71,7 @@ export async function remainingFor(productId: string): Promise<number | null> {
 
 export async function applyPaidOrder(
   sessionId: string,
-  lines: { productId: string; quantity: number }[],
+  lines: { productId: string; quantity: number; selections?: ProductSelections }[],
 ): Promise<void> {
   const store = stockStore();
   const processedKey = `processed/${sessionId}`;
@@ -70,20 +80,28 @@ export async function applyPaidOrder(
 
   await store.set(processedKey, "1");
 
-  const state = await readState();
-  for (const product of getCatalogProducts()) {
-    const catalogStock = catalogStockOf(product);
-    if (catalogStock === null) continue;
-    if (!state[product.id] || state[product.id].catalogStock !== catalogStock) {
-      state[product.id] = { remaining: catalogStock, catalogStock };
-    }
-  }
+  const synced = syncCatalog(await readState());
+  const state = synced.state;
+  const products = getCatalogProducts();
 
   for (const line of lines) {
     if (line.quantity < 1) continue;
-    const row = state[line.productId];
-    if (!row) continue;
-    row.remaining = Math.max(0, Math.floor(row.remaining) - line.quantity);
+    const product = products.find((item) => item.id === line.productId);
+    if (!product) continue;
+    const caps = stockCapsForSelection(
+      {
+        id: product.id,
+        priceCents: product.priceCents,
+        stock: product.stock,
+        options: product.options,
+      },
+      line.selections ?? {},
+    );
+    for (const cap of caps) {
+      const row = state[cap.key];
+      if (!row) continue;
+      row.remaining = Math.max(0, Math.floor(row.remaining) - line.quantity);
+    }
   }
 
   await writeState(state);

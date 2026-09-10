@@ -140,6 +140,7 @@ export default async (req: Request) => {
       products.map((item) => ({
         productId: item.product.id,
         quantity: item.quantity,
+        selections: item.selections,
       })),
     );
   } catch (error) {

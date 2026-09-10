@@ -31,6 +31,8 @@ export function Link({
         className={className}
         onClick={(event) => {
           event.preventDefault();
+          const path = href.startsWith("/") ? href : `/${href}`;
+          studio.setPreviewPath(path);
         }}
       >
         {children}

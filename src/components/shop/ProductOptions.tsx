@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { useLocale, useTranslations } from "@/i18n/context";
 import {
   billedLetterCount,
+  choiceIsSoldOut,
   choiceLabel,
   countBillableLetters,
   extraCharactersFor,
@@ -22,25 +23,35 @@ function ChoiceBox({
   selected,
   onSelect,
   kind,
+  soldOut,
 }: {
   choice: ProductOptionChoice;
   selected: boolean;
   onSelect: () => void;
   kind: "fabric" | "hardware";
+  soldOut?: boolean;
 }) {
   const locale = useLocale();
+  const t = useTranslations("shop");
   const label = choiceLabel(choice, locale);
 
   return (
     <button
       type="button"
-      onClick={onSelect}
+      onClick={() => {
+        if (soldOut) return;
+        onSelect();
+      }}
+      disabled={soldOut}
       aria-pressed={selected}
+      aria-disabled={soldOut}
       className={cn(
         "group flex flex-col overflow-hidden rounded-2xl bg-white text-left ring-1 transition-all",
-        selected
-          ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
-          : "ring-brand-pink-light hover:ring-brand-pink",
+        soldOut
+          ? "cursor-not-allowed opacity-50 ring-brand-pink-light"
+          : selected
+            ? "ring-2 ring-brand-pink-accent ring-offset-2 ring-offset-brand-offwhite"
+            : "ring-brand-pink-light hover:ring-brand-pink",
       )}
     >
       <span
@@ -59,6 +70,11 @@ function ChoiceBox({
         ) : !choice.color ? (
           <span className="flex h-full items-center justify-center bg-brand-pink-light font-body text-xs text-brand-black/50">
             {label}
+          </span>
+        ) : null}
+        {soldOut ? (
+          <span className="absolute inset-x-0 bottom-0 bg-white/90 px-1 py-1 text-center font-body text-[10px] font-semibold text-brand-rose">
+            {t("soldOut")}
           </span>
         ) : null}
       </span>
@@ -138,6 +154,7 @@ function OptionField({
               choice={choice}
               kind={option.type === "hardware" ? "hardware" : "fabric"}
               selected={value === choice.id}
+              soldOut={option.type === "fabric" && choiceIsSoldOut(choice)}
               onSelect={() => onChange(choice.id)}
             />
           ))}

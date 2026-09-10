@@ -21,6 +21,8 @@ export interface ProductOptionChoice {
   quantity?: number;
   /** Total pack price in cents. */
   priceCents?: number;
+  /** Remaining units for this choice (typically a fabric). Omit for unlimited. 0 = sold out. */
+  stock?: number;
 }
 
 export interface LetterExtraCharacter {
@@ -59,10 +61,108 @@ const EXTRA_ALIASES: Record<string, string[]> = {
 export type ProductSelections = Record<string, string>;
 
 export interface OptionedProduct {
+  id?: string;
   priceCents: number;
+  stock?: number;
   options?: ProductOption[];
   salePercent?: number;
   saleSkip?: boolean;
+}
+
+export function variantStockKey(productId: string, optionId: string, choiceId: string): string {
+  return `${productId}::${optionId}::${choiceId}`;
+}
+
+export function catalogStockNumber(value: unknown): number | null {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  return Math.max(0, Math.floor(value));
+}
+
+export function choiceIsSoldOut(choice: ProductOptionChoice): boolean {
+  return catalogStockNumber(choice.stock) === 0;
+}
+
+export function fabricOptionWithStock(
+  product: OptionedProduct,
+  selections: ProductSelections = {},
+): { option: ProductOption; choice: ProductOptionChoice } | null {
+  for (const option of getProductOptions(product)) {
+    if (option.type !== "fabric") continue;
+    const selected = selections[option.id];
+    const choice = option.choices?.find((item) => item.id === selected);
+    if (choice && catalogStockNumber(choice.stock) !== null) {
+      return { option, choice };
+    }
+  }
+  return null;
+}
+
+export function catalogStockTracks(
+  product: OptionedProduct & { id: string },
+): { key: string; catalogStock: number }[] {
+  const rows: { key: string; catalogStock: number }[] = [];
+  const productStock = catalogStockNumber(product.stock);
+  if (productStock !== null) {
+    rows.push({ key: product.id, catalogStock: productStock });
+  }
+  for (const option of getProductOptions(product)) {
+    if (option.type !== "fabric") continue;
+    for (const choice of option.choices ?? []) {
+      const stock = catalogStockNumber(choice.stock);
+      if (stock === null) continue;
+      rows.push({
+        key: variantStockKey(product.id, option.id, choice.id),
+        catalogStock: stock,
+      });
+    }
+  }
+  return rows;
+}
+
+export function stockCapsForSelection(
+  product: OptionedProduct & { id: string },
+  selections: ProductSelections = {},
+): { key: string; remaining: number }[] {
+  const caps: { key: string; remaining: number }[] = [];
+  const productStock = catalogStockNumber(product.stock);
+  if (productStock !== null) {
+    caps.push({ key: product.id, remaining: productStock });
+  }
+  const fabric = fabricOptionWithStock(product, selections);
+  if (fabric) {
+    caps.push({
+      key: variantStockKey(product.id, fabric.option.id, fabric.choice.id),
+      remaining: catalogStockNumber(fabric.choice.stock) ?? 0,
+    });
+  }
+  return caps;
+}
+
+export function availableStockFor(
+  product: OptionedProduct & { id: string },
+  selections: ProductSelections = {},
+): number | null {
+  const caps = stockCapsForSelection(product, selections);
+  if (caps.length === 0) return null;
+  return Math.min(...caps.map((cap) => cap.remaining));
+}
+
+export function productHasFabricStock(product: OptionedProduct): boolean {
+  return getProductOptions(product).some(
+    (option) =>
+      option.type === "fabric" &&
+      (option.choices ?? []).some((choice) => catalogStockNumber(choice.stock) !== null),
+  );
+}
+
+export function firstAvailableFabricId(option: ProductOption): string | undefined {
+  const choices = option.choices ?? [];
+  const available = choices.find((choice) => !choiceIsSoldOut(choice));
+  return (available ?? choices[0])?.id;
+}
+
+export function getFabricOptions(product: OptionedProduct): ProductOption[] {
+  return getProductOptions(product).filter((option) => option.type === "fabric");
 }
 
 export type SelectionErrorReason = "required" | "invalid" | "minLetters" | "maxLetters";
