@@ -1,8 +1,8 @@
 {
-  "enabled": false,
-  "percentOff": 20,
+  "enabled": true,
+  "percentOff": 90,
   "endsOn": "",
-  "showSiteBanner": true,
-  "showShopBanner": true,
+  "showSiteBanner": false,
+  "showShopBanner": false,
   "showBadges": true
 }

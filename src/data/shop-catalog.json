@@ -100,7 +100,7 @@
           ]
         }
       ],
-      "stock": 10
+      "stock": 0
     },
     {
       "id": "quilted-toiletry-bag",
@@ -228,7 +228,8 @@
             "en": "Extra wishes"
           }
         }
-      ]
+      ],
+      "stock": 0
     },
     {
       "id": "quilted-ereader-case",
@@ -371,7 +372,8 @@
             "en": "Extra wishes"
           }
         }
-      ]
+      ],
+      "stock": 0
     },
     {
       "id": "drawstring-bag",
@@ -415,7 +417,8 @@
             "en": "Extra wishes"
           }
         }
-      ]
+      ],
+      "stock": 0
     },
     {
       "id": "fabric-balloon",
@@ -459,7 +462,8 @@
             "en": "Extra wishes"
           }
         }
-      ]
+      ],
+      "stock": 0
     },
     {
       "id": "fabric-name-banner",
@@ -557,7 +561,8 @@
             "en": "Extra wishes"
           }
         }
-      ]
+      ],
+      "stock": 0
     },
     {
       "id": "apple-bag-tag-pattern",
