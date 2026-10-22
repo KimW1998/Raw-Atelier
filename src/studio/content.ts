@@ -8,6 +8,7 @@ import saleSettings from "@/data/sale.json";
 import vacationSettings from "@/data/vacation.json";
 import type { SaleSettings } from "@/lib/sale";
 import type { VacationSettings } from "@/lib/vacation";
+import { normalizePageImages, PAGE_IMAGES, type PageImages } from "@/lib/page-images";
 
 const yamlModules = import.meta.glob("../../content/*/*.yaml", {
   eager: true,
@@ -27,6 +28,7 @@ export interface StudioDraft {
   files: Record<Locale, FileBundle>;
   portfolioItems: PortfolioItem[];
   shopProducts: ShopCatalogProduct[];
+  pageImages: PageImages;
   vacation: VacationSettings;
   sale: SaleSettings;
 }
@@ -306,6 +308,7 @@ export function loadStudioDraft(): StudioDraft {
     files,
     portfolioItems: clone(portfolioParsed?.items ?? []),
     shopProducts: clone(catalog.products as ShopCatalogProduct[]),
+    pageImages: clone(normalizePageImages(PAGE_IMAGES)),
     vacation: {
       enabled: Boolean(vacationSettings.enabled),
       pausePhysical: Boolean(vacationSettings.pausePhysical),

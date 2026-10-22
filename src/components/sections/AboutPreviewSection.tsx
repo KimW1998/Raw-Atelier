@@ -6,11 +6,13 @@ import { Section } from "@/components/ui/Section";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { usePageImages } from "@/lib/page-images";
 
 export function AboutPreviewSection() {
   const t = useTranslations("home");
   const tBrand = useTranslations("brand");
   const tCta = useTranslations("cta");
+  const images = usePageImages();
 
   return (
     <Section spacing="compact">
@@ -20,7 +22,7 @@ export function AboutPreviewSection() {
           <FadeIn direction="right">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
               <PremiumImage
-                src="/images/about/kim-portrait.jpg"
+                src={images.aboutPortrait}
                 alt={`Kim Wauben, ${tBrand("name")}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

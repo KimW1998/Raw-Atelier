@@ -9,6 +9,7 @@ import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { useLocale, useTranslations } from "@/i18n/context";
 import { Link } from "@/i18n/routing";
+import { usePageImages } from "@/lib/page-images";
 
 export default function AboutPage() {
   const locale = useLocale();
@@ -18,11 +19,8 @@ export default function AboutPage() {
   const tNav = useTranslations("nav");
 
   const whyItems = ["quality", "story", "connection"] as const;
-  const studioImages = [
-    "/images/portfolio/fashion-butterfly-wings.jpg",
-    "/images/portfolio/gifts-baby-wrap.jpg",
-    "/images/portfolio/fashion-upcycle-blazer.jpg",
-  ];
+  const images = usePageImages();
+  const studioImages = images.aboutGallery;
 
   return (
     <>
@@ -81,7 +79,7 @@ export default function AboutPage() {
             <FadeIn direction="left">
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                 <PremiumImage
-                  src="/images/about/kim-portrait.jpg"
+                  src={images.aboutPortrait}
                   alt={t("story.title")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -142,7 +140,7 @@ export default function AboutPage() {
             <FadeIn direction="right">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <PremiumImage
-                  src="/images/about/kim-at-event.jpg"
+                  src={images.aboutEvent}
                   alt={t("atEvents.title")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"

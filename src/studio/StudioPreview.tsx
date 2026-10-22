@@ -3,6 +3,7 @@ import { RootLayout } from "@/layouts/RootLayout";
 import { StudioPreviewProvider } from "@/lib/studio-preview";
 import type { PortfolioItem } from "@/lib/portfolio";
 import type { SaleSettings } from "@/lib/sale";
+import type { PageImages } from "@/lib/page-images";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
 import HomePage from "@/pages/HomePage";
@@ -41,6 +42,7 @@ export function StudioPreview({
   messages,
   portfolioItems,
   shopProducts,
+  pageImages,
   vacation,
   sale,
   onPreviewLocale,
@@ -51,6 +53,7 @@ export function StudioPreview({
   messages: Record<string, unknown>;
   portfolioItems: PortfolioItem[];
   shopProducts: ShopCatalogProduct[];
+  pageImages: PageImages;
   vacation: VacationSettings;
   sale: SaleSettings;
   onPreviewLocale: (locale: Locale) => void;
@@ -68,6 +71,7 @@ export function StudioPreview({
             setPreviewLocale: onPreviewLocale,
             portfolioItems,
             shopProducts,
+            pageImages,
             vacation,
             sale,
           }}

@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import type { Config } from "@netlify/functions";
 import { getEnv } from "./_shared/email";
 
-const FOLDERS = new Set(["portfolio", "shop", "fabrics"]);
+const FOLDERS = new Set(["portfolio", "shop", "fabrics", "pages"]);
 const MAX_BYTES = 4.5 * 1024 * 1024;
 const TYPES: Record<string, string> = {
   "image/jpeg": "jpg",

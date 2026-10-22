@@ -14,7 +14,7 @@ export interface StudioPage {
   label: string;
   previewPath: string;
   sources: { file: string; roots?: string[] }[];
-  extra?: "portfolio" | "shop" | "vacation";
+  extra?: "portfolio" | "shop" | "vacation" | "pageImages";
 }
 
 export const STUDIO_PAGES: StudioPage[] = [
@@ -22,6 +22,7 @@ export const STUDIO_PAGES: StudioPage[] = [
     id: "home",
     label: "Home",
     previewPath: "/",
+    extra: "pageImages",
     sources: [
       { file: "home" },
       { file: "shared", roots: ["testimonials", "process"] },
@@ -31,6 +32,7 @@ export const STUDIO_PAGES: StudioPage[] = [
     id: "about",
     label: "Over mij",
     previewPath: "/about",
+    extra: "pageImages",
     sources: [
       { file: "about" },
       { file: "shared", roots: ["faq"] },
@@ -40,6 +42,7 @@ export const STUDIO_PAGES: StudioPage[] = [
     id: "services",
     label: "Diensten",
     previewPath: "/services",
+    extra: "pageImages",
     sources: [{ file: "services" }],
   },
   {

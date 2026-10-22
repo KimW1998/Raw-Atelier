@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { getPlaceholderForSrc, PLACEHOLDER_IMAGES } from "@/lib/image-fallbacks";
 
@@ -13,6 +13,11 @@ interface ImagePlaceholderProps {
   sizes?: string;
 }
 
+function withCacheBust(url: string) {
+  const clean = url.split("?")[0];
+  return `${clean}?t=${Date.now()}`;
+}
+
 export function PremiumImage({
   src,
   alt,
@@ -24,14 +29,29 @@ export function PremiumImage({
 }: ImagePlaceholderProps) {
   const [imageSrc, setImageSrc] = useState(src);
   const [stage, setStage] = useState<"primary" | "placeholder" | "default">("primary");
+  const srcRef = useRef(src);
+  const retriesRef = useRef(0);
 
   useEffect(() => {
+    srcRef.current = src;
+    retriesRef.current = 0;
     setImageSrc(src);
     setStage("primary");
   }, [src]);
 
   const handleError = () => {
+    if (srcRef.current !== src) return;
+
     if (stage === "primary") {
+      if (retriesRef.current < 8) {
+        retriesRef.current += 1;
+        const attempt = retriesRef.current;
+        window.setTimeout(() => {
+          if (srcRef.current !== src) return;
+          setImageSrc(withCacheBust(src));
+        }, 100 * attempt);
+        return;
+      }
       setImageSrc(getPlaceholderForSrc(src));
       setStage("placeholder");
       return;

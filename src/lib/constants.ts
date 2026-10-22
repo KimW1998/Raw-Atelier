@@ -26,6 +26,8 @@ export const SERVICE_IDS = [
   "fashion",
 ] as const;
 
+export type ServiceId = (typeof SERVICE_IDS)[number];
+
 export const SERVICE_ICONS: Record<(typeof SERVICE_IDS)[number], string> = {
   "live-events": "/images/icons/personalized-gifts.png",
   corporate: "/images/icons/live-embroidery.png",

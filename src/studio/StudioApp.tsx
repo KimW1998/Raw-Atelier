@@ -16,7 +16,13 @@ import {
   type StudioDraft,
 } from "./content";
 import { BilingualField, BilingualListField, FieldGroup } from "./fields";
-import { PortfolioItemsEditor, SaleSettingsEditor, ShopProductsEditor, VacationSettingsEditor } from "./extras";
+import {
+  PageImagesEditor,
+  PortfolioItemsEditor,
+  SaleSettingsEditor,
+  ShopProductsEditor,
+  VacationSettingsEditor,
+} from "./extras";
 import { STUDIO_PAGES, studioPageById, type StudioPage } from "./pages";
 import { StudioPreview } from "./StudioPreview";
 import { StudioErrorBoundary } from "./StudioErrorBoundary";
@@ -155,6 +161,13 @@ export function StudioApp() {
       });
     }
 
+    if (JSON.stringify(draft.pageImages) !== JSON.stringify(original.pageImages)) {
+      files.push({
+        path: "src/data/page-images.json",
+        content: `${JSON.stringify(draft.pageImages, null, 2)}\n`,
+      });
+    }
+
     if (JSON.stringify(draft.vacation) !== JSON.stringify(original.vacation)) {
       files.push({
         path: "src/data/vacation.json",
@@ -262,6 +275,16 @@ export function StudioApp() {
 
           <div className="grid min-h-0 flex-1 grid-cols-[minmax(460px,38vw)_minmax(0,1fr)]">
             <div className="min-h-0 space-y-5 overflow-auto border-r border-brand-pink-light p-5">
+              {page.extra === "pageImages" || page.extra === "shop" ? (
+                <PageImagesEditor
+                  pageId={page.id}
+                  images={draft.pageImages}
+                  onChange={(pageImages) => {
+                    setDraft((current) => ({ ...current, pageImages }));
+                    setStatus("idle");
+                  }}
+                />
+              ) : null}
               {page.extra === "portfolio" ? (
                 <PortfolioItemsEditor
                   items={draft.portfolioItems}
@@ -309,6 +332,7 @@ export function StudioApp() {
                   messages={previewMessages}
                   portfolioItems={draft.portfolioItems}
                   shopProducts={draft.shopProducts}
+                  pageImages={draft.pageImages}
                   vacation={draft.vacation}
                   sale={draft.sale}
                   onPreviewLocale={setPreviewLocale}

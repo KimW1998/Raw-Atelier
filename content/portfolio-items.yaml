@@ -3,10 +3,10 @@ items:
     category: events
     aspect: wide
     featured: true
-    image: /images/portfolio/events-live-booth.jpg
+    image: /images/uploads/portfolio/img-20260912-101048345-hdr-1792667897683-1792668938615.jpg
     title:
-      nl: Live pakdesign-event
-      en: Live Suit Design Event
+      nl: Live borduren op Langeraar braderie
+      en: Live embroidery on Langeraar market
   - id: conclusion-crew
     category: corporate
     aspect: tall

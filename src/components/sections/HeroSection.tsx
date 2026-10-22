@@ -5,11 +5,13 @@ import { Container } from "@/components/ui/Container";
 import { PatternBackground } from "@/components/ui/PatternBackground";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { usePageImages } from "@/lib/page-images";
 
 export function HeroSection() {
   const t = useTranslations("home");
   const tBrand = useTranslations("brand");
   const tCta = useTranslations("cta");
+  const images = usePageImages();
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
@@ -50,7 +52,7 @@ export function HeroSection() {
           <FadeIn delay={0.3} direction="left">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl shadow-brand-pink/20">
               <PremiumImage
-                src="/images/hero-main.jpg"
+                src={images.homeHero}
                 alt={`Machine embroidery at ${tBrand("name")} studio`}
                 fill
                 priority

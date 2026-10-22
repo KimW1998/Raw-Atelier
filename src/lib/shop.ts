@@ -1,4 +1,5 @@
 import catalog from "@/data/shop-catalog.json";
+import { PAGE_IMAGES, type PageImages } from "@/lib/page-images";
 import { useStudioPreview } from "@/lib/studio-preview";
 import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import type { Locale } from "@/i18n/context";
@@ -149,18 +150,17 @@ export function getShopTabHref(tab: ShopTabId | "digitalPatterns"): string {
 export function getPrimaryTabCoverImages(
   tab: ShopPrimaryTabId,
   products: ShopCatalogProduct[],
+  pageImages: PageImages = PAGE_IMAGES,
 ): string[] {
+  const dedicated = pageImages.shopOverview[tab];
+  if (dedicated) return [dedicated];
   if (tab === "digitalPatterns") {
     const embroidery = products.find((product) => product.section === "embroideryPatterns");
     const sewing = products.find((product) => product.section === "sewingPatterns");
     return [embroidery?.image, sewing?.image].filter((src): src is string => Boolean(src));
   }
   if (tab === "madeToOrder") {
-    return [
-      "/images/services/digitizing.jpg",
-      "/images/services/fashion.jpg",
-      "/images/services/gifts.jpg",
-    ];
+    return [pageImages.services.digitizing].filter(Boolean);
   }
   return productsForTab(products, tab)
     .slice(0, 3)

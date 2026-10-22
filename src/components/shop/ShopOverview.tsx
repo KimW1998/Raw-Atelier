@@ -9,8 +9,7 @@ import {
   type ShopPrimaryTabId,
 } from "@/lib/shop";
 import { cn } from "@/lib/utils";
-
-const HERO_IMAGE = "/images/portfolio/gifts-rainbow-heart-keychain-display.jpg";
+import { usePageImages } from "@/lib/page-images";
 
 const FEATURED: ShopPrimaryTabId[] = ["babyGifts", "digitalPatterns"];
 const SECONDARY: ShopPrimaryTabId[] = ["keychains", "pouches", "patches"];
@@ -34,7 +33,8 @@ function OverlayTile({
 }) {
   const t = useTranslations("shopPage");
   const tShop = useTranslations("shop");
-  const cover = getPrimaryTabCoverImages(tabId, products)[0];
+  const pageImages = usePageImages();
+  const cover = getPrimaryTabCoverImages(tabId, products, pageImages)[0];
 
   return (
     <button
@@ -86,6 +86,7 @@ function OverlayTile({
 
 export function ShopIntro() {
   const t = useTranslations("shopPage");
+  const images = usePageImages();
 
   return (
     <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
@@ -122,7 +123,7 @@ export function ShopIntro() {
       <FadeIn delay={0.12} direction="left">
         <div className="relative aspect-[5/4] overflow-hidden rounded-2xl shadow-sm sm:aspect-[4/3]">
           <PremiumImage
-            src={HERO_IMAGE}
+            src={images.shopHero}
             alt={t("hero.title")}
             fill
             priority

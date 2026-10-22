@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { ImagePlus, LoaderCircle, X } from "lucide-react";
+import { Crop, ImagePlus, Images, LoaderCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { StudioImageCropper } from "./image-crop";
+import { invalidateStudioMedia, StudioMediaPicker } from "./media-library";
 import { OrderButtons, moveItem } from "./order";
 
-export type StudioMediaFolder = "portfolio" | "shop" | "fabrics";
+export type StudioMediaFolder = "portfolio" | "shop" | "fabrics" | "pages";
 
 const ACCEPT =
   "image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif,.heic,.heif,.jpg,.jpeg,.png,.webp,.gif";
@@ -68,6 +70,38 @@ function fetchErrorMessage(err: unknown): string {
   return err instanceof Error ? err.message : "Upload mislukt";
 }
 
+function withCacheBust(url: string) {
+  const clean = url.split("?")[0];
+  return `${clean}?t=${Date.now()}`;
+}
+
+function probeImage(url: string, timeoutMs: number) {
+  return new Promise<boolean>((resolve) => {
+    const image = new Image();
+    const timer = window.setTimeout(() => {
+      image.onload = null;
+      image.onerror = null;
+      resolve(false);
+    }, timeoutMs);
+    image.onload = () => {
+      window.clearTimeout(timer);
+      resolve(true);
+    };
+    image.onerror = () => {
+      window.clearTimeout(timer);
+      resolve(false);
+    };
+    image.src = withCacheBust(url);
+  });
+}
+
+async function waitUntilImageReady(url: string) {
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    if (await probeImage(url, 500)) return;
+    await new Promise((resolve) => window.setTimeout(resolve, 80 + attempt * 40));
+  }
+}
+
 async function uploadStudioImage(file: File, folder: StudioMediaFolder): Promise<string> {
   const prepared = await prepareImageFile(file);
   const response = await fetch("/__studio/upload", {
@@ -88,6 +122,8 @@ async function uploadStudioImage(file: File, folder: StudioMediaFolder): Promise
   if (!response.ok || !data.url) {
     throw new Error(data.error || "Upload mislukt");
   }
+  await waitUntilImageReady(data.url);
+  invalidateStudioMedia();
   return data.url;
 }
 
@@ -123,6 +159,7 @@ export function StudioImageField({
   folder,
   label = "Foto",
   optional = false,
+  aspect = "1/1",
   className,
 }: {
   value: string;
@@ -130,6 +167,7 @@ export function StudioImageField({
   folder: StudioMediaFolder;
   label?: string;
   optional?: boolean;
+  aspect?: string;
   className?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -137,9 +175,15 @@ export function StudioImageField({
   const [error, setError] = useState("");
   const [dragOver, setDragOver] = useState(false);
   const [broken, setBroken] = useState(false);
+  const [cropOpen, setCropOpen] = useState(false);
+  const [libraryOpen, setLibraryOpen] = useState(false);
+  const [displaySrc, setDisplaySrc] = useState(value);
+  const retriesRef = useRef(0);
 
   useEffect(() => {
     setBroken(false);
+    retriesRef.current = 0;
+    setDisplaySrc(value);
   }, [value]);
 
   const handleFile = async (file: File | null) => {
@@ -162,7 +206,7 @@ export function StudioImageField({
       <button
         type="button"
         disabled={busy}
-        onClick={() => inputRef.current?.click()}
+        onClick={() => setLibraryOpen(true)}
         onDragOver={(event) => {
           event.preventDefault();
           setDragOver(true);
@@ -174,17 +218,25 @@ export function StudioImageField({
           void handleFile(pickImageFile(event));
         }}
         className={cn(
-          "relative flex aspect-square w-full overflow-hidden rounded-2xl border border-dashed bg-white text-left transition-colors",
+          "relative flex w-full overflow-hidden rounded-2xl border border-dashed bg-white text-left transition-colors",
           dragOver || !value || broken ? "border-brand-pink" : "border-brand-pink-light",
           busy && "opacity-70",
         )}
+        style={{ aspectRatio: aspect.replace("/", " / ") }}
       >
         {value && !broken ? (
           <img
-            src={value}
+            src={displaySrc}
             alt=""
             className="h-full w-full object-cover"
-            onError={() => setBroken(true)}
+            onError={() => {
+              if (retriesRef.current >= 8) {
+                setBroken(true);
+                return;
+              }
+              retriesRef.current += 1;
+              window.setTimeout(() => setDisplaySrc(withCacheBust(value)), 100 * retriesRef.current);
+            }}
           />
         ) : (
           <span className="flex h-full w-full flex-col items-center justify-center gap-1 px-2 text-center font-body text-xs text-brand-black/50">
@@ -207,19 +259,75 @@ export function StudioImageField({
       />
       <div className="mt-1.5 flex items-center justify-between gap-2">
         <p className="truncate font-body text-[11px] text-brand-black/40">
-          {busy ? "Uploaden…" : value ? "Klik of sleep om te vervangen" : "JPG, PNG of WebP"}
+          {busy ? "Uploaden…" : value ? "Kies bestaande of sleep een nieuwe" : "Bestaande foto of nieuw bestand"}
         </p>
-        {optional && value ? (
+        <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
-            onClick={() => onChange("")}
-            className="shrink-0 font-body text-[11px] text-brand-rose hover:underline"
+            disabled={busy}
+            onClick={() => setLibraryOpen(true)}
+            className="inline-flex items-center gap-0.5 font-body text-[11px] text-brand-black/60 hover:text-brand-black"
           >
-            Weg
+            <Images className="h-3 w-3" />
+            Bestaande
           </button>
-        ) : null}
+          {value && !broken ? (
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() => setCropOpen(true)}
+              className="inline-flex items-center gap-0.5 font-body text-[11px] text-brand-black/60 hover:text-brand-black"
+            >
+              <Crop className="h-3 w-3" />
+              Uitsnede
+            </button>
+          ) : null}
+          {optional && value ? (
+            <button
+              type="button"
+              onClick={() => onChange("")}
+              className="font-body text-[11px] text-brand-rose hover:underline"
+            >
+              Weg
+            </button>
+          ) : null}
+        </div>
       </div>
       {error ? <p className="mt-1 font-body text-xs text-red-700">{error}</p> : null}
+      {libraryOpen ? (
+        <StudioMediaPicker
+          current={value}
+          selected={value ? [value] : []}
+          onClose={() => setLibraryOpen(false)}
+          onUploadNew={() => {
+            setLibraryOpen(false);
+            inputRef.current?.click();
+          }}
+          onSelect={([url]) => {
+            if (url) onChange(url);
+            setLibraryOpen(false);
+          }}
+        />
+      ) : null}
+      {cropOpen && value ? (
+        <StudioImageCropper
+          src={value}
+          aspect={aspect}
+          onClose={() => setCropOpen(false)}
+          onApply={async (file) => {
+            setBusy(true);
+            setError("");
+            try {
+              onChange(await uploadStudioImage(file, folder));
+              setCropOpen(false);
+            } catch (err) {
+              setError(fetchErrorMessage(err));
+            } finally {
+              setBusy(false);
+            }
+          }}
+        />
+      ) : null}
     </div>
   );
 }
@@ -228,15 +336,18 @@ export function StudioImageList({
   images,
   onChange,
   folder,
+  aspect = "1/1",
 }: {
   images: string[];
   onChange: (images: string[]) => void;
   folder: StudioMediaFolder;
+  aspect?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [dragOver, setDragOver] = useState(false);
+  const [libraryOpen, setLibraryOpen] = useState(false);
 
   const addFiles = async (list: FileList | File[] | null) => {
     const files = imageFilesFrom(list);
@@ -271,16 +382,26 @@ export function StudioImageList({
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-2">
         <span className="font-body text-xs text-brand-black/50">
-          Foto's (eerste = hoofdfoto). Je kunt er meerdere tegelijk kiezen.
+          Foto's (eerste = hoofdfoto). Kies bestaande of upload nieuwe.
         </span>
-        <button
-          type="button"
-          disabled={busy}
-          onClick={() => inputRef.current?.click()}
-          className="rounded-full bg-brand-pink-accent px-3 py-1 font-body text-[11px] font-semibold text-white disabled:opacity-50"
-        >
-          {busy ? "Uploaden…" : "+ Foto's"}
-        </button>
+        <div className="flex shrink-0 gap-2">
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => setLibraryOpen(true)}
+            className="rounded-full bg-white px-3 py-1 font-body text-[11px] font-semibold text-brand-black ring-1 ring-brand-pink-light disabled:opacity-50"
+          >
+            Bestaande
+          </button>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => inputRef.current?.click()}
+            className="rounded-full bg-brand-pink-accent px-3 py-1 font-body text-[11px] font-semibold text-white disabled:opacity-50"
+          >
+            {busy ? "Uploaden…" : "+ Foto's"}
+          </button>
+        </div>
       </div>
       <input
         ref={inputRef}
@@ -294,7 +415,7 @@ export function StudioImageList({
         <button
           type="button"
           disabled={busy}
-          onClick={() => inputRef.current?.click()}
+          onClick={() => setLibraryOpen(true)}
           onDragOver={(event) => {
             event.preventDefault();
             setDragOver(true);
@@ -311,7 +432,7 @@ export function StudioImageList({
           )}
         >
           <ImagePlus className="h-4 w-4" />
-          Foto's kiezen of hierheen slepen
+          Bestaande kiezen, of nieuwe hierheen slepen
         </button>
       ) : (
         <>
@@ -321,6 +442,7 @@ export function StudioImageList({
                 <StudioImageField
                   value={src}
                   folder={folder}
+                  aspect={aspect}
                   label={index === 0 ? "Hoofdfoto" : `Foto ${index + 1}`}
                   onChange={(url) =>
                     onChange(images.map((item, i) => (i === index ? url : item)))
@@ -364,7 +486,7 @@ export function StudioImageList({
           <button
             type="button"
             disabled={busy}
-            onClick={() => inputRef.current?.click()}
+            onClick={() => setLibraryOpen(true)}
             onDragOver={(event) => {
               event.preventDefault();
               setDragOver(true);
@@ -381,14 +503,29 @@ export function StudioImageList({
             )}
           >
             <ImagePlus className="h-4 w-4" />
-            Extra foto's toevoegen
+            Extra foto's: bestaande of nieuwe
           </button>
         </>
       )}
       <p className="font-body text-[11px] leading-relaxed text-brand-black/40">
-        Meerdere bestanden tegelijk mag. Grote telefoonfoto’s worden automatisch verkleind.
+        Bestaande foto's kun je hergebruiken. Nieuwe bestanden worden verkleind.
       </p>
       {error ? <p className="font-body text-xs text-red-700">{error}</p> : null}
+      {libraryOpen ? (
+        <StudioMediaPicker
+          multiple
+          onClose={() => setLibraryOpen(false)}
+          onUploadNew={() => {
+            setLibraryOpen(false);
+            inputRef.current?.click();
+          }}
+          onSelect={(urls) => {
+            const extra = urls.filter((url) => !images.includes(url));
+            if (extra.length) onChange([...images, ...extra]);
+            setLibraryOpen(false);
+          }}
+        />
+      ) : null}
     </div>
   );
 }

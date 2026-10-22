@@ -7,12 +7,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PremiumImage } from "@/components/ui/PremiumImage";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeIn";
-import { SERVICES_DATA } from "@/lib/constants";
+import { useServices } from "@/lib/page-images";
 
 export function ServicesOverviewSection() {
   const t = useTranslations("home");
   const tServices = useTranslations("services");
   const tCta = useTranslations("cta");
+  const services = useServices();
 
   return (
     <Section id="services" spacing="compact">
@@ -26,7 +27,7 @@ export function ServicesOverviewSection() {
         />
 
         <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES_DATA.map((service) => (
+          {services.map((service) => (
             <StaggerItem key={service.id}>
               <Link
                 href={`/services#${service.id}`}

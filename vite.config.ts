@@ -1,12 +1,45 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { createReadStream, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from "fs";
 import path from "path";
 import type { IncomingMessage, ServerResponse } from "http";
 
-const STUDIO_FOLDERS = new Set(["portfolio", "shop", "fabrics"]);
+const STUDIO_FOLDERS = new Set(["portfolio", "shop", "fabrics", "pages"]);
 const STUDIO_UPLOAD_PATH = "/__studio/upload";
+const STUDIO_MEDIA_PATH = "/__studio/media";
 const STUDIO_MAX_BYTES = 8 * 1024 * 1024;
+const STUDIO_IMAGE_EXT = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif"]);
+const STUDIO_MEDIA_SKIP = new Set(["brand", "icons"]);
+
+function listPublicImages(imagesRoot: string): { url: string; name: string; folder: string; mtime: number }[] {
+  const items: { url: string; name: string; folder: string; mtime: number }[] = [];
+
+  const walk = (absDir: string, urlDir: string, folder: string) => {
+    if (!existsSync(absDir)) return;
+    for (const entry of readdirSync(absDir, { withFileTypes: true })) {
+      if (entry.name.startsWith(".")) continue;
+      const abs = path.join(absDir, entry.name);
+      const url = `${urlDir}/${entry.name}`;
+      if (entry.isDirectory()) {
+        const nextFolder = folder === "images" ? entry.name : folder;
+        if (STUDIO_MEDIA_SKIP.has(nextFolder)) continue;
+        walk(abs, url, nextFolder);
+        continue;
+      }
+      if (!STUDIO_IMAGE_EXT.has(path.extname(entry.name).toLowerCase())) continue;
+      items.push({
+        url,
+        name: entry.name,
+        folder,
+        mtime: statSync(abs).mtimeMs,
+      });
+    }
+  };
+
+  walk(imagesRoot, "/images", "images");
+  items.sort((a, b) => b.mtime - a.mtime);
+  return items;
+}
 
 function sendJson(res: ServerResponse, status: number, body: unknown) {
   res.statusCode = status;
@@ -54,12 +87,45 @@ async function readBody(req: IncomingMessage, limit: number): Promise<Buffer> {
   return Buffer.concat(chunks);
 }
 
+const UPLOAD_MIME: Record<string, string> = {
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  webp: "image/webp",
+  gif: "image/gif",
+};
+
 function studioUploadPlugin(): Plugin {
   return {
     name: "studio-upload",
     configureServer(server) {
+      const uploadsRoot = path.resolve(server.config.root, "public", "images", "uploads");
       server.middlewares.use((req, res, next) => {
-        const url = req.url?.split("?")[0];
+        const url = req.url?.split("?")[0] ?? "";
+        if (req.method === "GET" && url.startsWith("/images/uploads/")) {
+          const rel = decodeURIComponent(url.slice("/images/uploads/".length));
+          const abs = path.resolve(uploadsRoot, rel);
+          if (abs !== uploadsRoot && !abs.startsWith(`${uploadsRoot}${path.sep}`)) {
+            res.statusCode = 403;
+            res.end();
+            return;
+          }
+          if (!existsSync(abs)) {
+            next();
+            return;
+          }
+          const ext = path.extname(abs).slice(1).toLowerCase();
+          res.statusCode = 200;
+          res.setHeader("Content-Type", UPLOAD_MIME[ext] || "application/octet-stream");
+          res.setHeader("Cache-Control", "no-store");
+          createReadStream(abs).pipe(res);
+          return;
+        }
+        if (req.method === "GET" && url === STUDIO_MEDIA_PATH) {
+          const imagesRoot = path.resolve(server.config.root, "public", "images");
+          sendJson(res, 200, { items: listPublicImages(imagesRoot) });
+          return;
+        }
         if (url !== STUDIO_UPLOAD_PATH) {
           next();
           return;
@@ -134,5 +200,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    watch: {
+      ignored: ["**/public/images/uploads/**"],
+    },
   },
 });

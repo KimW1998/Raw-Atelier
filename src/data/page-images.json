@@ -1,0 +1,26 @@
+{
+  "homeHero": "/images/hero-main.jpg",
+  "shopHero": "/images/portfolio/gifts-rainbow-heart-keychain-display.jpg",
+  "aboutPortrait": "/images/about/kim-portrait.jpg",
+  "aboutEvent": "/images/uploads/portfolio/img-20260912-101048345-hdr-1792667897683-1792668938615.jpg",
+  "aboutGallery": [
+    "/images/portfolio/fashion-butterfly-wings.jpg",
+    "/images/portfolio/gifts-baby-wrap.jpg",
+    "/images/portfolio/fashion-upcycle-blazer.jpg"
+  ],
+  "services": {
+    "live-events": "/images/uploads/pages/img-20260912-101048345-hdr-1792669080563-1792669098500.jpg",
+    "corporate": "/images/services/corporate.jpg",
+    "gifts": "/images/services/gifts.jpg",
+    "digitizing": "/images/uploads/pages/digitizing-crop-1792669142940.jpg",
+    "fashion": "/images/services/fashion.jpg"
+  },
+  "shopOverview": {
+    "babyGifts": "/images/shop/balloon/balloon-1.jpg",
+    "digitalPatterns": "/images/uploads/pages/digitizing-crop-1792669142940.jpg",
+    "keychains": "/images/shop/keychain/keychain-1.jpg",
+    "pouches": "/images/uploads/shop/boxy-pouch-flower-3-sizes-1788954883564.jpg",
+    "patches": "/images/uploads/pages/img-20260912-114555707-hdr-1792671352740-1792671359508.jpg",
+    "madeToOrder": "/images/uploads/pages/img-20260911-194104162-hdr-1792671449157-1792671455791.jpg"
+  }
+}

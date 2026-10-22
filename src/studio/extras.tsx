@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import type { PortfolioItem } from "@/lib/portfolio";
+import type { PortfolioAspect, PortfolioItem } from "@/lib/portfolio";
+import type { PageImages, ShopOverviewSlotId } from "@/lib/page-images";
+import { PORTFOLIO_CATEGORIES, SERVICE_IDS } from "@/lib/constants";
+import type { StudioPageId } from "./pages";
 import { clampSalePercent, type SaleSettings } from "@/lib/sale";
 import type { ShopCatalogProduct } from "@/lib/shop";
 import type { VacationSettings } from "@/lib/vacation";
-import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
 import { overlayLiveStock, useLiveStockMap } from "@/lib/live-stock";
 import { SHOP_SECTION_ORDER, getProductImages, getProductOptions, isDigitalPatternSection, withProductImages } from "@/lib/shop";
 import { cn } from "@/lib/utils";
@@ -64,6 +66,7 @@ export function PortfolioItemsEditor({
             <StudioImageField
               value={item.image}
               folder="portfolio"
+              aspect={portfolioCropAspect(item.aspect)}
               label="Foto"
               onChange={(image) => update(index, { image })}
             />
@@ -82,15 +85,26 @@ export function PortfolioItemsEditor({
                     </option>
                   ))}
                 </select>
-                <label className="flex items-center gap-2 font-body text-sm">
-                  <input
-                    type="checkbox"
-                    checked={item.featured}
-                    onChange={(event) => update(index, { featured: event.target.checked })}
-                  />
-                  Homepage
-                </label>
+                <select
+                  className="rounded-xl border border-brand-pink-light px-2 py-2 font-body text-sm"
+                  value={item.aspect}
+                  onChange={(event) =>
+                    update(index, { aspect: event.target.value as PortfolioAspect })
+                  }
+                >
+                  <option value="square">Vierkant</option>
+                  <option value="wide">Liggend 4:3</option>
+                  <option value="tall">Staand 3:4</option>
+                </select>
               </div>
+              <label className="flex items-center gap-2 font-body text-sm">
+                <input
+                  type="checkbox"
+                  checked={item.featured}
+                  onChange={(event) => update(index, { featured: event.target.checked })}
+                />
+                Homepage
+              </label>
               <p className="font-body text-xs leading-relaxed text-brand-black/45">
                 Eén foto per item. Omhoog/omlaag is de volgorde op de site.
               </p>
@@ -327,6 +341,7 @@ export function ShopProductsEditor({
           </div>
           <StudioImageList
             folder="shop"
+            aspect="1/1"
             images={getProductImages(selected)}
             onChange={(images) =>
               onChange(
@@ -712,6 +727,202 @@ export function VacationSettingsEditor({
         Tekst van de banner staat hieronder (NL en EN). Na opslaan: git push / deploy om live te
         zetten.
       </p>
+    </div>
+  );
+}
+
+function portfolioCropAspect(aspect: PortfolioAspect) {
+  if (aspect === "tall") return "3/4";
+  if (aspect === "wide") return "4/3";
+  return "1/1";
+}
+
+const SERVICE_PHOTO_LABELS: Record<(typeof SERVICE_IDS)[number], string> = {
+  "live-events": "Live events",
+  corporate: "Zakelijk",
+  gifts: "Cadeaus",
+  digitizing: "Digitaliseren",
+  fashion: "Fashion",
+};
+
+const SHOP_OVERVIEW_EDITOR_SLOTS: {
+  id: ShopOverviewSlotId;
+  label: string;
+  hint: string;
+  aspect: string;
+  span: boolean;
+}[] = [
+  {
+    id: "babyGifts",
+    label: "Baby cadeaus",
+    hint: "Grote kaart, 16:10.",
+    aspect: "16/10",
+    span: false,
+  },
+  {
+    id: "digitalPatterns",
+    label: "Digitale patronen",
+    hint: "Grote kaart, 16:10.",
+    aspect: "16/10",
+    span: false,
+  },
+  {
+    id: "keychains",
+    label: "Sleutelhangers",
+    hint: "Liggend 4:3.",
+    aspect: "4/3",
+    span: false,
+  },
+  {
+    id: "pouches",
+    label: "Tasjes",
+    hint: "Liggend 4:3.",
+    aspect: "4/3",
+    span: false,
+  },
+  {
+    id: "patches",
+    label: "Patches",
+    hint: "Liggend 4:3.",
+    aspect: "4/3",
+    span: false,
+  },
+  {
+    id: "madeToOrder",
+    label: "Op bestelling",
+    hint: "Brede kaart 21:8. Los van de dienstenfoto, zodat de uitsnede hier klopt.",
+    aspect: "21/8",
+    span: true,
+  },
+];
+
+export function PageImagesEditor({
+  pageId,
+  images,
+  onChange,
+}: {
+  pageId: StudioPageId;
+  images: PageImages;
+  onChange: (images: PageImages) => void;
+}) {
+  const slots =
+    pageId === "home"
+      ? [
+          {
+            key: "homeHero",
+            label: "Home foto",
+            hint: "Staand 4:5, rechts op de homepage.",
+            aspect: "4/5",
+            value: images.homeHero,
+            set: (url: string) => onChange({ ...images, homeHero: url }),
+          },
+        ]
+      : pageId === "about"
+        ? [
+            {
+              key: "aboutPortrait",
+              label: "Portret",
+              hint: "Staand 4:5 bij je verhaal.",
+              aspect: "4/5",
+              value: images.aboutPortrait,
+              set: (url: string) => onChange({ ...images, aboutPortrait: url }),
+            },
+            {
+              key: "aboutEvent",
+              label: "Live events",
+              hint: "Liggend 4:3.",
+              aspect: "4/3",
+              value: images.aboutEvent,
+              set: (url: string) => onChange({ ...images, aboutEvent: url }),
+            },
+          ]
+        : pageId === "shop"
+          ? [
+              {
+                key: "shopHero",
+                label: "Shop foto",
+                hint: "Liggend 4:3, naast de shop-intro.",
+                aspect: "4/3",
+                span: false,
+                value: images.shopHero,
+                set: (url: string) => onChange({ ...images, shopHero: url }),
+              },
+              ...SHOP_OVERVIEW_EDITOR_SLOTS.map((slot) => ({
+                key: slot.id,
+                label: slot.label,
+                hint: slot.hint,
+                aspect: slot.aspect,
+                span: slot.span,
+                value: images.shopOverview[slot.id],
+                set: (url: string) =>
+                  onChange({
+                    ...images,
+                    shopOverview: { ...images.shopOverview, [slot.id]: url },
+                  }),
+              })),
+            ]
+          : pageId === "services"
+            ? SERVICE_IDS.map((id) => ({
+                key: id,
+                label: SERVICE_PHOTO_LABELS[id],
+                hint: "Liggend 4:3, op de dienstenpagina en de homepage.",
+                aspect: "4/3",
+                value: images.services[id],
+                set: (url: string) =>
+                  onChange({ ...images, services: { ...images.services, [id]: url } }),
+              }))
+            : [];
+
+  if (!slots.length && pageId !== "about") return null;
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="font-heading text-lg text-brand-black">Foto's</h2>
+        <p className="mt-1 font-body text-xs leading-relaxed text-brand-black/50">
+          {pageId === "shop"
+            ? "De overzichtskaarten hebben eigen foto's, los van producten en diensten. Gebruik Uitsnede om te passen."
+            : "Vervang een foto of gebruik Uitsnede om te passen in de vorm op de pagina."}
+        </p>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {slots.map((slot) => (
+          <div key={slot.key} className={"span" in slot && slot.span ? "col-span-2" : undefined}>
+            <StudioImageField
+              value={slot.value}
+              folder="pages"
+              aspect={slot.aspect}
+              label={slot.label}
+              onChange={slot.set}
+            />
+            {slot.hint ? (
+              <p className="mt-1 font-body text-[11px] leading-relaxed text-brand-black/40">{slot.hint}</p>
+            ) : null}
+          </div>
+        ))}
+      </div>
+      {pageId === "about" ? (
+        <div>
+          <p className="mb-2 font-body text-xs text-brand-black/50">Galerij onderaan (liggend 4:3)</p>
+          <div className="grid grid-cols-3 gap-2">
+            {images.aboutGallery.map((src, index) => (
+              <StudioImageField
+                key={`gallery-${index}`}
+                value={src}
+                folder="pages"
+                aspect="4/3"
+                label={`Foto ${index + 1}`}
+                onChange={(url) =>
+                  onChange({
+                    ...images,
+                    aboutGallery: images.aboutGallery.map((item, i) => (i === index ? url : item)),
+                  })
+                }
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
